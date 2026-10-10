@@ -110,10 +110,10 @@ section { padding-block: clamp(56px, 7vw, 88px); }
 .field input, .field select { width: 100%; min-height: 50px; border-radius: var(--r-sm); border: 1px solid rgba(233,238,234,.18); background: rgba(233,238,234,.06); color: var(--on-fob); font: 500 16px var(--font-body); padding: 0 14px; color-scheme: dark; }
 .field input::placeholder { color: rgba(233,238,234,.4); }
 .field input:focus, .field select:focus { outline: none; border-color: var(--green-bright); box-shadow: 0 0 0 3px color-mix(in srgb, var(--green-bright) 35%, transparent); }
-.svc-pick { display: grid; grid-template-columns: 1fr 1fr; gap: 8px; border: 0; padding: 0; margin: 0; }
+.svc-pick { display: grid; grid-template-columns: 1fr 1fr; grid-auto-rows: 1fr; gap: 8px; border: 0; padding: 0; margin: 0; }
 .svc-pick legend { font-size: 13px; font-weight: 600; color: color-mix(in srgb, var(--on-fob) 75%, transparent); margin-bottom: 5px; padding: 0; }
 .svc-pick input { position: absolute; opacity: 0; pointer-events: none; }
-.svc-pick label { display: block; padding: 11px 12px; border-radius: var(--r-sm); border: 1px solid rgba(233,238,234,.18); font-size: 15px; font-weight: 600; cursor: pointer; line-height: 1.25; transition: border-color .15s, background-color .15s; }
+.svc-pick label { display: flex; align-items: center; min-height: 48px; padding: 11px 12px; border-radius: var(--r-sm); border: 1px solid rgba(233,238,234,.18); font-size: 15px; font-weight: 600; cursor: pointer; line-height: 1.25; transition: border-color .15s, background-color .15s; }
 .svc-pick input:checked + label { border-color: var(--green-bright); background: color-mix(in srgb, var(--green-bright) 18%, transparent); }
 .svc-pick input:focus-visible + label { outline: 3px solid var(--green-bright); outline-offset: 2px; }
 .estimate .btn-call { width: 100%; justify-content: center; margin-top: 6px; background: var(--green-bright); color: #0D1A0B; }
@@ -197,6 +197,43 @@ footer { padding-block: 36px 110px; border-top: 1px solid var(--line); color: va
 footer .wrap { display: flex; flex-wrap: wrap; gap: 12px 28px; justify-content: space-between; }
 @media (min-width: 761px) { footer { padding-bottom: 36px; } }
 
+
+/* Phone layout */
+@media (max-width: 640px) {
+  section { padding-block: 48px; }
+  .sec-head { margin-bottom: 22px; }
+  .hero { padding-block: 28px 40px; }
+  .hero h1 { font-size: 40px; }
+  .hero .lede { font-size: 16px; margin-top: 16px; }
+  .cta-row { margin-top: 22px; }
+  .facts { display: grid; grid-template-columns: repeat(3, minmax(0,1fr)); gap: 10px; margin-top: 22px; padding-top: 18px; font-size: 12.5px; text-align: center; }
+  .facts span { flex-direction: column; gap: 6px; line-height: 1.25; }
+  .facts svg { width: 22px; height: 22px; }
+
+  .specs { gap: 12px; }
+  .spec { background: var(--surface); border: 1px solid var(--line); border-radius: 14px; padding: 18px 18px 20px; gap: 8px; }
+  .spec h3 { font-size: 19px; }
+  .spec .what { font-size: 15.5px; }
+
+  .steps { row-gap: 20px; }
+  .steps li { grid-template-columns: 40px minmax(0,1fr); column-gap: 14px; row-gap: 2px; padding: 0; border-top: 0; }
+  .steps li::before { grid-row: span 2; width: 40px; height: 40px; border-radius: 50%; display: grid; place-items: center; font-size: 18px; background: color-mix(in srgb, var(--brass) 18%, transparent); }
+  .steps li::after { display: none; }
+  .steps h3 { font-size: 18px; padding-top: 8px; }
+  .steps p { font-size: 15px; }
+
+  .area-grid { gap: 20px; }
+  .county h3 { margin-bottom: 10px; }
+  .county ul { display: flex; flex-wrap: wrap; gap: 8px; }
+  .county a { padding: 7px 13px; border: 1px solid var(--line); border-radius: 999px; font-size: 15px; background: var(--surface); }
+  .county a span { display: none; }
+  .area-note { margin-top: 22px; }
+
+  .cred .badge img { width: 150px; }
+  .bignum { font-size: 34px; }
+  .faq summary { font-size: 16.5px; padding-block: 16px; }
+}
+
 /* Mobile call bar */
 .callbar { position: fixed; left: 0; right: 0; bottom: 0; z-index: 30; display: none; gap: 10px; padding: 10px 16px calc(10px + env(safe-area-inset-bottom, 0px)); background: color-mix(in srgb, var(--bg) 92%, transparent); backdrop-filter: blur(10px); border-top: 1px solid var(--line); }
 .callbar .btn { flex: 1; justify-content: center; min-height: 50px; padding: 0 12px; font-size: 16px; }
@@ -265,7 +302,7 @@ footer .wrap { display: flex; flex-wrap: wrap; gap: 12px 28px; justify-content: 
                 <input type="radio" name="svc" id="s1" value="All keys lost" checked><label for="s1">All keys lost</label>
                 <input type="radio" name="svc" id="s2" value="Spare key"><label for="s2">Spare key</label>
                 <input type="radio" name="svc" id="s3" value="Locked out"><label for="s3">Locked out of car</label>
-                <input type="radio" name="svc" id="s4" value="Programming only"><label for="s4">Key programming only</label>
+                <input type="radio" name="svc" id="s4" value="Programming only"><label for="s4">Key programming</label>
               </fieldset>
               <div class="field"><label for="f-vehicle">Vehicle year, make and model</label><input id="f-vehicle" name="vehicle" placeholder="2019 Toyota Camry" required autocomplete="off"></div>
               <div class="field"><label for="f-name">Your name</label><input id="f-name" name="name" placeholder="First name is fine" required autocomplete="given-name"></div>
