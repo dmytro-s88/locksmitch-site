@@ -324,6 +324,26 @@ section { padding-block: clamp(56px, 7vw, 88px); }
 @media (prefers-reduced-motion: reduce) { .gallery img { transition: none; } }
 @media (max-width: 860px) { .gallery { grid-template-columns: repeat(2, minmax(0,1fr)); gap: 10px; } }
 
+/* City pages */
+[data-city] .hero h1 { font-size: clamp(34px, 4.4vw, 54px); }
+.local { padding-bottom: 0; }
+.crumbs { font-size: 14px; color: var(--muted); margin-bottom: 14px; }
+.crumbs a { color: var(--muted); text-decoration: none; }
+.crumbs a:hover { color: var(--green); }
+.county a.current { color: var(--green); }
+.local-grid { display: grid; grid-template-columns: minmax(0, 1.3fr) minmax(0, 1fr); gap: clamp(28px, 5vw, 64px); align-items: start; }
+.local h2 { margin-bottom: 14px; }
+.local .lede + .lede { margin-top: 12px; }
+.spots { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 20px; padding: 0; list-style: none; }
+.spots li { padding: 7px 13px; border: 1px solid var(--line); border-radius: 999px; font-size: 15px; font-weight: 600; background: var(--surface); }
+.nearby { background: var(--surface); border: 1px solid var(--line); border-radius: 14px; padding: 22px 24px; }
+.nearby h3 { font-size: 17px; margin-bottom: 10px; }
+.nearby ul { list-style: none; padding: 0; margin: 0; display: grid; grid-template-columns: 1fr 1fr; gap: 2px 18px; }
+.nearby a { display: block; padding: 6px 0; text-decoration: none; font-weight: 600; }
+.nearby a:hover { color: var(--green); }
+@media (max-width: 860px) { .local-grid { grid-template-columns: minmax(0,1fr); } }
+@media (max-width: 640px) { .county a.current { border-color: var(--green); } }
+
 /* Steps */
 .steps-sec { background: var(--surface); border-block: 1px solid var(--line); }
 .steps { list-style: none; margin: 0; padding: 0; display: grid; grid-template-columns: repeat(4, minmax(0,1fr)); gap: 0; counter-reset: s; }
@@ -651,6 +671,8 @@ footer .wrap { display: flex; flex-wrap: wrap; gap: 12px 28px; justify-content: 
 <script>
 (function () {
   // Service area grouped by county
+  var PAGES = { 'Cumming': '/cumming/' };
+  var HERE = document.documentElement.getAttribute('data-city');
   var counties = [
     ['Fulton', ['Alpharetta', 'Johns Creek', 'Milton', 'Roswell', 'Sandy Springs']],
     ['Gwinnett', ['Buford', 'Duluth', 'Lawrenceville', 'Norcross', 'Peachtree Corners', 'Sugar Hill', 'Suwanee']],
@@ -668,7 +690,8 @@ footer .wrap { display: flex; flex-wrap: wrap; gap: 12px 28px; justify-content: 
     var ul = document.createElement('ul');
     c[1].forEach(function (city) {
       var li = document.createElement('li'); var a = document.createElement('a');
-      a.href = 'https://' + city.toLowerCase().replace(/\s+/g, '') + '.locksmitch.com'; a.target = '_blank'; a.rel = 'noopener';
+      if (PAGES[city]) { a.href = PAGES[city]; } else { a.href = 'https://' + city.toLowerCase().replace(/\s+/g, '') + '.locksmitch.com'; a.target = '_blank'; a.rel = 'noopener'; }
+      if (city === HERE) { a.className = 'current'; a.setAttribute('aria-current', 'page'); }
       a.textContent = city; var s = document.createElement('span'); s.textContent = 'city page'; a.appendChild(s);
       li.appendChild(a); ul.appendChild(li);
     });
