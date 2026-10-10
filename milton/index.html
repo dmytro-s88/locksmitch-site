@@ -42,7 +42,7 @@
   },
   {
    "@type": "AdministrativeArea",
-   "name": "North Fulton County, GA"
+   "name": "Fulton County, GA"
   }
  ],
  "hasOfferCatalog": {
@@ -294,7 +294,7 @@ section { padding-block: clamp(56px, 7vw, 88px); }
 @media (max-width: 480px) { .steps { grid-template-columns: minmax(0,1fr); } }
 
 /* Area */
-.area-grid { display: grid; grid-template-columns: repeat(4, minmax(0,1fr)); gap: 28px 32px; }
+.area-grid { display: grid; grid-template-columns: repeat(3, minmax(0,1fr)); gap: 28px 32px; }
 @media (max-width: 960px) { .area-grid { grid-template-columns: repeat(2, minmax(0,1fr)); } }
 @media (max-width: 440px) { .area-grid { grid-template-columns: minmax(0,1fr); } }
 .county h3 { font-size: 15px; font-weight: 700; font-family: var(--font-body); color: var(--muted); padding-bottom: 8px; border-bottom: 1px solid var(--line); margin-bottom: 8px; }
@@ -484,7 +484,7 @@ footer .wrap { display: flex; flex-wrap: wrap; gap: 12px 28px; justify-content: 
   <section class="local" id="local">
     <div class="wrap local-grid">
       <div>
-        <h2>Serving Milton and North Fulton County</h2>
+        <h2>Serving Milton and Fulton County</h2>
         <p class="lede">We come to Milton from our base in Forsyth County, with the key machine, blanks and programmer on board, so the key gets cut and programmed on the spot.</p><p class="lede">If you’re locked out in the Milton area and need fast, reliable assistance, call <a href="tel:7702703333">(770) 270-3333</a> and we’ll head your way.</p>
         <p class="spots-h" style="margin-top:22px;font-weight:600">We come to you anywhere in Milton, including:</p>
         <ul class="spots"><li>Crabapple</li><li>Birmingham Crossroads</li><li>Arnold Mill Road</li><li>Bethany Bend</li><li>Highway 9</li></ul>
@@ -567,7 +567,7 @@ footer .wrap { display: flex; flex-wrap: wrap; gap: 12px 28px; justify-content: 
     <div class="wrap">
       <div class="sec-head">
         <h2>Where we work</h2>
-        <p class="lede">24 cities across eight counties north of Atlanta. Each city has its own page.</p>
+        <p class="lede">24 cities across nine counties north of Atlanta. Each city has its own page.</p>
       </div>
       <div class="area-grid" id="areaGrid"></div>
       <p class="area-note">Not on the list? Call anyway. If you’re near one of these cities, we can usually reach you.</p>
@@ -642,7 +642,8 @@ footer .wrap { display: flex; flex-wrap: wrap; gap: 12px 28px; justify-content: 
     ['Fulton', ['Alpharetta', 'Johns Creek', 'Milton', 'Roswell', 'Sandy Springs']],
     ['Gwinnett', ['Buford', 'Duluth', 'Lawrenceville', 'Norcross', 'Peachtree Corners', 'Sugar Hill', 'Suwanee']],
     ['Cobb', ['Kennesaw', 'Marietta', 'Smyrna']],
-    ['Forsyth & Dawson', ['Cumming', 'Dawsonville']],
+    ['Forsyth', ['Cumming']],
+    ['Dawson', ['Dawsonville']],
     ['Hall', ['Flowery Branch', 'Gainesville']],
     ['Cherokee', ['Canton', 'Woodstock']],
     ['DeKalb', ['Doraville', 'Dunwoody']],
@@ -651,7 +652,7 @@ footer .wrap { display: flex; flex-wrap: wrap; gap: 12px 28px; justify-content: 
   var grid = document.getElementById('areaGrid');
   counties.forEach(function (c) {
     var div = document.createElement('div'); div.className = 'county';
-    var h = document.createElement('h3'); h.textContent = c[0] + ' County'; if (c[0].indexOf('&') > -1) h.textContent = c[0] + ' Counties';
+    var h = document.createElement('h3'); h.textContent = c[0] + ' County';
     var ul = document.createElement('ul');
     c[1].forEach(function (city) {
       var li = document.createElement('li'); var a = document.createElement('a');
