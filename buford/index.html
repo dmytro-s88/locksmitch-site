@@ -636,18 +636,18 @@ footer .wrap { display: flex; flex-wrap: wrap; gap: 12px 28px; justify-content: 
 <script>
 (function () {
   // Service area grouped by county
-  var PAGES = {"Cumming": "/cumming/", "Alpharetta": "/alpharetta/", "Braselton": "/braselton/", "Buford": "/buford/", "Canton": "/canton/", "Dawsonville": "/dawsonville/", "Doraville": "/doraville/", "Duluth": "/duluth/", "Dunwoody": "/dunwoody/", "Flowery Branch": "/flowerybranch/", "Gainesville": "/gainesville/", "Johns Creek": "/johnscreek/", "Kennesaw": "/kennesaw/", "Lawrenceville": "/lawrenceville/", "Marietta": "/marietta/", "Milton": "/milton/", "Norcross": "/norcross/", "Peachtree Corners": "/peachtreecorners/", "Roswell": "/roswell/", "Sandy Springs": "/sandysprings/", "Smyrna": "/smyrna/", "Sugar Hill": "/sugarhill/", "Suwanee": "/suwanee/", "Woodstock": "/woodstock/"};
+  var PAGES = {"Cumming": "/cumming/", "Sugar Hill": "/sugarhill/", "Buford": "/buford/", "Suwanee": "/suwanee/", "Duluth": "/duluth/", "Peachtree Corners": "/peachtreecorners/", "Norcross": "/norcross/", "Lawrenceville": "/lawrenceville/", "Milton": "/milton/", "Alpharetta": "/alpharetta/", "Johns Creek": "/johnscreek/", "Roswell": "/roswell/", "Sandy Springs": "/sandysprings/", "Flowery Branch": "/flowerybranch/", "Gainesville": "/gainesville/", "Dawsonville": "/dawsonville/", "Canton": "/canton/", "Woodstock": "/woodstock/", "Dunwoody": "/dunwoody/", "Doraville": "/doraville/", "Braselton": "/braselton/", "Marietta": "/marietta/", "Kennesaw": "/kennesaw/", "Smyrna": "/smyrna/"};
   var HERE = document.documentElement.getAttribute('data-city');
   var counties = [
-    ['Fulton', ['Alpharetta', 'Johns Creek', 'Milton', 'Roswell', 'Sandy Springs']],
-    ['Gwinnett', ['Buford', 'Duluth', 'Lawrenceville', 'Norcross', 'Peachtree Corners', 'Sugar Hill', 'Suwanee']],
-    ['Cobb', ['Kennesaw', 'Marietta', 'Smyrna']],
     ['Forsyth', ['Cumming']],
-    ['Dawson', ['Dawsonville']],
+    ['Gwinnett', ['Sugar Hill', 'Buford', 'Suwanee', 'Duluth', 'Peachtree Corners', 'Norcross', 'Lawrenceville']],
+    ['Fulton', ['Milton', 'Alpharetta', 'Johns Creek', 'Roswell', 'Sandy Springs']],
     ['Hall', ['Flowery Branch', 'Gainesville']],
+    ['Dawson', ['Dawsonville']],
     ['Cherokee', ['Canton', 'Woodstock']],
-    ['DeKalb', ['Doraville', 'Dunwoody']],
-    ['Jackson', ['Braselton']]
+    ['DeKalb', ['Dunwoody', 'Doraville']],
+    ['Jackson', ['Braselton']],
+    ['Cobb', ['Marietta', 'Kennesaw', 'Smyrna']]
   ];
   var grid = document.getElementById('areaGrid');
   counties.forEach(function (c) {
