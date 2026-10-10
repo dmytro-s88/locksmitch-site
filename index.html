@@ -302,10 +302,18 @@ section { padding-block: clamp(56px, 7vw, 88px); }
 
 /* Gallery */
 .gallery { display: grid; grid-template-columns: repeat(3, minmax(0,1fr)); gap: 14px; }
-.gallery figure { margin: 0; position: relative; border-radius: 14px; overflow: hidden; background: var(--surface); aspect-ratio: 4 / 3; }
+.gallery figure { margin: 0; position: relative; border-radius: 14px; isolation: isolate; overflow: hidden; background: var(--surface); aspect-ratio: 4 / 3; }
 .gallery img { width: 100%; height: 100%; object-fit: cover; display: block; }
 .gallery figcaption { position: absolute; left: 0; right: 0; bottom: 0; padding: 28px 14px 12px; font-size: 14px; font-weight: 600; color: #fff; background: linear-gradient(transparent, rgba(0,0,0,.72)); }
-.gallery figcaption span { display: block; font-weight: 500; font-size: 13px; color: rgba(255,255,255,.75); }
+.gallery a { display: block; border-radius: 14px; text-decoration: none; }
+.gallery a:hover img { transform: scale(1.04); }
+.gallery img { transition: transform .35s ease; }
+.gallery figcaption { display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; overflow: hidden; line-height: 1.35; padding: 40px 14px 0; border-bottom: 12px solid transparent; }
+@media (max-width: 640px) { .gallery figcaption { font-size: 12.5px; padding: 30px 10px 0; border-bottom-width: 9px; } }
+.work-head { display: flex; flex-wrap: wrap; justify-content: space-between; align-items: end; gap: 16px; max-width: none; }
+.ig-btn { min-height: 44px; font-size: 15px; }
+@media (max-width: 860px) { .gallery a:nth-child(n+7) { display: none; } }
+@media (prefers-reduced-motion: reduce) { .gallery img { transition: none; } }
 @media (max-width: 860px) { .gallery { grid-template-columns: repeat(2, minmax(0,1fr)); gap: 10px; } }
 
 /* Steps */
@@ -544,7 +552,10 @@ footer .wrap { display: flex; flex-wrap: wrap; gap: 12px 28px; justify-content: 
 
   <section id="work" hidden>
     <div class="wrap">
-      <div class="sec-head"><h2>Recent jobs</h2><p class="lede">Keys we’ve cut and programmed around North Atlanta.</p></div>
+      <div class="sec-head work-head">
+        <div><h2>Recent jobs</h2><p class="lede">Keys we’ve cut and programmed around North Atlanta.</p></div>
+        <a class="btn btn-ghost ig-btn" href="https://www.instagram.com/locksmitch.ga/" target="_blank" rel="noopener"><svg><use href="#i-ig"/></svg>@locksmitch.ga</a>
+      </div>
       <div class="gallery" id="gallery"></div>
     </div>
   </section>
@@ -697,21 +708,24 @@ footer .wrap { display: flex; flex-wrap: wrap; gap: 12px 28px; justify-content: 
     document.getElementById('estForm').hidden = false;
   });
 
-  // Recent jobs gallery: add photos to assets/work/ and list them here
-  var PHOTOS = [
-    // { src: 'assets/work/rav4.jpg', car: '2021 Toyota RAV4', job: 'All keys lost' },
-  ];
-  if (PHOTOS.length) {
+  // Recent jobs gallery: photo posts from Instagram @locksmitch.ga (videos are skipped by the feed)
+  var FEED = 'https://script.google.com/macros/s/AKfycbwEnPklqAabpkxC7UoInrIwUW17F5hXMmveX2hEEUIxUGt7hskz_RNbpzz9QHiTZIKz/exec?feed=instagram';
+  var EMOJI = /[\u{1F000}-\u{1FAFF}\u{2600}-\u{27BF}\u{FE0F}\u{200D}]/gu;
+  fetch(FEED).then(function (r) { return r.json(); }).then(function (d) {
+    if (!d || !d.ok || !d.photos || !d.photos.length) return;
     var gal = document.getElementById('gallery');
-    PHOTOS.forEach(function (ph) {
+    d.photos.slice(0, 9).forEach(function (ph) {
+      var a = document.createElement('a'); a.href = ph.link; a.target = '_blank'; a.rel = 'noopener';
       var f = document.createElement('figure');
-      var im = document.createElement('img'); im.src = ph.src; im.alt = ph.car + ', ' + ph.job; im.loading = 'lazy';
-      var cap = document.createElement('figcaption'); cap.textContent = ph.car;
-      var sp = document.createElement('span'); sp.textContent = ph.job; cap.appendChild(sp);
-      f.appendChild(im); f.appendChild(cap); gal.appendChild(f);
+      var im = document.createElement('img'); im.src = ph.src; im.loading = 'lazy';
+      var text = (ph.caption || '').replace(EMOJI, '').replace(/\s+/g, ' ').trim();
+      im.alt = text || 'LocksMitch job photo';
+      f.appendChild(im);
+      if (text) { var cap = document.createElement('figcaption'); cap.textContent = text; f.appendChild(cap); }
+      a.appendChild(f); gal.appendChild(a);
     });
     document.getElementById('work').hidden = false;
-  }
+  }).catch(function () {});
 
   // "Get a spare key quote" preselects the service in the form
   Array.prototype.forEach.call(document.querySelectorAll('[data-svc]'), function (a) {

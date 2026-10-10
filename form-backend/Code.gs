@@ -37,7 +37,10 @@ function doPost(e) {
   return out({ ok: true });
 }
 
-function doGet() {
+function doGet(e) {
+  if (e && e.parameter && e.parameter.feed === 'instagram') return out(instagramFeed_());
+  if (e && e.parameter && e.parameter.ig === 'login') return instagramLoginPage_();
+  if (e && e.parameter && e.parameter.code) return instagramCallback_(e.parameter);
   return ContentService.createTextOutput('LocksMitch estimate form endpoint is running.');
 }
 
