@@ -15,6 +15,156 @@
 <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
 <meta name="apple-mobile-web-app-title" content="LocksMitch">
 <link rel="manifest" href="site.webmanifest?v=2">
+<script type="application/ld+json">
+{
+ "@context": "https://schema.org",
+ "@type": "Locksmith",
+ "name": "LocksMitch",
+ "legalName": "TPVision LLC",
+ "description": "Mobile auto locksmith in North Atlanta: car key replacement, all keys lost, spare keys, lockouts and key programming at your location.",
+ "url": "https://locksmitch.com",
+ "telephone": "+1-770-270-3333",
+ "email": "info@locksmitch.com",
+ "image": "https://new.locksmitch.com/assets/logo.png",
+ "logo": "https://new.locksmitch.com/assets/logo.png",
+ "areaServed": [
+  {
+   "@type": "City",
+   "name": "Alpharetta, GA"
+  },
+  {
+   "@type": "City",
+   "name": "Johns Creek, GA"
+  },
+  {
+   "@type": "City",
+   "name": "Milton, GA"
+  },
+  {
+   "@type": "City",
+   "name": "Roswell, GA"
+  },
+  {
+   "@type": "City",
+   "name": "Sandy Springs, GA"
+  },
+  {
+   "@type": "City",
+   "name": "Buford, GA"
+  },
+  {
+   "@type": "City",
+   "name": "Duluth, GA"
+  },
+  {
+   "@type": "City",
+   "name": "Lawrenceville, GA"
+  },
+  {
+   "@type": "City",
+   "name": "Norcross, GA"
+  },
+  {
+   "@type": "City",
+   "name": "Peachtree Corners, GA"
+  },
+  {
+   "@type": "City",
+   "name": "Sugar Hill, GA"
+  },
+  {
+   "@type": "City",
+   "name": "Suwanee, GA"
+  },
+  {
+   "@type": "City",
+   "name": "Kennesaw, GA"
+  },
+  {
+   "@type": "City",
+   "name": "Marietta, GA"
+  },
+  {
+   "@type": "City",
+   "name": "Smyrna, GA"
+  },
+  {
+   "@type": "City",
+   "name": "Cumming, GA"
+  },
+  {
+   "@type": "City",
+   "name": "Dawsonville, GA"
+  },
+  {
+   "@type": "City",
+   "name": "Flowery Branch, GA"
+  },
+  {
+   "@type": "City",
+   "name": "Gainesville, GA"
+  },
+  {
+   "@type": "City",
+   "name": "Canton, GA"
+  },
+  {
+   "@type": "City",
+   "name": "Woodstock, GA"
+  },
+  {
+   "@type": "City",
+   "name": "Doraville, GA"
+  },
+  {
+   "@type": "City",
+   "name": "Dunwoody, GA"
+  },
+  {
+   "@type": "City",
+   "name": "Braselton, GA"
+  }
+ ],
+ "hasOfferCatalog": {
+  "@type": "OfferCatalog",
+  "name": "Auto locksmith services",
+  "itemListElement": [
+   {
+    "@type": "Offer",
+    "itemOffered": {
+     "@type": "Service",
+     "name": "All keys lost"
+    }
+   },
+   {
+    "@type": "Offer",
+    "itemOffered": {
+     "@type": "Service",
+     "name": "Spare car key"
+    }
+   },
+   {
+    "@type": "Offer",
+    "itemOffered": {
+     "@type": "Service",
+     "name": "Car lockout"
+    }
+   },
+   {
+    "@type": "Offer",
+    "itemOffered": {
+     "@type": "Service",
+     "name": "Key and fob programming"
+    }
+   }
+  ]
+ },
+ "sameAs": [
+  "https://www.instagram.com/locksmitch.ga/",
+  "https://www.facebook.com/profile.php?id=61585047509637"
+ ]
+}
+</script>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@400;500;600;700;800&display=swap">
@@ -92,8 +242,13 @@ section { padding-block: clamp(56px, 7vw, 88px); }
 .hero h1 .l2 { display: block; font-size: .5em; font-weight: 600; color: var(--muted); letter-spacing: -0.01em; margin-top: .35em; line-height: 1.15; }
 .hero .lede { margin-top: 22px; }
 .cta-row { display: flex; flex-wrap: wrap; gap: 12px; margin-top: 28px; align-items: center; }
-.hero .btn-call { font-size: 20px; min-height: 60px; padding: 0 26px; font-variant-numeric: tabular-nums; }
-@media (max-width: 520px) { .cta-row .btn { flex: 1 1 100%; justify-content: center; } }
+.hero .btn-call { font-size: 18px; min-height: 56px; padding: 0 22px; font-variant-numeric: tabular-nums; }
+.hero .cta-row .btn-ghost { min-height: 56px; padding: 0 18px; }
+.hero .cta-row { gap: 10px; }
+@media (max-width: 520px), (min-width: 921px) and (max-width: 1240px) { .cta-row .btn { flex: 1 1 0; justify-content: center; padding: 0 14px; } .cta-row .btn-call { flex-basis: 100%; } }
+.direct { display: flex; gap: 10px; align-items: flex-start; margin-top: 16px; font-size: 15px; color: var(--muted); max-width: 52ch; }
+.direct strong { color: var(--ink); }
+.direct svg { width: 20px; height: 20px; flex: none; color: var(--green); margin-top: 1px; }
 .book-note { font-size: 14px; color: var(--muted); margin-top: 12px; }
 .book-note strong { color: var(--ink); }
 .facts { display: flex; flex-wrap: wrap; gap: 10px 24px; margin-top: 30px; padding-top: 22px; border-top: 1px solid var(--line); font-size: 15px; font-weight: 600; }
@@ -135,6 +290,23 @@ section { padding-block: clamp(56px, 7vw, 88px); }
 .spec .when { color: var(--green); font-size: 15px; font-weight: 600; margin-top: 4px; }
 .spec .what { color: color-mix(in srgb, var(--ink) 85%, transparent); }
 @media (max-width: 760px) { .specs { grid-template-columns: minmax(0,1fr); } }
+
+/* Spare key banner */
+.spare { display: grid; grid-template-columns: auto minmax(0,1fr) auto; gap: 20px 28px; align-items: center; margin-top: clamp(28px, 4vw, 44px); padding: clamp(20px, 3vw, 30px); border-radius: var(--r-lg); border: 1px solid color-mix(in srgb, var(--brass) 45%, var(--line)); background: color-mix(in srgb, var(--brass) 9%, var(--surface)); }
+.spare-ico { width: 52px; height: 52px; padding: 12px; border-radius: 50%; color: var(--brass-hi); background: color-mix(in srgb, var(--brass) 20%, transparent); }
+.spare h3 { font-size: 22px; }
+.spare p { color: var(--muted); margin-top: 6px; max-width: 58ch; }
+.spare-cta { display: flex; flex-wrap: wrap; gap: 10px; }
+@media (max-width: 860px) { .spare { grid-template-columns: auto minmax(0,1fr); } .spare-cta { grid-column: 1 / -1; } }
+@media (max-width: 520px) { .spare { grid-template-columns: minmax(0,1fr); } .spare-cta .btn { flex: 1 1 100%; justify-content: center; } .spare h3 { font-size: 20px; } }
+
+/* Gallery */
+.gallery { display: grid; grid-template-columns: repeat(3, minmax(0,1fr)); gap: 14px; }
+.gallery figure { margin: 0; position: relative; border-radius: 14px; overflow: hidden; background: var(--surface); aspect-ratio: 4 / 3; }
+.gallery img { width: 100%; height: 100%; object-fit: cover; display: block; }
+.gallery figcaption { position: absolute; left: 0; right: 0; bottom: 0; padding: 28px 14px 12px; font-size: 14px; font-weight: 600; color: #fff; background: linear-gradient(transparent, rgba(0,0,0,.72)); }
+.gallery figcaption span { display: block; font-weight: 500; font-size: 13px; color: rgba(255,255,255,.75); }
+@media (max-width: 860px) { .gallery { grid-template-columns: repeat(2, minmax(0,1fr)); gap: 10px; } }
 
 /* Steps */
 .steps-sec { background: var(--surface); border-block: 1px solid var(--line); }
@@ -236,7 +408,8 @@ footer .wrap { display: flex; flex-wrap: wrap; gap: 12px 28px; justify-content: 
 
 /* Mobile call bar */
 .callbar { position: fixed; left: 0; right: 0; bottom: 0; z-index: 30; display: none; gap: 10px; padding: 10px 16px calc(10px + env(safe-area-inset-bottom, 0px)); background: color-mix(in srgb, var(--bg) 92%, transparent); backdrop-filter: blur(10px); border-top: 1px solid var(--line); }
-.callbar .btn { flex: 1; justify-content: center; min-height: 50px; padding: 0 12px; font-size: 16px; }
+.callbar .btn { flex: 1 1 0; justify-content: center; min-height: 50px; padding: 0 10px; font-size: 16px; gap: 8px; }
+.callbar .btn-call { flex-grow: 1.4; }
 @media (max-width: 760px) { .callbar { display: flex; } }
 </style>
 </head>
@@ -255,6 +428,9 @@ footer .wrap { display: flex; flex-wrap: wrap; gap: 12px 28px; justify-content: 
   <symbol id="i-ig" viewBox="0 0 24 24"><path fill="none" stroke="currentColor" stroke-width="2" d="M7 3h10a4 4 0 0 1 4 4v10a4 4 0 0 1-4 4H7a4 4 0 0 1-4-4V7a4 4 0 0 1 4-4Zm5 5a4 4 0 1 0 0 8 4 4 0 0 0 0-8Zm5.5-1.5v.01"/></symbol>
   <symbol id="i-fb" viewBox="0 0 24 24"><path fill="currentColor" d="M14 8V6.5c0-.7.2-1.1 1.2-1.1H17V2.2c-.3 0-1.4-.2-2.6-.2C11.8 2 10 3.6 10 6.4V8H7v3.6h3V22h4V11.6h2.9l.4-3.6H14Z"/></symbol>
   <symbol id="i-mail" viewBox="0 0 24 24"><path fill="none" stroke="currentColor" stroke-width="2" stroke-linejoin="round" d="M3 5h18v14H3zM3 6l9 7 9-7"/></symbol>
+  <symbol id="i-sms" viewBox="0 0 24 24"><path fill="none" stroke="currentColor" stroke-width="2" stroke-linejoin="round" d="M4 5h16a1 1 0 0 1 1 1v10a1 1 0 0 1-1 1H9l-5 4v-4H4a1 1 0 0 1-1-1V6a1 1 0 0 1 1-1Z"/><path fill="currentColor" d="M8 11a1 1 0 1 0 0 .01M12 11a1 1 0 1 0 0 .01M16 11a1 1 0 1 0 0 .01"/></symbol>
+  <symbol id="i-key" viewBox="0 0 24 24"><path fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" d="M14.5 9.5a4.5 4.5 0 1 1-1.3-3.2 4.5 4.5 0 0 1 1.3 3.2ZM13 12.7 21 20.5M17.5 17l2-2M15.5 15l1.5-1.5"/></symbol>
+  <symbol id="i-person" viewBox="0 0 24 24"><path fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" d="M12 12a4 4 0 1 0 0-8 4 4 0 0 0 0 8ZM4 21a8 8 0 0 1 16 0"/></symbol>
   <symbol id="i-card" viewBox="0 0 24 24"><path fill="none" stroke="currentColor" stroke-width="2" stroke-linejoin="round" d="M3 5h18v14H3zM7 10a2 2 0 1 0 0 .01M6 15h3M13 9h5M13 13h5"/></symbol>
 </svg>
 
@@ -282,8 +458,10 @@ footer .wrap { display: flex; flex-wrap: wrap; gap: 12px 28px; justify-content: 
           <p class="lede">LocksMitch is a mobile auto locksmith for North Atlanta. We bring dealership-level key cutting and programming equipment to your driveway, office lot or the side of the road. No tow, no dealer wait.</p>
           <div class="cta-row">
             <a class="btn btn-call" href="tel:7702703333"><svg><use href="#i-phone"/></svg>Call (770) 270-3333</a>
+            <a class="btn btn-ghost" href="sms:+17702703333"><svg><use href="#i-sms"/></svg>Text us</a>
             <a class="btn btn-ghost" href="https://app.squareup.com/appointments/book/lxfbvt18yxijiv/LHKXXP6K6C9N7/start" target="_blank" rel="noopener"><svg><use href="#i-cal"/></svg>Book online</a>
           </div>
+          <p class="direct"><svg><use href="#i-person"/></svg><span><strong>No call center.</strong> Calls and texts go straight to the locksmith who does the job.</span></p>
           <p class="book-note"><span class="tag">$15 off</span>&nbsp; <strong>when you book online.</strong> Locked out right now? Call instead, it’s faster.</p>
           <div class="facts">
             <span><svg><use href="#i-van"/></svg>Fully mobile</span>
@@ -350,6 +528,24 @@ footer .wrap { display: flex; flex-wrap: wrap; gap: 12px 28px; justify-content: 
           <p class="what">We program keys and remotes you already own, as long as the hardware matches your vehicle. Tell us the part number and we’ll confirm before we come.</p>
         </article>
       </div>
+      <div class="spare">
+        <svg class="spare-ico"><use href="#i-key"/></svg>
+        <div class="spare-txt">
+          <h3>Bought a car with only one key?</h3>
+          <p>A second key costs far less while you still have a working one. Lose that last key and it turns into an all-keys-lost job.</p>
+        </div>
+        <div class="spare-cta">
+          <a class="btn btn-call" href="#estimate" data-svc="s2">Get a spare key quote</a>
+          <a class="btn btn-ghost" href="sms:+17702703333"><svg><use href="#i-sms"/></svg>Text us</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="work" hidden>
+    <div class="wrap">
+      <div class="sec-head"><h2>Recent jobs</h2><p class="lede">Keys we’ve cut and programmed around North Atlanta.</p></div>
+      <div class="gallery" id="gallery"></div>
     </div>
   </section>
 
@@ -397,6 +593,7 @@ footer .wrap { display: flex; flex-wrap: wrap; gap: 12px 28px; justify-content: 
         <h2 class="col-h">Contact us</h2>
         <div class="num-row"><a class="bignum" href="tel:7702703333" id="phoneNum">(770) 270-3333</a><button class="copy" type="button" id="copyBtn">Copy number</button></div>
         <ul class="channels">
+          <li><a href="sms:+17702703333"><svg><use href="#i-sms"/></svg><span class="ch-name">Text message</span><span class="ch-val">(770) 270-3333</span></a></li>
           <li><a href="https://wa.me/17702703333" target="_blank" rel="noopener"><svg><use href="#i-wa"/></svg><span class="ch-name">WhatsApp</span><span class="ch-val">Message us</span></a></li>
           <li><a href="https://t.me/LocksMitch" target="_blank" rel="noopener"><svg><use href="#i-tg"/></svg><span class="ch-name">Telegram</span><span class="ch-val">@LocksMitch</span></a></li>
           <li><a href="https://www.instagram.com/locksmitch.ga/" target="_blank" rel="noopener"><svg><use href="#i-ig"/></svg><span class="ch-name">Instagram</span><span class="ch-val">@locksmitch.ga</span></a></li>
@@ -410,6 +607,9 @@ footer .wrap { display: flex; flex-wrap: wrap; gap: 12px 28px; justify-content: 
         <details open><summary>Is it cheaper than the dealership?</summary><p>Usually, and you skip the tow. The dealer needs the car on their lot; we do the same programming in your driveway. Send the vehicle details and we’ll quote it.</p></details>
         <details><summary>Can you make a key if I’ve lost every one?</summary><p>Yes. That’s the “all keys lost” job. We cut the key from your vehicle’s code and program it on site.</p></details>
         <details><summary>Do you work on push-to-start and smart keys?</summary><p>Yes, for most makes. Some newer models need extra steps or parts. Tell us the year, make and model and we’ll confirm before coming out.</p></details>
+        <details><summary>Do I need to tow my car to you?</summary><p>No. We bring the key machine, blanks and programmer to wherever the car is: home, work, a parking lot or the side of the road.</p></details>
+        <details><summary>Can this damage my car?</summary><p>No. We open doors with automotive lockout tools, not by force, and program keys with dealer-level equipment, usually through the car’s diagnostic port.</p></details>
+        <details><summary>Can I text instead of calling?</summary><p>Yes. Text <a href="sms:+17702703333">(770) 270-3333</a> with the year, make and model and what happened. You’ll get a reply from the locksmith, not a call center.</p></details>
         <details><summary>How do I get the $15 discount?</summary><p>Book your appointment through the online booking page. The discount is applied to online bookings.</p></details>
       </div>
     </div>
@@ -425,7 +625,8 @@ footer .wrap { display: flex; flex-wrap: wrap; gap: 12px 28px; justify-content: 
 
 <div class="callbar">
   <a class="btn btn-call" href="tel:7702703333"><svg><use href="#i-phone"/></svg>Call now</a>
-  <a class="btn btn-ghost" href="#estimate">Free estimate</a>
+  <a class="btn btn-ghost" href="sms:+17702703333"><svg><use href="#i-sms"/></svg>Text</a>
+  <a class="btn btn-ghost" href="#estimate">Estimate</a>
 </div>
 
 <script>
@@ -494,6 +695,27 @@ footer .wrap { display: flex; flex-wrap: wrap; gap: 12px 28px; justify-content: 
     form.reset();
     document.getElementById('estSent').hidden = true;
     document.getElementById('estForm').hidden = false;
+  });
+
+  // Recent jobs gallery: add photos to assets/work/ and list them here
+  var PHOTOS = [
+    // { src: 'assets/work/rav4.jpg', car: '2021 Toyota RAV4', job: 'All keys lost' },
+  ];
+  if (PHOTOS.length) {
+    var gal = document.getElementById('gallery');
+    PHOTOS.forEach(function (ph) {
+      var f = document.createElement('figure');
+      var im = document.createElement('img'); im.src = ph.src; im.alt = ph.car + ', ' + ph.job; im.loading = 'lazy';
+      var cap = document.createElement('figcaption'); cap.textContent = ph.car;
+      var sp = document.createElement('span'); sp.textContent = ph.job; cap.appendChild(sp);
+      f.appendChild(im); f.appendChild(cap); gal.appendChild(f);
+    });
+    document.getElementById('work').hidden = false;
+  }
+
+  // "Get a spare key quote" preselects the service in the form
+  Array.prototype.forEach.call(document.querySelectorAll('[data-svc]'), function (a) {
+    a.addEventListener('click', function () { var r = document.getElementById(a.getAttribute('data-svc')); if (r) r.checked = true; });
   });
 
   // Copy phone number
