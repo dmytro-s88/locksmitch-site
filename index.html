@@ -360,6 +360,17 @@ section { padding-block: clamp(56px, 7vw, 88px); }
 .svc-tip { margin-top: 18px; padding: 14px 16px; border-radius: 12px; border: 1px solid color-mix(in srgb, var(--brass) 45%, var(--line)); background: color-mix(in srgb, var(--brass) 9%, var(--surface)); font-size: 15px; }
 .local h3.sub { font-size: 19px; margin-top: 30px; }
 
+/* Second key offer */
+.offer-tag { vertical-align: middle; margin-left: 6px; font-family: var(--font-body); font-size: 12px; }
+.addon { display: flex; gap: 10px; align-items: flex-start; padding: 11px 12px; border-radius: var(--r-sm); border: 1px dashed color-mix(in srgb, var(--brass) 60%, transparent); background: color-mix(in srgb, var(--brass) 10%, transparent); cursor: pointer; }
+.addon input { width: 18px; height: 18px; margin-top: 2px; accent-color: var(--green-bright); flex: none; }
+.addon b { display: block; font-size: 15px; color: var(--brass-hi); }
+.addon small { display: block; font-size: 13px; color: color-mix(in srgb, var(--on-fob) 65%, transparent); }
+.offer-card { display: grid; grid-template-columns: auto minmax(0,1fr); gap: 4px 16px; align-items: center; margin-top: 22px; padding: 16px 18px; border-radius: 14px; border: 1px solid color-mix(in srgb, var(--brass) 55%, var(--line)); background: color-mix(in srgb, var(--brass) 12%, var(--surface)); }
+.offer-card .big { grid-row: span 2; font-weight: 800; font-size: 30px; line-height: 1; color: var(--brass-hi); }
+.offer-card b { font-size: 17px; }
+.offer-card span { color: var(--muted); font-size: 14px; }
+
 /* Steps */
 .steps-sec { background: var(--surface); border-block: 1px solid var(--line); }
 .steps { list-style: none; margin: 0; padding: 0; display: grid; grid-template-columns: repeat(4, minmax(0,1fr)); gap: 0; counter-reset: s; }
@@ -534,6 +545,7 @@ footer .wrap { display: flex; flex-wrap: wrap; gap: 12px 28px; justify-content: 
                 <input type="radio" name="svc" id="s3" value="Locked out"><label for="s3">Locked out of car</label>
                 <input type="radio" name="svc" id="s4" value="Programming only"><label for="s4">Key programming</label>
               </fieldset>
+              <label class="addon" id="addon" for="f-second"><input type="checkbox" id="f-second" name="second_key" checked><span><b>Add a second key, 50% off</b><small>For the same car, made in the same visit.</small></span></label>
               <div class="field"><label for="f-vehicle">Vehicle year, make and model</label><input id="f-vehicle" name="vehicle" placeholder="2019 Toyota Camry" required autocomplete="off"></div>
               <div class="field"><label for="f-name">Your name</label><input id="f-name" name="name" placeholder="First name is fine" required autocomplete="given-name"></div>
               <div class="field"><label for="f-phone">Phone number</label><input id="f-phone" name="phone" type="tel" placeholder="(770) 555-0134" required autocomplete="tel"></div>
@@ -564,7 +576,7 @@ footer .wrap { display: flex; flex-wrap: wrap; gap: 12px 28px; justify-content: 
       </div>
       <div class="specs">
         <article class="spec">
-          <div><h3>All keys lost</h3><p class="when">You have no working key at all.</p></div>
+          <div><h3>All keys lost <span class="tag offer-tag">2nd key 50% off</span></h3><p class="when">You have no working key at all.</p></div>
           <p class="what">We cut a new key from your vehicle’s code, program the transponder or smart key to the immobilizer, and leave you with a working key. Most makes and models, including push-to-start.</p>
           <a class="more" href="/all-keys-lost/">More about this service</a>
         </article>
@@ -669,6 +681,7 @@ footer .wrap { display: flex; flex-wrap: wrap; gap: 12px 28px; justify-content: 
         <details><summary>Do I need to tow my car to you?</summary><p>No. We bring the key machine, blanks and programmer to wherever the car is: home, work, a parking lot or the side of the road.</p></details>
         <details><summary>Can this damage my car?</summary><p>No. We open doors with automotive lockout tools, not by force, and program keys with dealer-level equipment, usually through the car’s diagnostic port.</p></details>
         <details><summary>Can I text instead of calling?</summary><p>Yes. Text <a href="sms:+17702703333">(770) 270-3333</a> with the year, make and model and what happened. You’ll get a reply from the locksmith, not a call center.</p></details>
+        <details><summary>Is there a discount on a second key?</summary><p>Yes. When we make a new key because all keys are lost, a second key for the same car is 50% off. Same car, same key type, made during the same visit. Combines with $15 off for online booking.</p></details>
         <details><summary>How do I get the $15 discount?</summary><p>Book your appointment through the online booking page. The discount is applied to online bookings.</p></details>
       </div>
     </div>
@@ -736,6 +749,7 @@ footer .wrap { display: flex; flex-wrap: wrap; gap: 12px 28px; justify-content: 
     if ((phone.match(/\d/g) || []).length < 7) { form.phone.focus(); showErr('Check the phone number. It needs at least 7 digits.'); return; }
     var data = new URLSearchParams({
       service: (form.querySelector('input[name="svc"]:checked') || {}).value || '',
+      second_key: (document.getElementById('s1').checked && document.getElementById('f-second').checked) ? 'yes' : '',
       vehicle: form.vehicle.value.trim(),
       name: form.name.value.trim(),
       phone: phone,
@@ -747,7 +761,7 @@ footer .wrap { display: flex; flex-wrap: wrap; gap: 12px 28px; justify-content: 
       .then(function (r) { return r.json(); })
       .then(function (res) {
         if (!res.ok) throw new Error(res.error || 'failed');
-        if (window.lmTrack) window.lmTrack('generate_lead', { service: data.get('service') || '' });
+        if (window.lmTrack) window.lmTrack('generate_lead', { service: data.get('service') || '', second_key: data.get('second_key') || 'no' });
         document.getElementById('estForm').hidden = true;
         document.getElementById('estSent').hidden = false;
       })
@@ -786,6 +800,12 @@ footer .wrap { display: flex; flex-wrap: wrap; gap: 12px 28px; justify-content: 
   Array.prototype.forEach.call(document.querySelectorAll('[data-svc]'), function (a) {
     a.addEventListener('click', function () { var r = document.getElementById(a.getAttribute('data-svc')); if (r) r.checked = true; });
   });
+
+  // Second key add-on only applies to All keys lost
+  var addon = document.getElementById('addon');
+  function syncAddon() { var c = document.querySelector('input[name="svc"]:checked'); addon.hidden = !(c && c.id === 's1'); }
+  Array.prototype.forEach.call(document.querySelectorAll('input[name="svc"]'), function (r) { r.addEventListener('change', syncAddon); });
+  syncAddon();
 
   // Analytics: calls, texts, messengers, online booking (form leads are tracked after a successful send)
   var PAGE_CITY = document.documentElement.getAttribute('data-city') || document.documentElement.getAttribute('data-page') || 'Home';

@@ -12,6 +12,7 @@ function doPost(e) {
   var vehicle = clean(p.vehicle, 120);
   var service = clean(p.service, 60);
   var page = clean(p.page, 200);
+  var secondKey = clean(p.second_key, 10) === 'yes';
   if (!name || !phone || !vehicle) return out({ ok: false, error: 'missing' });
   if ((phone.match(/\d/g) || []).length < 7) return out({ ok: false, error: 'phone' });
 
@@ -25,13 +26,14 @@ function doPost(e) {
     'New estimate request from the website',
     '',
     'Service: ' + (service || '-'),
+    (service === 'All keys lost' ? 'Second key (50% off): ' + (secondKey ? 'YES, wants a second key' : 'no') : null),
     'Vehicle: ' + vehicle,
     'Name: ' + name,
     'Phone: ' + phone,
     '',
     'Sent: ' + when + ' (Atlanta time)',
-    'Page: ' + (page || 'new.locksmitch.com')
-  ].join('\n');
+    'Page: ' + (page || 'locksmitch.com')
+  ].filter(function (x) { return x !== null; }).join('\n');
 
   MailApp.sendEmail({ to: TO, subject: SUBJECT, body: body, name: 'LocksMitch website' });
   return out({ ok: true });
