@@ -344,6 +344,22 @@ section { padding-block: clamp(56px, 7vw, 88px); }
 @media (max-width: 860px) { .local-grid { grid-template-columns: minmax(0,1fr); } }
 @media (max-width: 640px) { .county a.current { border-color: var(--green); } }
 
+/* Service pages */
+.more { color: var(--green); font-weight: 600; font-size: 15px; text-decoration: none; }
+.more::after { content: " →"; }
+.more:hover { text-decoration: underline; }
+.foot-links { display: flex; flex-wrap: wrap; gap: 8px 20px; width: 100%; padding-bottom: 6px; }
+.foot-links a { color: var(--ink); text-decoration: none; font-weight: 600; }
+.foot-links a:hover { color: var(--green); }
+.svc-steps { list-style: none; counter-reset: st; padding: 0; margin: 18px 0 0; display: grid; gap: 14px; }
+.svc-steps li { counter-increment: st; display: grid; grid-template-columns: 34px minmax(0,1fr); column-gap: 12px; }
+.svc-steps li::before { content: counter(st); grid-row: span 2; width: 34px; height: 34px; border-radius: 50%; display: grid; place-items: center; font-weight: 800; font-size: 15px; color: var(--brass-hi); background: color-mix(in srgb, var(--brass) 18%, transparent); }
+.svc-steps b { font-size: 17px; }
+.svc-steps span { color: var(--muted); font-size: 15px; }
+.price-list { margin: 10px 0 0; padding-left: 20px; color: var(--muted); display: grid; gap: 6px; }
+.svc-tip { margin-top: 18px; padding: 14px 16px; border-radius: 12px; border: 1px solid color-mix(in srgb, var(--brass) 45%, var(--line)); background: color-mix(in srgb, var(--brass) 9%, var(--surface)); font-size: 15px; }
+.local h3.sub { font-size: 19px; margin-top: 30px; }
+
 /* Steps */
 .steps-sec { background: var(--surface); border-block: 1px solid var(--line); }
 .steps { list-style: none; margin: 0; padding: 0; display: grid; grid-template-columns: repeat(4, minmax(0,1fr)); gap: 0; counter-reset: s; }
@@ -550,18 +566,22 @@ footer .wrap { display: flex; flex-wrap: wrap; gap: 12px 28px; justify-content: 
         <article class="spec">
           <div><h3>All keys lost</h3><p class="when">You have no working key at all.</p></div>
           <p class="what">We cut a new key from your vehicle’s code, program the transponder or smart key to the immobilizer, and leave you with a working key. Most makes and models, including push-to-start.</p>
+          <a class="more" href="/all-keys-lost/">More about this service</a>
         </article>
         <article class="spec">
           <div><h3>Spare key</h3><p class="when">You have one key and want a backup.</p></div>
           <p class="what">The cheapest moment to get a second key is while you still have the first. We clone or add a new key or fob so both work.</p>
+          <a class="more" href="/spare-key/">More about this service</a>
         </article>
         <article class="spec">
           <div><h3>Locked out of car</h3><p class="when">Keys are inside, or the lock won’t open.</p></div>
           <p class="what">We open the door without damage to paint, glass or weatherstripping. Call rather than filling the form so we can dispatch right away.</p>
+          <a class="more" href="/car-lockout/">More about this service</a>
         </article>
         <article class="spec">
           <div><h3>Key programming only</h3><p class="when">You bought a key or fob and it doesn’t start the car.</p></div>
           <p class="what">We program keys and remotes you already own, as long as the hardware matches your vehicle. Tell us the part number and we’ll confirm before we come.</p>
+          <a class="more" href="/key-programming/">More about this service</a>
         </article>
       </div>
       <div class="spare">
@@ -657,6 +677,9 @@ footer .wrap { display: flex; flex-wrap: wrap; gap: 12px 28px; justify-content: 
 
 <footer>
   <div class="wrap">
+    <nav class="foot-links" aria-label="Services">
+      <a href="/all-keys-lost/">All keys lost</a><a href="/spare-key/">Spare key</a><a href="/car-lockout/">Car lockout</a><a href="/key-programming/">Key programming</a><a href="/#area">Service area</a>
+    </nav>
     <span>© 2026 LocksMitch, a registered DBA of TPVision LLC</span>
     <span>Mobile auto locksmith serving North Atlanta, GA</span>
   </div>
@@ -765,7 +788,7 @@ footer .wrap { display: flex; flex-wrap: wrap; gap: 12px 28px; justify-content: 
   });
 
   // Analytics: calls, texts, messengers, online booking (form leads are tracked after a successful send)
-  var PAGE_CITY = document.documentElement.getAttribute('data-city') || 'Home';
+  var PAGE_CITY = document.documentElement.getAttribute('data-city') || document.documentElement.getAttribute('data-page') || 'Home';
   function track(name, extra) {
     if (typeof gtag !== 'function') return;
     var p = { page_city: PAGE_CITY };
