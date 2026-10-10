@@ -1,0 +1,11 @@
+{
+  "name": "LocksMitch Mobile Auto Locksmith",
+  "short_name": "LocksMitch",
+  "start_url": "/",
+  "display": "browser",
+  "background_color": "#0E1311",
+  "theme_color": "#0E1311",
+  "icons": [
+    { "src": "assets/apple-touch-icon.png", "sizes": "228x228", "type": "image/png" }
+  ]
+}
