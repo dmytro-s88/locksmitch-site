@@ -304,6 +304,11 @@ section { padding-block: clamp(56px, 7vw, 88px); }
 .county a:hover { color: var(--green); }
 .county a:hover span, .county a:focus-visible span { opacity: 1; }
 .area-note { margin-top: 32px; color: var(--muted); font-size: 15px; }
+.area-note a { color: var(--ink); font-weight: 600; }
+.area-note a:hover { color: var(--green); }
+.spots a { color: inherit; text-decoration: none; }
+.spots li:has(a) { border-color: var(--green); }
+.spots a:hover { color: var(--green); }
 
 /* Credentials */
 .cred { display: grid; grid-template-columns: auto minmax(0,1fr); gap: clamp(20px, 3vw, 36px); align-items: start; background: var(--surface); border: 1px solid var(--line); border-radius: 14px; padding: clamp(18px, 2.5vw, 26px); }
@@ -487,7 +492,7 @@ footer .wrap { display: flex; flex-wrap: wrap; gap: 12px 28px; justify-content: 
         <h2>Serving Buford and Gwinnett County</h2>
         <p class="lede">We come to Buford from our base in Forsyth County, with the key machine, blanks and programmer on board, so the key gets cut and programmed on the spot.</p><p class="lede">If you’re locked out in the Buford area and need rapid assistance, call <a href="tel:7702703333">(770) 270-3333</a> and we’ll head your way.</p>
         <p class="spots-h" style="margin-top:22px;font-weight:600">We come to you anywhere in Buford, including:</p>
-        <ul class="spots"><li>Mall of Georgia</li><li>Lake Lanier</li><li>Lake Lanier Islands</li><li>Downtown Buford</li><li>I-985 corridor</li></ul>
+        <ul class="spots"><li>Mall of Georgia</li><li><a href="/lake-lanier/">Lake Lanier</a></li><li>Lake Lanier Islands</li><li>Downtown Buford</li><li>I-985 corridor</li></ul>
       </div>
       <aside class="nearby" aria-labelledby="nearby-h">
         <h3 id="nearby-h">Nearby cities we serve</h3>
@@ -570,7 +575,7 @@ footer .wrap { display: flex; flex-wrap: wrap; gap: 12px 28px; justify-content: 
         <p class="lede">We serve North Atlanta, from Cumming and Lake Lanier down to the Perimeter. Here are the cities we cover most.</p>
       </div>
       <div class="area-grid" id="areaGrid"></div>
-      <p class="area-note">Not on the list? Call anyway. If you’re near one of these cities, we can usually reach you.</p>
+      <p class="area-note">Not on the list? Call anyway. If you’re near one of these cities, we can usually reach you. At the lake? See our <a href="/lake-lanier/">Lake Lanier page</a>.</p>
       <div class="cred" style="margin-top:clamp(40px,5vw,56px)">
         <div class="badge"><img src="/assets/nastf.jpg?v=2" alt="NASTF and NASTF Vehicle Security Professional badges" width="258" height="88"></div>
         <div>

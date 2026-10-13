@@ -389,6 +389,11 @@ section { padding-block: clamp(56px, 7vw, 88px); }
 .county a:hover { color: var(--green); }
 .county a:hover span, .county a:focus-visible span { opacity: 1; }
 .area-note { margin-top: 32px; color: var(--muted); font-size: 15px; }
+.area-note a { color: var(--ink); font-weight: 600; }
+.area-note a:hover { color: var(--green); }
+.spots a { color: inherit; text-decoration: none; }
+.spots li:has(a) { border-color: var(--green); }
+.spots a:hover { color: var(--green); }
 
 /* Credentials */
 .cred { display: grid; grid-template-columns: auto minmax(0,1fr); gap: clamp(20px, 3vw, 36px); align-items: start; background: var(--surface); border: 1px solid var(--line); border-radius: 14px; padding: clamp(18px, 2.5vw, 26px); }
@@ -659,7 +664,7 @@ footer .wrap { display: flex; flex-wrap: wrap; gap: 12px 28px; justify-content: 
         <p class="lede">We serve North Atlanta, from Cumming and Lake Lanier down to the Perimeter. Here are the cities we cover most.</p>
       </div>
       <div class="area-grid" id="areaGrid"></div>
-      <p class="area-note">Not on the list? Call anyway. If you’re near one of these cities, we can usually reach you.</p>
+      <p class="area-note">Not on the list? Call anyway. If you’re near one of these cities, we can usually reach you. At the lake? See our <a href="/lake-lanier/">Lake Lanier page</a>.</p>
       <div class="cred" style="margin-top:clamp(40px,5vw,56px)">
         <div class="badge"><img src="/assets/nastf.jpg?v=2" alt="NASTF and NASTF Vehicle Security Professional badges" width="258" height="88"></div>
         <div>
