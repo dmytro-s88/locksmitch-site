@@ -103,6 +103,22 @@
    }
   ]
  },
+ "openingHoursSpecification": [
+  {
+   "@type": "OpeningHoursSpecification",
+   "dayOfWeek": [
+    "Monday",
+    "Tuesday",
+    "Wednesday",
+    "Thursday",
+    "Friday",
+    "Saturday",
+    "Sunday"
+   ],
+   "opens": "00:00",
+   "closes": "23:59"
+  }
+ ],
  "sameAs": [
   "https://www.instagram.com/locksmitch.ga/",
   "https://www.facebook.com/profile.php?id=61585047509637"
@@ -426,7 +442,9 @@ section { padding-block: clamp(56px, 7vw, 88px); }
 .ch-name { font-weight: 700; }
 .ch-val { margin-left: auto; color: var(--muted); font-size: 15px; text-align: right; min-width: 0; overflow-wrap: anywhere; }
 .col-h { margin-bottom: 24px; }
-.num-row { display: flex; flex-wrap: wrap; align-items: center; gap: 12px 18px; padding-bottom: 20px; }
+.hours-line { display: flex; align-items: center; gap: 8px; margin: 14px 0 20px; font-size: 15px; font-weight: 600; }
+.hours-line svg { width: 18px; height: 18px; color: var(--green); flex: none; }
+.num-row { display: flex; flex-wrap: wrap; align-items: center; gap: 12px 18px; }
 .copy { font: 600 13px var(--font-body); border: 1px solid var(--line); background: transparent; color: var(--muted); border-radius: 999px; padding: 7px 14px; cursor: pointer; }
 .copy:hover { color: var(--ink); border-color: var(--ink); }
 .faq details { border-bottom: 1px solid var(--line); }
@@ -695,6 +713,7 @@ footer .wrap { display: flex; flex-wrap: wrap; gap: 12px 28px; justify-content: 
       <div>
         <h2 class="col-h">Contact us</h2>
         <div class="num-row"><a class="bignum" href="tel:7702703333" id="phoneNum">(770) 270-3333</a><button class="copy" type="button" id="copyBtn">Copy number</button></div>
+        <p class="hours-line"><svg><use href="#i-check"/></svg>Open 24/7, including nights, weekends and holidays</p>
         <ul class="channels">
           <li><a href="sms:+17702703333"><svg><use href="#i-sms"/></svg><span class="ch-name">Text message</span><span class="ch-val">(770) 270-3333</span></a></li>
           <li><a href="https://wa.me/17702703333" target="_blank" rel="noopener"><svg><use href="#i-wa"/></svg><span class="ch-name">WhatsApp</span><span class="ch-val">Message us</span></a></li>
