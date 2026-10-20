@@ -31,6 +31,7 @@
  "legalName": "TPVision LLC",
  "description": "Mobile auto locksmith in North Atlanta: car key replacement, all keys lost, spare keys, lockouts and key programming at your location.",
  "url": "https://locksmitch.com",
+ "paymentAccepted": "Cash, Credit Card, Debit Card, Apple Pay, Zelle, Venmo, Cash App",
  "telephone": "+1-770-270-3333",
  "email": "info@locksmitch.com",
  "image": "https://locksmitch.com/assets/logo.png",
@@ -443,6 +444,7 @@ section { padding-block: clamp(56px, 7vw, 88px); }
 .ch-val { margin-left: auto; color: var(--muted); font-size: 15px; text-align: right; min-width: 0; overflow-wrap: anywhere; }
 .col-h { margin-bottom: 24px; }
 .hours-line { display: flex; align-items: center; gap: 8px; margin: 14px 0 20px; font-size: 15px; font-weight: 600; }
+.pay-line { margin-top: -12px; }
 .hours-line svg { width: 18px; height: 18px; color: var(--green); flex: none; }
 .num-row { display: flex; flex-wrap: wrap; align-items: center; gap: 12px 18px; }
 .copy { font: 600 13px var(--font-body); border: 1px solid var(--line); background: transparent; color: var(--muted); border-radius: 999px; padding: 7px 14px; cursor: pointer; }
@@ -469,7 +471,7 @@ footer .wrap { display: flex; flex-wrap: wrap; gap: 12px 28px; justify-content: 
   .hero h1 { font-size: 40px; }
   .hero .lede { font-size: 16px; margin-top: 16px; }
   .cta-row { margin-top: 22px; }
-  .facts { display: grid; grid-template-columns: repeat(3, minmax(0,1fr)); gap: 10px; margin-top: 22px; padding-top: 18px; font-size: 12.5px; text-align: center; }
+  .facts { display: grid; grid-template-columns: repeat(4, minmax(0,1fr)); gap: 8px; margin-top: 22px; padding-top: 18px; font-size: 12px; text-align: center; }
   .facts span { flex-direction: column; gap: 6px; line-height: 1.25; }
   .facts svg { width: 22px; height: 22px; }
 
@@ -523,6 +525,7 @@ footer .wrap { display: flex; flex-wrap: wrap; gap: 12px 28px; justify-content: 
   <symbol id="i-key" viewBox="0 0 24 24"><path fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" d="M14.5 9.5a4.5 4.5 0 1 1-1.3-3.2 4.5 4.5 0 0 1 1.3 3.2ZM13 12.7 21 20.5M17.5 17l2-2M15.5 15l1.5-1.5"/></symbol>
   <symbol id="i-person" viewBox="0 0 24 24"><path fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" d="M12 12a4 4 0 1 0 0-8 4 4 0 0 0 0 8ZM4 21a8 8 0 0 1 16 0"/></symbol>
   <symbol id="i-card" viewBox="0 0 24 24"><path fill="none" stroke="currentColor" stroke-width="2" stroke-linejoin="round" d="M3 5h18v14H3zM7 10a2 2 0 1 0 0 .01M6 15h3M13 9h5M13 13h5"/></symbol>
+  <symbol id="i-pay" viewBox="0 0 24 24"><path fill="none" stroke="currentColor" stroke-width="2" stroke-linejoin="round" d="M3 6h18v12H3zM3 10h18M7 15h4"/></symbol>
 </svg>
 
 <header class="top">
@@ -558,6 +561,7 @@ footer .wrap { display: flex; flex-wrap: wrap; gap: 12px 28px; justify-content: 
             <span><svg><use href="#i-van"/></svg>Fully mobile</span>
             <span><svg><use href="#i-shield"/></svg>NASTF certified</span>
             <span><svg><use href="#i-check"/></svg>Licensed &amp; insured</span>
+            <span><svg><use href="#i-pay"/></svg>Cards, Zelle, Apple Pay</span>
           </div>
         </div>
 
@@ -697,6 +701,7 @@ footer .wrap { display: flex; flex-wrap: wrap; gap: 12px 28px; justify-content: 
         <h2 class="col-h">Contact us</h2>
         <div class="num-row"><a class="bignum" href="tel:7702703333" id="phoneNum">(770) 270-3333</a><button class="copy" type="button" id="copyBtn">Copy number</button></div>
         <p class="hours-line"><svg><use href="#i-check"/></svg>Open 24/7, including nights, weekends and holidays</p>
+        <p class="hours-line pay-line"><svg><use href="#i-pay"/></svg>We accept cash, credit and debit cards, Apple Pay, Zelle, Venmo and Cash App</p>
         <ul class="channels">
           <li><a href="sms:+17702703333"><svg><use href="#i-sms"/></svg><span class="ch-name">Text message</span><span class="ch-val">(770) 270-3333</span></a></li>
           <li><a href="https://wa.me/17702703333" target="_blank" rel="noopener"><svg><use href="#i-wa"/></svg><span class="ch-name">WhatsApp</span><span class="ch-val">Message us</span></a></li>
@@ -715,6 +720,7 @@ footer .wrap { display: flex; flex-wrap: wrap; gap: 12px 28px; justify-content: 
         <details><summary>Do I need to tow my car to you?</summary><p>No. We bring the key machine, blanks and programmer to wherever the car is: home, work, a parking lot or the side of the road.</p></details>
         <details><summary>Can this damage my car?</summary><p>No. We open doors with automotive lockout tools, not by force, and program keys with dealer-level equipment, usually through the car’s diagnostic port.</p></details>
         <details><summary>What are your hours?</summary><p>We take calls and go out 24/7, including nights, weekends and holidays.</p></details>
+        <details><summary>How can I pay?</summary><p>Cash, credit and debit cards, Apple Pay, Zelle, Venmo or Cash App, whichever is easiest for you.</p></details>
         <details><summary>Can I text instead of calling?</summary><p>Yes. Text <a href="sms:+17702703333">(770) 270-3333</a> with the year, make and model and what happened. You’ll get a reply from the locksmith, not a call center.</p></details>
         <details><summary>Is there a discount on a second key?</summary><p>Yes. When we make a new key because all keys are lost, a second key for the same car is 50% off. Same car, same key type, made during the same visit. Combines with $15 off for online booking.</p></details>
         <details><summary>How do I get the $15 discount?</summary><p>Book your appointment through the online booking page. The discount is applied to online bookings.</p></details>
@@ -730,6 +736,7 @@ footer .wrap { display: flex; flex-wrap: wrap; gap: 12px 28px; justify-content: 
     </nav>
     <span>© 2026 LocksMitch, a registered DBA of TPVision LLC</span>
     <span>Mobile auto locksmith serving North Atlanta, GA</span>
+    <span>We accept cash, cards, Apple Pay, Zelle, Venmo and Cash App</span>
   </div>
 </footer>
 
