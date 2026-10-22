@@ -543,7 +543,7 @@ footer .wrap { display: flex; flex-wrap: wrap; gap: 12px 28px; justify-content: 
           <div class="cta-row">
             <a class="btn btn-call" href="tel:7702703333"><svg><use href="#i-phone"/></svg>Call (770) 270-3333</a>
             <a class="btn btn-ghost" href="sms:+17702703333"><svg><use href="#i-sms"/></svg>Text us</a>
-            <a class="btn btn-ghost" href="https://app.squareup.com/appointments/book/lxfbvt18yxijiv/LHKXXP6K6C9N7/start" target="_blank" rel="noopener"><svg><use href="#i-cal"/></svg>Book online</a>
+            <a class="btn btn-ghost" href="/book/"><svg><use href="#i-cal"/></svg>Book online</a>
           </div>
           <p class="direct"><svg><use href="#i-person"/></svg><span><strong>Answered 24/7.</strong> No call center. Every request goes straight to the locksmith who does the job.</span></p>
           <p class="book-note"><span class="tag">$15 off</span>&nbsp; <strong>when you book online.</strong> Locked out of your Ferrari right now? Call instead, it’s faster.</p>
@@ -880,7 +880,7 @@ footer .wrap { display: flex; flex-wrap: wrap; gap: 12px 28px; justify-content: 
     if (/^tel:/.test(href)) track('click_to_call', { link_location: where });
     else if (/^sms:/.test(href)) track('click_to_text', { link_location: where });
     else if (/wa\.me|t\.me\//.test(href)) track('click_messenger', { channel: /wa\.me/.test(href) ? 'whatsapp' : 'telegram', link_location: where });
-    else if (/squareup\.com\/appointments/.test(href)) track('click_book_online', { link_location: where });
+    else if (/^\/book\/|squareup\.com\/appointments/.test(href)) track('click_book_online', { link_location: where });
   });
 
   // Copy phone number
