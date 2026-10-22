@@ -11,7 +11,10 @@
 <meta property="og:url" content="https://locksmitch.com/book/">
 <meta property="og:title" content="Book a Visit | LocksMitch">
 <meta property="og:description" content="Pick a time for your spare key, new key, lockout or key programming. Mitch confirms by text. $15 off online bookings.">
-<meta property="og:image" content="https://locksmitch.com/assets/logo.png">
+<meta property="og:image" content="https://locksmitch.com/assets/og.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta name="twitter:card" content="summary_large_image">
 <script async src="https://www.googletagmanager.com/gtag/js?id=G-XWXQMEEC9Y"></script>
 <script>window.dataLayer = window.dataLayer || []; function gtag(){dataLayer.push(arguments);} gtag('js', new Date()); gtag('config', 'G-XWXQMEEC9Y');</script>
 <meta http-equiv="Content-Security-Policy" content="upgrade-insecure-requests">
@@ -188,9 +191,16 @@ footer { padding-block: 32px calc(36px + env(safe-area-inset-bottom, 0px)); bord
 footer .wrap { display: flex; flex-wrap: wrap; gap: 10px 26px; justify-content: space-between; }
 footer a { color: var(--ink); text-decoration: none; font-weight: 600; }
 footer a:hover { color: var(--green); }
+.skip{position:absolute;left:-9999px;top:8px;z-index:1000;background:var(--green,#5ad96a);color:#0D1A0B;padding:10px 14px;border-radius:10px;font-weight:600}.skip:focus{left:8px}.foot-cities{display:flex;flex-wrap:wrap;gap:6px 14px;margin:10px 0 14px;font-size:13px}.foot-cities a{color:var(--muted,#9aa);text-decoration:none}
+.callbar { position: fixed; left: 0; right: 0; bottom: 0; z-index: 30; display: none; gap: 10px; padding: 10px 16px calc(10px + env(safe-area-inset-bottom, 0px)); background: color-mix(in srgb, var(--bg) 92%, transparent); backdrop-filter: blur(10px); border-top: 1px solid var(--line); }
+.callbar .btn { flex: 1 1 0; justify-content: center; min-height: 50px; padding: 0 10px; font-size: 16px; gap: 8px; }
+.callbar .btn-call { flex-grow: 1.4; }
+@media (max-width: 760px) { .callbar { display: flex; } }
 </style>
+<script type="application/ld+json">{"@context": "https://schema.org", "@type": "BreadcrumbList", "itemListElement": [{"@type": "ListItem", "position": 1, "name": "LocksMitch", "item": "https://locksmitch.com/"}, {"@type": "ListItem", "position": 2, "name": "Book a visit", "item": "https://locksmitch.com/book/"}]}</script>
 </head>
 <body>
+<a class="skip" href="#main">Skip to content</a>
 
 <svg width="0" height="0" style="position:absolute" aria-hidden="true">
   <symbol id="i-phone" viewBox="0 0 24 24"><path fill="currentColor" d="M6.6 10.8a15.1 15.1 0 0 0 6.6 6.6l2.2-2.2c.3-.3.7-.4 1-.2 1.1.4 2.3.6 3.6.6.6 0 1 .4 1 1V20c0 .6-.4 1-1 1A17 17 0 0 1 3 4c0-.6.4-1 1-1h3.5c.6 0 1 .4 1 1 0 1.3.2 2.5.6 3.6.1.3 0 .7-.2 1l-2.3 2.2Z"/></symbol>
@@ -204,8 +214,8 @@ footer a:hover { color: var(--green); }
 
 <header class="top">
   <div class="wrap">
-    <a class="brand" href="/" aria-label="LocksMitch home"><img src="/assets/logo.png?v=2" alt="LocksMitch mobile auto locksmith" width="420" height="191"></a>
-    <a class="btn btn-call" href="tel:7702703333"><svg><use href="#i-phone"/></svg><span>(770) 270-3333</span></a>
+    <a class="brand" href="/" aria-label="LocksMitch home"><img src="/assets/logo.webp" alt="LocksMitch mobile auto locksmith" width="420" height="191"></a>
+    <a class="btn btn-call" href="tel:7702703333" aria-label="Call (770) 270-3333"><svg><use href="#i-phone"/></svg><span>(770) 270-3333</span></a>
   </div>
 </header>
 
@@ -306,6 +316,10 @@ footer a:hover { color: var(--green); }
   </div>
 </footer>
 
+<div class="callbar">
+  <a class="btn btn-call" href="tel:7702703333"><svg><use href="#i-phone"/></svg>Call now</a>
+  <a class="btn btn-ghost" href="sms:+17702703333">Text</a>
+</div>
 <script>
 (function () {
   var API = 'https://script.google.com/macros/s/AKfycbynxb1ruxrGOtdWw-uGXRYzHs_Pz7L-ad5lc9KdyqKUzbRcSfJ1-L97VLvmfUbY_cZh/exec';

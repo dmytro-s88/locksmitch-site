@@ -308,3 +308,11 @@ footer .wrap { display: flex; flex-wrap: wrap; gap: 12px 28px; justify-content: 
 .callbar .btn { flex: 1 1 0; justify-content: center; min-height: 50px; padding: 0 10px; font-size: 16px; gap: 8px; }
 .callbar .btn-call { flex-grow: 1.4; }
 @media (max-width: 760px) { .callbar { display: flex; } }
+
+/* города обычными ссылками (для поисковиков и без JS) */
+.foot-cities { display: flex; flex-wrap: wrap; gap: 6px 14px; margin: 10px 0 14px; font-size: 13px; }
+.foot-cities a { color: var(--muted); text-decoration: none; }
+.foot-cities a:hover { color: var(--ink); text-decoration: underline; }
+/* ссылка «к содержимому» для клавиатуры и скринридеров */
+.skip { position: absolute; left: -9999px; top: 8px; z-index: 1000; background: var(--green); color: var(--on-green); padding: 10px 14px; border-radius: 10px; font-weight: 600; }
+.skip:focus { left: 8px; }
