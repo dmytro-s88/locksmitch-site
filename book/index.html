@@ -364,6 +364,9 @@ footer a:hover { color: var(--green); }
     var keep = state.date && d.days.some(function (x) { return x.date === state.date && x.slots.length; });
     if (!firstOpen) { timesBox.innerHTML = '<p class="slot-msg">No open times in the next two weeks. Call or text <a href="tel:7702703333">(770) 270-3333</a> and Mitch will fit you in.</p>'; state.date = ''; state.time = ''; summary(); return; }
     pickDay(keep ? state.date : firstOpen, true);
+    // Scroll the day strip (not the page) so the selected day sits near the left edge, with a full day or two still visible before it
+    var sel = daysEl.querySelector('[aria-pressed="true"]');
+    if (sel) daysEl.scrollLeft = Math.max(0, sel.offsetLeft - daysEl.offsetLeft - 2 * (sel.offsetWidth + 8));
   }
 
   function pickDay(ymd, quiet) {
