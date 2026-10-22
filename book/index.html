@@ -72,6 +72,7 @@ button { font: inherit; color: inherit; }
 .step-h .n { width: 34px; height: 34px; border-radius: 50%; display: grid; place-items: center; font-weight: 800; font-size: 15px; color: var(--brass-hi); background: color-mix(in srgb, var(--brass) 18%, transparent); flex: none; transition: background-color .2s, color .2s; }
 .step.done .step-h .n { background: var(--green); color: var(--on-green); }
 .step-h h2 { font-size: 21px; font-weight: 700; line-height: 1.2; }
+@media (max-width: 560px) { .step-h .hint { display: none; } }
 .step-h .hint { margin-left: auto; font-size: 13px; color: var(--muted); font-weight: 600; text-align: right; }
 
 /* Step 1: services */
@@ -86,7 +87,12 @@ button { font: inherit; color: inherit; }
 .svc b svg { width: 19px; height: 19px; color: var(--green); flex: none; }
 .svc small { color: var(--muted); font-size: 14px; line-height: 1.4; }
 .svc .len { font-size: 12.5px; font-weight: 700; color: var(--brass-hi); margin-top: 4px; }
-@media (max-width: 480px) { .svc { grid-template-columns: minmax(0, 1fr); } }
+@media (max-width: 480px) {
+  .svc { grid-template-columns: minmax(0, 1fr); gap: 8px; }
+  .svc label { grid-template-columns: minmax(0, 1fr) auto; align-items: baseline; column-gap: 10px; row-gap: 2px; padding: 12px 13px; }
+  .svc label small { grid-column: 1 / -1; grid-row: 2; font-size: 13.5px; }
+  .svc .len { margin-top: 0; grid-row: 1; grid-column: 2; }
+}
 .lock-note { margin-top: 12px; font-size: 14.5px; padding: 11px 13px; border-radius: 10px; border: 1px solid color-mix(in srgb, var(--green) 45%, var(--line)); background: color-mix(in srgb, var(--green) 9%, transparent); }
 .lock-note a { font-weight: 700; color: var(--ink); white-space: nowrap; }
 
@@ -360,7 +366,7 @@ footer a:hover { color: var(--green); }
     if (state.time && day.slots.indexOf(state.time) < 0) state.time = '';
     var p = dParts(ymd), groups = [['Morning', []], ['Afternoon', []]];
     day.slots.forEach(function (t) { groups[Number(t.slice(0, 2)) < 12 ? 0 : 1][1].push(t); });
-    var html = '<div class="times-h"><h3>' + DOWL[p.w] + ', ' + MONL[p.m] + ' ' + p.d + '</h3><span>' + day.slots.length + ' open</span></div>';
+    var html = '<div class="times-h"><h3>' + DOWL[p.w] + ', ' + MONL[p.m] + ' ' + p.d + '</h3><span>' + day.slots.length + ' open · Eastern time</span></div>';
     groups.forEach(function (g) {
       if (!g[1].length) return;
       html += '<div class="part"><p>' + g[0] + '</p><div class="times">' + g[1].map(function (t) {
