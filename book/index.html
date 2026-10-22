@@ -1,0 +1,457 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<style>html{background:#0E1311}body{margin:0}img{max-width:100%}[hidden]{display:none!important}</style>
+<title>Book a Visit | LocksMitch</title>
+<meta name="description" content="Pick a time for your spare key, new key, lockout or key programming. Mitch confirms by text. $15 off when you book online.">
+<meta name="robots" content="noindex, nofollow">
+<meta http-equiv="Content-Security-Policy" content="upgrade-insecure-requests">
+<link rel="icon" type="image/png" href="/assets/favicon.png?v=2">
+<link rel="apple-touch-icon" href="/assets/apple-touch-icon.png?v=2">
+<meta name="theme-color" content="#0E1311">
+<meta name="color-scheme" content="dark">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@400;500;600;700;800&display=swap">
+<style>
+/* Booking page: same tokens as the main site (graphite fob, logo green, brass accents).
+   Three steps on the left, a "Your visit" ticket on the right that becomes the last block on phones. */
+:root {
+  --bg: #0E1311; --surface: #151D1A; --ink: #EAF0EC; --muted: #9AA8A1; --line: #26322D;
+  --green: #6CC655; --on-green: #0B170A; --teal: #4FB0BE;
+  --brass: #C9A257; --brass-hi: #E8CD8C;
+  --fob: #1A2420; --on-fob: #EAF0EC;
+  --err: #FFB4A8;
+  --font: "Open Sans", system-ui, -apple-system, "Segoe UI", sans-serif;
+  --r-sm: 8px; --r-lg: 18px;
+  --gutter: clamp(16px, 4vw, 40px); --max: 1180px;
+  color-scheme: dark;
+}
+* { box-sizing: border-box; }
+body { background: var(--bg); color: var(--ink); font-family: var(--font); font-size: 17px; line-height: 1.55; -webkit-font-smoothing: antialiased; }
+a { color: inherit; }
+:focus-visible { outline: 3px solid var(--green); outline-offset: 3px; border-radius: 6px; }
+.wrap { max-width: var(--max); margin-inline: auto; padding-left: max(var(--gutter), env(safe-area-inset-left, 0px)); padding-right: max(var(--gutter), env(safe-area-inset-right, 0px)); }
+h1, h2, h3 { margin: 0; text-wrap: balance; letter-spacing: -0.01em; }
+p { margin: 0; }
+button { font: inherit; color: inherit; }
+
+/* Header */
+.top { position: sticky; top: 0; z-index: 20; padding-top: env(safe-area-inset-top, 0px); background: color-mix(in srgb, var(--bg) 88%, transparent); backdrop-filter: blur(10px); border-bottom: 1px solid var(--line); }
+.top .wrap { display: flex; align-items: center; gap: 16px; min-height: 76px; }
+.brand { margin-right: auto; display: flex; }
+.brand img { height: 62px; width: auto; display: block; }
+.btn { display: inline-flex; align-items: center; justify-content: center; gap: 10px; min-height: 52px; padding: 0 22px; border-radius: 999px; font: 700 17px/1 var(--font); text-decoration: none; border: 2px solid transparent; cursor: pointer; transition: transform .15s ease, background-color .15s ease, opacity .15s; }
+.btn:active { transform: translateY(1px); }
+.btn svg { width: 20px; height: 20px; flex: none; }
+.btn-call { background: var(--green); color: var(--on-green); }
+.btn-call:hover { background: color-mix(in srgb, var(--green) 88%, var(--ink)); }
+.btn-ghost { border-color: color-mix(in srgb, var(--ink) 55%, transparent); color: var(--ink); background: transparent; }
+.btn-ghost:hover { background: color-mix(in srgb, var(--ink) 7%, transparent); }
+.top .btn { min-height: 44px; padding: 0 18px; font-size: 16px; font-variant-numeric: tabular-nums; }
+@media (max-width: 520px) { .top .btn span { display: none; } .top .btn { padding: 0 13px; } .brand img { height: 54px; } }
+
+/* Intro */
+.intro { padding-block: clamp(28px, 5vw, 56px) clamp(20px, 3vw, 32px); }
+.tag { display: inline-flex; align-items: center; gap: 6px; font-size: 13px; font-weight: 700; padding: 4px 11px; border-radius: 999px; background: color-mix(in srgb, var(--brass) 22%, transparent); color: var(--brass-hi); }
+.intro h1 { font-size: clamp(36px, 5vw, 56px); font-weight: 800; line-height: 1.05; letter-spacing: -0.025em; margin-top: 14px; }
+.intro .lede { color: var(--muted); font-size: 18px; max-width: 56ch; margin-top: 14px; }
+.urgent { display: flex; gap: 10px; align-items: flex-start; margin-top: 18px; font-size: 15px; color: var(--muted); max-width: 60ch; }
+.urgent svg { width: 20px; height: 20px; color: var(--green); flex: none; margin-top: 2px; }
+.urgent a { color: var(--ink); font-weight: 700; text-decoration: none; white-space: nowrap; }
+.urgent a:hover { color: var(--green); }
+
+/* Layout */
+.layout { display: grid; grid-template-columns: minmax(0, 1fr) 380px; gap: clamp(24px, 4vw, 48px); align-items: start; padding-bottom: clamp(48px, 7vw, 88px); }
+@media (max-width: 960px) { .layout { grid-template-columns: minmax(0, 1fr); } }
+.steps { display: grid; gap: 14px; min-width: 0; }
+.step { background: var(--surface); border: 1px solid var(--line); border-radius: var(--r-lg); padding: clamp(18px, 3vw, 28px); min-width: 0; }
+.step-h { display: flex; align-items: center; gap: 12px; margin-bottom: 18px; }
+.step-h .n { width: 34px; height: 34px; border-radius: 50%; display: grid; place-items: center; font-weight: 800; font-size: 15px; color: var(--brass-hi); background: color-mix(in srgb, var(--brass) 18%, transparent); flex: none; transition: background-color .2s, color .2s; }
+.step.done .step-h .n { background: var(--green); color: var(--on-green); }
+.step-h h2 { font-size: 21px; font-weight: 700; line-height: 1.2; }
+.step-h .hint { margin-left: auto; font-size: 13px; color: var(--muted); font-weight: 600; text-align: right; }
+
+/* Step 1: services */
+.svc { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 10px; border: 0; padding: 0; margin: 0; }
+.svc legend { position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0); }
+.svc input { position: absolute; opacity: 0; pointer-events: none; }
+.svc label { display: grid; gap: 4px; align-content: start; min-height: 100%; padding: 14px 14px 13px; border-radius: 12px; border: 1px solid rgba(233,238,234,.16); background: rgba(233,238,234,.03); cursor: pointer; transition: border-color .15s, background-color .15s; }
+.svc label:hover { border-color: rgba(233,238,234,.34); }
+.svc input:checked + label { border-color: var(--green); background: color-mix(in srgb, var(--green) 14%, transparent); }
+.svc input:focus-visible + label { outline: 3px solid var(--green); outline-offset: 2px; }
+.svc b { font-size: 16.5px; display: flex; align-items: center; gap: 8px; }
+.svc b svg { width: 19px; height: 19px; color: var(--green); flex: none; }
+.svc small { color: var(--muted); font-size: 14px; line-height: 1.4; }
+.svc .len { font-size: 12.5px; font-weight: 700; color: var(--brass-hi); margin-top: 4px; }
+@media (max-width: 480px) { .svc { grid-template-columns: minmax(0, 1fr); } }
+.lock-note { margin-top: 12px; font-size: 14.5px; padding: 11px 13px; border-radius: 10px; border: 1px solid color-mix(in srgb, var(--green) 45%, var(--line)); background: color-mix(in srgb, var(--green) 9%, transparent); }
+.lock-note a { font-weight: 700; color: var(--ink); white-space: nowrap; }
+
+/* Step 2: days and times */
+.days-wrap { position: relative; margin-inline: calc(-1 * clamp(18px, 3vw, 28px)); }
+.days { display: flex; gap: 8px; overflow-x: auto; scroll-snap-type: x proximity; padding: 2px clamp(18px, 3vw, 28px) 10px; scrollbar-width: thin; scrollbar-color: var(--line) transparent; }
+.day { flex: 0 0 auto; width: 66px; padding: 9px 0 10px; border-radius: 12px; border: 1px solid rgba(233,238,234,.16); background: transparent; cursor: pointer; display: grid; justify-items: center; gap: 1px; scroll-snap-align: start; transition: border-color .15s, background-color .15s; }
+.day:hover:not([disabled]) { border-color: rgba(233,238,234,.34); }
+.day .dw { font-size: 12px; font-weight: 700; text-transform: uppercase; letter-spacing: .06em; color: var(--muted); }
+.day .dn { font-size: 22px; font-weight: 800; line-height: 1.2; font-variant-numeric: tabular-nums; }
+.day .dm { font-size: 12px; color: var(--muted); font-weight: 600; }
+.day[aria-pressed="true"] { border-color: var(--green); background: color-mix(in srgb, var(--green) 16%, transparent); }
+.day[aria-pressed="true"] .dw, .day[aria-pressed="true"] .dm { color: var(--ink); }
+.day[disabled] { opacity: .38; cursor: not-allowed; }
+.day[disabled] .dm { font-size: 11px; }
+.times-h { display: flex; align-items: baseline; justify-content: space-between; gap: 12px; margin: 16px 0 10px; }
+.times-h h3 { font-size: 16px; font-weight: 700; }
+.times-h span { font-size: 13px; color: var(--muted); }
+.part { margin-top: 12px; }
+.part:first-of-type { margin-top: 0; }
+.part p { font-size: 12.5px; font-weight: 700; text-transform: uppercase; letter-spacing: .07em; color: var(--muted); margin-bottom: 8px; }
+.times { display: grid; grid-template-columns: repeat(auto-fill, minmax(96px, 1fr)); gap: 8px; }
+.time { min-height: 46px; border-radius: 10px; border: 1px solid rgba(233,238,234,.16); background: transparent; cursor: pointer; font-weight: 700; font-size: 15.5px; font-variant-numeric: tabular-nums; transition: border-color .15s, background-color .15s; }
+.time:hover { border-color: rgba(233,238,234,.34); }
+.time[aria-pressed="true"] { background: var(--green); border-color: var(--green); color: var(--on-green); }
+.slot-msg { color: var(--muted); font-size: 15px; padding: 14px 0 4px; }
+.slot-msg a { color: var(--ink); font-weight: 700; }
+.skel { display: grid; grid-template-columns: repeat(auto-fill, minmax(96px, 1fr)); gap: 8px; margin-top: 16px; }
+.skel i { display: block; height: 46px; border-radius: 10px; background: linear-gradient(90deg, rgba(233,238,234,.04), rgba(233,238,234,.09), rgba(233,238,234,.04)); background-size: 200% 100%; animation: sh 1.2s linear infinite; }
+@keyframes sh { from { background-position: 200% 0; } to { background-position: -200% 0; } }
+@media (prefers-reduced-motion: reduce) { .skel i { animation: none; } }
+
+/* Step 3: details */
+.fields { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 12px; }
+.fields .wide { grid-column: 1 / -1; }
+@media (max-width: 560px) { .fields { grid-template-columns: minmax(0, 1fr); } }
+.field { display: grid; gap: 5px; min-width: 0; }
+.field label { font-size: 13px; font-weight: 600; color: color-mix(in srgb, var(--ink) 78%, transparent); }
+.field label span { font-weight: 500; color: var(--muted); }
+.field input, .field textarea { width: 100%; min-height: 50px; border-radius: var(--r-sm); border: 1px solid rgba(233,238,234,.18); background: rgba(233,238,234,.05); color: var(--ink); font: 500 16px var(--font); padding: 0 14px; }
+.field textarea { min-height: 92px; padding: 12px 14px; resize: vertical; line-height: 1.45; }
+.field input::placeholder, .field textarea::placeholder { color: rgba(233,238,234,.38); }
+.field input:focus, .field textarea:focus { outline: none; border-color: var(--green); box-shadow: 0 0 0 3px color-mix(in srgb, var(--green) 32%, transparent); }
+.field input[aria-invalid="true"] { border-color: var(--err); }
+.field small { font-size: 12.5px; color: var(--muted); }
+.addon { display: flex; gap: 10px; align-items: flex-start; padding: 12px 13px; border-radius: var(--r-sm); border: 1px dashed color-mix(in srgb, var(--brass) 60%, transparent); background: color-mix(in srgb, var(--brass) 10%, transparent); cursor: pointer; }
+.addon input { width: 18px; height: 18px; margin-top: 3px; accent-color: var(--green); flex: none; }
+.addon b { display: block; font-size: 15px; color: var(--brass-hi); }
+.addon small { display: block; font-size: 13px; color: var(--muted); }
+.hp { position: absolute; left: -9999px; width: 1px; height: 1px; overflow: hidden; }
+
+/* Ticket */
+.ticket { position: sticky; top: 96px; background: var(--fob); border: 1px solid color-mix(in srgb, var(--green) 30%, var(--line)); border-radius: var(--r-lg); box-shadow: 0 30px 70px -30px rgba(0,0,0,.7); overflow: hidden; }
+@media (max-width: 960px) { .ticket { position: static; } }
+.ticket-top { padding: 22px 22px 18px; }
+.ticket h2 { font-size: 13px; font-weight: 700; text-transform: uppercase; letter-spacing: .08em; color: var(--muted); }
+.t-when { font-size: 26px; font-weight: 800; line-height: 1.15; margin-top: 8px; letter-spacing: -0.015em; }
+.t-when.empty { color: color-mix(in srgb, var(--ink) 40%, transparent); }
+.t-rows { display: grid; gap: 9px; margin-top: 16px; padding-top: 16px; border-top: 1px solid var(--line); font-size: 15px; }
+.t-rows div { display: flex; justify-content: space-between; gap: 14px; }
+.t-rows dt { color: var(--muted); }
+.t-rows dd { margin: 0; font-weight: 600; text-align: right; min-width: 0; overflow-wrap: anywhere; }
+.perf { position: relative; height: 0; border-top: 2px dashed var(--line); margin: 0 18px; }
+.perf::before, .perf::after { content: ""; position: absolute; top: -12px; width: 22px; height: 22px; border-radius: 50%; background: var(--bg); border: 1px solid color-mix(in srgb, var(--green) 30%, var(--line)); }
+.perf::before { left: -30px; } .perf::after { right: -30px; }
+.ticket-bot { padding: 18px 22px 22px; display: grid; gap: 12px; }
+.save { display: flex; gap: 10px; align-items: center; font-size: 14.5px; }
+.save .tag { flex: none; }
+.ticket .btn-call { width: 100%; min-height: 56px; font-size: 18px; }
+.ticket .btn-call[disabled] { opacity: .55; cursor: not-allowed; }
+.fine { font-size: 13px; color: var(--muted); line-height: 1.45; }
+.fine a { color: inherit; font-weight: 600; }
+.form-err { font-size: 14px; font-weight: 600; color: var(--err); background: rgba(255,120,100,.12); border-radius: var(--r-sm); padding: 10px 12px; }
+.form-err a { color: inherit; }
+
+/* Done */
+.done-card { max-width: 640px; margin: clamp(28px, 6vw, 72px) auto clamp(56px, 8vw, 96px); background: var(--fob); border: 1px solid color-mix(in srgb, var(--green) 35%, var(--line)); border-radius: var(--r-lg); padding: clamp(24px, 4vw, 40px); display: grid; gap: 16px; box-shadow: 0 30px 70px -30px rgba(0,0,0,.7); }
+.done-card > svg { width: 52px; height: 52px; color: var(--on-green); background: var(--green); border-radius: 50%; padding: 12px; }
+.done-card h1 { font-size: clamp(30px, 4vw, 40px); font-weight: 800; line-height: 1.1; }
+.done-when { font-size: 22px; font-weight: 800; color: var(--brass-hi); }
+.done-card p { color: var(--muted); }
+.done-card p strong { color: var(--ink); }
+.done-actions { display: flex; flex-wrap: wrap; gap: 10px; margin-top: 6px; }
+
+footer { padding-block: 32px calc(36px + env(safe-area-inset-bottom, 0px)); border-top: 1px solid var(--line); color: var(--muted); font-size: 14px; }
+footer .wrap { display: flex; flex-wrap: wrap; gap: 10px 26px; justify-content: space-between; }
+footer a { color: var(--ink); text-decoration: none; font-weight: 600; }
+footer a:hover { color: var(--green); }
+</style>
+</head>
+<body>
+
+<svg width="0" height="0" style="position:absolute" aria-hidden="true">
+  <symbol id="i-phone" viewBox="0 0 24 24"><path fill="currentColor" d="M6.6 10.8a15.1 15.1 0 0 0 6.6 6.6l2.2-2.2c.3-.3.7-.4 1-.2 1.1.4 2.3.6 3.6.6.6 0 1 .4 1 1V20c0 .6-.4 1-1 1A17 17 0 0 1 3 4c0-.6.4-1 1-1h3.5c.6 0 1 .4 1 1 0 1.3.2 2.5.6 3.6.1.3 0 .7-.2 1l-2.3 2.2Z"/></symbol>
+  <symbol id="i-check" viewBox="0 0 24 24"><path fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" d="m5 12.5 4.5 4.5L19 7.5"/></symbol>
+  <symbol id="i-key" viewBox="0 0 24 24"><path fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" d="M14.5 9.5a4.5 4.5 0 1 1-1.3-3.2 4.5 4.5 0 0 1 1.3 3.2ZM13 12.7 21 20.5M17.5 17l2-2M15.5 15l1.5-1.5"/></symbol>
+  <symbol id="i-copy" viewBox="0 0 24 24"><path fill="none" stroke="currentColor" stroke-width="2" stroke-linejoin="round" d="M9 9h11v11H9zM5 15H4V4h11v1"/></symbol>
+  <symbol id="i-lock" viewBox="0 0 24 24"><path fill="none" stroke="currentColor" stroke-width="2" stroke-linejoin="round" d="M6 11h12v10H6zM8.5 11V8a3.5 3.5 0 0 1 7 0v3"/></symbol>
+  <symbol id="i-chip" viewBox="0 0 24 24"><path fill="none" stroke="currentColor" stroke-width="2" d="M7 7h10v10H7zM10 3v4M14 3v4M10 17v4M14 17v4M3 10h4M3 14h4M17 10h4M17 14h4"/></symbol>
+  <symbol id="i-bolt" viewBox="0 0 24 24"><path fill="none" stroke="currentColor" stroke-width="2" stroke-linejoin="round" d="M13 3 5 13.5h6L10 21l8-10.5h-6L13 3Z"/></symbol>
+</svg>
+
+<header class="top">
+  <div class="wrap">
+    <a class="brand" href="/" aria-label="LocksMitch home"><img src="/assets/logo.png?v=2" alt="LocksMitch mobile auto locksmith" width="420" height="191"></a>
+    <a class="btn btn-call" href="tel:7702703333"><svg><use href="#i-phone"/></svg><span>(770) 270-3333</span></a>
+  </div>
+</header>
+
+<main id="main">
+  <div id="bookView">
+    <section class="intro">
+      <div class="wrap">
+        <span class="tag">$15 off online bookings</span>
+        <h1>Book a visit</h1>
+        <p class="lede">Pick a time that works for you. Mitch comes to your car, and confirms your appointment by text, usually within a few minutes.</p>
+        <p class="urgent"><svg><use href="#i-bolt"/></svg><span>Locked out or stuck right now? Call <a href="tel:7702703333">(770) 270-3333</a>. Emergency calls are answered 24/7.</span></p>
+      </div>
+    </section>
+
+    <form class="wrap layout" id="bookForm" novalidate>
+      <div class="steps">
+        <!-- 1. Service -->
+        <section class="step" id="st1" aria-labelledby="st1h">
+          <div class="step-h"><span class="n">1</span><h2 id="st1h">What do you need?</h2></div>
+          <fieldset class="svc">
+            <legend>Service</legend>
+            <input type="radio" name="svc" id="sv-spare" value="spare" checked>
+            <label for="sv-spare"><b><svg><use href="#i-key"/></svg>Spare key</b><small>You have a working key and want another one.</small><span class="len">About 1 hour</span></label>
+            <input type="radio" name="svc" id="sv-akl" value="akl">
+            <label for="sv-akl"><b><svg><use href="#i-key"/></svg>All keys lost</b><small>No working key. We cut and program a new one at the car.</small><span class="len">About 2 hours</span></label>
+            <input type="radio" name="svc" id="sv-lockout" value="lockout">
+            <label for="sv-lockout"><b><svg><use href="#i-lock"/></svg>Car lockout</b><small>Keys locked inside. We open it without damage.</small><span class="len">About 1 hour</span></label>
+            <input type="radio" name="svc" id="sv-program" value="program">
+            <label for="sv-program"><b><svg><use href="#i-chip"/></svg>Key programming</b><small>You already bought a key or remote that needs programming.</small><span class="len">About 1 hour</span></label>
+          </fieldset>
+          <p class="lock-note" id="lockNote" hidden>Locked out right now? Calling <a href="tel:7702703333">(770) 270-3333</a> is faster than booking.</p>
+        </section>
+
+        <!-- 2. Day and time -->
+        <section class="step" id="st2" aria-labelledby="st2h">
+          <div class="step-h"><span class="n">2</span><h2 id="st2h">Pick a day and time</h2><span class="hint">Eastern time</span></div>
+          <div class="days-wrap"><div class="days" id="days" role="group" aria-label="Day"></div></div>
+          <div id="timesBox" aria-live="polite"></div>
+        </section>
+
+        <!-- 3. Details -->
+        <section class="step" id="st3" aria-labelledby="st3h">
+          <div class="step-h"><span class="n">3</span><h2 id="st3h">Car and contact</h2></div>
+          <div class="fields">
+            <div class="field wide"><label for="f-vehicle">Vehicle year, make and model</label><input id="f-vehicle" name="vehicle" placeholder="2019 Toyota Camry" autocomplete="off" required></div>
+            <div class="field wide"><label for="f-address">Where will the car be?</label><input id="f-address" name="address" placeholder="Street address and city, or a business name" autocomplete="street-address" required><small>Home, work or a parking lot, anywhere in North Atlanta.</small></div>
+            <div class="field"><label for="f-name">Your name</label><input id="f-name" name="name" placeholder="First name is fine" autocomplete="given-name" required></div>
+            <div class="field"><label for="f-phone">Mobile number</label><input id="f-phone" name="phone" type="tel" inputmode="tel" placeholder="(770) 555-0134" autocomplete="tel" required></div>
+            <label class="addon wide" id="addon" for="f-second" hidden><input type="checkbox" id="f-second" name="second"><span><b>Add a second key, 50% off</b><small>Same car, same key type, made in the same visit.</small></span></label>
+            <div class="field wide"><label for="f-note">Anything Mitch should know? <span>(optional)</span></label><textarea id="f-note" name="note" maxlength="500" placeholder="Push-to-start or a key you turn, gate code, where to park..."></textarea></div>
+            <div class="hp" aria-hidden="true"><label for="f-company">Company</label><input id="f-company" name="company" tabindex="-1" autocomplete="off"></div>
+          </div>
+        </section>
+      </div>
+
+      <aside class="ticket" aria-labelledby="tk-h">
+        <div class="ticket-top">
+          <h2 id="tk-h">Your visit</h2>
+          <p class="t-when empty" id="tWhen">Pick a time</p>
+          <dl class="t-rows">
+            <div><dt>Service</dt><dd id="tSvc">Spare key</dd></div>
+            <div><dt>Time set aside</dt><dd id="tLen">About 1 hour</dd></div>
+            <div><dt>Where</dt><dd id="tWhere">Your car's location</dd></div>
+          </dl>
+        </div>
+        <div class="perf" aria-hidden="true"></div>
+        <div class="ticket-bot">
+          <p class="save"><span class="tag">$15 off</span><span>applied to online bookings</span></p>
+          <button class="btn btn-call" type="submit" id="sendBtn">Request this time</button>
+          <p class="form-err" id="formErr" role="alert" hidden></p>
+          <p class="fine">Nothing is charged now. Mitch texts you to confirm and gives you the exact price before he comes out. We use your number only for this appointment. <a href="/privacy/">Privacy policy</a></p>
+        </div>
+      </aside>
+    </form>
+  </div>
+
+  <div class="wrap" id="doneView" hidden>
+    <section class="done-card" aria-labelledby="doneH">
+      <svg><use href="#i-check"/></svg>
+      <h1 id="doneH" tabindex="-1">Request sent</h1>
+      <p class="done-when" id="doneWhen"></p>
+      <p>Mitch will text you at <strong id="donePhone"></strong> to confirm your appointment, usually within a few minutes. If that time doesn't work for him, he'll offer the closest one that does.</p>
+      <p>Plans changed or need help sooner? Call or text <a href="tel:7702703333"><strong>(770) 270-3333</strong></a>.</p>
+      <div class="done-actions">
+        <a class="btn btn-call" href="/">Back to LocksMitch</a>
+        <button class="btn btn-ghost" type="button" id="againBtn">Book another visit</button>
+      </div>
+    </section>
+  </div>
+</main>
+
+<footer>
+  <div class="wrap">
+    <span><a href="/">locksmitch.com</a></span>
+    <span>© 2026 LocksMitch, a registered DBA of TPVision LLC</span>
+    <span>Mobile auto locksmith serving North Atlanta, GA</span>
+    <span><a href="/privacy/">Privacy</a></span>
+  </div>
+</footer>
+
+<script>
+(function () {
+  var API = 'https://script.google.com/macros/s/AKfycbynxb1ruxrGOtdWw-uGXRYzHs_Pz7L-ad5lc9KdyqKUzbRcSfJ1-L97VLvmfUbY_cZh/exec';
+  var SVC = { spare: ['Spare key', 'About 1 hour'], akl: ['All keys lost', 'About 2 hours'], lockout: ['Car lockout', 'About 1 hour'], program: ['Key programming', 'About 1 hour'] };
+  var DOW = ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'], DOWL = ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'];
+  var MON = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'];
+  var MONL = ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'];
+
+  var $ = function (id) { return document.getElementById(id); };
+  var form = $('bookForm'), daysEl = $('days'), timesBox = $('timesBox'), err = $('formErr'), sendBtn = $('sendBtn');
+  var cache = {}, state = { svc: 'spare', date: '', time: '', data: null };
+
+  // YYYY-MM-DD → parts without timezone conversion (dates come from the server in Atlanta time)
+  function dParts(ymd) { var p = ymd.split('-').map(Number); var d = new Date(Date.UTC(p[0], p[1] - 1, p[2])); return { y: p[0], m: p[1] - 1, d: p[2], w: d.getUTCDay() }; }
+  function tLabel(hm) { var p = hm.split(':').map(Number), h = p[0] % 12 || 12; return h + ':' + ('0' + p[1]).slice(-2) + ' ' + (p[0] < 12 ? 'AM' : 'PM'); }
+  function whenLong(ymd, hm) { var p = dParts(ymd); return DOWL[p.w] + ', ' + MONL[p.m] + ' ' + p.d + ' at ' + tLabel(hm); }
+  function whenShort(ymd, hm) { var p = dParts(ymd); return DOW[p.w] + ', ' + MON[p.m] + ' ' + p.d + ' · ' + tLabel(hm); }
+  function relDay(ymd, i) { if (i === 0) return 'Today'; if (i === 1) return 'Tomorrow'; return null; }
+
+  function showErr(html) { err.innerHTML = html; err.hidden = false; }
+  function hideErr() { err.hidden = true; }
+
+  function load(svc, force) {
+    if (cache[svc] && !force) { render(cache[svc]); return; }
+    daysEl.innerHTML = '';
+    timesBox.innerHTML = '<div class="skel" aria-label="Loading times">' + new Array(9).join('<i></i>') + '</div>';
+    fetch(API + '?book_slots=1&svc=' + encodeURIComponent(svc) + '&_=' + Date.now())
+      .then(function (r) { return r.json(); })
+      .then(function (d) {
+        if (!d || !d.ok) throw new Error('bad');
+        cache[svc] = d;
+        if (state.svc === svc) render(d);
+      })
+      .catch(function () {
+        if (state.svc !== svc) return;
+        timesBox.innerHTML = '<p class="slot-msg">We couldn\'t load the calendar. Call or text <a href="tel:7702703333">(770) 270-3333</a> and we\'ll book you in.</p>';
+      });
+  }
+
+  function render(d) {
+    state.data = d;
+    daysEl.innerHTML = '';
+    var firstOpen = '';
+    d.days.forEach(function (day, i) {
+      var p = dParts(day.date), b = document.createElement('button');
+      b.type = 'button'; b.className = 'day'; b.dataset.date = day.date;
+      var none = day.closed || !day.slots.length;
+      b.disabled = none;
+      b.setAttribute('aria-pressed', 'false');
+      b.setAttribute('aria-label', DOWL[p.w] + ', ' + MONL[p.m] + ' ' + p.d + (day.closed ? ', closed' : none ? ', fully booked' : ', ' + day.slots.length + ' times'));
+      b.innerHTML = '<span class="dw">' + (relDay(day.date, i) === 'Today' ? 'Today' : DOW[p.w]) + '</span><span class="dn">' + p.d + '</span><span class="dm">' + (day.closed ? 'Closed' : none ? 'Full' : MON[p.m]) + '</span>';
+      b.addEventListener('click', function () { pickDay(day.date); });
+      daysEl.appendChild(b);
+      if (!none && !firstOpen) firstOpen = day.date;
+    });
+    var keep = state.date && d.days.some(function (x) { return x.date === state.date && x.slots.length; });
+    if (!firstOpen) { timesBox.innerHTML = '<p class="slot-msg">No open times in the next two weeks. Call or text <a href="tel:7702703333">(770) 270-3333</a> and Mitch will fit you in.</p>'; state.date = ''; state.time = ''; summary(); return; }
+    pickDay(keep ? state.date : firstOpen, true);
+  }
+
+  function pickDay(ymd, quiet) {
+    state.date = ymd;
+    Array.prototype.forEach.call(daysEl.children, function (b) { b.setAttribute('aria-pressed', b.dataset.date === ymd ? 'true' : 'false'); });
+    var day = state.data.days.filter(function (x) { return x.date === ymd; })[0];
+    if (state.time && day.slots.indexOf(state.time) < 0) state.time = '';
+    var p = dParts(ymd), groups = [['Morning', []], ['Afternoon', []]];
+    day.slots.forEach(function (t) { groups[Number(t.slice(0, 2)) < 12 ? 0 : 1][1].push(t); });
+    var html = '<div class="times-h"><h3>' + DOWL[p.w] + ', ' + MONL[p.m] + ' ' + p.d + '</h3><span>' + day.slots.length + ' open</span></div>';
+    groups.forEach(function (g) {
+      if (!g[1].length) return;
+      html += '<div class="part"><p>' + g[0] + '</p><div class="times">' + g[1].map(function (t) {
+        return '<button type="button" class="time" data-t="' + t + '" aria-pressed="' + (t === state.time) + '">' + tLabel(t) + '</button>';
+      }).join('') + '</div></div>';
+    });
+    timesBox.innerHTML = html;
+    Array.prototype.forEach.call(timesBox.querySelectorAll('.time'), function (b) { b.addEventListener('click', function () { pickTime(b.dataset.t); }); });
+    var sel = daysEl.querySelector('[aria-pressed="true"]');
+    if (sel && !quiet) sel.scrollIntoView({ block: 'nearest', inline: 'nearest', behavior: 'smooth' });
+    summary();
+  }
+
+  function pickTime(t) {
+    state.time = t; hideErr();
+    Array.prototype.forEach.call(timesBox.querySelectorAll('.time'), function (b) { b.setAttribute('aria-pressed', String(b.dataset.t === t)); });
+    summary();
+    if (window.matchMedia('(max-width: 960px)').matches && !$('f-vehicle').value) $('st3').scrollIntoView({ behavior: 'smooth', block: 'start' });
+  }
+
+  function summary() {
+    var s = SVC[state.svc];
+    $('tSvc').textContent = s[0] + ($('f-second').checked && state.svc === 'akl' ? ' + 2nd key' : '');
+    $('tLen').textContent = s[1];
+    var w = $('tWhen');
+    if (state.date && state.time) { w.textContent = whenShort(state.date, state.time); w.classList.remove('empty'); }
+    else { w.textContent = 'Pick a time'; w.classList.add('empty'); }
+    var a = $('f-address').value.trim();
+    $('tWhere').textContent = a || 'Your car\'s location';
+    $('st1').classList.add('done');
+    $('st2').classList.toggle('done', !!(state.date && state.time));
+    $('st3').classList.toggle('done', ['f-vehicle', 'f-address', 'f-name', 'f-phone'].every(function (id) { return $(id).value.trim(); }));
+  }
+
+  Array.prototype.forEach.call(form.querySelectorAll('input[name="svc"]'), function (r) {
+    r.addEventListener('change', function () {
+      state.svc = r.value; state.time = '';
+      $('lockNote').hidden = r.value !== 'lockout';
+      $('addon').hidden = r.value !== 'akl';
+      if (r.value === 'akl') $('f-second').checked = true;
+      hideErr(); summary(); load(r.value);
+    });
+  });
+  form.addEventListener('input', function (e) { if (e.target.removeAttribute) e.target.removeAttribute('aria-invalid'); summary(); });
+
+  form.addEventListener('submit', function (e) {
+    e.preventDefault(); hideErr();
+    if (!state.date || !state.time) { showErr('Pick a day and time first.'); $('st2').scrollIntoView({ behavior: 'smooth', block: 'start' }); return; }
+    var req = ['f-vehicle', 'f-address', 'f-name', 'f-phone'].map($).filter(function (i) { return !i.value.trim(); });
+    if (req.length) { req.forEach(function (i) { i.setAttribute('aria-invalid', 'true'); }); req[0].focus(); showErr('Fill in the car, where it will be, your name and mobile number.'); return; }
+    var digits = ($('f-phone').value.match(/\d/g) || []).join('').replace(/^1(?=\d{10}$)/, '');
+    if (digits.length !== 10) { $('f-phone').setAttribute('aria-invalid', 'true'); $('f-phone').focus(); showErr('Check the mobile number. We need all 10 digits to text you.'); return; }
+    var data = new URLSearchParams({
+      book_request: '1', svc: state.svc, date: state.date, time: state.time,
+      vehicle: $('f-vehicle').value.trim(), address: $('f-address').value.trim(), name: $('f-name').value.trim(),
+      phone: digits, note: $('f-note').value.trim(), second: ($('f-second').checked && state.svc === 'akl') ? 'yes' : '', company: $('f-company').value
+    });
+    sendBtn.disabled = true; sendBtn.textContent = 'Sending…';
+    fetch(API, { method: 'POST', body: data })
+      .then(function (r) { return r.json(); })
+      .then(function (res) {
+        if (res.ok) {
+          if (window.gtag) window.gtag('event', 'generate_lead', { method: 'online_booking', service: state.svc });
+          $('doneWhen').textContent = whenLong(state.date, state.time);
+          $('donePhone').textContent = '(' + digits.slice(0, 3) + ') ' + digits.slice(3, 6) + '-' + digits.slice(6);
+          $('bookView').hidden = true; $('doneView').hidden = false;
+          window.scrollTo(0, 0); $('doneH').focus();
+          return;
+        }
+        if (res.error === 'taken') { delete cache[state.svc]; state.time = ''; load(state.svc, true); showErr('That time was just taken. Please pick another one.'); return; }
+        if (res.error === 'phone') { $('f-phone').setAttribute('aria-invalid', 'true'); showErr('Check the mobile number. We need a US number to text you.'); return; }
+        if (res.error === 'limit') { showErr('We already have your requests. Call or text <a href="tel:7702703333">(770) 270-3333</a> to change them.'); return; }
+        throw new Error(res.error || 'failed');
+      })
+      .catch(function () { showErr('Your request didn\'t go through. Call or text <a href="tel:7702703333">(770) 270-3333</a> and we\'ll book you in.'); })
+      .then(function () { sendBtn.disabled = false; sendBtn.textContent = 'Request this time'; });
+  });
+
+  $('againBtn').addEventListener('click', function () {
+    state.time = ''; delete cache[state.svc];
+    ['f-vehicle', 'f-address', 'f-note'].forEach(function (id) { $(id).value = ''; });
+    $('doneView').hidden = true; $('bookView').hidden = false; window.scrollTo(0, 0);
+    load(state.svc, true); summary();
+  });
+
+  // ?svc=akl preselects the service (for links from service pages later)
+  var pre = (location.search.match(/[?&]svc=(\w+)/) || [])[1];
+  if (pre && SVC[pre]) { var r = $('sv-' + pre); if (r) { r.checked = true; state.svc = pre; $('lockNote').hidden = pre !== 'lockout'; $('addon').hidden = pre !== 'akl'; if (pre === 'akl') $('f-second').checked = true; } }
+  summary();
+  load(state.svc);
+})();
+</script>
+</body>
+</html>
