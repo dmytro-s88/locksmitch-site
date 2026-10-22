@@ -115,9 +115,9 @@ button { font: inherit; color: inherit; }
 .day[aria-pressed="true"] .dw, .day[aria-pressed="true"] .dm { color: var(--ink); }
 .day[disabled] { opacity: .38; cursor: not-allowed; }
 .day[disabled] .dm { font-size: 11px; }
-.times-h { display: flex; align-items: baseline; justify-content: space-between; gap: 12px; margin: 16px 0 10px; }
+.times-h { display: flex; flex-wrap: wrap; align-items: baseline; justify-content: space-between; gap: 2px 12px; margin: 16px 0 10px; }
 .times-h h3 { font-size: 16px; font-weight: 700; }
-.times-h span { font-size: 13px; color: var(--muted); }
+.times-h span { font-size: 13px; color: var(--muted); white-space: nowrap; }
 .part { margin-top: 12px; }
 .part:first-of-type { margin-top: 0; }
 .part p { font-size: 12.5px; font-weight: 700; text-transform: uppercase; letter-spacing: .07em; color: var(--muted); margin-bottom: 8px; }
