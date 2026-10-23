@@ -433,7 +433,7 @@ a, button, label, .btn, .facts span, .svc-pick label, .spots li { -webkit-tap-hi
 @media (max-width: 520px) { .brand .brand-mark > img, .brand .brand-mark > svg { height: 64px; } .brand .brand-word { height: 25px; margin-top: 7px; } }
 .lm-glare { opacity: 0; transform: translate(var(--gx, 300px), var(--gy, 500px)); transition: opacity .35s ease; }
 @media (prefers-reduced-motion: no-preference) {
-  .brand:hover .brand-mark > svg { transition-duration: .15s; }
+  .brand .brand-mark.lm-live > svg { transition: none; }
   .brand:hover .lm-glare { opacity: 1; }
   .lm-lm { transition: filter .35s ease; }
   .brand:hover .lm-lm { filter: brightness(1.18) saturate(1.1); }
@@ -445,4 +445,12 @@ a, button, label, .btn, .facts span, .svc-pick label, .spots li { -webkit-tap-hi
   .brand:hover .lm-wave2 { animation-delay: .15s; } .brand:hover .lm-wave3 { animation-delay: .3s; }
   @keyframes lm-glare-in { 0% { opacity: 0; transform: translate(-150px, 150px); } 30% { opacity: 1; } 100% { opacity: 0; transform: translate(900px, 1100px); } }
   .lm-fob.lm-intro .lm-glare { animation: lm-glare-in 1.4s ease .5s 1 backwards; }
+}
+@media (prefers-reduced-motion: no-preference) and (hover: none) {
+  /* phones: a gentle sway every 8 s with a light pass; replaced by the gyro tilt when the phone reports orientation */
+  @keyframes lm-sway { 0%, 66%, 100% { transform: none; } 72% { transform: rotateY(-16deg) rotateX(5deg); } 80% { transform: rotateY(13deg) rotateX(-3deg); } 87% { transform: rotateY(-4deg); } 92% { transform: none; } }
+  @keyframes lm-sway-glare { 0%, 68% { opacity: 0; transform: translate(-120px, 260px); } 76% { opacity: 1; } 88% { opacity: .8; } 94%, 100% { opacity: 0; transform: translate(880px, 900px); } }
+  .brand .brand-mark:not(.lm-gyro) > svg { animation: lm-sway 8s ease-in-out 2.5s infinite; }
+  .lm-fob:not(.lm-gyro) .lm-glare { animation: lm-sway-glare 8s ease-in-out 2.5s infinite; }
+  .lm-fob.lm-gyro .lm-glare { opacity: .7; }
 }
