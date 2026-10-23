@@ -159,7 +159,7 @@
 
 // Cursor spotlight on buttons: --mx/--my follow the pointer inside the button
 document.addEventListener('pointermove', function (e) {
-  var b = e.target && e.target.closest ? e.target.closest('.btn') : null;
+  var b = e.target && e.target.closest ? e.target.closest('.btn, .facts span') : null;
   if (!b) return;
   var r = b.getBoundingClientRect();
   var x = e.clientX - r.left, y = e.clientY - r.top;

@@ -372,7 +372,7 @@ table.prices td:nth-child(3) { color: var(--muted); font-size: 14px; }
 @media (hover: hover) and (prefers-reduced-motion: no-preference) {
   /* glow = a blurred radial blob behind the badge whose opacity fades in; opacity animates on the compositor, so no pop */
   .facts span { position: relative; transition: transform .3s cubic-bezier(.2,.7,.2,1); }
-  .facts span::before { content: ""; position: absolute; inset: -14px -18px; z-index: -1; pointer-events: none; border-radius: 999px; opacity: 0; transition: opacity .45s ease;
+  .facts span::before { content: ""; position: absolute; inset: -14px -18px; z-index: -1; pointer-events: none; border-radius: 999px; opacity: 0; transform: translate(var(--sx, 0px), var(--sy, 0px)); transition: opacity .45s ease, transform .12s ease-out;
     background: radial-gradient(closest-side, color-mix(in srgb, var(--green) 26%, transparent), color-mix(in srgb, var(--green) 10%, transparent) 55%, transparent); }
   .facts span:hover { transform: translateY(-3px); }
   .facts span:hover::before { opacity: 1; }
