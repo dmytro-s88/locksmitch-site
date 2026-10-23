@@ -329,3 +329,31 @@ table.prices td:nth-child(3) { color: var(--muted); font-size: 14px; }
   table.prices td { border: 0; padding: 2px 0; }
   table.prices td:nth-child(3) { grid-column: 1 / -1; }
 }
+
+/* Motion (2026-10-23): hover lift + glow on buttons, reveal on scroll, live dot, floating call button. Off for reduced motion. */
+@media (prefers-reduced-motion: no-preference) {
+  .btn { transition: transform .18s ease, box-shadow .18s ease, background-color .18s ease, border-color .18s ease; }
+  .btn-call:hover { transform: translateY(-2px); box-shadow: 0 12px 30px color-mix(in srgb, var(--green) 42%, transparent); }
+  .btn-ghost:hover { transform: translateY(-2px); box-shadow: 0 10px 24px rgba(0,0,0,.28); }
+  .btn:active { transform: translateY(1px); box-shadow: none; }
+  .btn svg { transition: transform .2s ease; }
+  .btn-ghost:hover svg { transform: translateX(2px); }
+  @keyframes ring-shake { 0%,100% { transform: rotate(0); } 20% { transform: rotate(-14deg); } 40% { transform: rotate(11deg); } 60% { transform: rotate(-7deg); } 80% { transform: rotate(4deg); } }
+  .btn-call:hover svg { animation: ring-shake .55s ease; }
+  .reveal { opacity: 0; transform: translateY(18px); transition: opacity .6s ease var(--d, 0ms), transform .6s cubic-bezier(.2,.7,.2,1) var(--d, 0ms); }
+  .reveal.in { opacity: 1; transform: none; }
+  .spec, .steps li, .spots li, .area-grid a, .nearby li, .faq details { transition: transform .25s ease, border-color .25s ease, background-color .25s ease, color .25s ease; }
+  .spec:hover { transform: translateY(-4px); }
+  .spec:hover h3 { color: var(--green); }
+  .steps li::before { transition: color .25s ease, transform .25s ease; }
+  .steps li:hover::before { color: var(--green); transform: scale(1.08); }
+  .spots li:has(a):hover { transform: translateY(-2px); background: color-mix(in srgb, var(--green) 14%, transparent); }
+  .area-grid a:hover { transform: translateX(4px); }
+  .faq details:hover { border-color: color-mix(in srgb, var(--green) 50%, var(--line)); }
+  @keyframes live-dot { 0% { box-shadow: 0 0 0 0 color-mix(in srgb, var(--green-bright) 55%, transparent); } 70% { box-shadow: 0 0 0 10px transparent; } 100% { box-shadow: 0 0 0 0 transparent; } }
+  .direct strong::before { animation: live-dot 2.2s ease-out infinite; }
+}
+.direct strong::before { content: ""; display: inline-block; width: 9px; height: 9px; border-radius: 50%; background: var(--green-bright); margin-right: 8px; vertical-align: 1px; }
+.float-call { position: fixed; right: 22px; bottom: 22px; z-index: 29; opacity: 0; transform: translateY(16px); pointer-events: none; transition: opacity .25s ease, transform .25s ease; box-shadow: 0 14px 34px rgba(0,0,0,.45); }
+.float-call.show { opacity: 1; transform: none; pointer-events: auto; }
+@media (max-width: 920px) { .float-call { display: none; } }
