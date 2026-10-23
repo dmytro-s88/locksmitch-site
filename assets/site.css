@@ -316,3 +316,16 @@ footer .wrap { display: flex; flex-wrap: wrap; gap: 12px 28px; justify-content: 
 /* ссылка «к содержимому» для клавиатуры и скринридеров */
 .skip { position: absolute; left: -9999px; top: 8px; z-index: 1000; background: var(--green); color: var(--on-green); padding: 10px 14px; border-radius: 10px; font-weight: 600; }
 .skip:focus { left: 8px; }
+
+/* Pricing page */
+table.prices { width: 100%; border-collapse: collapse; margin: 18px 0 8px; font-size: 15px; }
+table.prices th, table.prices td { text-align: left; padding: 10px 10px 10px 0; border-bottom: 1px solid var(--line); vertical-align: top; }
+table.prices th { color: var(--muted); font-weight: 600; font-size: 13px; letter-spacing: .02em; }
+table.prices td:nth-child(2) { font-family: var(--font-display); font-weight: 800; font-size: 18px; white-space: nowrap; }
+table.prices td:nth-child(3) { color: var(--muted); font-size: 14px; }
+@media (max-width: 640px) {
+  table.prices thead { display: none; }
+  table.prices tr { display: grid; grid-template-columns: 1fr auto; padding: 10px 0; border-bottom: 1px solid var(--line); }
+  table.prices td { border: 0; padding: 2px 0; }
+  table.prices td:nth-child(3) { grid-column: 1 / -1; }
+}
