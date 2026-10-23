@@ -370,8 +370,8 @@ table.prices td:nth-child(3) { color: var(--muted); font-size: 14px; }
 /* Hero facts: lift + green tint on hover (decorative, not links) */
 .facts span { padding: 6px 10px; margin: -6px -10px; border-radius: 999px; }
 @media (hover: hover) and (prefers-reduced-motion: no-preference) {
-  .facts span { transition: transform .25s ease, box-shadow .35s ease; }
-  .facts span:hover { transform: translateY(-3px); box-shadow: 0 0 28px 10px color-mix(in srgb, var(--green) 13%, transparent), 0 0 60px 20px color-mix(in srgb, var(--green) 6%, transparent); }
+  .facts span { transition: transform .25s ease, filter .35s ease; }
+  .facts span:hover { transform: translateY(-3px); filter: drop-shadow(0 0 6px color-mix(in srgb, var(--green) 55%, transparent)) drop-shadow(0 0 18px color-mix(in srgb, var(--green) 35%, transparent)); }
   .facts svg { transition: transform .25s ease; }
   .facts span:hover svg { transform: scale(1.18); }
 }
