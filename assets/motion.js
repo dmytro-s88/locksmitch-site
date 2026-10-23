@@ -36,3 +36,28 @@ document.addEventListener('pointermove', function (e) {
   b.style.setProperty('--sx', ((r.width / 2 - x) / r.width * 18).toFixed(1) + 'px');
   b.style.setProperty('--sy', ((r.height / 2 - y) / r.height * 10).toFixed(1) + 'px');
 }, { passive: true });
+
+// Vector logo: inline the fob so its waves and glare can move; tilt toward the pointer like a lit 3D object.
+(function () {
+  var mark = document.querySelector('.brand .brand-mark'); if (!mark || !window.fetch) return;
+  var img = mark.querySelector('img'); if (!img) return;
+  fetch(img.getAttribute('src')).then(function (r) { return r.ok ? r.text() : Promise.reject(r.status); }).then(function (txt) {
+    var box = document.createElement('div'); box.innerHTML = txt.trim();
+    var svg = box.querySelector('svg'); if (!svg) return;
+    svg.setAttribute('width', img.getAttribute('width')); svg.setAttribute('height', img.getAttribute('height'));
+    svg.setAttribute('focusable', 'false');
+    mark.replaceChild(svg, img);
+    if (!(window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches)) svg.classList.add('lm-intro');
+    var brand = mark.closest('.brand'); if (!brand || !(window.matchMedia && window.matchMedia('(hover: hover)').matches)) return;
+    var vb = svg.viewBox.baseVal;
+    brand.addEventListener('pointermove', function (e) {
+      var r = svg.getBoundingClientRect(), x = (e.clientX - r.left) / r.width, y = (e.clientY - r.top) / r.height;
+      var cx = Math.max(-0.6, Math.min(1.6, x)) - 0.5, cy = Math.max(-0.4, Math.min(1.4, y)) - 0.5;
+      mark.style.setProperty('--ry', (cx * 26).toFixed(1) + 'deg');
+      mark.style.setProperty('--rx', (-cy * 18).toFixed(1) + 'deg');
+      svg.style.setProperty('--gx', (vb.x + x * vb.width).toFixed(0) + 'px');
+      svg.style.setProperty('--gy', (vb.y + y * vb.height).toFixed(0) + 'px');
+    }, { passive: true });
+    brand.addEventListener('pointerleave', function () { mark.style.setProperty('--rx', '0deg'); mark.style.setProperty('--ry', '0deg'); });
+  }).catch(function () {});
+})();

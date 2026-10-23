@@ -419,14 +419,30 @@ a, button, label, .btn, .facts span, .svc-pick label, .spots li { -webkit-tap-hi
   .hero-grid > div > :nth-child(7) { animation-delay: .53s; }
   .hero-grid > .estimate { animation: rise-in .6s cubic-bezier(.2,.7,.2,1) .35s both; }
 
-  /* Logo: one light sweep on load, again on hover */
-  .brand { position: relative; overflow: hidden; border-radius: 12px; }
-  .brand::after { content: ""; position: absolute; inset: 0; pointer-events: none; transform: translateX(-130%) skewX(-18deg);
-    background: linear-gradient(90deg, transparent 30%, rgba(255,255,255,.28) 50%, transparent 70%); animation: logo-shine 1.3s ease .7s 1 both; }
-  @keyframes logo-shine { to { transform: translateX(130%) skewX(-18deg); } }
-  @media (hover: hover) { .brand:hover::after { animation: logo-shine .9s ease 0s 1 both; } }
-
   /* Mobile call bar: a slow, soft pulse ring on Call now */
   @keyframes cta-pulse { 0% { box-shadow: 0 0 0 0 color-mix(in srgb, var(--green) 55%, transparent); } 55% { box-shadow: 0 0 0 12px transparent; } 100% { box-shadow: 0 0 0 0 transparent; } }
   .callbar .btn-call { animation: cta-pulse 4.5s ease-out 2s infinite; }
+}
+
+/* Vector logo (2026-10-24): fob + wordmark; the fob tilts toward the pointer, a glare follows it, the waves blink */
+.brand { gap: 2px; align-items: center; }
+.brand .brand-mark { display: block; perspective: 320px; flex: none; }
+.brand .brand-mark > img, .brand .brand-mark > svg { display: block; height: 78px; width: auto; margin: 0; overflow: visible;
+  transform: rotateX(var(--rx, 0deg)) rotateY(var(--ry, 0deg)); transform-origin: 48% 56%; transition: transform .6s cubic-bezier(.2,.7,.2,1); }
+.brand .brand-word { height: 30px; width: auto; margin: 9px 0 0; }
+@media (max-width: 520px) { .brand .brand-mark > img, .brand .brand-mark > svg { height: 64px; } .brand .brand-word { height: 25px; margin-top: 7px; } }
+.lm-glare { opacity: 0; transform: translate(var(--gx, 300px), var(--gy, 500px)); transition: opacity .35s ease; }
+@media (prefers-reduced-motion: no-preference) {
+  .brand:hover .brand-mark > svg { transition-duration: .15s; }
+  .brand:hover .lm-glare { opacity: 1; }
+  .lm-lm { transition: filter .35s ease; }
+  .brand:hover .lm-lm { filter: brightness(1.18) saturate(1.1); }
+  @keyframes lm-wave-idle { 0%, 82%, 100% { opacity: 1; } 86% { opacity: .2; } 92% { opacity: 1; } }
+  @keyframes lm-wave-on { 0%, 100% { opacity: 1; } 45% { opacity: .18; } }
+  .lm-wave { animation: lm-wave-idle 7s ease-in-out 1.2s infinite; }
+  .lm-wave2 { animation-delay: 1.35s; } .lm-wave3 { animation-delay: 1.5s; }
+  .brand:hover .lm-wave { animation: lm-wave-on 1.1s ease-in-out infinite; }
+  .brand:hover .lm-wave2 { animation-delay: .15s; } .brand:hover .lm-wave3 { animation-delay: .3s; }
+  @keyframes lm-glare-in { 0% { opacity: 0; transform: translate(-150px, 150px); } 30% { opacity: 1; } 100% { opacity: 0; transform: translate(900px, 1100px); } }
+  .lm-fob.lm-intro .lm-glare { animation: lm-glare-in 1.4s ease .5s 1 backwards; }
 }
