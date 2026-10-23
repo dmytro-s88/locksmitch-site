@@ -387,3 +387,13 @@ table.prices td:nth-child(3) { color: var(--muted); font-size: 14px; }
   .svc-pick input:checked + label:hover { border-color: var(--green-bright); background: color-mix(in srgb, var(--green-bright) 24%, transparent); }
   .svc-pick label:active { transform: scale(.985); }
 }
+
+/* Touch: no grey tap rectangle on Android/iOS, a soft press instead */
+a, button, label, .btn, .facts span, .svc-pick label, .spots li { -webkit-tap-highlight-color: transparent; }
+.btn { -webkit-touch-callout: none; }
+@media (hover: none) {
+  .btn { transition: transform .12s ease, filter .12s ease; }
+  .btn:active { transform: scale(.97); filter: brightness(1.08); }
+  .btn:active::after { opacity: 1; transition: none; }
+  .svc-pick label:active { transform: scale(.97); }
+}
