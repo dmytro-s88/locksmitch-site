@@ -333,8 +333,9 @@ table.prices td:nth-child(3) { color: var(--muted); font-size: 14px; }
 /* Motion (2026-10-23): hover lift + glow on buttons, reveal on scroll, live dot, floating call button. Off for reduced motion. */
 @media (prefers-reduced-motion: no-preference) {
   .btn { transition: transform .18s ease, box-shadow .18s ease, background-color .18s ease, border-color .18s ease; }
-  .btn-call:hover { transform: translateY(-2px); box-shadow: 0 12px 30px color-mix(in srgb, var(--green) 42%, transparent); }
-  .btn-ghost:hover { transform: translateY(-2px); box-shadow: 0 10px 24px rgba(0,0,0,.28); }
+  .btn-call:hover { transform: translateY(-2px); box-shadow: var(--sx, 0px) calc(12px + var(--sy, 0px)) 30px color-mix(in srgb, var(--green) 42%, transparent); }
+  .btn-ghost:hover { transform: translateY(-2px); box-shadow: var(--sx, 0px) calc(10px + var(--sy, 0px)) 24px rgba(0,0,0,.28); }
+  .btn:hover { transition-duration: .18s, .08s, .18s, .18s; }
   .btn:active { transform: translateY(1px); box-shadow: none; }
   .btn svg { transition: transform .2s ease; }
   .btn-ghost:hover svg { transform: translateX(2px); }

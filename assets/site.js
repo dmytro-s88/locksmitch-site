@@ -162,6 +162,10 @@ document.addEventListener('pointermove', function (e) {
   var b = e.target && e.target.closest ? e.target.closest('.btn') : null;
   if (!b) return;
   var r = b.getBoundingClientRect();
-  b.style.setProperty('--mx', (e.clientX - r.left) + 'px');
-  b.style.setProperty('--my', (e.clientY - r.top) + 'px');
+  var x = e.clientX - r.left, y = e.clientY - r.top;
+  b.style.setProperty('--mx', x + 'px');
+  b.style.setProperty('--my', y + 'px');
+  // the pointer is the light: the glow shadow shifts away from it
+  b.style.setProperty('--sx', ((r.width / 2 - x) / r.width * 18).toFixed(1) + 'px');
+  b.style.setProperty('--sy', ((r.height / 2 - y) / r.height * 10).toFixed(1) + 'px');
 }, { passive: true });
