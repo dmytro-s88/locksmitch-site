@@ -1,4 +1,5 @@
 User-agent: *
 Allow: /
 Disallow: /form-backend/
+Disallow: /sms/
 Sitemap: https://locksmitch.com/sitemap.xml

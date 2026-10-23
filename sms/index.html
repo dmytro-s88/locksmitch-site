@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex, nofollow">
+<title>Text the customer</title>
+<style>
+  body{margin:0;min-height:100vh;display:flex;align-items:center;justify-content:center;background:#0E1311;color:#e8ece9;font:17px/1.5 -apple-system,"Open Sans",system-ui,sans-serif;text-align:center;padding:24px}
+  code{font-size:24px;letter-spacing:.5px}
+  .btn{display:inline-block;margin-top:18px;padding:14px 24px;border-radius:12px;background:#58c27a;color:#0E1311;font-weight:600;font-size:18px;text-decoration:none}
+  p{margin:8px 0}
+</style>
+</head>
+<body>
+<div>
+  <p id="msg">Opening Messages…</p>
+  <p><code id="num"></code></p>
+  <a id="go" class="btn" href="#">Open Messages</a>
+</div>
+<script>
+  var d = (new URLSearchParams(location.search).get('to') || '').replace(/\D/g, '');
+  if (d.length === 10) d = '1' + d;
+  if (d.length === 11 && d.charAt(0) === '1') {
+    var u = 'sms:+' + d;
+    document.getElementById('num').textContent = '+1 ' + d.slice(1, 4) + '-' + d.slice(4, 7) + '-' + d.slice(7);
+    document.getElementById('go').href = u;
+    location.href = u;
+  } else {
+    document.getElementById('msg').textContent = 'No phone number given.';
+    document.getElementById('go').style.display = 'none';
+  }
+</script>
+</body>
+</html>
