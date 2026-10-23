@@ -370,9 +370,12 @@ table.prices td:nth-child(3) { color: var(--muted); font-size: 14px; }
 /* Hero facts: lift + green tint on hover (decorative, not links) */
 .facts span { padding: 6px 10px; margin: -6px -10px; border-radius: 999px; }
 @media (hover: hover) and (prefers-reduced-motion: no-preference) {
-  /* a transparent shadow at rest, so the glow fades in smoothly instead of popping (none -> filter cannot animate) */
-  .facts span { filter: drop-shadow(0 0 6px transparent) drop-shadow(0 0 18px transparent); transition: transform .3s cubic-bezier(.2,.7,.2,1), filter .4s ease; will-change: transform, filter; }
-  .facts span:hover { transform: translateY(-3px); filter: drop-shadow(0 0 6px color-mix(in srgb, var(--green) 55%, transparent)) drop-shadow(0 0 18px color-mix(in srgb, var(--green) 35%, transparent)); }
+  /* glow = a blurred radial blob behind the badge whose opacity fades in; opacity animates on the compositor, so no pop */
+  .facts span { position: relative; transition: transform .3s cubic-bezier(.2,.7,.2,1); }
+  .facts span::before { content: ""; position: absolute; inset: -14px -18px; z-index: -1; pointer-events: none; border-radius: 999px; opacity: 0; transition: opacity .45s ease;
+    background: radial-gradient(closest-side, color-mix(in srgb, var(--green) 26%, transparent), color-mix(in srgb, var(--green) 10%, transparent) 55%, transparent); }
+  .facts span:hover { transform: translateY(-3px); }
+  .facts span:hover::before { opacity: 1; }
   .facts svg { transition: transform .25s ease; }
   .facts span:hover svg { transform: scale(1.18); }
 }
