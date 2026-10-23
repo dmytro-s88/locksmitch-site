@@ -75,7 +75,7 @@ section { padding-block: clamp(56px, 7vw, 88px); }
 .hero .cta-row .btn-ghost { min-height: 56px; padding: 0 18px; }
 .hero .cta-row { gap: 10px; }
 @media (max-width: 520px), (min-width: 921px) and (max-width: 1240px) { .cta-row .btn { flex: 1 1 0; justify-content: center; padding: 0 14px; } .cta-row .btn-call { flex-basis: 100%; } }
-.direct { display: flex; gap: 10px; align-items: flex-start; margin-top: 16px; font-size: 15px; color: var(--muted); max-width: 52ch; }
+.direct { display: flex; gap: 10px; align-items: flex-start; margin: 18px 0 18px; font-size: 15px; color: var(--muted); max-width: 52ch; }
 .direct strong { color: var(--ink); }
 .direct svg { width: 20px; height: 20px; flex: none; color: var(--green); margin-top: 1px; }
 .book-note { font-size: 14px; color: var(--muted); margin-top: 12px; }
@@ -357,3 +357,11 @@ table.prices td:nth-child(3) { color: var(--muted); font-size: 14px; }
 .float-call { position: fixed; right: 22px; bottom: 22px; z-index: 29; opacity: 0; transform: translateY(16px); pointer-events: none; transition: opacity .25s ease, transform .25s ease; box-shadow: 0 14px 34px rgba(0,0,0,.45); }
 .float-call.show { opacity: 1; transform: none; pointer-events: auto; }
 @media (max-width: 920px) { .float-call { display: none; } }
+
+/* Cursor spotlight on buttons (2026-10-23): a soft highlight follows the pointer, the lift glow stays */
+.btn { position: relative; overflow: hidden; isolation: isolate; }
+.btn > * { position: relative; z-index: 1; }
+.btn::after { content: ""; position: absolute; inset: 0; border-radius: inherit; pointer-events: none; opacity: 0; transition: opacity .25s ease;
+  background: radial-gradient(130px circle at var(--mx, 50%) var(--my, 50%), rgba(255,255,255,.32), rgba(255,255,255,0) 62%); }
+.btn-ghost::after { background: radial-gradient(130px circle at var(--mx, 50%) var(--my, 50%), rgba(255,255,255,.16), rgba(255,255,255,0) 62%); }
+@media (hover: hover) and (prefers-reduced-motion: no-preference) { .btn:hover::after { opacity: 1; } }

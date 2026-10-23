@@ -156,3 +156,12 @@
     new IntersectionObserver(function (en) { fb.classList.toggle('show', !en[0].isIntersecting); }).observe(hero);
   }
 })();
+
+// Cursor spotlight on buttons: --mx/--my follow the pointer inside the button
+document.addEventListener('pointermove', function (e) {
+  var b = e.target && e.target.closest ? e.target.closest('.btn') : null;
+  if (!b) return;
+  var r = b.getBoundingClientRect();
+  b.style.setProperty('--mx', (e.clientX - r.left) + 'px');
+  b.style.setProperty('--my', (e.clientY - r.top) + 'px');
+}, { passive: true });
