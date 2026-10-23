@@ -397,3 +397,36 @@ a, button, label, .btn, .facts span, .svc-pick label, .spots li { -webkit-tap-hi
   .btn:active::after { opacity: 1; transition: none; }
   .svc-pick label:active { transform: scale(.97); }
 }
+
+/* Hero: on desktop both columns start at the top, so a growing form never pushes the headline around */
+@media (min-width: 921px) {
+  .hero-grid { align-items: start; }
+  .hero-grid > div:first-child { padding-top: clamp(20px, 3.2vw, 44px); }
+}
+@media (prefers-reduced-motion: no-preference) {
+  @keyframes addon-in { from { opacity: 0; transform: translateY(-6px); } to { opacity: 1; transform: none; } }
+  .addon { animation: addon-in .3s ease both; }
+
+  /* Entrance: hero lines rise one after another on load (CSS only, works without JS) */
+  @keyframes rise-in { from { opacity: 0; transform: translateY(14px); } to { opacity: 1; transform: none; } }
+  .hero-grid > div > * { animation: rise-in .55s cubic-bezier(.2,.7,.2,1) both; }
+  .hero-grid > div > :nth-child(1) { animation-delay: .05s; }
+  .hero-grid > div > :nth-child(2) { animation-delay: .13s; }
+  .hero-grid > div > :nth-child(3) { animation-delay: .21s; }
+  .hero-grid > div > :nth-child(4) { animation-delay: .29s; }
+  .hero-grid > div > :nth-child(5) { animation-delay: .37s; }
+  .hero-grid > div > :nth-child(6) { animation-delay: .45s; }
+  .hero-grid > div > :nth-child(7) { animation-delay: .53s; }
+  .hero-grid > .estimate { animation: rise-in .6s cubic-bezier(.2,.7,.2,1) .35s both; }
+
+  /* Logo: one light sweep on load, again on hover */
+  .brand { position: relative; overflow: hidden; border-radius: 12px; }
+  .brand::after { content: ""; position: absolute; inset: 0; pointer-events: none; transform: translateX(-130%) skewX(-18deg);
+    background: linear-gradient(90deg, transparent 30%, rgba(255,255,255,.28) 50%, transparent 70%); animation: logo-shine 1.3s ease .7s 1 both; }
+  @keyframes logo-shine { to { transform: translateX(130%) skewX(-18deg); } }
+  @media (hover: hover) { .brand:hover::after { animation: logo-shine .9s ease 0s 1 both; } }
+
+  /* Mobile call bar: a slow, soft pulse ring on Call now */
+  @keyframes cta-pulse { 0% { box-shadow: 0 0 0 0 color-mix(in srgb, var(--green) 55%, transparent); } 55% { box-shadow: 0 0 0 12px transparent; } 100% { box-shadow: 0 0 0 0 transparent; } }
+  .callbar .btn-call { animation: cta-pulse 4.5s ease-out 2s infinite; }
+}
