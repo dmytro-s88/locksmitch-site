@@ -379,3 +379,11 @@ table.prices td:nth-child(3) { color: var(--muted); font-size: 14px; }
   .facts svg { transition: transform .25s ease; }
   .facts span:hover svg { transform: scale(1.18); }
 }
+
+/* Estimate form: service choices react to the pointer (slight grow + lighter border) */
+@media (hover: hover) and (prefers-reduced-motion: no-preference) {
+  .svc-pick label { transition: transform .22s cubic-bezier(.2,.7,.2,1), border-color .2s ease, background-color .2s ease, box-shadow .3s ease; }
+  .svc-pick label:hover { transform: scale(1.035); border-color: rgba(233,238,234,.5); background: rgba(233,238,234,.1); box-shadow: 0 6px 18px rgba(0,0,0,.28); }
+  .svc-pick input:checked + label:hover { border-color: var(--green-bright); background: color-mix(in srgb, var(--green-bright) 24%, transparent); }
+  .svc-pick label:active { transform: scale(.985); }
+}
