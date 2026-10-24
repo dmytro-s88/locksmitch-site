@@ -109,7 +109,7 @@ document.addEventListener('pointermove', function (e) {
   var ctx = cv.getContext('2d'), dpr = Math.min(window.devicePixelRatio || 1, small ? 1.5 : 2);
   var W = 0, H = 0, S = small ? 46 : 58, N = 0, pulses = [], px = -9999, py = -9999, pAct = 0;
   var rx = 0, ry = 0, trx = 0, tryy = 0, D = 1100;
-  function size() { W = cv.clientWidth; H = cv.clientHeight; cv.width = W * dpr; cv.height = H * dpr; ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
+  function size() { cv.style.height = ''; W = cv.clientWidth; H = Math.min(cv.clientHeight, small ? Math.round(window.innerHeight * 1.15) : 1400); cv.style.height = H + 'px'; cv.width = W * dpr; cv.height = H * dpr; ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
     N = Math.ceil((floor ? Math.max(W, H) * 1.6 : Math.max(W, H) * 1.25) / S); }
   // world (u, v) on the plane -> screen
   var cxr, sxr, cyr, syr, cx0, cy0;
@@ -129,8 +129,10 @@ document.addEventListener('pointermove', function (e) {
     var ex = Math.min(x, W - x) / (W * 0.18), ey = Math.min(y, H - y) / (H * 0.18);
     return a * Math.max(0, Math.min(1, ex, ey));
   }
+  var BUCKETS = 14, paths = [];
   function drawGrid() {
-    var seg = small ? 14 : 22, i, j, a, b, u, v, ext = N * S;
+    var seg = small ? 12 : 20, i, j, a, b, u, v, ext = N * S, k;
+    for (k = 0; k < BUCKETS; k++) paths[k] = [];
     for (var dir = 0; dir < 2; dir++) {
       for (i = -N; i <= N; i++) {
         a = null;
@@ -138,11 +140,19 @@ document.addEventListener('pointermove', function (e) {
           var t = -ext + (2 * ext) * j / seg;
           if (floor && dir === 0) { u = i * S; v = (t + ext) * 0.5; } else if (floor) { u = t; v = (i + N) * S * 0.5; } else if (dir === 0) { u = i * S; v = t; } else { u = t; v = i * S; }
           b = proj(u, v);
-          if (a && b) { var mx = (a[0] + b[0]) / 2, my = (a[1] + b[1]) / 2, al = lineAlpha(mx, my, b[2]);
-            if (al > 0.004) { ctx.strokeStyle = 'rgba(166,234,102,' + al.toFixed(3) + ')'; ctx.beginPath(); ctx.moveTo(a[0], a[1]); ctx.lineTo(b[0], b[1]); ctx.stroke(); } }
+          if (a && b) { var mx = (a[0] + b[0]) / 2, my = (a[1] + b[1]) / 2;
+            if (mx > -40 && mx < W + 40 && my > -40 && my < H + 40) {   // off-screen segments are skipped
+              var al = lineAlpha(mx, my, b[2]);
+              if (al > 0.004) { k = Math.min(BUCKETS - 1, Math.floor(al / 0.4 * BUCKETS)); paths[k].push(a[0], a[1], b[0], b[1]); } } }
           a = b;
         }
       }
+    }
+    for (k = 0; k < BUCKETS; k++) {   // one stroke per brightness level instead of one per segment
+      var P = paths[k]; if (!P.length) continue;
+      ctx.strokeStyle = 'rgba(166,234,102,' + ((k + 0.5) / BUCKETS * 0.4).toFixed(3) + ')'; ctx.beginPath();
+      for (var q = 0; q < P.length; q += 4) { ctx.moveTo(P[q], P[q + 1]); ctx.lineTo(P[q + 2], P[q + 3]); }
+      ctx.stroke();
     }
   }
   function spawn(u, v, near) {
@@ -190,7 +200,7 @@ document.addEventListener('pointermove', function (e) {
     if (!visible || document.hidden) return;
     if (!small || (frame++ & 1) === 0) {
       pAct += ((px > -999 ? 1 : 0) - pAct) * 0.08;
-      if (t > autoNext) { var n = nearestNode(Math.random() * W, Math.random() * H * 0.9); if (n) spawn(n[0], n[1], false); autoNext = t + (small ? 900 : 1300) + Math.random() * 1500; }
+      if (t > autoNext) { var ru = (Math.floor(Math.random() * N * 1.2) - Math.floor(N * 0.6)) * S, rv = (Math.floor(Math.random() * N * 1.2) - Math.floor(N * 0.6)) * S; var pr = proj(ru, rv); if (pr && pr[0] > 0 && pr[0] < W && pr[1] > 0 && pr[1] < H) spawn(ru, rv, false); autoNext = t + (small ? 900 : 1300) + Math.random() * 1500; }
       render(t);
     }
     requestAnimationFrame(loop);
@@ -208,9 +218,12 @@ document.addEventListener('pointermove', function (e) {
     var n = nearestNode(px, py); if (n) { spawn(n[0], n[1], true); spawn(n[0], n[1], true); }
     setTimeout(function () { px = py = -9999; }, 900);
   }, { passive: true });
-  new IntersectionObserver(function (en) { visible = en[0].isIntersecting; if (visible) requestAnimationFrame(loop); }).observe(hero);
-  document.addEventListener('visibilitychange', function () { if (!document.hidden && visible) requestAnimationFrame(loop); });
-  requestAnimationFrame(loop);
+  function start() {   // after the page has painted, so the grid never delays the first screen
+    new IntersectionObserver(function (en) { visible = en[0].isIntersecting; if (visible) requestAnimationFrame(loop); }).observe(hero);
+    document.addEventListener('visibilitychange', function () { if (!document.hidden && visible) requestAnimationFrame(loop); });
+    requestAnimationFrame(loop);
+  }
+  if (document.readyState === 'complete') setTimeout(start, 300); else window.addEventListener('load', function () { setTimeout(start, 300); });
 })();
 
 // Hero scene (2026-10-24): a North Georgia night behind the hero. Stars, Blue Ridge ridges, pine hills with
