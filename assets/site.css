@@ -391,6 +391,10 @@ table.prices td:nth-child(3) { color: var(--muted); font-size: 14px; }
 /* Touch: no grey tap rectangle on Android/iOS, a soft press instead */
 a, button, label, .btn, .facts span, .svc-pick label, .spots li { -webkit-tap-highlight-color: transparent; }
 .btn { -webkit-touch-callout: none; }
+/* the floating call button must stay fixed: the generic .btn { position: relative } above would otherwise drop it into the page flow */
+.btn.float-call { position: fixed; }
+@media (min-width: 921px) { body > footer { padding-bottom: 84px; } }
+
 @media (hover: none) {
   .btn { transition: transform .12s ease, filter .12s ease; }
   .btn:active { transform: scale(.97); filter: brightness(1.08); }
