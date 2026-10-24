@@ -1,4 +1,7 @@
 (function () {
+  // Spanish pages (/es/) use the same script; T(en, es) picks the text by the page language
+  var ES = document.documentElement.lang === 'es';
+  function T(en, es) { return ES ? es : en; }
   // Service area grouped by county
   var PAGES = {"Cumming": "/cumming/", "Sugar Hill": "/sugarhill/", "Buford": "/buford/", "Suwanee": "/suwanee/", "Duluth": "/duluth/", "Peachtree Corners": "/peachtreecorners/", "Norcross": "/norcross/", "Lawrenceville": "/lawrenceville/", "Milton": "/milton/", "Alpharetta": "/alpharetta/", "Johns Creek": "/johnscreek/", "Roswell": "/roswell/", "Sandy Springs": "/sandysprings/", "Flowery Branch": "/flowerybranch/", "Gainesville": "/gainesville/", "Dawsonville": "/dawsonville/", "Canton": "/canton/", "Woodstock": "/woodstock/", "Dunwoody": "/dunwoody/", "Doraville": "/doraville/", "Braselton": "/braselton/", "Marietta": "/marietta/", "Kennesaw": "/kennesaw/", "Smyrna": "/smyrna/"};
   var HERE = document.documentElement.getAttribute('data-city');
@@ -16,13 +19,13 @@
   var grid = document.getElementById('areaGrid');
   if (grid) counties.forEach(function (c) {   // pages without the service area block (guides) skip it
     var div = document.createElement('div'); div.className = 'county';
-    var h = document.createElement('h3'); h.textContent = c[0] + ' County';
+    var h = document.createElement('h3'); h.textContent = ES ? 'Condado de ' + c[0] : c[0] + ' County';
     var ul = document.createElement('ul');
     c[1].forEach(function (city) {
       var li = document.createElement('li'); var a = document.createElement('a');
       if (PAGES[city]) { a.href = PAGES[city]; } else { a.href = 'https://' + city.toLowerCase().replace(/\s+/g, '') + '.locksmitch.com'; a.target = '_blank'; a.rel = 'noopener'; }
       if (city === HERE) { a.className = 'current'; a.setAttribute('aria-current', 'page'); }
-      a.textContent = city; var s = document.createElement('span'); s.textContent = 'city page'; a.appendChild(s);
+      a.textContent = city; var s = document.createElement('span'); s.textContent = T('city page', 'página en inglés'); a.appendChild(s);
       li.appendChild(a); ul.appendChild(li);
     });
     div.appendChild(h); div.appendChild(ul); grid.appendChild(div);
@@ -38,9 +41,9 @@
     e.preventDefault();
     err.hidden = true;
     var bad = Array.prototype.filter.call(form.querySelectorAll('input[required]'), function (i) { return !i.value.trim(); });
-    if (bad.length) { bad[0].focus(); bad[0].setAttribute('aria-invalid', 'true'); showErr('Fill in the vehicle, your name and phone number.'); return; }
+    if (bad.length) { bad[0].focus(); bad[0].setAttribute('aria-invalid', 'true'); showErr(T('Fill in the vehicle, your name and phone number.', 'Escriba el carro, su nombre y su número de teléfono.')); return; }
     var phone = form.phone.value.trim();
-    if ((phone.match(/\d/g) || []).length < 7) { form.phone.focus(); showErr('Check the phone number. It needs at least 7 digits.'); return; }
+    if ((phone.match(/\d/g) || []).length < 7) { form.phone.focus(); showErr(T('Check the phone number. It needs at least 7 digits.', 'Revise el número de teléfono. Necesita al menos 7 dígitos.')); return; }
     var data = new URLSearchParams({
       service: (form.querySelector('input[name="svc"]:checked') || {}).value || '',
       second_key: (document.getElementById('s1').checked && document.getElementById('f-second').checked) ? 'yes' : '',
@@ -50,7 +53,7 @@
       company: form.company.value,
       page: location.href
     });
-    sendBtn.disabled = true; sendBtn.textContent = 'Sending…';
+    sendBtn.disabled = true; sendBtn.textContent = T('Sending…', 'Enviando…');
     fetch(ENDPOINT, { method: 'POST', body: data })
       .then(function (r) { return r.json(); })
       .then(function (res) {
@@ -61,9 +64,9 @@
         showCard();
       })
       .catch(function () {
-        showErr('Your request didn’t go through. Call or text <a href="tel:7702703333">(770) 270-3333</a> and we’ll help right away.');
+        showErr(T('Your request didn’t go through. Call or text <a href="tel:7702703333">(770) 270-3333</a> and we’ll help right away.', 'Su solicitud no se envió. Llame o escriba al <a href="tel:7702703333">(770) 270-3333</a> y le ayudamos enseguida.'));
       })
-      .then(function () { sendBtn.disabled = false; sendBtn.textContent = 'Get my free estimate'; });
+      .then(function () { sendBtn.disabled = false; sendBtn.textContent = T('Get my free estimate', 'Quiero mi presupuesto gratis'); });
   });
   form.addEventListener('input', function (e) { e.target.removeAttribute('aria-invalid'); });
   document.getElementById('estAgain').addEventListener('click', function () {
@@ -142,10 +145,27 @@
   // Copy phone number
   var btn = document.getElementById('copyBtn');
   if (btn) btn.addEventListener('click', function () {
-    var done = function () { btn.textContent = 'Copied'; setTimeout(function () { btn.textContent = 'Copy number'; }, 1800); };
+    var done = function () { btn.textContent = T('Copied', 'Copiado'); setTimeout(function () { btn.textContent = T('Copy number', 'Copiar número'); }, 1800); };
     try {
       navigator.clipboard.writeText('(770) 270-3333').then(done, function () { selectNum(); });
     } catch (e) { selectNum(); }
   });
   function selectNum() { var r = document.createRange(); r.selectNodeContents(document.getElementById('phoneNum')); var s = getSelection(); s.removeAllRanges(); s.addRange(r); }
+
+  // Language: remember the choice made with the globe switch; on a Spanish-language device show a small "¿Prefiere español?" hint
+  // on English pages (never a redirect: English visitors and search engines see the same page as before)
+  function store(k, v) { try { if (v === undefined) return localStorage.getItem(k); localStorage.setItem(k, v); } catch (e) { return null; } }
+  Array.prototype.forEach.call(document.querySelectorAll('a.lang, a[hreflang]'), function (a) {
+    a.addEventListener('click', function () { var to = a.getAttribute('hreflang'); if (to) { store('lm_lang', to); track('lang_switch', { to: to }); } });
+  });
+  var devLang = String((navigator.languages && navigator.languages[0]) || navigator.language || '');
+  var esLink = document.querySelector('a.lang[hreflang="es"]');
+  if (!ES && esLink && /^es\b/i.test(devLang) && !store('lm_lang') && store('lm_lang_hint') !== 'off') {
+    var box = document.createElement('div');
+    box.className = 'lang-hint'; box.setAttribute('role', 'note'); box.setAttribute('lang', 'es');
+    box.innerHTML = '<span>¿Prefiere español?</span><a href="' + esLink.getAttribute('href') + '" hreflang="es">Ver en español</a><button type="button" aria-label="Cerrar">×</button>';
+    box.querySelector('a').addEventListener('click', function () { store('lm_lang', 'es'); track('lang_switch', { to: 'es', via: 'hint' }); });
+    box.querySelector('button').addEventListener('click', function () { store('lm_lang_hint', 'off'); box.remove(); });
+    document.body.appendChild(box);
+  }
 })();
