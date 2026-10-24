@@ -482,5 +482,5 @@ table.prices tr:hover .key-ico { transform: rotate(-6deg) scale(1.06); border-co
 .meet-cta { display: flex; flex-wrap: wrap; gap: 12px; margin-top: 18px; }
 @media (max-width: 640px) {
   .meet-grid { grid-template-columns: 1fr; }
-  .meet-photo { max-width: 150px; }
+  .meet-photo { max-width: 240px; }
 }
