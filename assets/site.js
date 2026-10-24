@@ -58,6 +58,7 @@
         if (window.lmTrack) window.lmTrack('generate_lead', { service: data.get('service') || '', second_key: data.get('second_key') || 'no' });
         document.getElementById('estForm').hidden = true;
         document.getElementById('estSent').hidden = false;
+        showCard();
       })
       .catch(function () {
         showErr('Your request didn’t go through. Call or text <a href="tel:7702703333">(770) 270-3333</a> and we’ll help right away.');
@@ -69,7 +70,23 @@
     form.reset();
     document.getElementById('estSent').hidden = true;
     document.getElementById('estForm').hidden = false;
+    showCard();
   });
+  // After the form swaps for the confirmation (or back), the card gets shorter or taller and the page jumps.
+  // Bring the card's top into view under the sticky header and move focus to its heading.
+  function showCard() {
+    var card = document.getElementById('estimate');
+    if (!card) return;
+    var hdr = document.querySelector('header');
+    var off = (hdr && /sticky|fixed/.test(getComputedStyle(hdr).position) ? hdr.offsetHeight : 0) + 12;
+    var r = card.getBoundingClientRect();
+    if (r.top < off || r.top > window.innerHeight * 0.4) {
+      var reduce = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+      window.scrollTo({ top: r.top + window.pageYOffset - off, behavior: reduce ? 'auto' : 'smooth' });
+    }
+    var h = card.querySelector('#estSent:not([hidden]) h2, #estForm:not([hidden]) h2');
+    if (h) { h.setAttribute('tabindex', '-1'); h.style.outline = 'none'; h.focus({ preventScroll: true }); }
+  }
 
   // Recent jobs gallery: photo posts from Instagram @locksmitch.ga (videos are skipped by the feed)
   var FEED = 'https://script.google.com/macros/s/AKfycbwEnPklqAabpkxC7UoInrIwUW17F5hXMmveX2hEEUIxUGt7hskz_RNbpzz9QHiTZIKz/exec?feed=instagram';
