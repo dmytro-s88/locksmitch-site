@@ -80,6 +80,8 @@ section { padding-block: clamp(56px, 7vw, 88px); }
 .direct svg { width: 20px; height: 20px; flex: none; color: var(--green); margin-top: 1px; }
 .book-note { font-size: 14px; color: var(--muted); margin-top: 12px; }
 .book-note strong { color: var(--ink); }
+a.tag { text-decoration: none; }
+a.tag:hover { background: color-mix(in srgb, var(--brass) 34%, transparent); }
 .facts { display: flex; flex-wrap: wrap; gap: 10px 24px; margin-top: 30px; padding-top: 22px; border-top: 1px solid var(--line); font-size: 15px; font-weight: 600; }
 .facts span { display: inline-flex; align-items: center; gap: 8px; }
 .facts svg { width: 18px; height: 18px; color: var(--green); flex: none; }
@@ -582,11 +584,19 @@ table.prices tr:hover .key-ico { transform: rotate(-6deg) scale(1.06); border-co
 /* «$15 off» в hero: раз в ~6 с подпрыгивает и покачивается, чтобы скидку замечали */
 @media (prefers-reduced-motion: no-preference) {
   .book-note .tag { animation: tag-nudge 6s ease-in-out 1.6s infinite; transform-origin: 50% 60%; }
+  .book-note .tag:hover, .book-note .tag:focus-visible { animation: tag-pop .7s ease-in-out; }
   @keyframes tag-nudge {
     0%, 82%, 100% { transform: none; box-shadow: none; }
     85% { transform: scale(1.16) rotate(-5deg); box-shadow: 0 0 0 4px color-mix(in srgb, var(--brass) 18%, transparent); }
     88% { transform: scale(1.16) rotate(5deg); }
     91% { transform: scale(1.12) rotate(-3deg); }
     94% { transform: scale(1.06) rotate(2deg); box-shadow: 0 0 0 0 transparent; }
+  }
+  @keyframes tag-pop {
+    0%, 100% { transform: none; box-shadow: none; }
+    20% { transform: scale(1.16) rotate(-5deg); box-shadow: 0 0 0 4px color-mix(in srgb, var(--brass) 18%, transparent); }
+    40% { transform: scale(1.16) rotate(5deg); }
+    60% { transform: scale(1.12) rotate(-3deg); }
+    80% { transform: scale(1.06) rotate(2deg); box-shadow: 0 0 0 0 transparent; }
   }
 }
