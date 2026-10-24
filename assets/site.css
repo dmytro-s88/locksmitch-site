@@ -80,6 +80,7 @@ section { padding-block: clamp(56px, 7vw, 88px); }
 .direct svg { width: 20px; height: 20px; flex: none; color: var(--green); margin-top: 1px; }
 .book-note { font-size: 14px; color: var(--muted); margin-top: 12px; }
 .book-note strong { color: var(--ink); }
+.est-slot .estimate { margin-top: 26px; }
 .also { margin-top: 18px; font-size: 15px; color: var(--muted); }
 .also b { color: var(--ink); }
 .also a { color: var(--green-bright); font-weight: 700; white-space: nowrap; }

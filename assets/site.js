@@ -170,3 +170,13 @@
     document.body.appendChild(box);
   }
 })();
+
+// Страница цен на телефоне: форма оценки переезжает под цены (человек пришёл смотреть цены, а не форму)
+(function () {
+  var slot = document.getElementById('estSlot'), est = document.getElementById('estimate');
+  if (!slot || !est || !window.matchMedia) return;
+  var mq = window.matchMedia('(max-width: 920px)'), home = est.parentNode, next = est.nextSibling;
+  function place() { if (mq.matches) slot.appendChild(est); else home.insertBefore(est, next); }
+  place();
+  if (mq.addEventListener) mq.addEventListener('change', place);
+})();
