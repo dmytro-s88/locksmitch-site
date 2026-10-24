@@ -68,6 +68,7 @@
   form.addEventListener('input', function (e) { e.target.removeAttribute('aria-invalid'); });
   document.getElementById('estAgain').addEventListener('click', function () {
     form.reset();
+    var def = document.querySelector('input[name="svc"]:checked'); if (def) def.dispatchEvent(new Event('change', { bubbles: true }));
     document.getElementById('estSent').hidden = true;
     document.getElementById('estForm').hidden = false;
     showCard();
@@ -109,7 +110,7 @@
 
   // "Get a spare key quote" preselects the service in the form
   Array.prototype.forEach.call(document.querySelectorAll('[data-svc]'), function (a) {
-    a.addEventListener('click', function () { var r = document.getElementById(a.getAttribute('data-svc')); if (r) r.checked = true; });
+    a.addEventListener('click', function () { var r = document.getElementById(a.getAttribute('data-svc')); if (r) { r.checked = true; r.dispatchEvent(new Event('change', { bubbles: true })); } });
   });
 
   // Second key add-on only applies to All keys lost
