@@ -96,7 +96,7 @@ document.addEventListener('pointermove', function (e) {
 // Picked with ?bg=grid / ?bg=floor or <html data-bg="...">; the night scene stays the default.
 (function () {
   var hero = document.querySelector('.hero');
-  var mode = (location.search.match(/[?&]bg=(grid|floor|night)/) || [])[1] || document.documentElement.getAttribute('data-bg') || 'night';
+  var mode = (location.search.match(/[?&]bg=(grid|floor|night)/) || [])[1] || document.documentElement.getAttribute('data-bg') || 'grid';
   if (!hero || mode === 'night' || hero.querySelector('.hs')) return;
   var reduce = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
   var small = window.matchMedia('(max-width: 760px)').matches;
@@ -110,10 +110,11 @@ document.addEventListener('pointermove', function (e) {
   var W = 0, H = 0, S = small ? 46 : 58, N = 0, pulses = [], px = -9999, py = -9999, pAct = 0;
   var rx = 0, ry = 0, trx = 0, tryy = 0, D = 1100;
   function size() { W = cv.clientWidth; H = cv.clientHeight; cv.width = W * dpr; cv.height = H * dpr; ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
-    N = Math.ceil((floor ? Math.max(W, H) * 1.6 : Math.max(W, H) * 0.75) / S); }
+    N = Math.ceil((floor ? Math.max(W, H) * 1.6 : Math.max(W, H) * 1.25) / S); }
   // world (u, v) on the plane -> screen
   var cxr, sxr, cyr, syr, cx0, cy0;
-  function prep() { cxr = Math.cos(rx); sxr = Math.sin(rx); cyr = Math.cos(ry); syr = Math.sin(ry); cx0 = W * (floor ? 0.5 : 0.62); cy0 = floor ? H * 0.42 : H * 0.48; }
+  var lay = 0;   // 0 = wall, 1 = laid down like a floor (wall mode, driven by scroll)
+  function prep() { cxr = Math.cos(rx); sxr = Math.sin(rx); cyr = Math.cos(ry); syr = Math.sin(ry); cx0 = W * (floor ? 0.5 : 0.62 - 0.12 * lay); cy0 = floor ? H * 0.42 : H * (0.48 + 0.22 * lay); }
   function proj(u, v) {
     var x = u, y = v, z = 0;
     if (floor) { y = 0; z = v; }
@@ -179,8 +180,10 @@ document.addEventListener('pointermove', function (e) {
   function render(t) {
     var sc = Math.max(0, Math.min(1, (window.scrollY - (hero.offsetTop || 0) + 80) / Math.max(1, hero.offsetHeight)));
     var breathe = reduce ? 0 : Math.sin(t / 7000) * 0.035 + Math.sin(t / 2900) * 0.012;
-    trx = floor ? 1.18 + sc * 0.22 + breathe : 0.2 + sc * 0.45 + breathe;
-    rx += (trx - rx) * 0.06; ry += (tryy - ry) * 0.05; prep();
+    var sl = Math.max(0, Math.min(1, sc / 0.55)); sl = sl * sl * (3 - 2 * sl);   // eased: the wall lies down over the first half of the hero
+    trx = floor ? 1.18 + sc * 0.22 + breathe : 0.2 + sl * 1.05 + breathe * (1 - sl * 0.6);
+    lay += ((floor ? 0 : sl) - lay) * 0.08;
+    rx += (trx - rx) * 0.08; ry += (tryy - ry) * 0.05; prep();
     ctx.clearRect(0, 0, W, H); ctx.lineWidth = 1; drawGrid(); drawPulses();
   }
   function loop(t) {
