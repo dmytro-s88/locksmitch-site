@@ -31,7 +31,7 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@400;500;600;700;800&display=swap">
-<link rel="stylesheet" href="/assets/site.css?v=20261024j">
+<link rel="stylesheet" href="/assets/site.css?v=20261024k">
 <script type="application/ld+json">{"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"LocksMitch","item":"https://locksmitch.com/"},{"@type":"ListItem","position":2,"name":"Prices","item":"https://locksmitch.com/pricing/"}]}</script>
 <script type="application/ld+json">{"@context": "https://schema.org", "@type": "FAQPage", "mainEntity": [{"@type": "Question", "name": "Why is the dealer more expensive?", "acceptedAnswer": {"@type": "Answer", "text": "The dealer needs the car on their lot, so you pay for a tow or a second trip, and dealer parts are priced at retail. We do the same cutting and programming at your car with the same manufacturer key data."}}, {"@type": "Question", "name": "Is the starting price what I will pay?", "acceptedAnswer": {"@type": "Answer", "text": "For most cars, yes. The price goes up only for a newer model year, a rarer key, all keys lost or a long drive, and Mitch tells you the exact number by text before he leaves."}}, {"@type": "Question", "name": "Do you charge a trip fee?", "acceptedAnswer": {"@type": "Answer", "text": "No. In Cumming and Forsyth County the price includes coming to you. Further out, the lockout and no-chip key prices step up as shown above; key jobs add $50 only beyond 25 miles."}}, {"@type": "Question", "name": "What if the key turns out to be a different type?", "acceptedAnswer": {"@type": "Answer", "text": "Mitch checks the key at the car. If it is a different type than you thought, he tells you the new price before doing anything."}}, {"@type": "Question", "name": "Do you really charge $75 for a lockout?", "acceptedAnswer": {"@type": "Answer", "text": "Yes, in Cumming and Forsyth County, day rate. Nights add $50. That is the whole price: coming out, opening the car, no damage."}}, {"@type": "Question", "name": "What if the key I bought online doesn’t work?", "acceptedAnswer": {"@type": "Answer", "text": "Tell us the part number or send a photo before the visit and Mitch checks it. If it still can’t be programmed to your car (wrong type, already used or locked), you pay $75 for the trip and the check, and Mitch can supply a key that works."}}, {"@type": "Question", "name": "How can I pay?", "acceptedAnswer": {"@type": "Answer", "text": "Cash, credit and debit cards, Apple Pay, Zelle, Venmo or Cash App."}}]}</script>
 </head>
@@ -133,27 +133,40 @@
     </div>
   </section>
 
-  <section class="local" id="local">
-    <div class="wrap local-grid">
-      <div>
-        <h2>Starting prices</h2>
-        <p class="lede">These are the lowest prices for each job. The exact price depends on the make, model year and key type, and Mitch confirms it by text before he drives out.</p>
-        <table class="prices">
-          <thead><tr><th>Job</th><th>From</th><th>What it includes</th></tr></thead>
-          <tbody>
-            <tr><td>Car lockout, flat rate</td><td>$75</td><td>Opening the car with lockout tools, no damage. Flat rate by distance: $75 in Cumming and Forsyth, $100 up to 25 miles, $125 up to 40 miles</td></tr>
-            <tr><td><span class="key-name"><img class="key-ico" src="/assets/keys/plain.svg?v=2" alt="Plain metal key" width="52" height="52" loading="lazy">Key cut, no chip</span></td><td>$75</td><td>Plain metal key for older cars, doors and trunks, cut by code, by lock or from your working key</td></tr>
-            <tr><td><span class="key-name"><img class="key-ico" src="/assets/keys/chip.svg?v=2" alt="Key with a chip in the head" width="52" height="52" loading="lazy">Spare key with chip</span></td><td>$140</td><td>Transponder key cut and programmed, most makes</td></tr>
-            <tr><td><span class="key-name"><img class="key-ico" src="/assets/keys/remote.svg?v=2" alt="Key with lock and unlock buttons" width="52" height="52" loading="lazy">Key with remote (flip key)</span></td><td>$150</td><td>Remote head or flip key, cut and programmed</td></tr>
-            <tr><td><span class="key-name"><img class="key-ico" src="/assets/keys/smart.svg?v=2" alt="Push-to-start smart key fob" width="52" height="52" loading="lazy">Push-to-start smart key</span></td><td>$180</td><td>Proximity key programmed. 2020 and newer from $200</td></tr>
-            <tr><td>All keys lost</td><td>$190</td><td>New key made from the vehicle code when no key is left. Toyota, Honda, Ford, GM, Hyundai, Kia, Nissan, Jeep and most other makes. Subaru and European makes quoted by model</td></tr>
-            <tr><td>Programming only, a key you bought</td><td>$99</td><td>We cut and program a key or fob you already have. Push-to-start smart key $129. No working key at all: all-keys-lost pricing applies. European makes quoted by model</td></tr>
-            <tr><td>Remote you bought, buttons only</td><td>$89</td><td>Programming a remote without a key blade</td></tr>
-            <tr><td>Replacement remote</td><td>$129</td><td>New remote supplied and programmed</td></tr>
-            <tr><td>European: BMW, Mini, VW, Audi</td><td>$200</td><td>Cut and programmed, model years we cover</td></tr>
-            <tr><td>Mercedes-Benz, Porsche, Volvo</td><td>$450</td><td>Complex key systems, quoted by model</td></tr>
-          </tbody>
-        </table>
+  <section class="local pricing" id="local">
+    <div class="wrap">
+      <h2>Starting prices</h2>
+      <p class="lede">These are the lowest prices for each job. The exact price depends on the make, model year and key type, and Mitch confirms it by text before he drives out.</p>
+      <div class="price-groups">
+        <div class="pg">
+          <h3 class="pg-h">Lockout and new keys</h3>
+          <ul class="pc-list">
+          <li class="pc"><img class="pc-ico" src="/assets/keys/lock.svg?v=2" alt="Open padlock" width="52" height="52" loading="lazy"><div class="pc-body"><h4>Car lockout, flat rate</h4><p>Opening the car with lockout tools, no damage. $75 in Cumming and Forsyth, $100 up to 25 miles, $125 up to 40 miles</p></div><div class="pc-price"><span>from</span>$75</div></li>
+          <li class="pc"><img class="pc-ico" src="/assets/keys/plain.svg?v=2" alt="Plain metal key" width="52" height="52" loading="lazy"><div class="pc-body"><h4>Key cut, no chip</h4><p>Plain metal key for older cars, doors and trunks, cut by code, by lock or from your working key</p></div><div class="pc-price"><span>from</span>$75</div></li>
+          <li class="pc"><img class="pc-ico" src="/assets/keys/chip.svg?v=2" alt="Key with a chip in the head" width="52" height="52" loading="lazy"><div class="pc-body"><h4>Spare key with chip</h4><p>Transponder key cut and programmed, most makes</p></div><div class="pc-price"><span>from</span>$140</div></li>
+          <li class="pc"><img class="pc-ico" src="/assets/keys/remote.svg?v=2" alt="Key with lock and unlock buttons" width="52" height="52" loading="lazy"><div class="pc-body"><h4>Key with remote (flip key)</h4><p>Remote head or flip key, cut and programmed</p></div><div class="pc-price"><span>from</span>$150</div></li>
+          <li class="pc"><img class="pc-ico" src="/assets/keys/smart.svg?v=2" alt="Push-to-start smart key fob" width="52" height="52" loading="lazy"><div class="pc-body"><h4>Push-to-start smart key</h4><p>Proximity key programmed. 2020 and newer from $200</p></div><div class="pc-price"><span>from</span>$180</div></li>
+          <li class="pc"><img class="pc-ico" src="/assets/keys/akl.svg?v=2" alt="New key with a plus sign" width="52" height="52" loading="lazy"><div class="pc-body"><h4>All keys lost</h4><p>New key made from the vehicle code when no key is left. Toyota, Honda, Ford, GM, Hyundai, Kia, Nissan, Jeep and most other makes. Subaru and European makes quoted by model</p></div><div class="pc-price"><span>from</span>$190</div></li>
+          </ul>
+        </div>
+        <div class="pg">
+          <h3 class="pg-h">Programming and remotes</h3>
+          <ul class="pc-list">
+          <li class="pc"><img class="pc-ico" src="/assets/keys/prog.svg?v=2" alt="Key fob being programmed" width="52" height="52" loading="lazy"><div class="pc-body"><h4>Programming only, a key you bought</h4><p>We cut and program a key or fob you already have. Push-to-start smart key $129. No working key at all: all-keys-lost pricing applies. European makes quoted by model</p></div><div class="pc-price"><span>from</span>$99</div></li>
+          <li class="pc"><img class="pc-ico" src="/assets/keys/remote-only.svg?v=2" alt="Remote without a key blade" width="52" height="52" loading="lazy"><div class="pc-body"><h4>Remote you bought, buttons only</h4><p>Programming a remote without a key blade</p></div><div class="pc-price"><span>from</span>$89</div></li>
+          <li class="pc"><img class="pc-ico" src="/assets/keys/remote-only.svg?v=2" alt="Remote without a key blade" width="52" height="52" loading="lazy"><div class="pc-body"><h4>Replacement remote</h4><p>New remote supplied and programmed</p></div><div class="pc-price"><span>from</span>$129</div></li>
+          </ul>
+        </div>
+        <div class="pg">
+          <h3 class="pg-h">European makes</h3>
+          <ul class="pc-list">
+          <li class="pc"><img class="pc-ico" src="/assets/keys/remote.svg?v=2" alt="Flip key" width="52" height="52" loading="lazy"><div class="pc-body"><h4>European: BMW, Mini, VW, Audi</h4><p>Cut and programmed, model years we cover</p></div><div class="pc-price"><span>from</span>$200</div></li>
+          <li class="pc"><img class="pc-ico" src="/assets/keys/smart.svg?v=2" alt="Smart key fob" width="52" height="52" loading="lazy"><div class="pc-body"><h4>Mercedes-Benz, Porsche, Volvo</h4><p>Complex key systems, quoted by model</p></div><div class="pc-price"><span>from</span>$450</div></li>
+          </ul>
+        </div>
+      </div>
+      <div class="local-grid price-extra">
+        <div>
         <h3 class="sub">Distance and time</h3>
         <ul class="price-list">
           <li><b>Cumming, Forsyth County and Sugar Hill</b> (up to 12 miles by road): prices as listed, no trip fee</li>
@@ -165,7 +178,7 @@
           <li><b>Second key</b> for the same car in the same visit: 50% off. <b>Online booking</b>: $15 off</li>
         </ul>
         <p class="svc-tip">Watch out for "$19" and "$29" locksmith ads: that is a dispatch fee for a call center, the work is priced separately when the van arrives. We quote the whole job before anyone drives out.</p>
-      </div>
+        </div>
       <aside class="nearby">
         <h3>Services</h3>
         <ul style="grid-template-columns:1fr"><li><a href="/all-keys-lost/">All keys lost</a></li><li><a href="/spare-key/">Spare key</a></li><li><a href="/car-lockout/">Locked out of car</a></li><li><a href="/key-programming/">Key programming only</a></li></ul>
@@ -173,6 +186,7 @@
         <ul><li><a href="/toyota-key-replacement/">Toyota</a></li><li><a href="/honda-key-replacement/">Honda</a></li><li><a href="/ford-key-replacement/">Ford</a></li><li><a href="/chevrolet-gmc-key-replacement/">Chevrolet, GMC</a></li><li><a href="/hyundai-key-replacement/">Hyundai</a></li><li><a href="/kia-key-replacement/">Kia</a></li><li><a href="/nissan-key-replacement/">Nissan</a></li><li><a href="/bmw-key-replacement/">BMW</a></li></ul>
         <p style="margin-top:14px"><a href="/#services" style="padding:0;color:var(--muted);font-weight:500">All makes and services →</a></p>
       </aside>
+      </div>
     </div>
   </section>
 
