@@ -160,7 +160,8 @@
   });
   var devLang = String((navigator.languages && navigator.languages[0]) || navigator.language || '');
   var esLink = document.querySelector('a.lang[hreflang="es"]');
-  if (!ES && esLink && /^es\b/i.test(devLang) && !store('lm_lang') && store('lm_lang_hint') !== 'off') {
+  var forceHint = /[?&]eshint\b/.test(location.search);   // ?eshint: показать плашку на любом телефоне (для проверки)
+  if (!ES && esLink && (forceHint || (/^es\b/i.test(devLang) && !store('lm_lang') && store('lm_lang_hint') !== 'off'))) {
     var box = document.createElement('div');
     box.className = 'lang-hint'; box.setAttribute('role', 'note'); box.setAttribute('lang', 'es');
     box.innerHTML = '<span>¿Prefiere español?</span><a href="' + esLink.getAttribute('href') + '" hreflang="es">Ver en español</a><button type="button" aria-label="Cerrar">×</button>';
