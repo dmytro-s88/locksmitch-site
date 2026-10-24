@@ -181,7 +181,7 @@ document.addEventListener('pointermove', function (e) {
     var sc = Math.max(0, Math.min(1, (window.scrollY - (hero.offsetTop || 0) + 80) / Math.max(1, hero.offsetHeight)));
     var breathe = reduce ? 0 : Math.sin(t / 7000) * 0.035 + Math.sin(t / 2900) * 0.012;
     var sl = Math.max(0, Math.min(1, sc / 0.55)); sl = sl * sl * (3 - 2 * sl);   // eased: the wall lies down over the first half of the hero
-    trx = floor ? 1.18 + sc * 0.22 + breathe : 0.2 + sl * 1.05 + breathe * (1 - sl * 0.6);
+    trx = floor ? 1.18 + sc * 0.22 + breathe : -(0.2 + sl * 1.05 + breathe * (1 - sl * 0.6));   // negative: the top edge leans away, so it lies down into the distance
     lay += ((floor ? 0 : sl) - lay) * 0.08;
     rx += (trx - rx) * 0.08; ry += (tryy - ry) * 0.05; prep();
     ctx.clearRect(0, 0, W, H); ctx.lineWidth = 1; drawGrid(); drawPulses();
@@ -196,7 +196,7 @@ document.addEventListener('pointermove', function (e) {
     requestAnimationFrame(loop);
   }
   size(); prep(); window.addEventListener('resize', function () { size(); render(performance.now()); });
-  if (reduce) { rx = trx = floor ? 1.18 : 0.2; prep(); render(0); return; }
+  if (reduce) { rx = trx = floor ? 1.18 : -0.2; prep(); render(0); return; }
   hero.addEventListener('pointermove', function (e) {
     var r = cv.getBoundingClientRect(); px = e.clientX - r.left; py = e.clientY - r.top;
     if (e.pointerType !== 'touch') tryy = ((e.clientX - r.left) / r.width - 0.5) * 0.22;

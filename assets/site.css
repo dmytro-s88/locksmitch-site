@@ -492,7 +492,8 @@ table.prices tr:hover .key-ico { transform: rotate(-6deg) scale(1.06); border-co
   .meet-text h2 { font-size: 24px; margin-bottom: 8px; }
   .meet-text p { font-size: 15px; }
   .meet-cta { clear: both; padding-top: 4px; }
-  .meet-cta .btn { min-height: 46px; padding: 0 18px; font-size: 16px; }
+  .meet-cta { flex-wrap: nowrap; }
+  .meet-cta .btn { flex: 1 1 0; justify-content: center; min-height: 48px; padding: 0 12px; font-size: 16px; gap: 8px; }
 }
 
 /* Pricing page: grouped price cards (2026-10-24) */
@@ -535,7 +536,7 @@ table.prices tr:hover .key-ico { transform: rotate(-6deg) scale(1.06); border-co
 }
 @media (prefers-reduced-motion: reduce) { .hs-glow, .hs-shimmer line, .hs-shoot { animation: none !important; } }
 /* Hero grid option (?bg=grid / ?bg=floor) */
-.hero.grid-scene { background: radial-gradient(70% 60% at 62% 45%, #0f1a16 0%, #0b120f 55%, #090e0c 100%); }
-.hs-grid { position: absolute; inset: 0; width: 100%; height: 100%; }
+.hero.grid-scene { background: var(--bg); border-bottom-color: transparent; }
+.hs-grid { position: absolute; inset: 0; width: 100%; height: 100%; -webkit-mask-image: linear-gradient(180deg, #000 0%, #000 55%, transparent 100%); mask-image: linear-gradient(180deg, #000 0%, #000 55%, transparent 100%); }
 .hs-gridmode .hs-scrim { background: linear-gradient(90deg, rgba(14,19,17,.55) 0%, rgba(14,19,17,.2) 40%, rgba(14,19,17,0) 65%); }
 @media (max-width: 920px) { .hs-gridmode .hs-scrim { background: linear-gradient(180deg, rgba(14,19,17,0) 0%, rgba(14,19,17,.25) 50%, rgba(14,19,17,.75) 85%); } }
