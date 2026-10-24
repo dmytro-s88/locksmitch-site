@@ -561,3 +561,7 @@ table.prices tr:hover .key-ico { transform: rotate(-6deg) scale(1.06); border-co
 .guide-card .more { margin-top: auto; padding-top: 6px; }
 @media (max-width: 860px) { .guide-side { position: static; } }
 @media (prefers-reduced-motion: reduce) { .guide-card { transition: none; } .guide-card:hover { transform: none; } }
+
+/* City pages: local facts block */
+.local-facts { margin-top: 26px; }
+.local-facts p { color: var(--muted); max-width: 62ch; margin: 0 0 6px; }
