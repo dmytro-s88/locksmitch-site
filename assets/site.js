@@ -41,7 +41,7 @@
     e.preventDefault();
     err.hidden = true;
     var bad = Array.prototype.filter.call(form.querySelectorAll('input[required]'), function (i) { return !i.value.trim(); });
-    if (bad.length) { bad[0].focus(); bad[0].setAttribute('aria-invalid', 'true'); showErr(T('Fill in the vehicle, your name and phone number.', 'Escriba el carro, su nombre y su número de teléfono.')); return; }
+    if (bad.length) { bad[0].focus(); bad[0].setAttribute('aria-invalid', 'true'); showErr(T('Fill in the vehicle, your name and phone number.', 'Falta el carro, su nombre o su número de teléfono.')); return; }
     var phone = form.phone.value.trim();
     if ((phone.match(/\d/g) || []).length < 7) { form.phone.focus(); showErr(T('Check the phone number. It needs at least 7 digits.', 'Revise el número de teléfono. Necesita al menos 7 dígitos.')); return; }
     var data = new URLSearchParams({
@@ -66,7 +66,7 @@
       .catch(function () {
         showErr(T('Your request didn’t go through. Call or text <a href="tel:7702703333">(770) 270-3333</a> and we’ll help right away.', 'Su solicitud no se envió. Llame o escriba al <a href="tel:7702703333">(770) 270-3333</a> y le ayudamos enseguida.'));
       })
-      .then(function () { sendBtn.disabled = false; sendBtn.textContent = T('Get my free estimate', 'Quiero mi presupuesto gratis'); });
+      .then(function () { sendBtn.disabled = false; sendBtn.textContent = T('Get my free estimate', 'Quiero mi cotización gratis'); });
   });
   form.addEventListener('input', function (e) { e.target.removeAttribute('aria-invalid'); });
   document.getElementById('estAgain').addEventListener('click', function () {
