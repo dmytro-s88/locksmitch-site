@@ -512,3 +512,25 @@ table.prices tr:hover .key-ico { transform: rotate(-6deg) scale(1.06); border-co
 @media (max-width: 760px) { .pc-list { grid-template-columns: minmax(0, 1fr); } }
 @media (max-width: 420px) { .pc { grid-template-columns: 50px minmax(0, 1fr) auto; gap: 12px; padding: 14px; } .pc-ico { width: 50px; height: 50px; } .pc-price { font-size: 21px; } }
 @media (prefers-reduced-motion: reduce) { .pc, .pc-ico { transition: none; } .pc:hover, .pc:hover .pc-ico { transform: none; } }
+
+/* Hero scene: North Georgia night with parallax layers (built by motion.js) */
+.hero.has-scene { position: relative; overflow: hidden; isolation: isolate; background: linear-gradient(180deg, #060a09 0%, #0a110f 45%, #0e1712 100%); }
+.hero.has-scene > .wrap { position: relative; z-index: 2; }
+.hs { position: absolute; inset: 0; z-index: 0; pointer-events: none; }
+.hs-layer { position: absolute; left: -4%; width: 108%; bottom: -2%; height: 104%; will-change: transform; }
+.hs-stars { top: 0; height: 75%; bottom: auto; }
+.hs-glow { background: radial-gradient(48% 46% at 38% 86%, rgba(108,198,85,.34), transparent 70%), radial-gradient(36% 40% at 74% 90%, rgba(79,176,190,.22), transparent 70%); animation: hs-breathe 9s ease-in-out infinite; }
+@keyframes hs-breathe { 50% { opacity: .6; } }
+.hs-shimmer line { opacity: 0; animation: hs-shimmer 5.6s ease-in-out infinite; }
+@keyframes hs-shimmer { 0%, 100% { opacity: 0; } 40% { opacity: .35; } 60% { opacity: .12; } }
+.hs-shoot { position: absolute; width: 150px; height: 1.5px; border-radius: 2px; background: linear-gradient(90deg, rgba(234,240,236,0), rgba(234,240,236,.95)); transform: rotate(18deg); opacity: 0; }
+.hs-shoot.go { animation: hs-shoot 1.3s ease-out 1; }
+@keyframes hs-shoot { 0% { opacity: 0; transform: rotate(18deg) translateX(0); } 12% { opacity: 1; } 100% { opacity: 0; transform: rotate(18deg) translateX(320px); } }
+.hs-scrim { position: absolute; inset: 0; background: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='160' height='160'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.9' numOctaves='2' stitchTiles='stitch'/%3E%3CfeColorMatrix values='0 0 0 0 1 0 0 0 0 1 0 0 0 0 1 0 0 0 .05 0'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E"), linear-gradient(90deg, rgba(14,19,17,.62) 0%, rgba(14,19,17,.3) 40%, rgba(14,19,17,0) 66%), linear-gradient(0deg, rgba(14,19,17,.5) 0%, rgba(14,19,17,0) 18%); }
+@media (max-width: 920px) {
+  .hs-layer { height: 760px; }
+  .hs-stars { height: 520px; }
+  .hs-scrim { background: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='160' height='160'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.9' numOctaves='2' stitchTiles='stitch'/%3E%3CfeColorMatrix values='0 0 0 0 1 0 0 0 0 1 0 0 0 0 1 0 0 0 .05 0'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E"), linear-gradient(180deg, rgba(14,19,17,.18) 0%, rgba(14,19,17,.42) 38%, rgba(14,19,17,.55) 60%, rgba(14,19,17,.92) 78%, #0e1311 90%); }
+  .hs-far, .hs-mid, .hs-near, .hs-glow { top: 0; bottom: auto; }
+}
+@media (prefers-reduced-motion: reduce) { .hs-glow, .hs-shimmer line, .hs-shoot { animation: none !important; } }

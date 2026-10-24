@@ -89,3 +89,118 @@ document.addEventListener('pointermove', function (e) {
     }
   }).catch(function () {});
 })();
+
+// Hero scene (2026-10-24): a North Georgia night behind the hero. Stars, Blue Ridge ridges, pine hills with
+// Lake Lanier, near pines. Layers move like a camera: with the pointer on desktop, with scroll on phones
+// (and with tilt on Android). Static and calm with prefers-reduced-motion.
+(function () {
+  var hero = document.querySelector('.hero');
+  if (!hero || hero.querySelector('.hs')) return;
+  var reduce = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  var small = window.matchMedia('(max-width: 760px)').matches;
+  var NS = 'http://www.w3.org/2000/svg';
+  var seed = 7; function rnd() { seed |= 0; seed = seed + 0x6D2B79F5 | 0; var t = Math.imul(seed ^ seed >>> 15, 1 | seed); t = t + Math.imul(t ^ t >>> 7, 61 | t) ^ t; return ((t ^ t >>> 14) >>> 0) / 4294967296; }
+  function ridge(base, amp, step) {
+    var p1 = rnd() * 6, p2 = rnd() * 6, p3 = rnd() * 6, d = 'M-120,700 L-120,' + base;
+    for (var x = -120; x <= 1720; x += step) {
+      var y = base - amp * (0.55 * Math.sin(x * 0.0041 + p1) + 0.3 * Math.sin(x * 0.011 + p2) + 0.15 * Math.sin(x * 0.029 + p3));
+      d += ' L' + x + ',' + y.toFixed(1);
+    }
+    return d + ' L1720,700 Z';
+  }
+  function pine(x, base, h) {
+    var w = h * 0.44, d = 'M' + (x - w * 0.04).toFixed(1) + ',' + base + 'h' + (w * 0.08).toFixed(1) + 'v' + (-h * 0.12).toFixed(1) + 'h' + (-w * 0.08).toFixed(1) + 'Z';
+    for (var i = 0; i < 4; i++) {
+      var top = base - h + i * h * 0.2, bot = top + h * 0.34 + i * h * 0.04, hw = w * (0.2 + i * 0.1);
+      d += 'M' + x.toFixed(1) + ',' + top.toFixed(1) + 'L' + (x + hw).toFixed(1) + ',' + bot.toFixed(1) + 'L' + (x - hw).toFixed(1) + ',' + bot.toFixed(1) + 'Z';
+    }
+    return d;
+  }
+  function layer(cls, inner) {
+    var s = document.createElementNS(NS, 'svg');
+    s.setAttribute('viewBox', '0 0 1600 700'); s.setAttribute('preserveAspectRatio', 'xMidYMax slice'); s.setAttribute('class', 'hs-layer ' + cls); s.setAttribute('aria-hidden', 'true');
+    s.innerHTML = inner; return s;
+  }
+  var far = layer('hs-far', '<defs><linearGradient id="hsFar" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#2a4a42"/><stop offset="1" stop-color="#152620"/></linearGradient>' +
+    '<linearGradient id="hsFar2" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#1f3830"/><stop offset="1" stop-color="#11201b"/></linearGradient></defs>' +
+    '<path d="' + ridge(400, 80, 16) + '" fill="url(#hsFar)"/><path d="' + ridge(462, 60, 14) + '" fill="url(#hsFar2)"/>');
+  var pines = '', i, x;
+  for (i = 0; i < 70; i++) { x = -100 + i * 26 + rnd() * 14; pines += pine(x, 566 + rnd() * 8, 34 + rnd() * 34); }
+  var mid = layer('hs-mid', '<defs><linearGradient id="hsLake" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#4FB0BE" stop-opacity=".38"/><stop offset=".25" stop-color="#173430" stop-opacity=".95"/><stop offset="1" stop-color="#0a1311"/></linearGradient></defs>' +
+    '<path d="' + ridge(540, 22, 20) + '" fill="#10201a"/><path d="' + pines + '" fill="#10201a"/>' +
+    '<rect x="-120" y="572" width="1840" height="140" fill="url(#hsLake)"/>' +
+    '<g class="hs-shimmer" stroke="#A6EA66" stroke-linecap="round">' +
+    [[180, 590, 60], [420, 604, 90], [690, 594, 50], [930, 612, 110], [1210, 598, 70], [1420, 608, 60], [560, 624, 40], [1080, 628, 50]].map(function (a, k) {
+      return '<line x1="' + a[0] + '" y1="' + a[1] + '" x2="' + (a[0] + a[2]) + '" y2="' + a[1] + '" stroke-width="1.6" style="animation-delay:' + (k * 0.7).toFixed(1) + 's"/>'; }).join('') + '</g>');
+  var near = '';
+  for (i = 0; i < 16; i++) { x = -60 + i * 30 + rnd() * 18; near += pine(x, 712, 150 + rnd() * 170 - i * 6); }
+  for (i = 0; i < 16; i++) { x = 1660 - i * 30 - rnd() * 18; near += pine(x, 712, 150 + rnd() * 170 - i * 6); }
+  for (i = 0; i < 18; i++) { x = 480 + i * 36 + rnd() * 20; near += pine(x, 712, 46 + rnd() * 40); }
+  var nearL = layer('hs-near', '<path d="' + near + '" fill="#070c0a"/><rect x="-120" y="690" width="1840" height="30" fill="#070c0a"/>');
+  var box = document.createElement('div'); box.className = 'hs'; box.setAttribute('aria-hidden', 'true');
+  var stars = document.createElement('canvas'); stars.className = 'hs-layer hs-stars';
+  var glow = document.createElement('div'); glow.className = 'hs-layer hs-glow';
+  var shoot = document.createElement('i'); shoot.className = 'hs-shoot';
+  var scrim = document.createElement('div'); scrim.className = 'hs-scrim';
+  [stars, shoot, glow, far, mid, nearL, scrim].forEach(function (n) { box.appendChild(n); });
+  hero.insertBefore(box, hero.firstChild);
+  hero.classList.add('has-scene');
+
+  // stars
+  var ctx = stars.getContext('2d'), list = [], dpr = Math.min(window.devicePixelRatio || 1, 2), sw = 0, sh = 0;
+  function sizeStars() {
+    sw = stars.clientWidth; sh = stars.clientHeight; if (!sw || !sh) return;
+    stars.width = sw * dpr; stars.height = sh * dpr; ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
+    list = []; var n = Math.round(sw * sh / (small ? 7000 : 5200));
+    for (var k = 0; k < n; k++) list.push({ x: Math.random() * sw, y: Math.random() * sh * 0.72, r: Math.random() * 1.1 + 0.25, p: Math.random() * 6.28, s: 0.4 + Math.random() * 1.1, g: Math.random() < 0.12 });
+    drawStars(0);
+  }
+  function drawStars(t) {
+    ctx.clearRect(0, 0, sw, sh);
+    for (var k = 0; k < list.length; k++) {
+      var s = list[k], a = reduce ? 0.55 : 0.2 + 0.6 * (0.5 + 0.5 * Math.sin(t / 1000 * s.s + s.p));
+      ctx.fillStyle = s.g ? 'rgba(166,234,102,' + (a * 0.9).toFixed(3) + ')' : 'rgba(234,240,236,' + a.toFixed(3) + ')';
+      ctx.beginPath(); ctx.arc(s.x, s.y, s.r, 0, 6.283); ctx.fill();
+    }
+  }
+  sizeStars(); window.addEventListener('resize', sizeStars);
+  if (reduce) return;
+
+  // shooting star now and then
+  function fly() {
+    shoot.style.top = (6 + Math.random() * 26) + '%'; shoot.style.left = (20 + Math.random() * 55) + '%';
+    shoot.classList.remove('go'); void shoot.offsetWidth; shoot.classList.add('go');
+    setTimeout(fly, 7000 + Math.random() * 9000);
+  }
+  setTimeout(fly, 2500);
+
+  // camera: pointer (desktop), scroll (all), tilt (Android)
+  var L = [[stars, 8, 0.5], [glow, 12, 0.38], [far, 18, 0.3], [mid, 34, 0.16], [nearL, 58, 0.05]];
+  var tx = 0, ty = 0, cx = 0, cy = 0, visible = true, frame = 0;
+  hero.addEventListener('pointermove', function (e) {
+    if (e.pointerType === 'touch') return;
+    var r = hero.getBoundingClientRect(); tx = ((e.clientX - r.left) / r.width - 0.5) * 2; ty = ((e.clientY - r.top) / r.height - 0.5) * 2;
+  }, { passive: true });
+  hero.addEventListener('pointerleave', function () { tx = 0; ty = 0; });
+  if (window.DeviceOrientationEvent && typeof DeviceOrientationEvent.requestPermission !== 'function' && small) {
+    var base = null;
+    window.addEventListener('deviceorientation', function (e) {
+      if (e.gamma == null) return; if (base === null) base = e.beta;
+      tx = Math.max(-1, Math.min(1, e.gamma / 25)); ty = Math.max(-1, Math.min(1, (e.beta - base) / 25));
+    }, { passive: true });
+  }
+  new IntersectionObserver(function (en) { visible = en[0].isIntersecting; if (visible) requestAnimationFrame(loop); }).observe(hero);
+  function loop(t) {
+    if (!visible || document.hidden) return;
+    cx += (tx - cx) * 0.06; cy += (ty - cy) * 0.06;
+    var sy = Math.max(0, Math.min(window.scrollY - (hero.offsetTop || 0) + 80, hero.offsetHeight));
+    for (var k = 0; k < L.length; k++) {
+      var d = L[k][1], f = L[k][2];
+      L[k][0].style.transform = 'translate3d(' + (-cx * d).toFixed(2) + 'px,' + (-cy * d * 0.45 + sy * f).toFixed(2) + 'px,0)';
+    }
+    if ((frame++ & 1) === 0) drawStars(t);
+    requestAnimationFrame(loop);
+  }
+  document.addEventListener('visibilitychange', function () { if (!document.hidden && visible) requestAnimationFrame(loop); });
+  requestAnimationFrame(loop);
+})();
