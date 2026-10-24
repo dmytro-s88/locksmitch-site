@@ -472,7 +472,8 @@ table.prices tr:hover .key-ico { transform: rotate(-6deg) scale(1.06); border-co
 
 /* Meet Mitch */
 .meet { padding-block: clamp(32px, 5vw, 56px); }
-.meet-grid { display: grid; grid-template-columns: 150px 1fr; gap: clamp(20px, 4vw, 36px); align-items: start; }
+.meet-grid { display: grid; grid-template-columns: 1fr 260px; gap: clamp(28px, 5vw, 64px); align-items: center; background: var(--surface); border: 1px solid var(--line); border-radius: var(--r-lg); padding: clamp(28px, 4vw, 48px) clamp(28px, 5vw, 56px); max-width: 1000px; margin-inline: auto; }
+.meet-photo { order: 2; box-shadow: 0 18px 40px rgba(0,0,0,.45); }
 .meet-photo { aspect-ratio: 4 / 5; border-radius: var(--r-lg); background: radial-gradient(120% 90% at 50% 20%, rgba(108,198,85,.18), transparent 60%), var(--surface); border: 1px solid var(--line); display: grid; place-items: center; overflow: hidden; }
 .meet-photo img { width: 46%; height: auto; filter: drop-shadow(0 14px 22px rgba(0,0,0,.55)); }
 .meet-photo img.meet-pic { width: 100%; height: 100%; object-fit: cover; filter: none; }
@@ -481,9 +482,9 @@ table.prices tr:hover .key-ico { transform: rotate(-6deg) scale(1.06); border-co
 .meet-text p:first-of-type { color: var(--ink); }
 .meet-cta { display: flex; flex-wrap: wrap; gap: 12px; margin-top: 18px; }
 @media (max-width: 640px) {
-  .meet-grid { display: block; }
+  .meet-grid { display: block; padding: 22px 18px; }
   .meet-grid::after { content: ""; display: table; clear: both; }
-  .meet-photo { float: left; width: 96px; margin: 4px 14px 6px 0; border-radius: 12px; }
+  .meet-photo { float: right; width: 96px; margin: 4px 0 6px 14px; border-radius: 12px; box-shadow: none; }
   .meet-text h2 { font-size: 24px; margin-bottom: 8px; }
   .meet-text p { font-size: 15px; }
   .meet-cta { clear: both; padding-top: 4px; }
