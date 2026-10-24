@@ -90,6 +90,126 @@ document.addEventListener('pointermove', function (e) {
   }).catch(function () {});
 })();
 
+// Hero grid (2026-10-24, option): a 3D grid behind the hero. Lines light up around the pointer, green signals run
+// along the lines from where the pointer passes (from a tap on phones, and on their own now and then). Scroll tilts
+// the grid. Modes: "grid" = a wall leaning back a little, "floor" = a floor running to the horizon.
+// Picked with ?bg=grid / ?bg=floor or <html data-bg="...">; the night scene stays the default.
+(function () {
+  var hero = document.querySelector('.hero');
+  var mode = (location.search.match(/[?&]bg=(grid|floor|night)/) || [])[1] || document.documentElement.getAttribute('data-bg') || 'night';
+  if (!hero || mode === 'night' || hero.querySelector('.hs')) return;
+  var reduce = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  var small = window.matchMedia('(max-width: 760px)').matches;
+  var floor = mode === 'floor';
+  var box = document.createElement('div'); box.className = 'hs hs-gridmode'; box.setAttribute('aria-hidden', 'true');
+  var cv = document.createElement('canvas'); cv.className = 'hs-grid';
+  var scrim = document.createElement('div'); scrim.className = 'hs-scrim';
+  box.appendChild(cv); box.appendChild(scrim);
+  hero.insertBefore(box, hero.firstChild); hero.classList.add('has-scene', 'grid-scene');
+  var ctx = cv.getContext('2d'), dpr = Math.min(window.devicePixelRatio || 1, small ? 1.5 : 2);
+  var W = 0, H = 0, S = small ? 46 : 58, N = 0, pulses = [], px = -9999, py = -9999, pAct = 0;
+  var rx = 0, ry = 0, trx = 0, tryy = 0, D = 1100;
+  function size() { W = cv.clientWidth; H = cv.clientHeight; cv.width = W * dpr; cv.height = H * dpr; ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
+    N = Math.ceil((floor ? Math.max(W, H) * 1.6 : Math.max(W, H) * 0.75) / S); }
+  // world (u, v) on the plane -> screen
+  var cxr, sxr, cyr, syr, cx0, cy0;
+  function prep() { cxr = Math.cos(rx); sxr = Math.sin(rx); cyr = Math.cos(ry); syr = Math.sin(ry); cx0 = W * (floor ? 0.5 : 0.62); cy0 = floor ? H * 0.42 : H * 0.48; }
+  function proj(u, v) {
+    var x = u, y = v, z = 0;
+    if (floor) { y = 0; z = v; }
+    var x1 = x * cyr + z * syr, z1 = -x * syr + z * cyr;
+    var y2 = y * cxr - z1 * sxr, z2 = y * sxr + z1 * cxr;
+    var k = D / (D + z2); if (k <= 0) return null;
+    return [cx0 + x1 * k, cy0 + y2 * k + (floor ? 120 * k : 0), k];
+  }
+  function lineAlpha(x, y, k) {
+    var a = (floor ? 0.11 : 0.09) * Math.min(1, k * 1.2);
+    if (pAct > 0.01) { var dx = x - px, dy = y - py, d = Math.sqrt(dx * dx + dy * dy), R = small ? 140 : 230; if (d < R) a += 0.32 * pAct * (1 - d / R) * (1 - d / R); }
+    var ex = Math.min(x, W - x) / (W * 0.18), ey = Math.min(y, H - y) / (H * 0.18);
+    return a * Math.max(0, Math.min(1, ex, ey));
+  }
+  function drawGrid() {
+    var seg = small ? 14 : 22, i, j, a, b, u, v, ext = N * S;
+    for (var dir = 0; dir < 2; dir++) {
+      for (i = -N; i <= N; i++) {
+        a = null;
+        for (j = 0; j <= seg; j++) {
+          var t = -ext + (2 * ext) * j / seg;
+          if (floor && dir === 0) { u = i * S; v = (t + ext) * 0.5; } else if (floor) { u = t; v = (i + N) * S * 0.5; } else if (dir === 0) { u = i * S; v = t; } else { u = t; v = i * S; }
+          b = proj(u, v);
+          if (a && b) { var mx = (a[0] + b[0]) / 2, my = (a[1] + b[1]) / 2, al = lineAlpha(mx, my, b[2]);
+            if (al > 0.004) { ctx.strokeStyle = 'rgba(166,234,102,' + al.toFixed(3) + ')'; ctx.beginPath(); ctx.moveTo(a[0], a[1]); ctx.lineTo(b[0], b[1]); ctx.stroke(); } }
+          a = b;
+        }
+      }
+    }
+  }
+  function spawn(u, v, near) {
+    if (pulses.length > (small ? 14 : 26)) return;
+    var horiz = Math.random() < 0.5, sgn = Math.random() < 0.5 ? -1 : 1;
+    pulses.push({ h: horiz, fu: Math.round(u / S) * S, fv: Math.round(v / S) * S, t: 0, dir: sgn, sp: (near ? 3.2 : 2.2) + Math.random() * 2, life: 1, len: S * (2 + Math.random() * 2.5) });
+  }
+  function nearestNode(x, y) {
+    var best = null, bd = 1e9, ext = N;
+    for (var i = -ext; i <= ext; i += 1) for (var j = (floor ? 0 : -ext); j <= ext; j += 1) {
+      var u = i * S, v = floor ? j * S * 0.5 : j * S, p = proj(u, v); if (!p) continue;
+      var d = (p[0] - x) * (p[0] - x) + (p[1] - y) * (p[1] - y); if (d < bd) { bd = d; best = [u, v]; }
+    }
+    return best;
+  }
+  function drawPulses() {
+    for (var k = pulses.length - 1; k >= 0; k--) {
+      var p = pulses[k]; p.t += p.sp; if (p.t > p.len * 3) p.life -= 0.04;
+      if (p.life <= 0) { pulses.splice(k, 1); continue; }
+      var steps = 8, prev = null;
+      for (var s = 0; s <= steps; s++) {
+        var off = (p.t - p.len * s / steps) * p.dir, u = p.h ? p.fu + off : p.fu, v = p.h ? p.fv : p.fv + off;
+        var q = proj(u, v); if (!q) { prev = null; continue; }
+        if (prev) { var al = (1 - s / steps) * 0.9 * p.life * Math.min(1, q[2] * 1.3);
+          ctx.strokeStyle = 'rgba(166,234,102,' + al.toFixed(3) + ')'; ctx.lineWidth = 1.8 * (1 - s / steps) + 0.6;
+          ctx.beginPath(); ctx.moveTo(prev[0], prev[1]); ctx.lineTo(q[0], q[1]); ctx.stroke(); }
+        if (s === 0) { ctx.fillStyle = 'rgba(214,255,170,' + (0.9 * p.life).toFixed(3) + ')'; ctx.shadowColor = 'rgba(108,198,85,.9)'; ctx.shadowBlur = 10;
+          ctx.beginPath(); ctx.arc(q[0], q[1], 2.1, 0, 6.283); ctx.fill(); ctx.shadowBlur = 0; }
+        prev = q;
+      }
+    }
+    ctx.lineWidth = 1;
+  }
+  var t0 = 0, lastSpawn = 0, autoNext = 800, frame = 0, visible = true;
+  function render(t) {
+    var sc = Math.max(0, Math.min(1, (window.scrollY - (hero.offsetTop || 0) + 80) / Math.max(1, hero.offsetHeight)));
+    var breathe = reduce ? 0 : Math.sin(t / 7000) * 0.035 + Math.sin(t / 2900) * 0.012;
+    trx = floor ? 1.18 + sc * 0.22 + breathe : 0.2 + sc * 0.45 + breathe;
+    rx += (trx - rx) * 0.06; ry += (tryy - ry) * 0.05; prep();
+    ctx.clearRect(0, 0, W, H); ctx.lineWidth = 1; drawGrid(); drawPulses();
+  }
+  function loop(t) {
+    if (!visible || document.hidden) return;
+    if (!small || (frame++ & 1) === 0) {
+      pAct += ((px > -999 ? 1 : 0) - pAct) * 0.08;
+      if (t > autoNext) { var n = nearestNode(Math.random() * W, Math.random() * H * 0.9); if (n) spawn(n[0], n[1], false); autoNext = t + (small ? 900 : 1300) + Math.random() * 1500; }
+      render(t);
+    }
+    requestAnimationFrame(loop);
+  }
+  size(); prep(); window.addEventListener('resize', function () { size(); render(performance.now()); });
+  if (reduce) { rx = trx = floor ? 1.18 : 0.2; prep(); render(0); return; }
+  hero.addEventListener('pointermove', function (e) {
+    var r = cv.getBoundingClientRect(); px = e.clientX - r.left; py = e.clientY - r.top;
+    if (e.pointerType !== 'touch') tryy = ((e.clientX - r.left) / r.width - 0.5) * 0.22;
+    var now = performance.now(); if (now - lastSpawn > (e.pointerType === 'touch' ? 140 : 90)) { lastSpawn = now; var n = nearestNode(px, py); if (n) spawn(n[0], n[1], true); }
+  }, { passive: true });
+  hero.addEventListener('pointerleave', function () { px = py = -9999; tryy = 0; });
+  hero.addEventListener('touchstart', function (e) {
+    var r = cv.getBoundingClientRect(), tt = e.touches[0]; px = tt.clientX - r.left; py = tt.clientY - r.top;
+    var n = nearestNode(px, py); if (n) { spawn(n[0], n[1], true); spawn(n[0], n[1], true); }
+    setTimeout(function () { px = py = -9999; }, 900);
+  }, { passive: true });
+  new IntersectionObserver(function (en) { visible = en[0].isIntersecting; if (visible) requestAnimationFrame(loop); }).observe(hero);
+  document.addEventListener('visibilitychange', function () { if (!document.hidden && visible) requestAnimationFrame(loop); });
+  requestAnimationFrame(loop);
+})();
+
 // Hero scene (2026-10-24): a North Georgia night behind the hero. Stars, Blue Ridge ridges, pine hills with
 // Lake Lanier, near pines. Layers move like a camera: with the pointer on desktop, with scroll on phones
 // (and with tilt on Android). Static and calm with prefers-reduced-motion.

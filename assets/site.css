@@ -534,3 +534,8 @@ table.prices tr:hover .key-ico { transform: rotate(-6deg) scale(1.06); border-co
   .hs-far, .hs-mid, .hs-near, .hs-glow { top: 0; bottom: auto; }
 }
 @media (prefers-reduced-motion: reduce) { .hs-glow, .hs-shimmer line, .hs-shoot { animation: none !important; } }
+/* Hero grid option (?bg=grid / ?bg=floor) */
+.hero.grid-scene { background: radial-gradient(70% 60% at 62% 45%, #0f1a16 0%, #0b120f 55%, #090e0c 100%); }
+.hs-grid { position: absolute; inset: 0; width: 100%; height: 100%; }
+.hs-gridmode .hs-scrim { background: linear-gradient(90deg, rgba(14,19,17,.55) 0%, rgba(14,19,17,.2) 40%, rgba(14,19,17,0) 65%); }
+@media (max-width: 920px) { .hs-gridmode .hs-scrim { background: linear-gradient(180deg, rgba(14,19,17,0) 0%, rgba(14,19,17,.25) 50%, rgba(14,19,17,.75) 85%); } }
