@@ -14,7 +14,7 @@
     ['Cobb', ['Marietta', 'Kennesaw', 'Smyrna']]
   ];
   var grid = document.getElementById('areaGrid');
-  counties.forEach(function (c) {
+  if (grid) counties.forEach(function (c) {   // pages without the service area block (guides) skip it
     var div = document.createElement('div'); div.className = 'county';
     var h = document.createElement('h3'); h.textContent = c[0] + ' County';
     var ul = document.createElement('ul');
@@ -141,7 +141,7 @@
 
   // Copy phone number
   var btn = document.getElementById('copyBtn');
-  btn.addEventListener('click', function () {
+  if (btn) btn.addEventListener('click', function () {
     var done = function () { btn.textContent = 'Copied'; setTimeout(function () { btn.textContent = 'Copy number'; }, 1800); };
     try {
       navigator.clipboard.writeText('(770) 270-3333').then(done, function () { selectNum(); });
