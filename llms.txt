@@ -7,7 +7,7 @@
 - Locksmith: Mitch, the owner, does every job himself. No call center, no dispatcher.
 - Hours: 24/7, including nights, weekends and holidays. Nights (9 pm to 7 am) add $50.
 - Pricing: the price is quoted before driving out and does not change at the car. Coming to the customer is included, no separate trip fee.
-- Second key for the same car in the same visit: 50% off. Booking online at https://locksmitch.com/book/: $15 off.
+- Second key for the same car in the same visit: 50% off. Booking online at https://locksmitch.com/book/: $15 off (spare keys and all keys lost only).
 - Payment: cash, cards, Apple Pay, Zelle, Venmo, Cash App.
 - Registered with NASTF for access to manufacturer key data.
 - Vehicle: a Tesla Model Y with the LocksMitch logo.
@@ -27,6 +27,12 @@ Full list: https://locksmitch.com/pricing/
 - Programming only, a key you bought: from $99. We cut and program a key or fob you already have. Push-to-start smart key $129. No working key at all: all-keys-lost pricing applies. European makes quoted by model.
 - Remote you bought, buttons only: from $89. Programming a remote without a key blade.
 - Replacement remote: from $129. New remote supplied and programmed.
+
+### Quick fixes, 24/7
+- Jump start: from $75. Dead car battery, jump starter brought to the car. $75 in Cumming and Forsyth, $100 up to 25 miles, $125 up to 40 miles.
+- Broken key extraction: from $75. Broken piece removed from the ignition or a door lock; a new key is priced separately.
+- Key fob not working: from $75. New fob battery and a check of the key; free during another job.
+- Erase a lost key: from $89. The lost key is removed from the car's memory; free with a new key from LocksMitch.
 
 ### European makes
 - European: BMW, Mini, VW, Audi: from $200. Cut and programmed, model years we cover.
