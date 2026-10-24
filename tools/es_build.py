@@ -140,8 +140,8 @@ HOME = [
      '<details><summary>¿Puedo escribir en vez de llamar?</summary><p>Sí. Envíe un texto al <a href="sms:+17702703333">(770) 270-3333</a> con el año, la marca, el modelo y qué pasó. Le contesta el cerrajero, no un centro de llamadas. Mitch no habla español, pero puede escribirle en español: él usa un traductor y le contesta con gusto.</p></details>'),
     ('<details><summary>Is there a discount on a second key?</summary><p>Yes. When we make a new key because all keys are lost, a second key for the same car is 50% off. Same car, same key type, made during the same visit. Combines with $15 off for online booking.</p></details>',
      '<details><summary>¿Hay descuento en una segunda llave?</summary><p>Sí. Cuando hacemos una llave nueva porque se perdieron todas, la segunda llave para el mismo carro tiene 50% de descuento. Mismo carro, mismo tipo de llave y en la misma visita. Se suma a los $15 de descuento por reservar en línea.</p></details>'),
-    ('<details><summary>How do I get the $15 discount?</summary><p>Book your appointment through the online booking page. The discount is applied to online bookings.</p></details>',
-     '<details><summary>¿Cómo obtengo el descuento de $15?</summary><p>Reserve su cita en la página de reservas en línea. El descuento se aplica a las reservas en línea.</p></details>'),
+    ('<details><summary>How do I get the $15 discount?</summary><p>Book your appointment through the online booking page. The discount is applied to online bookings. Valid on spare keys and all-keys-lost jobs only.</p></details>',
+     '<details><summary>¿Cómo obtengo el descuento de $15?</summary><p>Reserve su cita en la página de reservas en línea. El descuento se aplica a las reservas en línea. Válido solo para llaves extra y para llaves nuevas cuando se perdieron todas.</p></details>'),
 ]
 
 PRICING = [
@@ -199,7 +199,7 @@ PRICING = [
     ('<li><b>Nights</b>, 9 pm to 7 am: +$50</li>', '<li><b>De noche</b>, de 9 pm a 7 am: +$50</li>'),
     ('<li><b>Parts you bought</b>: if a key or remote you bought online can’t be programmed to your car (wrong type, used or locked), the trip and check is $75</li>',
      '<li><b>Piezas que usted compró</b>: si una llave o control que compró en línea no se puede programar a su carro (tipo equivocado, usada o bloqueada), la visita y la revisión cuestan $75</li>'),
-    ('<li><b>Second key</b> for the same car in the same visit: 50% off. <b>Online booking</b>: $15 off</li>', '<li><b>Segunda llave</b> para el mismo carro en la misma visita: 50% de descuento. <b>Reserva en línea</b>: $15 de descuento</li>'),
+    ('<li><b>Second key</b> for the same car in the same visit: 50% off. <b>Online booking</b>: $15 off <small>(spare keys and all keys lost only)</small></li>', '<li><b>Segunda llave</b> para el mismo carro en la misma visita: 50% de descuento. <b>Reserva en línea</b>: $15 de descuento <small>(solo llaves extra y pérdida de todas las llaves)</small></li>'),
     ('<p class="svc-tip">Watch out for "$19" and "$29" locksmith ads: that is a dispatch fee for a call center, the work is priced separately when the van arrives. We quote the whole job before anyone drives out.</p>',
      '<p class="svc-tip">Cuidado con los anuncios de cerrajeros de "$19" o "$29": es solo el cargo de un centro de llamadas, y el trabajo se cobra aparte cuando llega la camioneta. Nosotros le damos el precio de todo el trabajo antes de salir.</p>'),
     ('<aside class="nearby">\n        <h3>Services</h3>', '<aside class="nearby">\n        <h3>Servicios <small style="font-weight:500">(en inglés)</small></h3>'),
