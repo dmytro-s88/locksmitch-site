@@ -1,0 +1,50 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex, nofollow">
+<title>Analytics off on this device | LocksMitch</title>
+<style>
+  :root { --bg: #0f1216; --card: #171c22; --text: #e8edf2; --muted: #9aa6b2; --ok: #34c759; --off: #ff9f0a; --accent: #3b82f6; }
+  * { box-sizing: border-box; }
+  body { margin: 0; min-height: 100vh; display: grid; place-items: center; padding: 16px; background: var(--bg); color: var(--text);
+         font: 16px/1.5 -apple-system, BlinkMacSystemFont, "Open Sans", "Segoe UI", sans-serif; }
+  .card { max-width: 440px; width: 100%; background: var(--card); border-radius: 16px; padding: 28px 24px; text-align: center; }
+  .icon { font-size: 44px; line-height: 1; }
+  h1 { font-size: 22px; margin: 14px 0 8px; }
+  p { color: var(--muted); margin: 0 0 18px; }
+  .state { font-weight: 700; }
+  .on { color: var(--off); } .off { color: var(--ok); }
+  button { font: inherit; border: 0; border-radius: 10px; padding: 11px 18px; cursor: pointer; background: #2a323c; color: var(--text); }
+  a { color: var(--accent); }
+</style>
+</head>
+<body>
+<main class="card">
+  <div class="icon" id="icon">✅</div>
+  <h1 id="title">This device is excluded</h1>
+  <p id="text">LocksMitch analytics will not count visits from this browser. Open this page once in every browser you use (Safari, Chrome, the Telegram browser).</p>
+  <button id="toggle" type="button">Count this device again</button>
+  <p style="margin:18px 0 0"><a href="/">Back to locksmitch.com</a></p>
+</main>
+<script>
+  // Opening this page marks the browser as the owner's: every page's GA snippet checks lm_notrack and stays off.
+  var K = 'lm_notrack', q = location.search;
+  function set(v) { try { if (v) localStorage.setItem(K, '1'); else localStorage.removeItem(K); } catch (e) {} }
+  function get() { try { return localStorage.getItem(K) === '1'; } catch (e) { return false; } }
+  if (!/[?&]on\b/.test(q)) set(true); else set(false);
+  function show() {
+    var off = get();
+    document.getElementById('icon').textContent = off ? '✅' : '📊';
+    document.getElementById('title').textContent = off ? 'This device is excluded' : 'This device is counted again';
+    document.getElementById('text').innerHTML = off
+      ? 'LocksMitch analytics will not count visits from this browser. Open this page once in every browser you use (Safari, Chrome, the Telegram browser).'
+      : 'Visits from this browser show up in LocksMitch analytics again.';
+    document.getElementById('toggle').textContent = off ? 'Count this device again' : 'Exclude this device';
+  }
+  document.getElementById('toggle').onclick = function () { set(!get()); show(); };
+  show();
+</script>
+</body>
+</html>
