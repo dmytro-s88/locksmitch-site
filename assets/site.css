@@ -469,3 +469,18 @@ a, button, label, .btn, .facts span, .svc-pick label, .spots li { -webkit-tap-hi
 @media (min-width: 641px) { table.prices td:first-child { width: 38%; } }
 table.prices tr:hover .key-ico { transform: rotate(-6deg) scale(1.06); border-color: rgba(108,198,85,.45); }
 @media (prefers-reduced-motion: reduce) { .key-ico { transition: none; } table.prices tr:hover .key-ico { transform: none; } }
+
+/* Meet Mitch */
+.meet { padding-block: clamp(40px, 7vw, 72px); }
+.meet-grid { display: grid; grid-template-columns: 220px 1fr; gap: clamp(24px, 5vw, 56px); align-items: center; }
+.meet-photo { aspect-ratio: 4 / 5; border-radius: var(--r-lg); background: radial-gradient(120% 90% at 50% 20%, rgba(108,198,85,.18), transparent 60%), var(--surface); border: 1px solid var(--line); display: grid; place-items: center; overflow: hidden; }
+.meet-photo img { width: 46%; height: auto; filter: drop-shadow(0 14px 22px rgba(0,0,0,.55)); }
+.meet-photo img.meet-pic { width: 100%; height: 100%; object-fit: cover; filter: none; }
+.meet-text h2 { margin: 0 0 14px; }
+.meet-text p { color: var(--muted); max-width: 62ch; margin: 0 0 12px; line-height: 1.6; }
+.meet-text p:first-of-type { color: var(--ink); font-size: 18px; }
+.meet-cta { display: flex; flex-wrap: wrap; gap: 12px; margin-top: 18px; }
+@media (max-width: 640px) {
+  .meet-grid { grid-template-columns: 1fr; }
+  .meet-photo { max-width: 150px; }
+}
