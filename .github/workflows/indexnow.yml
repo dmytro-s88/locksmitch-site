@@ -1,0 +1,56 @@
+# IndexNow: after every push to main, tell Bing (and other IndexNow engines) which pages changed.
+# Key file: /6da266f97a46e4e2600e8e90eb8f2f63.txt (public by design). Manual run "all" pings every URL in sitemap.xml.
+name: IndexNow
+on:
+  push:
+    branches: [main]
+    paths-ignore: ['.github/**', '**/*.md']
+  workflow_dispatch:
+    inputs:
+      all:
+        description: 'Ping every URL from sitemap.xml'
+        type: boolean
+        default: true
+jobs:
+  ping:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+      - name: Wait for GitHub Pages to publish
+        run: |
+          for i in $(seq 1 20); do
+            code=$(curl -s -o /dev/null -w '%{http_code}' "https://locksmitch.com/6da266f97a46e4e2600e8e90eb8f2f63.txt?r=$RANDOM")
+            [ "$code" = 200 ] && break; sleep 15
+          done
+          sleep 60
+      - name: Build the URL list
+        id: urls
+        run: |
+          if [ "${{ github.event_name }}" = "workflow_dispatch" ] && [ "${{ inputs.all }}" = "true" ]; then
+            curl -s https://locksmitch.com/sitemap.xml | grep -o '<loc>[^<]*</loc>' | sed 's#</*loc>##g' > urls.txt
+          else
+            BEFORE="${{ github.event.before }}"
+            if [ -z "$BEFORE" ] || [ "$BEFORE" = "0000000000000000000000000000000000000000" ]; then BEFORE=HEAD~1; fi
+            git diff --name-only "$BEFORE" "${{ github.sha }}" > changed.txt || true
+            grep -E '(^|/)index\.html$' changed.txt | sed -E 's#index\.html$##' | sed 's#^#https://locksmitch.com/#' > urls.txt || true
+            # styles, scripts, images or the sitemap changed but no page did: ping the home page
+            if [ ! -s urls.txt ] && grep -qE '^(assets/|sitemap\.xml)' changed.txt; then echo "https://locksmitch.com/" > urls.txt; fi
+            grep -v '/sms/' urls.txt > u2.txt || true; mv u2.txt urls.txt
+          fi
+          echo "count=$(wc -l < urls.txt | tr -d ' ')" >> "$GITHUB_OUTPUT"
+          cat urls.txt
+      - name: Ping IndexNow
+        if: steps.urls.outputs.count != '0'
+        run: |
+          python3 - <<'PY'
+          import json, urllib.request
+          urls = [u.strip() for u in open('urls.txt') if u.strip()][:10000]
+          body = json.dumps({"host": "locksmitch.com", "key": "6da266f97a46e4e2600e8e90eb8f2f63", "keyLocation": "https://locksmitch.com/6da266f97a46e4e2600e8e90eb8f2f63.txt", "urlList": urls}).encode()
+          req = urllib.request.Request("https://api.indexnow.org/indexnow", data=body, headers={"Content-Type": "application/json; charset=utf-8"})
+          try:
+              r = urllib.request.urlopen(req, timeout=30); print("IndexNow", r.status, len(urls), "urls")
+          except urllib.error.HTTPError as e:
+              print("IndexNow error", e.code, e.read()[:300]); raise SystemExit(1 if e.code not in (200, 202) else 0)
+          PY
