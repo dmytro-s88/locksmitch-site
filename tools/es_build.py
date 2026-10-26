@@ -106,10 +106,10 @@ COMMON = [
 
 HOME = [
     ('<html lang="en">', '<html lang="es" data-page="Home ES">'),
-    ('<title>Mobile Auto Locksmith in North Atlanta | LocksMitch</title>', '<title>Cerrajero de Autos a Domicilio en North Atlanta | LocksMitch</title>'),
+    ('<title>LocksMitch: Mobile Auto Locksmith in Cumming &amp; North Atlanta</title>', '<title>LocksMitch: Cerrajero de Autos a Domicilio en Cumming y North Atlanta</title>'),
     ('<meta name="description" content="Lost car keys, spare keys, lockouts and key programming. LocksMitch comes to you across North Atlanta. Call (770) 270-3333.">',
      '<meta name="description" content="Llaves de carro perdidas, llaves extra, apertura de carros y programación de llaves. LocksMitch va a donde está su carro en North Atlanta. Llame al (770) 270-3333.">'),
-    ('<meta property="og:title" content="LocksMitch | Mobile Auto Locksmith in North Atlanta">', '<meta property="og:title" content="LocksMitch | Cerrajero de Autos a Domicilio en North Atlanta">'),
+    ('<meta property="og:title" content="LocksMitch: Mobile Auto Locksmith in Cumming &amp; North Atlanta">', '<meta property="og:title" content="LocksMitch: Cerrajero de Autos a Domicilio en Cumming y North Atlanta">'),
     ('<meta property="og:description" content="Lost car keys, spare keys, lockouts and key programming. We come to you across North Atlanta. Call (770) 270-3333.">',
      '<meta property="og:description" content="Llaves de carro perdidas, llaves extra, apertura de carros y programación de llaves. Vamos a donde está usted en North Atlanta. Llame al (770) 270-3333.">'),
     ('<h1>Lost your car keys?<span class="l2">We cut and program new ones where you’re parked.</span></h1>', '<h1>¿Perdió las llaves de su carro?<span class="l2">Cortamos y programamos llaves nuevas donde esté su carro.</span></h1>'),
