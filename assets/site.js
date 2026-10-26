@@ -155,7 +155,7 @@
   // Language: remember the choice made with the globe switch; on a Spanish-language device show a small "¿Prefiere español?" hint
   // on English pages (never a redirect: English visitors and search engines see the same page as before)
   function store(k, v) { try { if (v === undefined) return localStorage.getItem(k); localStorage.setItem(k, v); } catch (e) { return null; } }
-  Array.prototype.forEach.call(document.querySelectorAll('a.lang'), function (a) { a.title = a.title || (a.getAttribute('hreflang') === 'es' ? 'Español' : 'English'); });
+  Array.prototype.forEach.call(document.querySelectorAll('a.lang'), function (a) { a.setAttribute('data-tip', a.getAttribute('hreflang') === 'es' ? 'Español' : 'English'); });
   Array.prototype.forEach.call(document.querySelectorAll('a.lang, a[hreflang]'), function (a) {
     a.addEventListener('click', function () { var to = a.getAttribute('hreflang'); if (to) { store('lm_lang', to); track('lang_switch', { to: to }); } });
   });
