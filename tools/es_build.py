@@ -202,6 +202,7 @@ PRICING = [
     ('alt="Flip key"', 'alt="Llave navaja"'),
     ('<h4>European: BMW, Mini, VW, Audi</h4><p>Cut and programmed, model years we cover</p>', '<h4>Europeas: BMW, Mini, VW, Audi</h4><p>Cortada y programada, en los años de modelo que trabajamos</p>'),
     ('alt="Smart key fob"', 'alt="Llave inteligente"'),
+    ('<h4>Land Rover, Jaguar</h4><p>2011 to 2019 from $200, 2020 and newer from $350. All keys lost quoted by model</p>', '<h4>Land Rover, Jaguar</h4><p>De 2011 a 2019 desde $200, de 2020 en adelante desde $350. Si perdió todas las llaves, el precio depende del modelo</p>'),
     ('<h4>Mercedes-Benz, Porsche, Volvo</h4><p>Complex key systems, quoted by model</p>', '<h4>Mercedes-Benz, Porsche, Volvo</h4><p>Sistemas de llave complejos, precio según el modelo</p>'),
     ('<h3 class="sub">Distance and time</h3>', '<h3 class="sub">Distancia y horario</h3>'),
     ('<li><b>Cumming, Forsyth County and Sugar Hill</b> (up to 12 miles by road): prices as listed, no trip fee</li>',
