@@ -86,9 +86,9 @@ section { padding-block: clamp(56px, 7vw, 88px); }
 .also a { color: var(--green-bright); font-weight: 700; white-space: nowrap; }
 a.tag { text-decoration: none; }
 a.tag:hover { background: color-mix(in srgb, var(--brass) 34%, transparent); }
-.facts { display: grid; grid-template-columns: repeat(2, max-content); gap: 12px 40px; margin-top: 30px; padding-top: 22px; border-top: 1px solid var(--line); font-size: 15px; font-weight: 600; }
-.facts span { display: inline-flex; align-items: center; gap: 8px; }
-.facts svg { width: 18px; height: 18px; color: var(--green); flex: none; }
+.facts { display: grid; grid-template-columns: repeat(4, minmax(0,1fr)); gap: 12px; margin-top: 30px; padding-top: 22px; border-top: 1px solid var(--line); font-size: 14px; font-weight: 600; text-align: center; }
+.facts span { display: inline-flex; flex-direction: column; align-items: center; gap: 8px; line-height: 1.3; }
+.facts svg { width: 24px; height: 24px; color: var(--green); flex: none; }
 
 /* Estimate form */
 .estimate { background: var(--fob); color: var(--on-fob); border-radius: var(--r-lg); padding: clamp(22px, 3vw, 32px); border: 1px solid color-mix(in srgb, var(--green) 30%, var(--line)); box-shadow: 0 30px 70px -30px rgba(0,0,0,.7); position: relative; }
