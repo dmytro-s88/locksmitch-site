@@ -9,7 +9,7 @@
 - Pricing: the price is quoted before driving out and does not change at the car. Coming to the customer is included, no separate trip fee.
 - Second key for the same car in the same visit: 50% off. Booking online at https://locksmitch.com/book/: $15 off (spare keys and all keys lost only).
 - Payment: cash, cards, Apple Pay, Zelle, Venmo, Cash App.
-- Warranty: 1 year. If a key LocksMitch made or programmed stops working within a year, it is fixed or replaced free. Not covered: physical or water damage, lost keys, batteries. On a key the customer supplied, the programming is covered, not the part. Nothing to keep: the warranty is tied to the customer's phone number and the job date in LocksMitch records; customers also get a LocksMitch tag with the number on their keys.
+- Warranty: 1 year on keys and remotes LocksMitch supplies. If one stops working within a year, it is fixed or replaced free. Not covered: physical or water damage, lost keys, batteries. Programming or cutting a key the customer bought elsewhere is tested before payment but is not under warranty; to get the warranty, buy the key from LocksMitch. Nothing to keep: the warranty is tied to the customer's phone number and the job date in LocksMitch records; customers also get a LocksMitch tag with the number on their keys.
 - Registered with NASTF for access to manufacturer key data.
 - Vehicle: a Tesla Model Y with the LocksMitch logo.
 
