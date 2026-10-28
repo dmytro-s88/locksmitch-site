@@ -15,19 +15,19 @@ SPRITE = '/assets/brands.svg?v=1'
 # (name, sprite id or None for a wordmark, page slug or None)
 BRANDS = [
     ('Asian', [
-        ('Toyota', 'toyota', 'toyota'), ('Lexus', None, 'lexus'), ('Honda', 'honda', 'honda'), ('Acura', 'acura', None),
-        ('Nissan', 'nissan', 'nissan'), ('Infiniti', 'infiniti', None), ('Mazda', 'mazda', 'mazda'), ('Subaru', 'subaru', 'subaru'),
-        ('Mitsubishi', 'mitsubishi', None), ('Hyundai', 'hyundai', 'hyundai'), ('Kia', 'kia', 'kia'), ('Genesis', None, None),
+        ('Toyota', 'toyota', 'toyota'), ('Lexus', None, 'lexus'), ('Honda', 'honda', 'honda'), ('Acura', 'acura', 'honda'),
+        ('Nissan', 'nissan', 'nissan'), ('Infiniti', 'infiniti', 'nissan'), ('Mazda', 'mazda', 'mazda'), ('Subaru', 'subaru', 'subaru'),
+        ('Mitsubishi', 'mitsubishi', None), ('Hyundai', 'hyundai', 'hyundai'), ('Kia', 'kia', 'kia'), ('Genesis', None, 'hyundai'),
     ]),
     ('American', [
-        ('Ford', 'ford', 'ford'), ('Chevrolet', 'chevrolet', 'chevrolet-gmc'), ('GMC', None, 'chevrolet-gmc'), ('Cadillac', 'cadillac', None),
-        ('Buick', None, None), ('Chrysler', 'chrysler', None), ('Dodge', None, 'jeep-dodge-ram'), ('Jeep', 'jeep', 'jeep-dodge-ram'),
+        ('Ford', 'ford', 'ford'), ('Chevrolet', 'chevrolet', 'chevrolet-gmc'), ('GMC', None, 'chevrolet-gmc'), ('Cadillac', 'cadillac', 'chevrolet-gmc'),
+        ('Buick', None, 'chevrolet-gmc'), ('Chrysler', 'chrysler', 'jeep-dodge-ram'), ('Dodge', None, 'jeep-dodge-ram'), ('Jeep', 'jeep', 'jeep-dodge-ram'),
         ('RAM', 'ram', 'jeep-dodge-ram'),
     ]),
     ('European', [
         ('BMW', 'bmw', 'bmw'), ('Mercedes', 'mercedes', 'mercedes'), ('Volkswagen', 'volkswagen', 'volkswagen-audi'), ('Audi', 'audi', 'volkswagen-audi'),
         ('Volvo', 'volvo', 'volvo'), ('Porsche', 'porsche', 'porsche'), ('Ferrari', 'ferrari', 'ferrari'), ('Maserati', 'maserati', 'maserati'),
-        ('Land Rover', None, 'land-rover-jaguar'), ('Jaguar', None, 'land-rover-jaguar'), ('MINI', 'mini', None),
+        ('Land Rover', None, 'land-rover-jaguar'), ('Jaguar', None, 'land-rover-jaguar'), ('MINI', 'mini', 'bmw'),
     ]),
 ]
 # Drawn here: Simple Icons has no Mercedes logo
