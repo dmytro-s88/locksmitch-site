@@ -90,11 +90,20 @@ function instagramLoginPage_() {
 }
 
 function instagramCallback_(p) {
+  try {
+    return instagramCallbackInner_(p);
+  } catch (err) {
+    console.error('Instagram callback error: ' + err + '\n' + (err.stack || ''));
+    PropertiesService.getScriptProperties().setProperty('IG_LAST_ERROR', String(err).slice(0, 500));
+    return page_('Something went wrong', '<p>' + esc_(String(err)) + '</p><p>Open the connect link again to retry.</p>');
+  }
+}
+
+function instagramCallbackInner_(p) {
   var props = PropertiesService.getScriptProperties();
   if (!p.state || p.state !== props.getProperty('IG_STATE')) {
     return page_('Link expired', '<p>Open the connect link again and retry.</p>');
   }
-  props.deleteProperty('IG_STATE');
   var secret = props.getProperty('IG_APP_SECRET');
   if (!secret) return page_('App secret missing', '<p>Add IG_APP_SECRET in Project Settings → Script properties.</p>');
 
@@ -116,6 +125,7 @@ function instagramCallback_(p) {
     console.error('Long-lived exchange failed: ' + r2.getContentText().slice(0, 300));
     return page_('Could not get a long-lived token', '<p>' + esc_((j2.error && j2.error.message) || 'Unknown error') + '</p>');
   }
+  props.deleteProperty('IG_STATE');
   props.setProperty('IG_TOKEN', j2.access_token);
   props.setProperty('IG_TOKEN_REFRESHED', new Date().toISOString());
   var res = setupInstagram();

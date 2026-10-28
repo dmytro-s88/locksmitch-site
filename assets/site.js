@@ -2,6 +2,18 @@
   // Spanish pages (/es/) use the same script; T(en, es) picks the text by the page language
   var ES = document.documentElement.lang === 'es';
   function T(en, es) { return ES ? es : en; }
+  // Where the visit came from (referrer and first page), kept for the tab and sent with the estimate form; /book/ does the same
+  var SRC = (function () {
+    try {
+      var s = sessionStorage.getItem('lm_src');
+      if (!s) {
+        var r = document.referrer, own = r && new URL(r).hostname.replace(/^www\./, '') === location.hostname.replace(/^www\./, '');
+        s = JSON.stringify({ ref: own ? '' : r.slice(0, 300), land: (location.pathname + location.search).slice(0, 300) });
+        sessionStorage.setItem('lm_src', s);
+      }
+      return JSON.parse(s);
+    } catch (e) { return { ref: document.referrer.slice(0, 300), land: location.pathname }; }
+  })();
   // Service area grouped by county
   var PAGES = {"Cumming": "/cumming/", "Sugar Hill": "/sugarhill/", "Buford": "/buford/", "Suwanee": "/suwanee/", "Duluth": "/duluth/", "Peachtree Corners": "/peachtreecorners/", "Norcross": "/norcross/", "Lawrenceville": "/lawrenceville/", "Milton": "/milton/", "Alpharetta": "/alpharetta/", "Johns Creek": "/johnscreek/", "Roswell": "/roswell/", "Sandy Springs": "/sandysprings/", "Flowery Branch": "/flowerybranch/", "Gainesville": "/gainesville/", "Dawsonville": "/dawsonville/", "Canton": "/canton/", "Woodstock": "/woodstock/", "Dunwoody": "/dunwoody/", "Doraville": "/doraville/", "Braselton": "/braselton/", "Marietta": "/marietta/", "Kennesaw": "/kennesaw/", "Smyrna": "/smyrna/"};
   var HERE = document.documentElement.getAttribute('data-city');
@@ -77,7 +89,9 @@
       name: form.name.value.trim(),
       phone: phone,
       company: form.company.value,
-      page: location.href
+      page: location.href,
+      src_ref: SRC.ref || '',
+      src_land: SRC.land || ''
     });
     sendBtn.disabled = true; sendBtn.textContent = T('Sending…', 'Enviando…');
     fetch(ENDPOINT, { method: 'POST', body: data })

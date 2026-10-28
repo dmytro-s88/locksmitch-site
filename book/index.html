@@ -336,6 +336,18 @@ footer a:hover { color: var(--green); }
   var MON = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'];
   var MONL = ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'];
 
+  // Where the visit came from (same as assets/site.js): referrer and first page of the tab, sent with the booking
+  var SRC = (function () {
+    try {
+      var s = sessionStorage.getItem('lm_src');
+      if (!s) {
+        var r = document.referrer, own = r && new URL(r).hostname.replace(/^www\./, '') === location.hostname.replace(/^www\./, '');
+        s = JSON.stringify({ ref: own ? '' : r.slice(0, 300), land: (location.pathname + location.search).slice(0, 300) });
+        sessionStorage.setItem('lm_src', s);
+      }
+      return JSON.parse(s);
+    } catch (e) { return { ref: document.referrer.slice(0, 300), land: location.pathname }; }
+  })();
   var $ = function (id) { return document.getElementById(id); };
   var form = $('bookForm'), daysEl = $('days'), timesBox = $('timesBox'), err = $('formErr'), sendBtn = $('sendBtn');
   var cache = {}, state = { svc: 'spare', date: '', time: '', data: null };
@@ -457,7 +469,8 @@ footer a:hover { color: var(--green); }
     var data = new URLSearchParams({
       book_request: '1', svc: state.svc, date: state.date, time: state.time,
       vehicle: $('f-vehicle').value.trim(), address: $('f-address').value.trim(), name: $('f-name').value.trim(),
-      phone: digits, note: $('f-note').value.trim(), second: ($('f-second').checked && state.svc === 'akl') ? 'yes' : '', company: $('f-company').value
+      phone: digits, note: $('f-note').value.trim(), second: ($('f-second').checked && state.svc === 'akl') ? 'yes' : '', company: $('f-company').value,
+      src_ref: SRC.ref || '', src_land: SRC.land || ''
     });
     sendBtn.disabled = true; sendBtn.textContent = 'Sending…';
     fetch(API, { method: 'POST', body: data })

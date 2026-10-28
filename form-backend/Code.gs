@@ -12,6 +12,7 @@ function doPost(e) {
   var vehicle = clean(p.vehicle, 120);
   var service = clean(p.service, 60);
   var page = clean(p.page, 200);
+  var srcRef = clean(p.src_ref, 300), srcLand = clean(p.src_land, 300);
   var secondKey = clean(p.second_key, 10) === 'yes';
   if (!name || !phone || !vehicle) return out({ ok: false, error: 'missing' });
   if ((phone.match(/\d/g) || []).length < 7) return out({ ok: false, error: 'phone' });
@@ -32,7 +33,9 @@ function doPost(e) {
     'Phone: ' + phone,
     '',
     'Sent: ' + when + ' (Atlanta time)',
-    'Page: ' + (page || 'locksmitch.com')
+    'Page: ' + (page || 'locksmitch.com'),
+    'Came from: ' + (srcRef || 'direct'),
+    'First page: ' + (srcLand || '-')
   ].filter(function (x) { return x !== null; }).join('\n');
 
   MailApp.sendEmail({ to: TO, subject: SUBJECT, body: body, name: 'LocksMitch website' });
