@@ -235,6 +235,32 @@ a.tag:hover { background: color-mix(in srgb, var(--brass) 34%, transparent); }
 .makes-more { margin-top: 14px; color: var(--muted); font-size: 15px; }
 .makes-more a { color: var(--green); }
 
+/* Dealer comparison */
+.vs-wrap { overflow: hidden; border: 1px solid var(--line); border-radius: 16px; }
+table.vs { width: 100%; table-layout: fixed; border-collapse: collapse; font-size: 16px; line-height: 1.4; }
+.vs th, .vs td { padding: 14px 18px; text-align: left; vertical-align: top; border-top: 1px solid var(--line); }
+.vs thead th, .vs thead td { border-top: 0; padding-block: 16px; font-size: 16px; font-weight: 800; background: var(--surface); }
+.vs thead .us { background: var(--green); color: var(--on-green); }
+.vs tbody th { width: 44%; font-weight: 600; color: var(--ink); }
+.vs .us { width: 28%; background: color-mix(in srgb, var(--green) 9%, transparent); }
+.vs .them { width: 28%; color: var(--muted); }
+.vs .mk { display: inline-flex; align-items: flex-start; gap: 7px; }
+.vs .mk svg { flex: none; width: 18px; height: 18px; margin-top: 2px; fill: none; stroke: currentColor; stroke-width: 2.6; stroke-linecap: round; stroke-linejoin: round; }
+.vs .us .mk { font-weight: 700; color: var(--ink); }
+.vs .mk-yes svg { color: var(--green); }
+.vs .mk-no svg { color: #E2725B; }
+.vs .mk-mid svg { color: var(--brass); }
+@media (max-width: 640px) {
+  table.vs { font-size: 14px; }
+  .vs th, .vs td { padding: 12px 8px; overflow-wrap: break-word; hyphens: auto; }
+  .vs thead th, .vs thead td { font-size: 13px; }
+  .vs tbody th { width: 38%; }
+  .vs .us { width: 29%; }
+  .vs .them { width: 33%; }
+  .vs .mk { gap: 5px; }
+  .vs .mk svg { width: 15px; height: 15px; }
+}
+
 /* Steps */
 .steps-sec { background: var(--surface); border-block: 1px solid var(--line); }
 .steps { list-style: none; margin: 0; padding: 0; display: grid; grid-template-columns: repeat(4, minmax(0,1fr)); gap: 0; counter-reset: s; }
