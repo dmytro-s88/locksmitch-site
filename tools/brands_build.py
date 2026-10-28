@@ -21,7 +21,7 @@ BRANDS = [
     ('Asian', [
         ('Toyota', 'toyota', 'toyota'), ('Lexus', 'file:lexus', 'lexus'), ('Honda', 'honda', 'honda'), ('Acura', 'acura', 'honda'),
         ('Nissan', 'nissan', 'nissan'), ('Infiniti', 'infiniti', 'nissan'), ('Mazda', 'mazda', 'mazda'), ('Subaru', 'subaru', 'subaru'),
-        ('Mitsubishi', 'mitsubishi', None), ('Hyundai', 'hyundai', 'hyundai'), ('Kia', 'kia', 'kia'), ('Genesis', None, 'hyundai'),
+        ('Mitsubishi', 'mitsubishi', 'mitsubishi'), ('Hyundai', 'hyundai', 'hyundai'), ('Kia', 'kia', 'kia'), ('Genesis', None, 'hyundai'),
     ]),
     ('American', [
         ('Ford', 'ford', 'ford'), ('Chevrolet', 'chevrolet', 'chevrolet-gmc'), ('GMC', None, 'chevrolet-gmc'), ('Cadillac', 'cadillac', 'chevrolet-gmc'),
