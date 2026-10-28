@@ -39,7 +39,7 @@ def tile(name, icon, slug):
     if not icon:
         mark = f'<b class="wm" aria-hidden="true">{name.upper().replace(" ", "<br>")}</b>'
     elif icon.startswith('file:'):
-        mark = f'<i class="lgm" style="--m:url(/assets/makes/{icon[5:]}.svg)" aria-hidden="true"></i>'
+        mark = f'<i class="lgm" style="--m:url(/assets/makes/{icon[5:]}.svg?v=2)" aria-hidden="true"></i>'
     else:
         mark = f'<svg aria-hidden="true"><use href="{SPRITE}#{icon}"/></svg>'
     inner = f'{mark}<span>{name}</span>'
