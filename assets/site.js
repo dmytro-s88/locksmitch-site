@@ -16,21 +16,46 @@
     ['Jackson', ['Braselton']],
     ['Cobb', ['Marietta', 'Kennesaw', 'Smyrna']]
   ];
+  function cityLink(city) {
+    var a = document.createElement('a');
+    if (PAGES[city]) { a.href = PAGES[city]; } else { a.href = 'https://' + city.toLowerCase().replace(/\s+/g, '') + '.locksmitch.com'; a.target = '_blank'; a.rel = 'noopener'; }
+    if (city === HERE) { a.className = 'current'; a.setAttribute('aria-current', 'page'); }
+    a.textContent = city;
+    return a;
+  }
+  function countyHead(c, tagName) {
+    var h = document.createElement(tagName); h.textContent = ES ? 'Condado de ' + c[0] : c[0] + ' County';
+    if (c[0] === 'Forsyth') { var tag = document.createElement('em'); tag.textContent = T('Home base', 'Nuestra base'); h.appendChild(tag); }
+    return h;
+  }
   var grid = document.getElementById('areaGrid');
   if (grid) counties.forEach(function (c) {   // pages without the service area block (guides) skip it
     var div = document.createElement('div'); div.className = c[0] === 'Forsyth' ? 'county home' : 'county';
-    var h = document.createElement('h3'); h.textContent = ES ? 'Condado de ' + c[0] : c[0] + ' County';
-    if (c[0] === 'Forsyth') { var tag = document.createElement('em'); tag.textContent = T('Home base', 'Nuestra base'); h.appendChild(tag); }
     var ul = document.createElement('ul');
-    c[1].forEach(function (city) {
-      var li = document.createElement('li'); var a = document.createElement('a');
-      if (PAGES[city]) { a.href = PAGES[city]; } else { a.href = 'https://' + city.toLowerCase().replace(/\s+/g, '') + '.locksmitch.com'; a.target = '_blank'; a.rel = 'noopener'; }
-      if (city === HERE) { a.className = 'current'; a.setAttribute('aria-current', 'page'); }
-      a.textContent = city;
-      li.appendChild(a); ul.appendChild(li);
-    });
-    div.appendChild(h); div.appendChild(ul); grid.appendChild(div);
+    c[1].forEach(function (city) { var li = document.createElement('li'); li.appendChild(cityLink(city)); ul.appendChild(li); });
+    div.appendChild(countyHead(c, 'h3')); div.appendChild(ul); grid.appendChild(div);
   });
+
+  // Top menu: "Service area" gets a city dropdown (the menu itself is hidden on phones)
+  var areaLink = document.querySelector('.nav a[href$="#area"]');
+  if (areaLink) {
+    var dd = document.createElement('div'); dd.className = 'nav-dd';
+    areaLink.parentNode.insertBefore(dd, areaLink); dd.appendChild(areaLink);
+    var ddBtn = document.createElement('button'); ddBtn.type = 'button'; ddBtn.className = 'nav-dd-btn';
+    ddBtn.setAttribute('aria-expanded', 'false'); ddBtn.setAttribute('aria-label', T('Show cities', 'Ver ciudades'));
+    ddBtn.innerHTML = '<svg viewBox="0 0 12 12" aria-hidden="true"><path d="M2.5 4.5 6 8l3.5-3.5" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg>';
+    var panel = document.createElement('div'); panel.className = 'nav-dd-panel';
+    counties.forEach(function (c) {
+      var g = document.createElement('div'); g.className = 'grp'; g.appendChild(countyHead(c, 'p'));
+      c[1].forEach(function (city) { g.appendChild(cityLink(city)); });
+      panel.appendChild(g);
+    });
+    dd.appendChild(ddBtn); dd.appendChild(panel);
+    var setDd = function (open) { dd.classList.toggle('open', open); ddBtn.setAttribute('aria-expanded', String(open)); };
+    ddBtn.addEventListener('click', function (e) { e.stopPropagation(); setDd(!dd.classList.contains('open')); });
+    document.addEventListener('click', function (e) { if (!dd.contains(e.target)) setDd(false); });
+    document.addEventListener('keydown', function (e) { if (e.key === 'Escape') setDd(false); });
+  }
 
   // Estimate form: posts to the Apps Script endpoint, which emails info@locksmitch.com
   var ENDPOINT = 'https://script.google.com/macros/s/AKfycbwEnPklqAabpkxC7UoInrIwUW17F5hXMmveX2hEEUIxUGt7hskz_RNbpzz9QHiTZIKz/exec';
