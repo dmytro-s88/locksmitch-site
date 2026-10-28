@@ -10,7 +10,7 @@ Makes with no Simple Icons logo are shown as a lettered wordmark; Mercedes is dr
 import os, re, sys
 
 ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
-SPRITE = '/assets/brands.svg?v=1'
+SPRITE = '/assets/brands.svg?v=2'
 
 # (name, sprite id or None for a wordmark, page slug or None)
 BRANDS = [
@@ -27,7 +27,7 @@ BRANDS = [
     ('European', [
         ('BMW', 'bmw', 'bmw'), ('Mercedes', 'mercedes', 'mercedes'), ('Volkswagen', 'volkswagen', 'volkswagen-audi'), ('Audi', 'audi', 'volkswagen-audi'),
         ('Volvo', 'volvo', 'volvo'), ('Porsche', 'porsche', 'porsche'), ('Ferrari', 'ferrari', 'ferrari'), ('Maserati', 'maserati', 'maserati'),
-        ('Land Rover', None, 'land-rover-jaguar'), ('Jaguar', None, 'land-rover-jaguar'), ('MINI', 'mini', 'bmw'),
+        ('Land Rover', None, 'land-rover-jaguar'), ('Jaguar', None, 'land-rover-jaguar'), ('MINI', 'mini', 'bmw'), ('Fiat', 'fiat', None), ('Alfa Romeo', None, None),
     ]),
 ]
 # Drawn here: Simple Icons has no Mercedes logo
