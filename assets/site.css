@@ -293,15 +293,24 @@ table.vs { width: 100%; table-layout: fixed; border-collapse: collapse; font-siz
 .spots a:hover { color: var(--green); }
 
 /* Credentials */
-.cred { display: grid; grid-template-columns: auto minmax(0,1fr); gap: clamp(20px, 3vw, 36px); align-items: start; background: var(--surface); border: 1px solid var(--line); border-radius: 14px; padding: clamp(18px, 2.5vw, 26px); }
-.cred .badge { background: #fff; border-radius: 8px; padding: 8px 10px; align-self: start; justify-self: start; width: fit-content; }
-.cred .badge img { display: block; width: 160px; max-width: 100%; height: auto; }
-.cred-list { display: grid; grid-template-columns: repeat(3, minmax(0,1fr)); align-items: start; gap: 12px 40px; margin-top: 16px; padding-top: 14px; border-top: 1px solid var(--line); }
-.cred-list div { display: grid; gap: 2px; align-content: start; }
-.cred-list b { font-size: 14px; }
-.cred-list span { color: var(--muted); font-size: 14px; }
-@media (max-width: 640px) { .cred-list { grid-template-columns: minmax(0,1fr); } }
-@media (max-width: 860px) { .cred { grid-template-columns: minmax(0,1fr); } }
+.cred { background: var(--surface); border: 1px solid var(--line); border-radius: 14px; padding: clamp(18px, 2.5vw, 26px); }
+.creds { display: grid; grid-template-columns: repeat(2, minmax(0,1fr)); gap: 12px; margin-top: 18px; }
+.cr { display: flex; align-items: center; gap: 14px; padding: 14px 16px; border: 1px solid var(--line); border-radius: 14px; background: color-mix(in srgb, var(--ink) 3%, transparent); }
+.cr-wide { grid-column: 1 / -1; }
+.cr b { display: block; font-size: 16px; line-height: 1.3; color: var(--ink); }
+.cr div span { display: block; margin-top: 2px; font-size: 14px; line-height: 1.35; color: var(--muted); }
+.cr-ico { flex: none; display: grid; place-items: center; width: 44px; height: 44px; border-radius: 50%; border: 1.5px solid color-mix(in srgb, var(--green) 55%, transparent); color: var(--green); }
+.cr-ico svg { width: 22px; height: 22px; }
+.cr-badge { flex: none; padding: 6px 8px; border-radius: 8px; background: #fff; }
+.cr-badge img { display: block; width: 130px; height: auto; }
+.meet .creds { clear: both; margin: 18px 0 4px; }
+@media (max-width: 420px) {
+  .cr { gap: 10px; padding: 12px; }
+  .cr-ico { width: 38px; height: 38px; }
+  .cr-badge img { width: 104px; }
+  .cr b { font-size: 15px; }
+  .cr div span { font-size: 13px; }
+}
 
 /* Contact + FAQ */
 .two { display: grid; grid-template-columns: repeat(2, minmax(0,1fr)); gap: clamp(32px, 6vw, 80px); align-items: start; }
@@ -362,7 +371,6 @@ footer .wrap { display: flex; flex-wrap: wrap; gap: 12px 28px; justify-content: 
   .county a { font-size: 15px; }
   .area-note { margin-top: 22px; }
 
-  .cred .badge img { width: 150px; }
   .bignum { font-size: 34px; }
   .faq summary { font-size: 16.5px; padding-block: 16px; }
 }
