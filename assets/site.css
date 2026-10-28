@@ -202,6 +202,18 @@ a.tag:hover { background: color-mix(in srgb, var(--brass) 34%, transparent); }
 .brands { margin-top: clamp(28px, 4vw, 44px); }
 .brands h3 { font-size: 17px; margin-bottom: 12px; }
 .brands .spots { margin-top: 0; }
+.makes { display: grid; gap: 14px; }
+.make-group { border: 1px solid var(--line); border-radius: 16px; background: var(--surface); padding: 16px 14px 14px; }
+.make-group h4 { margin: 0 0 10px 4px; font-size: 13px; font-weight: 700; letter-spacing: .1em; text-transform: uppercase; color: var(--muted); }
+.logos { display: grid; grid-template-columns: repeat(auto-fill, minmax(72px, 1fr)); gap: 4px; margin: 0; padding: 0; list-style: none; }
+.logos li > * { display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 8px; min-height: 86px; padding: 10px 2px; border-radius: 12px; color: var(--ink); text-decoration: none; text-align: center; }
+.logos svg { width: 36px; height: 36px; fill: currentColor; }
+.logos .wm { display: flex; align-items: center; justify-content: center; height: 36px; font-size: 13px; font-weight: 800; letter-spacing: .12em; line-height: 1.1; }
+.logos span { font-size: 12.5px; font-weight: 600; line-height: 1.2; color: var(--muted); }
+.logos a:hover { color: var(--green); background: color-mix(in srgb, var(--green) 10%, transparent); }
+.logos a:hover span { color: var(--green); }
+.makes-more { margin-top: 14px; color: var(--muted); font-size: 15px; }
+.makes-more a { color: var(--green); }
 
 /* Steps */
 .steps-sec { background: var(--surface); border-block: 1px solid var(--line); }
