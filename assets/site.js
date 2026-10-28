@@ -18,14 +18,15 @@
   ];
   var grid = document.getElementById('areaGrid');
   if (grid) counties.forEach(function (c) {   // pages without the service area block (guides) skip it
-    var div = document.createElement('div'); div.className = 'county';
+    var div = document.createElement('div'); div.className = c[0] === 'Forsyth' ? 'county home' : 'county';
     var h = document.createElement('h3'); h.textContent = ES ? 'Condado de ' + c[0] : c[0] + ' County';
+    if (c[0] === 'Forsyth') { var tag = document.createElement('em'); tag.textContent = T('Home base', 'Nuestra base'); h.appendChild(tag); }
     var ul = document.createElement('ul');
     c[1].forEach(function (city) {
       var li = document.createElement('li'); var a = document.createElement('a');
       if (PAGES[city]) { a.href = PAGES[city]; } else { a.href = 'https://' + city.toLowerCase().replace(/\s+/g, '') + '.locksmitch.com'; a.target = '_blank'; a.rel = 'noopener'; }
       if (city === HERE) { a.className = 'current'; a.setAttribute('aria-current', 'page'); }
-      a.textContent = city; var s = document.createElement('span'); s.textContent = T('city page', 'página en inglés'); a.appendChild(s);
+      a.textContent = city;
       li.appendChild(a); ul.appendChild(li);
     });
     div.appendChild(h); div.appendChild(ul); grid.appendChild(div);
