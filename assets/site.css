@@ -272,6 +272,10 @@ table.vs { width: 100%; table-layout: fixed; border-collapse: collapse; font-siz
 @media (max-width: 480px) { .steps { grid-template-columns: minmax(0,1fr); } }
 
 /* Area */
+.local-more { margin-top: 22px; }
+.local-more h3 { margin-bottom: 8px; }
+.local-more p { color: var(--muted); max-width: 70ch; margin: 0 0 12px; line-height: 1.6; }
+.guide-faq { margin-bottom: 18px; }
 .area-grid { column-count: 3; column-gap: 14px; }
 @media (max-width: 960px) { .area-grid { column-count: 2; } }
 @media (max-width: 330px) { .area-grid { column-count: 1; } }
