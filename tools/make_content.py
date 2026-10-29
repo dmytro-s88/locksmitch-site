@@ -182,7 +182,7 @@ MAKES = {
     'volkswagen-audi': {
         'h3': 'Volkswagen flip keys and Audi keys',
         'paras': [
-            "Most Volkswagens from 2005 to 2016 use a flip key: the blade folds into the remote. Jetta, Passat, Golf, GTI and Tiguan keys from those years are a regular job for us. Inside, the car's immobilizer has gone through several generations, and the newest ones take more steps, so we confirm the exact year first.",
+            "Most Volkswagens use a flip key: the blade folds into the remote. Jetta, Passat, Golf, GTI and Tiguan flip keys are a regular job for us. Newer models like the Atlas and the latest Tiguan and Jetta use a newer immobilizer generation, and some have keyless smart keys. Those take more steps, so we confirm the exact year first and quote the newer ones per car.",
             "The most common VW call is a flip key that broke at the hinge but still starts the car. A new shell or a new flip key often fixes it, and keeping the working chip may save money. Audi keys are quoted per car, because the key system varies a lot between the A3, A4, Q5 and Q7 and across years.",
             "Text us the year and model, and whether you have a flip key or a keyless smart key. You get a clear yes or no and a price before anyone drives out.",
         ],
