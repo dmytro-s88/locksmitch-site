@@ -6,7 +6,7 @@ on the home page, the key service pages and every make page. Rerun after editing
 import glob, os, re
 
 ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
-PAGES = ['index.html', 'all-keys-lost/index.html', 'spare-key/index.html', 'key-programming/index.html'] + sorted(
+PAGES = ['index.html', 'all-keys-lost/index.html', 'spare-key/index.html', 'key-programming/index.html', 'guides/dealer-vs-locksmith-car-key/index.html'] + sorted(
     os.path.relpath(p, ROOT) for p in glob.glob(os.path.join(ROOT, '*-key-replacement', 'index.html')))
 
 # (row, LocksMitch, dealer); each answer is (mark, text) with mark yes / no / mid
