@@ -156,26 +156,26 @@ MAKES = {
         ],
     },
     'bmw': {
-        'h3': 'BMW and Mini keys, 2005 to 2019',
+        'h3': 'BMW and Mini keys',
         'paras': [
-            "In BMW and Mini cars from our years, the key data lives in a module, not in the key. On older models it's a module called CAS; on many later 3 Series, X-models and Minis it's FEM or BDC. A new key is coded to that module, which is why BMW keys take more work than most cars.",
+            "In BMW and Mini cars, the key data lives in a module, not in the key. On older models it's a module called CAS; on many later 3 Series, X-models and Minis it's FEM or BDC. A new key is coded to that module, which is why BMW keys take more work than most cars.",
             "Many BMWs from these years have Comfort Access, where the car unlocks as you touch the handle. Others use a remote key you press. With a working key, adding a spare is fairly quick. With every key lost, we often need to read the module, which can take a couple of hours on some models.",
-            "Text us the year, model and whether you have Comfort Access, plus whether you still have a working key. We cover 2005 to 2019 and confirm your exact car before anyone drives out.",
+            "Text us the year, model and whether you have Comfort Access, plus whether you still have a working key. We confirm your exact car before anyone drives out.",
         ],
         'faq': [
             ("Why are BMW keys more expensive than Toyota or Honda keys?", "On a BMW the key is coded to a module in the car (CAS, FEM or BDC), and the key blanks cost more. It takes more equipment and more time than a typical Japanese car. You get the exact price by text before we come out."),
-            ("Do you make keys for Mini Cooper and Countryman?", "Yes, Mini uses BMW's key systems and the same price range. We cover 2005 to 2019 model years; send the year and model and we confirm."),
+            ("Do you make keys for Mini Cooper and Countryman?", "Yes, Mini uses BMW's key systems and the same price range. Send the year and model and we confirm."),
         ],
     },
     'mercedes': {
-        'h3': 'Mercedes-Benz SmartKey, 2005 to 2013',
+        'h3': 'Mercedes-Benz SmartKey, up to 2014',
         'paras': [
-            "Mercedes-Benz cars from 2005 to 2013 use the SmartKey, the chrome key that slides into the ignition, or Keyless Go on some models. The car checks the key through its ignition module, and a new key is made to match that module. That's why a Mercedes key takes more work and starts at a higher price.",
+            "Mercedes-Benz cars up to 2014 use the SmartKey, the chrome key that slides into the ignition, or Keyless Go on some models. The car checks the key through its ignition module, and a new key is made to match that module. That's why a Mercedes key takes more work and starts at a higher price.",
             "For older C-Class, E-Class and ML models and Sprinter vans from those years, we can usually add a key when you still have one that works. With every key lost, the job depends a lot on the model, and some parts may need to be ordered first. We tell you the timeline upfront.",
-            "Text us the year and model, and whether the key goes into the ignition or stays in your pocket. We work on Mercedes-Benz from 2005 to 2013, so we'll tell you right away if your car is outside those years.",
+            "Text us the year and model, and whether the key goes into the ignition or stays in your pocket. We work on Mercedes-Benz up to 2014, and 2014 depends on the key system. 2015 and newer are dealer-only, so we'll tell you right away if your car is outside that range.",
         ],
         'faq': [
-            ("Can you make a key for a Sprinter van?", "For Sprinter vans from 2005 to 2013, often yes. Send the year and tell us whether you still have a working key. We confirm the job and the timeline before anyone drives out."),
+            ("Can you make a key for a Sprinter van?", "For Sprinter vans up to 2014, often yes. Send the year and tell us whether you still have a working key. We confirm the job and the timeline before anyone drives out."),
             ("Why does my Mercedes key slide into the dash instead of turning?", "That's the SmartKey design Mercedes used for years. The car reads the key through its ignition module. If the key stopped being recognized, it may be the key or the module; send the year and model and what happened."),
         ],
     },
