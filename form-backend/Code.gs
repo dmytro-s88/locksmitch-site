@@ -5,6 +5,7 @@ var MAX_PER_HOUR = 40;
 
 function doPost(e) {
   var p = (e && e.parameter) || {};
+  if (p.action === 'ig_publish') return out(igPublish_(p)); // posting to @locksmitch.ga, key-protected (Instagram.gs)
   if (p.company) return out({ ok: true }); // honeypot field, bots fill it
 
   var name = clean(p.name, 80);

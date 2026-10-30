@@ -83,9 +83,9 @@ function instagramLoginPage_() {
   var url = 'https://www.instagram.com/oauth/authorize?enable_fb_login=0' +
             '&client_id=' + IG_APP_ID +
             '&redirect_uri=' + encodeURIComponent(IG_REDIRECT) +
-            '&response_type=code&scope=instagram_business_basic' +
+            '&response_type=code&scope=instagram_business_basic,instagram_business_content_publish' +
             '&state=' + state;
-  return page_('Connect Instagram', '<p>This connects @locksmitch.ga to the website gallery.</p>' +
+  return page_('Connect Instagram', '<p>This connects @locksmitch.ga to the website gallery and lets LocksMitch publish posts you approve.</p>' +
                '<p><a class="b" href="' + url + '" target="_top">Continue to Instagram</a></p>');
 }
 
@@ -139,3 +139,66 @@ function page_(title, body) {
 }
 
 function esc_(s) { return String(s).replace(/[&<>"]/g, function (c) { return { '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;' }[c]; }); }
+
+// ---- Publishing posts (photo, carousel or reel) ----
+// POST action=ig_publish&key=...&caption=...&image_urls=<one URL per line> | video_url=...  [&dry=1 only checks the token]
+// Media must sit at public URLs. Only the SHA-256 of the key is stored here; the key itself stays on Dima's Mac.
+var IG_PUBLISH_KEY_SHA256 = '6af7f9c6aceafb32ed9d88fcdc1dbd4a66270cb468361f85f54801b72799e796';
+var IG_API = 'https://graph.instagram.com/v21.0/';
+
+function igPublish_(p) {
+  var digest = Utilities.computeDigest(Utilities.DigestAlgorithm.SHA_256, String(p.key || ''), Utilities.Charset.UTF_8)
+    .map(function (b) { return ('0' + (b & 255).toString(16)).slice(-2); }).join('');
+  if (digest !== IG_PUBLISH_KEY_SHA256) return { ok: false, error: 'forbidden' };
+  var token = PropertiesService.getScriptProperties().getProperty('IG_TOKEN');
+  if (!token) return { ok: false, error: 'no_token' };
+  try {
+    if (p.dry === '1') return { ok: true, dry: true, account: igCall_('get', 'me', { fields: 'user_id,username,account_type' }, token) };
+    var images = String(p.image_urls || '').split('\n').map(function (s) { return s.trim(); }).filter(String);
+    var base = { caption: String(p.caption || '') };
+    if (p.location_id) base.location_id = p.location_id;
+    var container;
+    if (p.video_url) {
+      container = igCall_('post', 'me/media', Object.assign({ media_type: 'REELS', video_url: p.video_url, share_to_feed: 'true' }, base), token).id;
+    } else if (images.length === 1) {
+      container = igCall_('post', 'me/media', Object.assign({ image_url: images[0] }, base), token).id;
+    } else if (images.length > 1) {
+      var children = images.slice(0, 10).map(function (u) {
+        var id = igCall_('post', 'me/media', { image_url: u, is_carousel_item: 'true' }, token).id;
+        igWaitReady_(id, token);
+        return id;
+      });
+      container = igCall_('post', 'me/media', Object.assign({ media_type: 'CAROUSEL', children: children.join(',') }, base), token).id;
+    } else {
+      return { ok: false, error: 'no_media' };
+    }
+    igWaitReady_(container, token);
+    var postId = igCall_('post', 'me/media_publish', { creation_id: container }, token).id;
+    CacheService.getScriptCache().remove('ig_feed');
+    return { ok: true, id: postId, permalink: igCall_('get', postId, { fields: 'permalink' }, token).permalink };
+  } catch (err) {
+    console.error('ig_publish: ' + err);
+    return { ok: false, error: String(err.message || err).slice(0, 400) };
+  }
+}
+
+function igCall_(method, path, params, token) {
+  params.access_token = token;
+  var res = method === 'get'
+    ? UrlFetchApp.fetch(IG_API + path + '?' + Object.keys(params).map(function (k) { return k + '=' + encodeURIComponent(params[k]); }).join('&'), { muteHttpExceptions: true })
+    : UrlFetchApp.fetch(IG_API + path, { method: 'post', payload: params, muteHttpExceptions: true });
+  var j = JSON.parse(res.getContentText() || '{}');
+  if (res.getResponseCode() !== 200 || j.error) throw new Error(path + ': ' + ((j.error && (j.error.error_user_msg || j.error.message)) || res.getResponseCode()));
+  return j;
+}
+
+// Containers (above all videos) need processing time before they can be published.
+function igWaitReady_(id, token) {
+  for (var i = 0; i < 60; i++) {
+    var s = igCall_('get', id, { fields: 'status_code' }, token).status_code;
+    if (s === 'FINISHED') return;
+    if (s === 'ERROR' || s === 'EXPIRED') throw new Error('media ' + id + ' status ' + s);
+    Utilities.sleep(i < 5 ? 2000 : 5000);
+  }
+  throw new Error('media ' + id + ' still processing');
+}
