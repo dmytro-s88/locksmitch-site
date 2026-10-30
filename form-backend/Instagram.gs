@@ -153,7 +153,12 @@ function igPublish_(p) {
   var token = PropertiesService.getScriptProperties().getProperty('IG_TOKEN');
   if (!token) return { ok: false, error: 'no_token' };
   try {
-    if (p.dry === '1') return { ok: true, dry: true, account: igCall_('get', 'me', { fields: 'user_id,username,account_type' }, token) };
+    if (p.dry === '1') {
+      var acc = igCall_('get', 'me', { fields: 'user_id,username,account_type' }, token), limit;
+      try { limit = igCall_('get', 'me/content_publishing_limit', { fields: 'quota_usage,config' }, token).data; } // needs the publish permission
+      catch (e) { limit = 'NO PUBLISH PERMISSION: ' + e.message; }
+      return { ok: true, dry: true, account: acc, publishing_limit: limit };
+    }
     var images = String(p.image_urls || '').split('\n').map(function (s) { return s.trim(); }).filter(String);
     var base = { caption: String(p.caption || '') };
     if (p.location_id) base.location_id = p.location_id;
