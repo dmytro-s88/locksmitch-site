@@ -222,25 +222,33 @@
   if (mq.addEventListener) mq.addEventListener('change', place);
 })();
 
-// Touch screens have no hover, so once per visit play it for them: "$15 off" pops, then the four hero badges light up one by one
+// Touch screens have no hover, so once per visit play it for them: "$15 off" pops, and the four hero badges light up one by one when they scroll into view
 (function () {
   var tag = document.querySelector('.book-note .tag'), facts = document.querySelectorAll('.facts span');
   if (!tag || !facts.length || !window.matchMedia || !window.IntersectionObserver) return;
   if (!window.matchMedia('(hover: none)').matches || window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
-  function play() {
+  // the fixed call bar covers the bottom of the screen, so on screen means above it
+  function whenSeen(el, ratio, fn) {
+    var bar = document.querySelector('.callbar'), h = bar ? bar.offsetHeight : 0;
+    var io = new IntersectionObserver(function (es) {
+      if (es[es.length - 1].intersectionRatio >= ratio) { io.disconnect(); fn(); }
+    }, { threshold: ratio, rootMargin: '0px 0px -' + h + 'px 0px' });
+    io.observe(el);
+  }
+  function popTag() {
     tag.classList.add('pop');
     setTimeout(function () { tag.classList.remove('pop'); }, 750);
+  }
+  function lightFacts() {
     Array.prototype.forEach.call(facts, function (f, i) {
-      setTimeout(function () { f.classList.add('lit'); }, 550 + i * 280);
-      setTimeout(function () { f.classList.remove('lit'); }, 550 + i * 280 + 650);
+      setTimeout(function () { f.classList.add('lit'); }, 200 + i * 280);
+      setTimeout(function () { f.classList.remove('lit'); }, 200 + i * 280 + 650);
     });
   }
-  // wait a second after load, then play as soon as the badges are on screen
+  // wait a second after load, then each one plays as soon as it is on screen
   function arm() {
-    var io = new IntersectionObserver(function (es) {
-      if (es[0].isIntersecting) { io.disconnect(); play(); }
-    }, { threshold: 0.6 });
-    io.observe(facts[facts.length - 1].parentNode);
+    whenSeen(tag, 1, popTag);
+    whenSeen(facts[0].parentNode, 0.9, lightFacts);
   }
   if (document.readyState === 'complete') setTimeout(arm, 1000);
   else window.addEventListener('load', function () { setTimeout(arm, 1000); });
