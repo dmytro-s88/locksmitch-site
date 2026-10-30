@@ -445,14 +445,20 @@ table.prices td:nth-child(3) { color: var(--muted); font-size: 14px; }
 
 /* Hero facts: lift + green tint on hover (decorative, not links) */
 .facts span { padding: 6px 10px; margin: -6px -10px; border-radius: 999px; }
-@media (hover: hover) and (prefers-reduced-motion: no-preference) {
+/* On touch screens site.js runs this once as a demo: .lit goes across the four badges one by one */
+@media (prefers-reduced-motion: no-preference) {
   /* glow = a blurred radial blob behind the badge whose opacity fades in; opacity animates on the compositor, so no pop */
   .facts span { position: relative; transition: transform .3s cubic-bezier(.2,.7,.2,1); }
   .facts span::before { content: ""; position: absolute; inset: -14px -18px; z-index: -1; pointer-events: none; border-radius: 999px; opacity: 0; transform: translate(var(--sx, 0px), var(--sy, 0px)); transition: opacity .45s ease, transform .12s ease-out;
     background: radial-gradient(closest-side, color-mix(in srgb, var(--green) 26%, transparent), color-mix(in srgb, var(--green) 10%, transparent) 55%, transparent); }
+  .facts svg { transition: transform .25s ease; }
+  .facts span.lit { transform: translateY(-3px); }
+  .facts span.lit::before { opacity: 1; }
+  .facts span.lit svg { transform: scale(1.18); }
+}
+@media (hover: hover) and (prefers-reduced-motion: no-preference) {
   .facts span:hover { transform: translateY(-3px); }
   .facts span:hover::before { opacity: 1; }
-  .facts svg { transition: transform .25s ease; }
   .facts span:hover svg { transform: scale(1.18); }
 }
 
@@ -665,7 +671,7 @@ table.prices tr:hover .key-ico { transform: rotate(-6deg) scale(1.06); border-co
 /* «$15 off» в hero: раз в ~6 с подпрыгивает и покачивается, чтобы скидку замечали */
 @media (prefers-reduced-motion: no-preference) {
   .book-note .tag { animation: tag-nudge 6s ease-in-out 1.6s infinite; transform-origin: 50% 60%; }
-  .book-note .tag:hover, .book-note .tag:focus-visible { animation: tag-pop .7s ease-in-out; }
+  .book-note .tag:hover, .book-note .tag:focus-visible, .book-note .tag.pop { animation: tag-pop .7s ease-in-out; }
   @keyframes tag-nudge {
     0%, 82%, 100% { transform: none; box-shadow: none; }
     85% { transform: scale(1.16) rotate(-5deg); box-shadow: 0 0 0 4px color-mix(in srgb, var(--brass) 18%, transparent); }

@@ -221,3 +221,27 @@
   place();
   if (mq.addEventListener) mq.addEventListener('change', place);
 })();
+
+// Touch screens have no hover, so once per visit play it for them: "$15 off" pops, then the four hero badges light up one by one
+(function () {
+  var tag = document.querySelector('.book-note .tag'), facts = document.querySelectorAll('.facts span');
+  if (!tag || !facts.length || !window.matchMedia || !window.IntersectionObserver) return;
+  if (!window.matchMedia('(hover: none)').matches || window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+  function play() {
+    tag.classList.add('pop');
+    setTimeout(function () { tag.classList.remove('pop'); }, 750);
+    Array.prototype.forEach.call(facts, function (f, i) {
+      setTimeout(function () { f.classList.add('lit'); }, 550 + i * 280);
+      setTimeout(function () { f.classList.remove('lit'); }, 550 + i * 280 + 650);
+    });
+  }
+  // wait a second after load, then play as soon as the badges are on screen
+  function arm() {
+    var io = new IntersectionObserver(function (es) {
+      if (es[0].isIntersecting) { io.disconnect(); play(); }
+    }, { threshold: 0.6 });
+    io.observe(facts[facts.length - 1].parentNode);
+  }
+  if (document.readyState === 'complete') setTimeout(arm, 1000);
+  else window.addEventListener('load', function () { setTimeout(arm, 1000); });
+})();
