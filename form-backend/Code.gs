@@ -6,6 +6,7 @@ var MAX_PER_HOUR = 40;
 function doPost(e) {
   var p = (e && e.parameter) || {};
   if (p.action === 'ig_publish') return out(igPublish_(p)); // posting to @locksmitch.ga, key-protected (Instagram.gs)
+  if (p.action === 'fb_publish') return out(fbPublish_(p)); // posting to the Facebook Page, same key (Facebook.gs)
   if (p.company) return out({ ok: true }); // honeypot field, bots fill it
 
   var name = clean(p.name, 80);
@@ -46,7 +47,8 @@ function doPost(e) {
 function doGet(e) {
   if (e && e.parameter && e.parameter.feed === 'instagram') return out(instagramFeed_());
   if (e && e.parameter && e.parameter.ig === 'login') return instagramLoginPage_();
-  if (e && e.parameter && e.parameter.code) return instagramCallback_(e.parameter);
+  if (e && e.parameter && e.parameter.fb === 'login') return facebookLoginPage_();
+  if (e && e.parameter && e.parameter.code) return /^fb_/.test(e.parameter.state) ? facebookCallback_(e.parameter) : instagramCallback_(e.parameter);
   return ContentService.createTextOutput('LocksMitch estimate form endpoint is running.');
 }
 

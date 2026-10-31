@@ -146,10 +146,14 @@ function esc_(s) { return String(s).replace(/[&<>"]/g, function (c) { return { '
 var IG_PUBLISH_KEY_SHA256 = '6af7f9c6aceafb32ed9d88fcdc1dbd4a66270cb468361f85f54801b72799e796';
 var IG_API = 'https://graph.instagram.com/v21.0/';
 
-function igPublish_(p) {
+function publishKeyOk_(p) {
   var digest = Utilities.computeDigest(Utilities.DigestAlgorithm.SHA_256, String(p.key || ''), Utilities.Charset.UTF_8)
     .map(function (b) { return ('0' + (b & 255).toString(16)).slice(-2); }).join('');
-  if (digest !== IG_PUBLISH_KEY_SHA256) return { ok: false, error: 'forbidden' };
+  return digest === IG_PUBLISH_KEY_SHA256;
+}
+
+function igPublish_(p) {
+  if (!publishKeyOk_(p)) return { ok: false, error: 'forbidden' };
   var token = PropertiesService.getScriptProperties().getProperty('IG_TOKEN');
   if (!token) return { ok: false, error: 'no_token' };
   try {
@@ -187,11 +191,13 @@ function igPublish_(p) {
   }
 }
 
-function igCall_(method, path, params, token) {
-  params.access_token = token;
+// base is the API root, Instagram by default (Facebook.gs passes FB_API).
+function igCall_(method, path, params, token, base) {
+  base = base || IG_API;
+  if (token) params.access_token = token;
   var res = method === 'get'
-    ? UrlFetchApp.fetch(IG_API + path + '?' + Object.keys(params).map(function (k) { return k + '=' + encodeURIComponent(params[k]); }).join('&'), { muteHttpExceptions: true })
-    : UrlFetchApp.fetch(IG_API + path, { method: 'post', payload: params, muteHttpExceptions: true });
+    ? UrlFetchApp.fetch(base + path + '?' + Object.keys(params).map(function (k) { return k + '=' + encodeURIComponent(params[k]); }).join('&'), { muteHttpExceptions: true })
+    : UrlFetchApp.fetch(base + path, { method: 'post', payload: params, muteHttpExceptions: true });
   var j = JSON.parse(res.getContentText() || '{}');
   if (res.getResponseCode() !== 200 || j.error) throw new Error(path + ': ' + ((j.error && (j.error.error_user_msg || j.error.message)) || res.getResponseCode()));
   return j;
