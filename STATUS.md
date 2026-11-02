@@ -43,6 +43,7 @@
 
 ## Сделано (хронология, последнее сверху)
 
+- 2026-11-01: `moved-subdomains.xml` со старыми поддоменами (временный, только чтобы Google увидел 301; в sitemap.xml и robots.txt его нет), пустой alt у фото с подписью в Recent jobs.
 - 2026-11-01: title «Car Locksmith in город, GA, 24/7» и своё описание на 24 городах (tools/city_meta.py), короткие описания на /pricing/, /es/, /es/precios/ и гайде key not detected, BreadcrumbList на /es/precios/.
 - 2026-11-01: страницы округов /forsyth-county/, /gwinnett-county/, /north-fulton/ (tools/county_pages.py), ссылки на них с главной и городов, ссылки на города со страниц марок.
 - 2026-10-22: тех. долг закрыт. Общие CSS/JS вынесены в assets (index.html 57 КБ -> 25 КБ), футер с 24 городами, BreadcrumbList и Locksmith @id в JSON-LD, og:image 1200x630, короткие meta description, skip-link, aria-label на кнопке звонка, logo.webp, 404.html, favicon.ico, иконки манифеста 192/512, robots Disallow /form-backend/.

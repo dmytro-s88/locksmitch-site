@@ -143,7 +143,7 @@
       var f = document.createElement('figure');
       var im = document.createElement('img'); im.src = ph.src; im.loading = 'lazy';
       var text = (ph.caption || '').replace(EMOJI, '').replace(/\s+/g, ' ').trim();
-      im.alt = text || 'LocksMitch job photo';
+      im.alt = text ? '' : 'LocksMitch job photo';
       f.appendChild(im);
       if (text) { var cap = document.createElement('figcaption'); cap.textContent = text; f.appendChild(cap); }
       a.appendChild(f); gal.appendChild(a);
