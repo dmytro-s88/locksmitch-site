@@ -620,6 +620,8 @@ table.prices tr:hover .key-ico { transform: rotate(-6deg) scale(1.06); border-co
 
 /* Hero scene: North Georgia night with parallax layers (built by motion.js) */
 .hero.has-scene { position: relative; overflow: hidden; isolation: isolate; background: linear-gradient(180deg, #060a09 0%, #0a110f 45%, #0e1712 100%); }
+/* Clip the scene only at the sides, so the estimate card shadow can fall below the hero instead of ending in a hard line (2026-11-03) */
+@supports (overflow-x: clip) { .hero.has-scene { overflow: clip visible; } }
 .hero.has-scene > .wrap { position: relative; z-index: 2; }
 .hs { position: absolute; inset: 0; z-index: 0; pointer-events: none; }
 .hs-layer { position: absolute; left: -4%; width: 108%; bottom: -2%; height: 104%; will-change: transform; }
