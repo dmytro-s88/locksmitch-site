@@ -306,6 +306,26 @@
   document.addEventListener('keydown', function (e) { if (e.key === 'Escape') close(); });
 })();
 
+// Estimate card: on a mouse it lifts and tilts toward the pointer (up to ~4 degrees), still while a field has focus; never on touch or with reduced motion
+(function () {
+  var t = document.querySelector('.estimate');
+  if (!t || !window.matchMedia || !matchMedia('(hover: hover) and (pointer: fine)').matches || matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+  var raf = 0, ev = null;
+  function still() { t.classList.remove('tilting'); t.style.transform = ''; }
+  function apply() { raf = 0; if (t.contains(document.activeElement) && document.activeElement.matches('input, select, textarea')) { still(); return; }
+    t.classList.add('tilting');
+    var r = t.getBoundingClientRect(), x = (ev.clientX - r.left) / r.width - .5, y = (ev.clientY - r.top) / r.height - .5;
+    t.style.transform = 'perspective(1200px) rotateX(' + (-y * 4).toFixed(2) + 'deg) rotateY(' + (x * 5).toFixed(2) + 'deg) translateY(-4px)'; }
+  t.addEventListener('pointerenter', function () {
+    // the hero rise-in animation keeps its end state and would hide the tilt: drop it once it has played
+    if (t.getAnimations) t.getAnimations().forEach(function (a) { if (a.playState === 'finished') a.cancel(); });
+    t.classList.add('lifted');
+  });
+  t.addEventListener('pointermove', function (e) { ev = e; if (!raf) raf = requestAnimationFrame(apply); });
+  t.addEventListener('pointerleave', function () { if (raf) cancelAnimationFrame(raf); raf = 0; t.classList.remove('lifted'); still(); });
+  t.addEventListener('focusin', still);
+})();
+
 // Touch screens have no hover, so once per visit play it for them: "$15 off" pops, and the four hero badges light up one by one when they scroll into view
 (function () {
   var tag = document.querySelector('.book-note .tag'), facts = document.querySelectorAll('.facts .fact');
