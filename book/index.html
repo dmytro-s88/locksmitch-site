@@ -199,6 +199,17 @@ footer a:hover { color: var(--green); }
 :root[data-theme="light"] { --err: #9B2C1C; }
 :root[data-theme="light"] .field input, :root[data-theme="light"] .field textarea { background: #FFFFFF; border-color: var(--mix-ink-22); }
 :root[data-theme="light"] .ticket .perf::before, :root[data-theme="light"] .ticket .perf::after { background: #F3F5F1; border-color: #D8DFDA; }
+/* Ticket depth (2026-11-03): layered shadow, a lit top edge, punched notches; on a mouse it tilts a little toward the pointer (script at the end) */
+.ticket { background: linear-gradient(180deg, #212D28 0%, var(--fob) 38%);
+  box-shadow: inset 0 1px 0 rgba(255,255,255,.07), 0 2px 4px rgba(0,0,0,.35), 0 14px 28px -12px rgba(0,0,0,.55), 0 40px 80px -36px rgba(0,0,0,.8);
+  transition: transform .6s cubic-bezier(.2,.7,.2,1), box-shadow .6s ease; }
+.ticket.tilting { transition: transform .12s linear, box-shadow .3s ease; }
+.ticket.lifted { box-shadow: inset 0 1px 0 rgba(255,255,255,.07), 0 4px 8px rgba(0,0,0,.35), 0 22px 40px -14px rgba(0,0,0,.6), 0 56px 100px -40px rgba(0,0,0,.85); }
+.perf::before, .perf::after { box-shadow: inset 0 3px 5px rgba(0,0,0,.45); }
+:root[data-theme="light"] .ticket { background: linear-gradient(180deg, #FFFFFF 0%, #FFFFFF 55%, #F7F9F6 100%);
+  box-shadow: inset 0 1px 0 #FFFFFF, 0 1px 2px rgba(21,32,27,.08), 0 8px 18px -6px rgba(21,32,27,.12), 0 30px 54px -22px rgba(21,32,27,.30), 0 64px 100px -56px rgba(21,32,27,.35); }
+:root[data-theme="light"] .ticket.lifted { box-shadow: inset 0 1px 0 #FFFFFF, 0 2px 4px rgba(21,32,27,.08), 0 14px 26px -8px rgba(21,32,27,.14), 0 42px 70px -26px rgba(21,32,27,.34), 0 80px 120px -60px rgba(21,32,27,.38); }
+:root[data-theme="light"] .ticket .perf::before, :root[data-theme="light"] .ticket .perf::after { box-shadow: inset 0 3px 4px rgba(21,32,27,.16); }
 </style>
 <script type="application/ld+json">{"@context": "https://schema.org", "@type": "BreadcrumbList", "itemListElement": [{"@type": "ListItem", "position": 1, "name": "LocksMitch", "item": "https://locksmitch.com/"}, {"@type": "ListItem", "position": 2, "name": "Book a visit", "item": "https://locksmitch.com/book/"}]}</script>
 </head>
@@ -575,5 +586,18 @@ footer a:hover { color: var(--green); }
   })();
 </script>
 <script defer src="/assets/motion.js?v=20261103a"></script>
+<script>
+/* Ticket tilt: only with a mouse, never with reduced motion; at most ~4 degrees, eases back when the pointer leaves */
+(function () {
+  var t = document.querySelector('.ticket');
+  if (!t || !window.matchMedia || !matchMedia('(hover: hover) and (pointer: fine)').matches || matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+  var raf = 0, ev = null;
+  function apply() { raf = 0; var r = t.getBoundingClientRect(), x = (ev.clientX - r.left) / r.width - .5, y = (ev.clientY - r.top) / r.height - .5;
+    t.style.transform = 'perspective(1100px) rotateX(' + (-y * 5).toFixed(2) + 'deg) rotateY(' + (x * 6).toFixed(2) + 'deg) translateY(-4px)'; }
+  t.addEventListener('pointerenter', function () { t.classList.add('lifted'); setTimeout(function () { t.classList.add('tilting'); }, 150); });
+  t.addEventListener('pointermove', function (e) { ev = e; if (!raf) raf = requestAnimationFrame(apply); });
+  t.addEventListener('pointerleave', function () { if (raf) cancelAnimationFrame(raf); raf = 0; t.classList.remove('tilting', 'lifted'); t.style.transform = ''; });
+})();
+</script>
 </body>
 </html>
