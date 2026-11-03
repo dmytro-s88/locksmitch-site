@@ -32,8 +32,8 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="preload" as="style" href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@400;500;600;700;800&display=swap" onload="this.onload=null;this.rel='stylesheet'"><noscript><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@400;500;600;700;800&display=swap"></noscript>
-<link rel="stylesheet" href="/assets/site.css?v=20261103m">
-<script>try{var t=localStorage.getItem('lm_theme');if(t&&!(Date.now()-(+localStorage.getItem('lm_theme_at')||0)<864e5))t=null;if(!t){var d=new Date(),n=d.getHours()*60+d.getMinutes(),m=d.getMonth(),up=[460,445,465,425,395,385,395,415,435,460,425,450][m],dn=[1070,1100,1185,1205,1230,1250,1250,1225,1190,1150,1055,1050][m];t=window.matchMedia&&matchMedia('(prefers-color-scheme: light)').matches&&n>=up&&n<dn?'light':'dark'}if(t==='light'){document.documentElement.setAttribute('data-theme','light');var c=document.querySelector('meta[name=theme-color]');c&&c.setAttribute('content','#F3F5F1')}window.gtag&&gtag('set','user_properties',{site_theme:t})}catch(e){}</script>
+<link rel="stylesheet" href="/assets/site.css?v=20261103o">
+<script>try{if(navigator.deviceMemory<=4)document.documentElement.classList.add('lowfx');var t=localStorage.getItem('lm_theme');if(t&&!(Date.now()-(+localStorage.getItem('lm_theme_at')||0)<864e5))t=null;if(!t){var d=new Date(),n=d.getHours()*60+d.getMinutes(),m=d.getMonth(),up=[460,445,465,425,395,385,395,415,435,460,425,450][m],dn=[1070,1100,1185,1205,1230,1250,1250,1225,1190,1150,1055,1050][m];t=window.matchMedia&&matchMedia('(prefers-color-scheme: light)').matches&&n>=up&&n<dn?'light':'dark'}if(t==='light'){document.documentElement.setAttribute('data-theme','light');var c=document.querySelector('meta[name=theme-color]');c&&c.setAttribute('content','#F3F5F1')}window.gtag&&gtag('set','user_properties',{site_theme:t})}catch(e){}</script>
 <script type="application/ld+json">{"@context": "https://schema.org", "@type": "BreadcrumbList", "itemListElement": [{"@type": "ListItem", "position": 1, "name": "LocksMitch", "item": "https://locksmitch.com/"}, {"@type": "ListItem", "position": 2, "name": "Nissan key replacement", "item": "https://locksmitch.com/nissan-key-replacement/"}]}</script>
 </head>
 <body>
@@ -92,10 +92,14 @@
           </div>
           <p class="book-note"><a class="tag" href="/book/">$15 off</a>&nbsp; <strong>when you book online.</strong> Locked out of your Nissan right now? Call instead, it’s faster.</p>
           <div class="facts">
-            <span><svg><use href="#i-van"/></svg>Fully mobile</span>
-            <span><svg><use href="#i-shield"/></svg>NASTF certified &amp; insured</span>
-            <span><svg><use href="#i-key"/></svg>1-year warranty</span>
-            <span><svg><use href="#i-pay"/></svg>Cash, Cards, Zelle</span>
+            <button type="button" class="fact" aria-expanded="false" aria-controls="fx-mobile"><svg><use href="#i-van"/></svg>Fully mobile</button>
+            <button type="button" class="fact" aria-expanded="false" aria-controls="fx-nastf"><svg><use href="#i-shield"/></svg>NASTF certified &amp; insured</button>
+            <button type="button" class="fact" aria-expanded="false" aria-controls="fx-warranty"><svg><use href="#i-key"/></svg>1-year warranty</button>
+            <button type="button" class="fact" aria-expanded="false" aria-controls="fx-pay"><svg><use href="#i-pay"/></svg>Cash, Cards, Zelle</button>
+            <div class="fact-tip" id="fx-mobile" hidden>I come to your car: home, work, a parking lot or the roadside. No tow, no shop, and coming to you is included. <a href="#area">See the area&nbsp;→</a></div>
+            <div class="fact-tip" id="fx-nastf" hidden>Registered with NASTF as a Vehicle Security Professional: access to manufacturer key data, the same as dealers. Insured on every job.</div>
+            <div class="fact-tip" id="fx-warranty" hidden>1 year on keys and remotes I supply. If one stops working, I fix or replace it free. Not covered: physical or water damage, lost keys, batteries.</div>
+            <div class="fact-tip" id="fx-pay" hidden>Cash, credit and debit cards, Apple Pay, Google Pay, Zelle, Venmo or Cash App, whichever is easiest for you.</div>
           </div>
           <p class="upfront"><svg><use href="#i-check"/></svg><span><strong>Upfront price.</strong> Quoted before we drive out, and it doesn’t change at your car. Coming to you is included. <a href="/pricing/">See prices&nbsp;→</a></span></p>
         </div>
@@ -346,7 +350,7 @@
   <a class="btn btn-ghost" href="#estimate">Estimate</a>
 </div>
 
-<script defer src="/assets/site.js?v=20261103c"></script>
+<script defer src="/assets/site.js?v=20261103d"></script>
 <script defer src="/assets/motion.js?v=20261103a"></script>
 
 </body>

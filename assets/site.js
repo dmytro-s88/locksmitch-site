@@ -277,9 +277,38 @@
   if (mq.addEventListener) mq.addEventListener('change', place);
 })();
 
+// Hero badges: a tap opens a short explanation under the row (one at a time), a tap anywhere else or Esc closes it
+(function () {
+  var row = document.querySelector('.facts');
+  if (!row) return;
+  var open = null;
+  function close() {
+    if (!open) return;
+    open.setAttribute('aria-expanded', 'false');
+    document.getElementById(open.getAttribute('aria-controls')).hidden = true;
+    open = null;
+  }
+  Array.prototype.forEach.call(row.querySelectorAll('.fact'), function (b) {
+    b.addEventListener('click', function () {
+      if (open === b) { close(); return; }
+      close();
+      var tip = document.getElementById(b.getAttribute('aria-controls'));
+      var r = b.getBoundingClientRect(), rr = row.getBoundingClientRect();
+      tip.style.setProperty('--ax', Math.round(r.left + r.width / 2 - rr.left) + 'px');
+      tip.hidden = false;
+      b.setAttribute('aria-expanded', 'true');
+      open = b;
+      if (window.lmTrack) window.lmTrack('fact_open', { fact: tip.id.slice(3) });
+    });
+  });
+  document.addEventListener('click', function (e) { if (open && !row.contains(e.target)) close(); });
+  row.addEventListener('click', function (e) { if (e.target.closest && e.target.closest('.fact-tip a')) close(); });
+  document.addEventListener('keydown', function (e) { if (e.key === 'Escape') close(); });
+})();
+
 // Touch screens have no hover, so once per visit play it for them: "$15 off" pops, and the four hero badges light up one by one when they scroll into view
 (function () {
-  var tag = document.querySelector('.book-note .tag'), facts = document.querySelectorAll('.facts span');
+  var tag = document.querySelector('.book-note .tag'), facts = document.querySelectorAll('.facts .fact');
   if (!tag || !facts.length || !window.matchMedia || !window.IntersectionObserver) return;
   if (!window.matchMedia('(hover: none)').matches || window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
   // the fixed call bar covers the bottom of the screen, so on screen means above it
