@@ -110,7 +110,7 @@ section { padding-block: clamp(56px, 7vw, 88px); }
 .also a { color: var(--green-bright); font-weight: 700; white-space: nowrap; }
 a.tag { text-decoration: none; }
 a.tag:hover { background: color-mix(in srgb, var(--brass) 34%, transparent); }
-.facts { display: grid; grid-template-columns: repeat(4, minmax(0,1fr)); gap: 12px; margin-top: 30px; padding-top: 22px; border-top: 1px solid var(--line); font-size: 14px; font-weight: 600; text-align: center; }
+.facts { display: grid; grid-template-columns: repeat(4, minmax(0,1fr)); gap: 12px; margin-top: 34px; font-size: 14px; font-weight: 600; text-align: center; }
 .facts span { display: inline-flex; flex-direction: column; align-items: center; gap: 8px; line-height: 1.3; }
 .facts svg { width: 24px; height: 24px; color: var(--green); flex: none; }
 
@@ -360,7 +360,7 @@ footer .wrap { display: flex; flex-wrap: wrap; gap: 12px 28px; justify-content: 
   .hero h1 { font-size: 40px; }
   .hero .lede { font-size: 16px; margin-top: 16px; }
   .cta-row { margin-top: 22px; }
-  .facts { display: grid; grid-template-columns: repeat(4, minmax(0,1fr)); gap: 8px; margin-top: 22px; padding-top: 18px; font-size: 12px; text-align: center; }
+  .facts { display: grid; grid-template-columns: repeat(4, minmax(0,1fr)); gap: 8px; margin-top: 28px; font-size: 12px; text-align: center; }
   .facts span { flex-direction: column; gap: 6px; line-height: 1.25; }
   .facts svg { width: 22px; height: 22px; }
 
@@ -384,7 +384,8 @@ footer .wrap { display: flex; flex-wrap: wrap; gap: 12px 28px; justify-content: 
 }
 
 /* Mobile call bar */
-.callbar { position: fixed; left: 0; right: 0; bottom: 0; z-index: 30; display: none; gap: 10px; padding: 10px 16px calc(10px + env(safe-area-inset-bottom, 0px)); background: color-mix(in srgb, var(--bg) 92%, transparent); backdrop-filter: blur(10px); border-top: 1px solid var(--line); }
+/* Floating glass bar, same look as the header */
+.callbar { position: fixed; left: 10px; right: 10px; bottom: calc(10px + env(safe-area-inset-bottom, 0px)); z-index: 30; display: none; gap: 8px; padding: 8px; background: color-mix(in srgb, var(--bg) 70%, transparent); -webkit-backdrop-filter: blur(18px) saturate(1.5); backdrop-filter: blur(18px) saturate(1.5); border: 1px solid color-mix(in srgb, var(--ink) 12%, transparent); border-radius: var(--r-lg); box-shadow: 0 10px 30px rgba(0,0,0,.35); }
 .callbar .btn { flex: 1 1 0; justify-content: center; min-height: 50px; padding: 0 10px; font-size: 16px; gap: 8px; }
 .callbar .btn-call { flex-grow: 1.4; }
 @media (max-width: 760px) { .callbar { display: flex; } }
@@ -669,7 +670,7 @@ table.prices tr:hover .key-ico { transform: rotate(-6deg) scale(1.06); border-co
              background: var(--fob); color: var(--on-fob); border: 1px solid var(--line); border-radius: 14px; box-shadow: 0 18px 40px -18px rgba(0,0,0,.8); font-size: 15px; }
 .lang-hint a { color: var(--ink); font-weight: 700; white-space: nowrap; }
 .lang-hint button { flex: none; width: 32px; height: 32px; border: 0; border-radius: 8px; background: transparent; color: var(--muted); font-size: 22px; line-height: 1; cursor: pointer; }
-@media (max-width: 760px) { .lang-hint { left: 16px; right: 16px; max-width: none; bottom: calc(82px + env(safe-area-inset-bottom, 0px)); } }
+@media (max-width: 760px) { .lang-hint { left: 16px; right: 16px; max-width: none; bottom: calc(92px + env(safe-area-inset-bottom, 0px)); } }
 
 /* «$15 off» в hero: раз в ~6 с подпрыгивает и покачивается, чтобы скидку замечали */
 @media (prefers-reduced-motion: no-preference) {
@@ -725,7 +726,7 @@ html.theme-anim, html.theme-anim *, html.theme-anim *::before, html.theme-anim *
 :root[data-theme="light"] .brand .brand-word:not(.brand-word-lt) { display: none; }
 :root[data-theme="light"] .brand .brand-word-lt { display: block; }
 :root[data-theme="light"] .top .wrap { background: color-mix(in srgb, #FFFFFF 72%, transparent); border-color: color-mix(in srgb, var(--ink) 10%, transparent); box-shadow: 0 10px 30px rgba(21,32,27,.10); }
-:root[data-theme="light"] .callbar { background: color-mix(in srgb, #FFFFFF 90%, transparent); }
+:root[data-theme="light"] .callbar { background: color-mix(in srgb, #FFFFFF 72%, transparent); border-color: color-mix(in srgb, var(--ink) 10%, transparent); box-shadow: 0 10px 30px rgba(21,32,27,.12); }
 :root[data-theme="light"] .estimate { box-shadow: 0 30px 60px -30px rgba(21,32,27,.45); }
 :root[data-theme="light"] .estimate { --green: #6CC655; --green-bright: #6CC655; --on-green: #0B170A; --ink: #EAF0EC; --muted: #9AA8A1; --line: #26322D; --surface: #151D1A; --bg: #0E1311; --brass-hi: #E8CD8C; color-scheme: dark; }
 :root[data-theme="light"] .nav-dd-panel, :root[data-theme="light"] .lang::after, :root[data-theme="light"] .theme-btn::after { box-shadow: 0 18px 44px rgba(21,32,27,.16); }
