@@ -26,7 +26,7 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="preload" as="style" href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@400;500;600;700;800&display=swap" onload="this.onload=null;this.rel='stylesheet'"><noscript><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@400;500;600;700;800&display=swap"></noscript>
-<link rel="stylesheet" href="/assets/site.css?v=20261103d">
+<link rel="stylesheet" href="/assets/site.css?v=20261103f">
 <script>try{if(localStorage.getItem('lm_theme')==='light'){document.documentElement.setAttribute('data-theme','light');document.querySelector('meta[name=theme-color]')&&document.querySelector('meta[name=theme-color]').setAttribute('content','#F3F5F1')}}catch(e){}</script>
 <style>
 /* Booking page: same tokens as the main site (graphite fob, logo green, brass accents).
@@ -537,6 +537,42 @@ footer a:hover { color: var(--green); }
   });
   bar.insertBefore(b, bar.querySelector('.lang') || bar.querySelector('.btn-call') || null);
 })();
+</script>
+<script>
+// Phone menu (same as assets/site.js, which this page does not load): three-line button, links from the header nav plus booking
+(function () {
+  function T(en) { return en; }
+  function track(n, x) { if (window.gtag) window.gtag('event', n, x); }
+
+    var bar = document.querySelector('.top .wrap'), nav = bar && bar.querySelector('.nav'); if (!nav) return;
+    var links = Array.prototype.filter.call(nav.querySelectorAll('a'), function (a) { return !a.closest('.nav-dd-panel'); });
+    var b = document.createElement('button'); b.type = 'button'; b.className = 'menu-btn';
+    b.setAttribute('aria-label', T('Menu', 'Menú')); b.setAttribute('aria-expanded', 'false'); b.setAttribute('aria-controls', 'mmenu');
+    b.innerHTML = '<svg viewBox="0 0 24 24" aria-hidden="true"><path class="mb-l1" d="M4 7h16"/><path class="mb-l2" d="M4 12h16"/><path class="mb-l3" d="M4 17h16"/></svg>';
+    var p = document.createElement('nav'); p.id = 'mmenu'; p.className = 'menu-panel'; p.setAttribute('aria-label', T('Menu', 'Menú'));
+    links.forEach(function (a) {
+      var m = document.createElement('a'); m.href = a.getAttribute('href'); m.textContent = a.textContent.trim(); p.appendChild(m);
+    });
+    var bk = document.createElement('a'); bk.className = 'btn btn-call menu-book'; bk.href = '/book/';
+    bk.textContent = T('Book online, $15 off', 'Reservar en línea, $15 menos'); p.appendChild(bk);
+    function set(open) {
+      bar.classList.toggle('menu-open', open); b.setAttribute('aria-expanded', open ? 'true' : 'false');
+      b.setAttribute('aria-label', open ? T('Close menu', 'Cerrar menú') : T('Menu', 'Menú'));
+    }
+    b.addEventListener('click', function (e) {
+      e.stopPropagation(); var open = !bar.classList.contains('menu-open'); set(open);
+      if (open) track('menu_open', {});
+    });
+    p.addEventListener('click', function (e) {
+      var a = e.target.closest('a'); if (!a) return;
+      track('menu_click', { item: a.getAttribute('href') }); set(false);
+    });
+    document.addEventListener('click', function (e) { if (bar.classList.contains('menu-open') && !bar.contains(e.target)) set(false); });
+    document.addEventListener('keydown', function (e) { if (e.key === 'Escape' && bar.classList.contains('menu-open')) { set(false); b.focus(); } });
+    window.addEventListener('resize', function () { if (window.innerWidth > 900) set(false); });
+    bar.insertBefore(b, bar.querySelector('.btn-call') || null);
+    bar.appendChild(p);
+  })();
 </script>
 <script defer src="/assets/motion.js?v=20261103a"></script>
 </body>

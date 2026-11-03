@@ -737,3 +737,28 @@ html.theme-anim, html.theme-anim *, html.theme-anim *::before, html.theme-anim *
 :root[data-theme="light"] .form-err { color: #9B2C1C; background: rgba(200,60,40,.10); }
 :root[data-theme="light"] .btn-call:hover { background: color-mix(in srgb, var(--green) 88%, #000); }
 :root[data-theme="light"] .pc:hover { border-color: color-mix(in srgb, var(--green) 45%, transparent); }
+
+/* Phone menu (2026-11-03): three-line button opens a glass panel under the header with the nav links and booking.
+   Shown up to 900px, where the inline nav is hidden; up to 760px it replaces the header call button (the bottom bar has Call now). */
+html { scroll-padding-top: 100px; }
+.top .wrap { position: relative; }
+.menu-btn { display: none; place-items: center; flex: none; width: 44px; height: 44px; padding: 0; border: 1px solid var(--line); border-radius: 999px; background: transparent; color: var(--ink); cursor: pointer; }
+.menu-btn svg { width: 22px; height: 22px; overflow: visible; }
+.menu-btn path { fill: none; stroke: currentColor; stroke-width: 2; stroke-linecap: round; transform-box: fill-box; transform-origin: center; transition: transform .22s ease, opacity .15s ease; }
+.menu-open .menu-btn .mb-l1 { transform: translateY(5px) rotate(45deg); }
+.menu-open .menu-btn .mb-l2 { opacity: 0; }
+.menu-open .menu-btn .mb-l3 { transform: translateY(-5px) rotate(-45deg); }
+.menu-panel { position: absolute; left: 0; right: 0; top: calc(100% + 8px); display: grid; padding: 8px; border-radius: var(--r-lg);
+  background: var(--bg);   /* solid: page text showed through a translucent panel (blur does not reach through the header's own backdrop) */
+  border: 1px solid color-mix(in srgb, var(--ink) 12%, transparent); box-shadow: 0 18px 44px rgba(0,0,0,.45);
+  opacity: 0; visibility: hidden; transform: translateY(-6px); transition: opacity .18s ease, transform .18s ease, visibility .18s; }
+.menu-open .menu-panel { opacity: 1; visibility: visible; transform: none; }
+.menu-panel a:not(.btn) { display: flex; align-items: center; min-height: 50px; padding: 0 14px; border-radius: 12px; color: var(--ink); text-decoration: none; font-weight: 600; font-size: 17px; }
+.menu-panel a:not(.btn):hover, .menu-panel a:not(.btn):focus-visible { background: color-mix(in srgb, var(--ink) 7%, transparent); color: var(--green); }
+.menu-panel a:not(.btn) + a:not(.btn) { border-top: 1px solid color-mix(in srgb, var(--ink) 8%, transparent); }
+.menu-panel .menu-book { justify-content: center; margin-top: 8px; min-height: 50px; }
+@media (max-width: 900px) { .menu-btn { display: inline-grid; } }
+@media (max-width: 760px) { .top .wrap > .btn-call { display: none; } }
+@media (max-width: 520px) { .menu-btn { width: 40px; height: 40px; } }
+@media (prefers-reduced-motion: reduce) { .menu-panel, .menu-btn path { transition: none; } }
+:root[data-theme="light"] .menu-panel { background: #FFFFFF; border-color: color-mix(in srgb, var(--ink) 10%, transparent); box-shadow: 0 18px 44px rgba(21,32,27,.16); }

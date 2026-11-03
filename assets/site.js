@@ -221,6 +221,38 @@
     var lang = bar.querySelector('.lang'), call = bar.querySelector('.btn-call');
     bar.insertBefore(b, lang || call || null);
   })();
+  // Phone menu: three-line button in the header opens the same links as the desktop nav, plus online booking.
+  // On phones it takes the place of the header call button (the bottom bar already has Call now).
+  (function () {
+    var bar = document.querySelector('.top .wrap'), nav = bar && bar.querySelector('.nav'); if (!nav) return;
+    var links = Array.prototype.filter.call(nav.querySelectorAll('a'), function (a) { return !a.closest('.nav-dd-panel'); });
+    var b = document.createElement('button'); b.type = 'button'; b.className = 'menu-btn';
+    b.setAttribute('aria-label', T('Menu', 'Menú')); b.setAttribute('aria-expanded', 'false'); b.setAttribute('aria-controls', 'mmenu');
+    b.innerHTML = '<svg viewBox="0 0 24 24" aria-hidden="true"><path class="mb-l1" d="M4 7h16"/><path class="mb-l2" d="M4 12h16"/><path class="mb-l3" d="M4 17h16"/></svg>';
+    var p = document.createElement('nav'); p.id = 'mmenu'; p.className = 'menu-panel'; p.setAttribute('aria-label', T('Menu', 'Menú'));
+    links.forEach(function (a) {
+      var m = document.createElement('a'); m.href = a.getAttribute('href'); m.textContent = a.textContent.trim(); p.appendChild(m);
+    });
+    var bk = document.createElement('a'); bk.className = 'btn btn-call menu-book'; bk.href = '/book/';
+    bk.textContent = T('Book online, $15 off', 'Reservar en línea, $15 menos'); p.appendChild(bk);
+    function set(open) {
+      bar.classList.toggle('menu-open', open); b.setAttribute('aria-expanded', open ? 'true' : 'false');
+      b.setAttribute('aria-label', open ? T('Close menu', 'Cerrar menú') : T('Menu', 'Menú'));
+    }
+    b.addEventListener('click', function (e) {
+      e.stopPropagation(); var open = !bar.classList.contains('menu-open'); set(open);
+      if (open) track('menu_open', {});
+    });
+    p.addEventListener('click', function (e) {
+      var a = e.target.closest('a'); if (!a) return;
+      track('menu_click', { item: a.getAttribute('href') }); set(false);
+    });
+    document.addEventListener('click', function (e) { if (bar.classList.contains('menu-open') && !bar.contains(e.target)) set(false); });
+    document.addEventListener('keydown', function (e) { if (e.key === 'Escape' && bar.classList.contains('menu-open')) { set(false); b.focus(); } });
+    window.addEventListener('resize', function () { if (window.innerWidth > 900) set(false); });
+    bar.insertBefore(b, bar.querySelector('.btn-call') || null);
+    bar.appendChild(p);
+  })();
   var devLang = String((navigator.languages && navigator.languages[0]) || navigator.language || '');
   var esLink = document.querySelector('a.lang[hreflang="es"]');
   var forceHint = /[?&]eshint\b/.test(location.search);   // ?eshint: показать плашку на любом телефоне (для проверки)
