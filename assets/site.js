@@ -199,7 +199,7 @@
   Array.prototype.forEach.call(document.querySelectorAll('a.lang, a[hreflang]'), function (a) {
     a.addEventListener('click', function () { var to = a.getAttribute('hreflang'); if (to) { store('lm_lang', to); track('lang_switch', { to: to }); } });
   });
-  // Light / dark theme: sun-moon button next to the globe; a manual choice is remembered (lm_theme). The <head> script applies it before paint;
+  // Light / dark theme: sun-moon button next to the globe; a manual choice is remembered for 24 hours (lm_theme + lm_theme_at). The <head> script applies it before paint;
   // with no manual choice it picks light only when the phone is in light mode and it is daytime in Atlanta (sunrise/sunset by month), else dark
   (function () {
     var bar = document.querySelector('.top .wrap'); if (!bar) return;
@@ -215,7 +215,7 @@
       root.classList.add('theme-anim');
       if (to === 'light') root.setAttribute('data-theme', 'light'); else root.removeAttribute('data-theme');
       if (meta) meta.setAttribute('content', to === 'light' ? '#F3F5F1' : '#0E1311');
-      store('lm_theme', to); label(); track('theme_switch', { to: to });
+      store('lm_theme', to); store('lm_theme_at', String(Date.now())); label(); track('theme_switch', { to: to });
       window.dispatchEvent(new Event('lm-theme'));
       setTimeout(function () { root.classList.remove('theme-anim'); }, 400);
     });
