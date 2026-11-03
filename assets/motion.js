@@ -346,7 +346,7 @@ document.addEventListener('pointermove', function (e) {
 })();
 
 // Touch screens have no pointer to follow, so the estimate card and the booking ticket tilt with scrolling (2026-11-03):
-// leaning back a little below the middle of the screen, upright and lifted in the middle, leaning forward above it.
+// leaning back below the middle of the screen (up to 11 degrees, a little smaller), upright and lifted in the middle, leaning forward above it.
 // Still while a field has focus (the keyboard scrolls the page); mouse screens use the pointer tilt (site.js, /book/).
 (function () {
   var cards = document.querySelectorAll('.estimate, .ticket');
@@ -360,7 +360,7 @@ document.addEventListener('pointermove', function (e) {
       var r = c.getBoundingClientRect();
       if (r.bottom < 0 || r.top > vh || typing(c)) { c.style.transform = ''; c.classList.remove('lifted'); return; }
       var p = Math.max(-1, Math.min(1, ((r.top + r.height / 2) / vh - .5) * 2));
-      c.style.transform = 'perspective(1400px) rotateX(' + (p * 6).toFixed(2) + 'deg)';
+      c.style.transform = 'perspective(1000px) rotateX(' + (p * 11).toFixed(2) + 'deg) scale(' + (1 - Math.abs(p) * .04).toFixed(3) + ')';
       c.classList.toggle('lifted', Math.abs(p) < .35);
     });
   }
