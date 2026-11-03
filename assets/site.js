@@ -199,7 +199,8 @@
   Array.prototype.forEach.call(document.querySelectorAll('a.lang, a[hreflang]'), function (a) {
     a.addEventListener('click', function () { var to = a.getAttribute('hreflang'); if (to) { store('lm_lang', to); track('lang_switch', { to: to }); } });
   });
-  // Light / dark theme: sun-moon button next to the globe; the choice is remembered (lm_theme), the <head> script applies it before paint
+  // Light / dark theme: sun-moon button next to the globe; a manual choice is remembered (lm_theme). The <head> script applies it before paint;
+  // with no manual choice it picks light only when the phone is in light mode and it is daytime in Atlanta (sunrise/sunset by month), else dark
   (function () {
     var bar = document.querySelector('.top .wrap'); if (!bar) return;
     var root = document.documentElement, meta = document.querySelector('meta[name="theme-color"]');
