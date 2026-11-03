@@ -193,13 +193,12 @@ footer a:hover { color: var(--green); }
   .svc label:hover { transform: scale(1.025); border-color: var(--mix-ink-45); box-shadow: 0 6px 18px rgba(0,0,0,.28); }
   .svc input:checked + label:hover { border-color: var(--green); }
 }
-/* Light theme (site-wide switch, see assets/site.css): the "Your visit" ticket and the done card keep the dark fob look */
-:root[data-theme="light"] .ticket, :root[data-theme="light"] .done-card { --bg: #0E1311; --surface: #151D1A; --ink: #EAF0EC; --muted: #9AA8A1; --line: #26322D; --green: #6CC655; --on-green: #0B170A; --brass-hi: #E8CD8C; --err: #FFB4A8; color: var(--ink); color-scheme: dark; }
-:root[data-theme="light"] .ticket, :root[data-theme="light"] .done-card { --mix-bg-70: rgba(14, 19, 17, .7); --mix-brass-12-surface: #282A1E; --mix-brass-45-line: #645A35; --mix-brass-55-line: #726236; --mix-brass-9-surface: #23271D; --mix-green-10: rgba(108, 198, 85, .1); --mix-green-14: rgba(108, 198, 85, .14); --mix-green-16: rgba(108, 198, 85, .16); --mix-green-26: rgba(108, 198, 85, .26); --mix-green-30-line: #3B5E39; --mix-green-32: rgba(108, 198, 85, .32); --mix-green-35-line: #3E663B; --mix-green-42: rgba(108, 198, 85, .42); --mix-green-45: rgba(108, 198, 85, .45); --mix-green-45-line: #46753F; --mix-green-50-line: #497C41; --mix-green-55: rgba(108, 198, 85, .55); --mix-green-55-line: #4C8343; --mix-green-7-surface: #1B291E; --mix-green-88-black: #5FAE4B; --mix-green-88-ink: #7BCB67; --mix-green-9: rgba(108, 198, 85, .09); --mix-ink-10: rgba(234, 240, 236, .1); --mix-ink-12: rgba(234, 240, 236, .12); --mix-ink-16: rgba(234, 240, 236, .16); --mix-ink-18: rgba(234, 240, 236, .18); --mix-ink-22: rgba(234, 240, 236, .22); --mix-ink-3: rgba(234, 240, 236, .03); --mix-ink-34: rgba(234, 240, 236, .34); --mix-ink-38: rgba(234, 240, 236, .38); --mix-ink-4: rgba(234, 240, 236, .04); --mix-ink-40: rgba(234, 240, 236, .4); --mix-ink-45: rgba(234, 240, 236, .45); --mix-ink-5: rgba(234, 240, 236, .05); --mix-ink-7: rgba(234, 240, 236, .07); --mix-ink-78: rgba(234, 240, 236, .78); --mix-ink-8: rgba(234, 240, 236, .08); --mix-ink-85: rgba(234, 240, 236, .85); --mix-ink-9: rgba(234, 240, 236, .09); }
+/* Light theme (site-wide switch, see assets/site.css): the "Your visit" ticket and the done card are white with dark text,
+   like the estimate card on the main page (Dima, 2026-11-03) */
+:root[data-theme="light"] .ticket, :root[data-theme="light"] .done-card { --fob: #FFFFFF; border-color: var(--line); box-shadow: 0 30px 60px -32px rgba(21,32,27,.28); }
 :root[data-theme="light"] { --err: #9B2C1C; }
 :root[data-theme="light"] .field input, :root[data-theme="light"] .field textarea { background: #FFFFFF; border-color: var(--mix-ink-22); }
 :root[data-theme="light"] .ticket .perf::before, :root[data-theme="light"] .ticket .perf::after { background: #F3F5F1; border-color: #D8DFDA; }
-:root[data-theme="light"] .ticket, :root[data-theme="light"] .done-card { box-shadow: 0 30px 60px -30px rgba(21,32,27,.45); }
 </style>
 <script type="application/ld+json">{"@context": "https://schema.org", "@type": "BreadcrumbList", "itemListElement": [{"@type": "ListItem", "position": 1, "name": "LocksMitch", "item": "https://locksmitch.com/"}, {"@type": "ListItem", "position": 2, "name": "Book a visit", "item": "https://locksmitch.com/book/"}]}</script>
 </head>
