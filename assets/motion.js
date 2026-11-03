@@ -344,3 +344,38 @@ document.addEventListener('pointermove', function (e) {
   document.addEventListener('visibilitychange', function () { if (!document.hidden && visible) requestAnimationFrame(loop); });
   requestAnimationFrame(loop);
 })();
+
+// Touch screens have no pointer to follow, so the estimate card and the booking ticket tilt with scrolling (2026-11-03):
+// leaning back a little below the middle of the screen, upright and lifted in the middle, leaning forward above it.
+// Still while a field has focus (the keyboard scrolls the page); mouse screens use the pointer tilt (site.js, /book/).
+(function () {
+  var cards = document.querySelectorAll('.estimate, .ticket');
+  if (!cards.length || !window.matchMedia || matchMedia('(hover: hover) and (pointer: fine)').matches || matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+  var raf = 0, ready = false;
+  function typing(c) { var a = document.activeElement; return c.contains(a) && a.matches('input, select, textarea'); }
+  function update() {
+    raf = 0;
+    var vh = window.innerHeight;
+    Array.prototype.forEach.call(cards, function (c) {
+      var r = c.getBoundingClientRect();
+      if (r.bottom < 0 || r.top > vh || typing(c)) { c.style.transform = ''; c.classList.remove('lifted'); return; }
+      var p = Math.max(-1, Math.min(1, ((r.top + r.height / 2) / vh - .5) * 2));
+      c.style.transform = 'perspective(1400px) rotateX(' + (p * 6).toFixed(2) + 'deg)';
+      c.classList.toggle('lifted', Math.abs(p) < .35);
+    });
+  }
+  function onScroll() {
+    if (!ready) {
+      ready = true;
+      // the hero rise-in animation keeps its end state and would hide the tilt: drop it once it has played
+      Array.prototype.forEach.call(cards, function (c) {
+        if (c.getAnimations) c.getAnimations().forEach(function (a) { if (a.playState === 'finished') a.cancel(); });
+        c.classList.add('tilting');
+      });
+    }
+    if (!raf) raf = requestAnimationFrame(update);
+  }
+  window.addEventListener('scroll', onScroll, { passive: true });
+  window.addEventListener('resize', onScroll, { passive: true });
+  document.addEventListener('focusin', onScroll);
+})();
