@@ -199,6 +199,28 @@
   Array.prototype.forEach.call(document.querySelectorAll('a.lang, a[hreflang]'), function (a) {
     a.addEventListener('click', function () { var to = a.getAttribute('hreflang'); if (to) { store('lm_lang', to); track('lang_switch', { to: to }); } });
   });
+  // Light / dark theme: sun-moon button next to the globe; the choice is remembered (lm_theme), the <head> script applies it before paint
+  (function () {
+    var bar = document.querySelector('.top .wrap'); if (!bar) return;
+    var root = document.documentElement, meta = document.querySelector('meta[name="theme-color"]');
+    var b = document.createElement('button'); b.type = 'button'; b.className = 'theme-btn';
+    b.innerHTML = '<svg class="ico-moon" viewBox="0 0 24 24" aria-hidden="true"><path d="M20 14.5A8 8 0 0 1 9.5 4a8 8 0 1 0 10.5 10.5Z" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"/></svg>' +
+      '<svg class="ico-sun" viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="4" fill="none" stroke="currentColor" stroke-width="1.8"/><path d="M12 2.5v2.2M12 19.3v2.2M2.5 12h2.2M19.3 12h2.2M5.3 5.3l1.6 1.6M17.1 17.1l1.6 1.6M5.3 18.7l1.6-1.6M17.1 6.9l1.6-1.6" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/></svg>';
+    function light() { return root.getAttribute('data-theme') === 'light'; }
+    function label() { var t = light() ? T('Dark theme', 'Tema oscuro') : T('Light theme', 'Tema claro'); b.setAttribute('aria-label', t); b.setAttribute('data-tip', t); }
+    label();
+    b.addEventListener('click', function () {
+      var to = light() ? 'dark' : 'light';
+      root.classList.add('theme-anim');
+      if (to === 'light') root.setAttribute('data-theme', 'light'); else root.removeAttribute('data-theme');
+      if (meta) meta.setAttribute('content', to === 'light' ? '#F3F5F1' : '#0E1311');
+      store('lm_theme', to); label(); track('theme_switch', { to: to });
+      window.dispatchEvent(new Event('lm-theme'));
+      setTimeout(function () { root.classList.remove('theme-anim'); }, 400);
+    });
+    var lang = bar.querySelector('.lang'), call = bar.querySelector('.btn-call');
+    bar.insertBefore(b, lang || call || null);
+  })();
   var devLang = String((navigator.languages && navigator.languages[0]) || navigator.language || '');
   var esLink = document.querySelector('a.lang[hreflang="es"]');
   var forceHint = /[?&]eshint\b/.test(location.search);   // ?eshint: показать плашку на любом телефоне (для проверки)

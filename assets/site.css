@@ -49,8 +49,11 @@ section { padding-block: clamp(56px, 7vw, 88px); }
 .tag { display: inline-block; font-size: 13px; font-weight: 700; padding: 3px 9px; border-radius: 999px; background: color-mix(in srgb, var(--brass) 22%, transparent); color: var(--brass-hi); }
 
 /* Header */
-.top { position: sticky; top: env(safe-area-inset-top, 0px); z-index: 20; background: color-mix(in srgb, var(--bg) 88%, transparent); backdrop-filter: blur(10px); border-bottom: 1px solid var(--line); }
-.top .wrap { display: flex; align-items: center; gap: 20px; min-height: 92px; }
+/* Floating glass bar: the header strip is transparent, the bar inside it hangs with a gap from the edges */
+.top { position: sticky; top: env(safe-area-inset-top, 0px); z-index: 20; padding: 12px var(--gutter) 0; pointer-events: none; }
+.top .wrap { pointer-events: auto; display: flex; align-items: center; gap: 20px; min-height: 70px; max-width: calc(var(--max) - 2 * var(--gutter)); padding-inline: 18px 12px; background: color-mix(in srgb, var(--bg) 70%, transparent); -webkit-backdrop-filter: blur(18px) saturate(1.5); backdrop-filter: blur(18px) saturate(1.5); border: 1px solid color-mix(in srgb, var(--ink) 12%, transparent); border-radius: var(--r-lg); box-shadow: 0 10px 30px rgba(0,0,0,.35); }
+.top .brand .brand-mark > img, .top .brand .brand-mark > svg { height: 54px; }
+.top .brand .brand-word { height: 25px; margin-top: 7px; }
 .brand { display: flex; align-items: center; gap: 10px; text-decoration: none; margin-right: auto; }
 .brand img { height: 78px; width: auto; margin-block: 4px; }
 .word { font-family: var(--font-display); font-weight: 800; font-size: 23px; line-height: 1; letter-spacing: -0.01em; }
@@ -661,7 +664,7 @@ table.prices tr:hover .key-ico { transform: rotate(-6deg) scale(1.06); border-co
 .lang::after { content: attr(data-tip); position: absolute; top: calc(100% + 14px); right: -6px; transform: translateY(6px); padding: 10px 16px; border: 1px solid var(--line); border-radius: 14px;
         background: var(--surface); color: var(--ink); box-shadow: 0 18px 44px rgba(0,0,0,.5); font-size: 15px; font-weight: 600; letter-spacing: 0; white-space: nowrap; pointer-events: none; opacity: 0; visibility: hidden; transition: opacity .18s ease, transform .18s ease, visibility .18s; z-index: 40; }
 @media (hover: hover) { .lang:hover::after, .lang:focus-visible::after { opacity: 1; visibility: visible; transform: none; } }
-@media (max-width: 520px) { .top .wrap { gap: 12px; } .lang { min-height: 38px; width: 38px; padding: 0; } }
+@media (max-width: 520px) { .top { padding: 8px 10px 0; } .top .wrap { gap: 12px; min-height: 62px; padding-inline: 12px 8px; } .top .brand .brand-mark > img, .top .brand .brand-mark > svg { height: 46px; } .top .brand .brand-word { height: 21px; margin-top: 6px; } .lang { min-height: 38px; width: 38px; padding: 0; } }
 .lang-hint { position: fixed; z-index: 31; right: 20px; bottom: 20px; max-width: 340px; display: flex; align-items: center; gap: 12px; padding: 12px 12px 12px 16px;
              background: var(--fob); color: var(--on-fob); border: 1px solid var(--line); border-radius: 14px; box-shadow: 0 18px 40px -18px rgba(0,0,0,.8); font-size: 15px; }
 .lang-hint a { color: var(--ink); font-weight: 700; white-space: nowrap; }
@@ -687,3 +690,49 @@ table.prices tr:hover .key-ico { transform: rotate(-6deg) scale(1.06); border-co
     80% { transform: scale(1.06) rotate(2deg); box-shadow: 0 0 0 0 transparent; }
   }
 }
+
+/* Light theme (2026-11-03): switched with the sun/moon button in the header, remembered in localStorage (lm_theme).
+   The pre-paint script in each page's <head> sets <html data-theme="light"> before the first frame. Dark stays the default.
+   The estimate card keeps the dark key-fob look in both themes. */
+.brand .brand-word-lt { display: none; }
+.theme-btn { display: inline-grid; place-items: center; flex: none; width: 40px; height: 40px; padding: 0; border: 1px solid var(--line); border-radius: 999px; background: transparent; color: var(--muted); cursor: pointer; position: relative; }
+.theme-btn svg { width: 18px; height: 18px; }
+.theme-btn .ico-sun { display: none; }
+.theme-btn:hover { color: var(--ink); border-color: var(--muted); }
+.theme-btn::after { content: attr(data-tip); position: absolute; top: calc(100% + 14px); right: -6px; transform: translateY(6px); padding: 10px 16px; border: 1px solid var(--line); border-radius: 14px;
+  background: var(--surface); color: var(--ink); box-shadow: 0 18px 44px rgba(0,0,0,.5); font: 600 15px/1.2 var(--font-body); white-space: nowrap; pointer-events: none; opacity: 0; visibility: hidden; transition: opacity .18s ease, transform .18s ease, visibility .18s; z-index: 40; }
+@media (hover: hover) { .theme-btn:hover::after, .theme-btn:focus-visible::after { opacity: 1; visibility: visible; transform: none; } }
+@media (max-width: 520px) { .theme-btn { width: 38px; height: 38px; } }
+html.theme-anim, html.theme-anim *, html.theme-anim *::before, html.theme-anim *::after { transition: background-color .35s ease, color .35s ease, border-color .35s ease !important; }
+
+:root[data-theme="light"] {
+  --bg: #F3F5F1;
+  --surface: #FFFFFF;
+  --ink: #15201B;
+  --muted: #56645D;
+  --line: #D8DFDA;
+  --green: #2F8A24;        /* darker logo green, readable as text on white */
+  --green-bright: #2F8A24;
+  --on-green: #FFFFFF;
+  --teal: #2B7F8C;
+  --brass: #B08A3E;
+  --brass-hi: #7A5A1E;
+  --brass-lo: #8C6A2A;
+  color-scheme: light;
+}
+:root[data-theme="light"] .theme-btn .ico-moon { display: none; }
+:root[data-theme="light"] .theme-btn .ico-sun { display: block; }
+:root[data-theme="light"] .brand .brand-word:not(.brand-word-lt) { display: none; }
+:root[data-theme="light"] .brand .brand-word-lt { display: block; }
+:root[data-theme="light"] .top .wrap { background: color-mix(in srgb, #FFFFFF 72%, transparent); border-color: color-mix(in srgb, var(--ink) 10%, transparent); box-shadow: 0 10px 30px rgba(21,32,27,.10); }
+:root[data-theme="light"] .callbar { background: color-mix(in srgb, #FFFFFF 90%, transparent); }
+:root[data-theme="light"] .estimate { box-shadow: 0 30px 60px -30px rgba(21,32,27,.45); }
+:root[data-theme="light"] .estimate { --green: #6CC655; --green-bright: #6CC655; --on-green: #0B170A; --ink: #EAF0EC; --muted: #9AA8A1; --line: #26322D; --surface: #151D1A; --bg: #0E1311; --brass-hi: #E8CD8C; color-scheme: dark; }
+:root[data-theme="light"] .nav-dd-panel, :root[data-theme="light"] .lang::after, :root[data-theme="light"] .theme-btn::after { box-shadow: 0 18px 44px rgba(21,32,27,.16); }
+:root[data-theme="light"] .hero.has-scene { background: linear-gradient(180deg, #E9EFE7 0%, #F0F4EE 45%, #F3F5F1 100%); }
+:root[data-theme="light"] .hero.grid-scene { background: var(--bg); }
+:root[data-theme="light"] .hs-gridmode .hs-scrim { background: linear-gradient(90deg, rgba(243,245,241,.7) 0%, rgba(243,245,241,.25) 40%, rgba(243,245,241,0) 65%); }
+@media (max-width: 920px) { :root[data-theme="light"] .hs-gridmode .hs-scrim { background: linear-gradient(180deg, rgba(243,245,241,0) 0%, rgba(243,245,241,.3) 50%, rgba(243,245,241,.8) 85%); } }
+:root[data-theme="light"] .form-err { color: #9B2C1C; background: rgba(200,60,40,.10); }
+:root[data-theme="light"] .btn-call:hover { background: color-mix(in srgb, var(--green) 88%, #000); }
+:root[data-theme="light"] .pc:hover { border-color: color-mix(in srgb, var(--green) 45%, transparent); }

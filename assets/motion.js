@@ -106,6 +106,10 @@ document.addEventListener('pointermove', function (e) {
   var scrim = document.createElement('div'); scrim.className = 'hs-scrim';
   box.appendChild(cv); box.appendChild(scrim);
   hero.insertBefore(box, hero.firstChild); hero.classList.add('has-scene', 'grid-scene');
+  // line colour per theme: light green glow on the dark page, deeper green on the light one
+  var LINE = '166,234,102', HEAD = '214,255,170', LW = 1;
+  function tone() { var lt = document.documentElement.getAttribute('data-theme') === 'light'; LINE = lt ? '47,138,36' : '166,234,102'; HEAD = lt ? '47,138,36' : '214,255,170'; LW = lt ? 1.15 : 1; }
+  tone(); window.addEventListener('lm-theme', tone);
   var ctx = cv.getContext('2d'), dpr = Math.min(window.devicePixelRatio || 1, small ? 1.5 : 2);
   var W = 0, H = 0, S = small ? 46 : 58, N = 0, pulses = [], px = -9999, py = -9999, pAct = 0;
   var rx = 0, ry = 0, trx = 0, tryy = 0, D = 1100;
@@ -150,7 +154,7 @@ document.addEventListener('pointermove', function (e) {
     }
     for (k = 0; k < BUCKETS; k++) {   // one stroke per brightness level instead of one per segment
       var P = paths[k]; if (!P.length) continue;
-      ctx.strokeStyle = 'rgba(166,234,102,' + ((k + 0.5) / BUCKETS * 0.4).toFixed(3) + ')'; ctx.beginPath();
+      ctx.strokeStyle = 'rgba(' + LINE + ',' + ((k + 0.5) / BUCKETS * 0.4).toFixed(3) + ')'; ctx.lineWidth = LW; ctx.beginPath();
       for (var q = 0; q < P.length; q += 4) { ctx.moveTo(P[q], P[q + 1]); ctx.lineTo(P[q + 2], P[q + 3]); }
       ctx.stroke();
     }
@@ -177,9 +181,9 @@ document.addEventListener('pointermove', function (e) {
         var off = (p.t - p.len * s / steps) * p.dir, u = p.h ? p.fu + off : p.fu, v = p.h ? p.fv : p.fv + off;
         var q = proj(u, v); if (!q) { prev = null; continue; }
         if (prev) { var al = (1 - s / steps) * 0.9 * p.life * Math.min(1, q[2] * 1.3);
-          ctx.strokeStyle = 'rgba(166,234,102,' + al.toFixed(3) + ')'; ctx.lineWidth = 1.8 * (1 - s / steps) + 0.6;
+          ctx.strokeStyle = 'rgba(' + LINE + ',' + al.toFixed(3) + ')'; ctx.lineWidth = 1.8 * (1 - s / steps) + 0.6;
           ctx.beginPath(); ctx.moveTo(prev[0], prev[1]); ctx.lineTo(q[0], q[1]); ctx.stroke(); }
-        if (s === 0) { ctx.fillStyle = 'rgba(214,255,170,' + (0.9 * p.life).toFixed(3) + ')'; ctx.shadowColor = 'rgba(108,198,85,.9)'; ctx.shadowBlur = 10;
+        if (s === 0) { ctx.fillStyle = 'rgba(' + HEAD + ',' + (0.9 * p.life).toFixed(3) + ')'; ctx.shadowColor = 'rgba(108,198,85,.9)'; ctx.shadowBlur = 10;
           ctx.beginPath(); ctx.arc(q[0], q[1], 2.1, 0, 6.283); ctx.fill(); ctx.shadowBlur = 0; }
         prev = q;
       }
