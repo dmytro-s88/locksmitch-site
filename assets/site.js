@@ -315,7 +315,7 @@
   var t = document.querySelector('.estimate');
   if (!t || !window.matchMedia || !matchMedia('(hover: hover) and (pointer: fine)').matches || matchMedia('(prefers-reduced-motion: reduce)').matches) return;
   var cur = { x: 0, y: 0, l: 0 }, tgt = { x: 0, y: 0, l: 0 }, raf = 0, over = false;
-  t.style.transition = 'box-shadow .6s ease';
+  t.style.transition = 'none';   // the card itself never transitions: the hover shadow fades on its ::after (site.css)
   // the hero rise-in keeps its end state and would override the tilt: once it has played, take it off with a class (site.css .risen).
   // Cancelling it with the Web Animations API made Safari replay it on every hover: the card jumped and faded in again (Dima's video, 2026-11-03)
   function risen() { t.classList.add('risen'); }
