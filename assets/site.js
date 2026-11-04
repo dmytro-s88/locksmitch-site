@@ -315,6 +315,9 @@
   var t = document.querySelector('.estimate');
   if (!t || !window.matchMedia || !matchMedia('(hover: hover) and (pointer: fine)').matches || matchMedia('(prefers-reduced-motion: reduce)').matches) return;
   var cur = { x: 0, y: 0, l: 0 }, tgt = { x: 0, y: 0, l: 0 }, raf = 0, over = false;
+  // Safari (Mac): it re-rasterizes the card's text at every small 3D turn, so the text shimmers while the card tilts (Dima's recording,
+  // 2026-11-03); Chrome paints the card once and turns the picture. There the card only lifts with its shadow, no turn.
+  var ua = navigator.userAgent, flat = /Version\/[\d.]+.*Safari\//.test(ua) && !/Chrome|Chromium|Edg|OPR/.test(ua);
   t.style.transition = 'box-shadow .6s ease';
   function typing() { return t.contains(document.activeElement) && document.activeElement.matches('input, select, textarea'); }
   function tick() {
@@ -332,7 +335,7 @@
   t.addEventListener('pointermove', function (e) {
     if (typing()) { aim(0, 0, 1); return; }
     var r = t.getBoundingClientRect(), x = (e.clientX - r.left) / r.width - .5, y = (e.clientY - r.top) / r.height - .5;
-    aim(-y * 4, x * 5, 1);
+    aim(flat ? 0 : -y * 4, flat ? 0 : x * 5, 1);
   });
   t.addEventListener('pointerleave', function () { over = false; t.classList.remove('lifted'); aim(0, 0, 0); });
   t.addEventListener('focusin', function () { aim(0, 0, over ? 1 : 0); });

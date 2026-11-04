@@ -595,6 +595,7 @@ footer a:hover { color: var(--green); }
   var t = document.querySelector('.ticket');
   if (!t || !window.matchMedia || !matchMedia('(hover: hover) and (pointer: fine)').matches || matchMedia('(prefers-reduced-motion: reduce)').matches) return;
   var cur = { x: 0, y: 0, l: 0 }, tgt = { x: 0, y: 0, l: 0 }, raf = 0;
+  var ua = navigator.userAgent, flat = /Version\/[\d.]+.*Safari\//.test(ua) && !/Chrome|Chromium|Edg|OPR/.test(ua);   // Safari re-rasterizes text on every 3D turn (shimmer): lift only
   t.style.transition = 'box-shadow .6s ease';
   function tick() {
     var moving = false;
@@ -604,7 +605,7 @@ footer a:hover { color: var(--green); }
   }
   function aim(x, y, l) { tgt.x = x; tgt.y = y; tgt.l = l; if (!raf) raf = requestAnimationFrame(tick); }
   t.addEventListener('pointerenter', function () { t.classList.add('lifted'); });
-  t.addEventListener('pointermove', function (e) { var r = t.getBoundingClientRect(), x = (e.clientX - r.left) / r.width - .5, y = (e.clientY - r.top) / r.height - .5; aim(-y * 5, x * 6, 1); });
+  t.addEventListener('pointermove', function (e) { var r = t.getBoundingClientRect(), x = (e.clientX - r.left) / r.width - .5, y = (e.clientY - r.top) / r.height - .5; aim(flat ? 0 : -y * 5, flat ? 0 : x * 6, 1); });
   t.addEventListener('pointerleave', function () { t.classList.remove('lifted'); aim(0, 0, 0); });
 })();
 </script>
