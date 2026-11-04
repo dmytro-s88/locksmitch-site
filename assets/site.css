@@ -777,6 +777,8 @@ html.theme-anim, html.theme-anim *, html.theme-anim *::before, html.theme-anim *
     :root:not(.lowfx):not(.ios-safari) .estimate, :root:not(.lowfx):not(.ios-safari) .ticket { animation: card-tilt linear both; animation-timeline: view(); animation-range: cover; will-change: transform; }
     :root:not(.lowfx):not(.ios-safari) .hero-grid > .estimate { animation: rise-in .6s cubic-bezier(.2,.7,.2,1) .35s both, card-tilt linear both; animation-timeline: auto, view(); animation-range: normal, cover; }
     :root:not(.lowfx):not(.ios-safari) .estimate.typing, :root:not(.lowfx):not(.ios-safari) .ticket.typing, :root:not(.lowfx):not(.ios-safari) .hero-grid > .estimate.typing { animation-play-state: paused; }
+    /* experiment ?fx=norise: the estimate card gets only the scroll tilt, no rise-in (two animations on one element may keep Safari off the compositor) */
+    :root.fx-norise:not(.lowfx) .hero-grid > .estimate { animation: card-tilt linear both; animation-timeline: view(); animation-range: cover; }
   }
 }
 :root[data-theme="light"] .nav-dd-panel, :root[data-theme="light"] .lang::after, :root[data-theme="light"] .theme-btn::after { box-shadow: 0 18px 44px rgba(21,32,27,.16); }
