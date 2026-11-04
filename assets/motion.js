@@ -355,28 +355,6 @@ document.addEventListener('pointermove', function (e) {
   var cards = document.querySelectorAll('.estimate, .ticket');
   // weak phones (.lowfx, Android with 4 GB of memory or less) keep the card still, like they keep the header without blur
   if (!cards.length || document.documentElement.classList.contains('lowfx') || !window.matchMedia || matchMedia('(hover: hover) and (pointer: fine)').matches || matchMedia('(prefers-reduced-motion: reduce)').matches) return;
-  // iPhone / iPad: no scroll-linked tilt (Safari lags it behind the scrolling); the card stands up on its own clock when it comes into view (site.css)
-  if (window.CSS && CSS.supports && CSS.supports('-webkit-touch-callout', 'none')) {
-    if (!window.IntersectionObserver) return;
-    var arm = function () {
-      Array.prototype.forEach.call(cards, function (c) {
-        // the hero rise-in animation keeps its end state and would hide the transform: drop it once it has played
-        if (c.getAnimations) c.getAnimations().forEach(function (a) { if (a.playState === 'finished') a.cancel(); });
-        c.classList.add('tilt-ready');
-      });
-      var io = new IntersectionObserver(function (es) {
-        es.forEach(function (e) {
-          if (e.isIntersecting && e.intersectionRatio >= .17) { e.target.classList.add('stood', 'lifted'); }
-          else if (e.intersectionRatio === 0) { e.target.classList.remove('stood', 'lifted'); }
-        });
-      }, { threshold: [0, .18] });
-      Array.prototype.forEach.call(cards, function (c) { io.observe(c); });
-    };
-    var waits = [];
-    Array.prototype.forEach.call(cards, function (c) { if (c.getAnimations) waits = waits.concat(c.getAnimations()); });
-    if (waits.length && window.Promise) Promise.all(waits.map(function (a) { return a.finished; })).then(arm, arm); else setTimeout(arm, 300);
-    return;
-  }
   var raf = 0, ready = false;
   // browsers with scroll-driven animations tilt the card in CSS (site.css, card-tilt): here only the deeper shadow and the pause while typing
   var css = window.CSS && CSS.supports && CSS.supports('animation-timeline: view()');
