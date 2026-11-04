@@ -315,10 +315,11 @@
   var t = document.querySelector('.estimate');
   if (!t || !window.matchMedia || !matchMedia('(hover: hover) and (pointer: fine)').matches || matchMedia('(prefers-reduced-motion: reduce)').matches) return;
   var cur = { x: 0, y: 0, l: 0 }, tgt = { x: 0, y: 0, l: 0 }, raf = 0, over = false;
-  // Safari (Mac): it re-rasterizes the card's text at every small 3D turn, so the text shimmers while the card tilts (Dima's recording,
-  // 2026-11-03); Chrome paints the card once and turns the picture. There the card only lifts with its shadow, no turn.
-  var ua = navigator.userAgent, flat = /Version\/[\d.]+.*Safari\//.test(ua) && !/Chrome|Chromium|Edg|OPR/.test(ua);
   t.style.transition = 'box-shadow .6s ease';
+  // the hero rise-in keeps its end state and would override the tilt: once it has played, take it off with a class (site.css .risen).
+  // Cancelling it with the Web Animations API made Safari replay it on every hover: the card jumped and faded in again (Dima's video, 2026-11-03)
+  function risen() { t.classList.add('risen'); }
+  t.addEventListener('animationend', function (e) { if (e.animationName === 'rise-in') risen(); });
   function typing() { return t.contains(document.activeElement) && document.activeElement.matches('input, select, textarea'); }
   function tick() {
     var moving = false;
@@ -327,15 +328,11 @@
     raf = moving ? requestAnimationFrame(tick) : 0;
   }
   function aim(x, y, l) { tgt.x = x; tgt.y = y; tgt.l = l; if (!raf) raf = requestAnimationFrame(tick); }
-  t.addEventListener('pointerenter', function () {
-    // the hero rise-in animation keeps its end state and would hide the tilt: drop it once it has played
-    if (t.getAnimations) t.getAnimations().forEach(function (a) { if (a.playState === 'finished') a.cancel(); });
-    over = true; t.classList.add('lifted');
-  });
+  t.addEventListener('pointerenter', function () { risen(); over = true; t.classList.add('lifted'); });
   t.addEventListener('pointermove', function (e) {
     if (typing()) { aim(0, 0, 1); return; }
     var r = t.getBoundingClientRect(), x = (e.clientX - r.left) / r.width - .5, y = (e.clientY - r.top) / r.height - .5;
-    aim(flat ? 0 : -y * 4, flat ? 0 : x * 5, 1);
+    aim(-y * 4, x * 5, 1);
   });
   t.addEventListener('pointerleave', function () { over = false; t.classList.remove('lifted'); aim(0, 0, 0); });
   t.addEventListener('focusin', function () { aim(0, 0, over ? 1 : 0); });

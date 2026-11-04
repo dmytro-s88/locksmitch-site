@@ -26,7 +26,7 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="preload" as="style" href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@400;500;600;700;800&display=swap" onload="this.onload=null;this.rel='stylesheet'"><noscript><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@400;500;600;700;800&display=swap"></noscript>
-<link rel="stylesheet" href="/assets/site.css?v=20261103z">
+<link rel="stylesheet" href="/assets/site.css?v=20261104a">
 <script>try{if(navigator.deviceMemory<=4)document.documentElement.classList.add('lowfx');var t=localStorage.getItem('lm_theme');if(t&&!(Date.now()-(+localStorage.getItem('lm_theme_at')||0)<864e5))t=null;if(!t){var d=new Date(),n=d.getHours()*60+d.getMinutes(),m=d.getMonth(),up=[460,445,465,425,395,385,395,415,435,460,425,450][m],dn=[1070,1100,1185,1205,1230,1250,1250,1225,1190,1150,1055,1050][m];t=window.matchMedia&&matchMedia('(prefers-color-scheme: light)').matches&&n>=up&&n<dn?'light':'dark'}if(t==='light'){document.documentElement.setAttribute('data-theme','light');var c=document.querySelector('meta[name=theme-color]');c&&c.setAttribute('content','#F3F5F1')}window.gtag&&gtag('set','user_properties',{site_theme:t})}catch(e){}</script>
 <style>
 /* Booking page: same tokens as the main site (graphite fob, logo green, brass accents).
@@ -586,7 +586,7 @@ footer a:hover { color: var(--green); }
     bar.appendChild(p);
   })();
 </script>
-<script defer src="/assets/motion.js?v=20261103p"></script>
+<script defer src="/assets/motion.js?v=20261104a"></script>
 <script>
 /* Ticket tilt: only with a mouse, never with reduced motion; at most ~5 degrees, eases back when the pointer leaves.
    The transform is eased by script every frame (a spring), not by a CSS transition: restarting a transition on every pointer move
@@ -595,7 +595,6 @@ footer a:hover { color: var(--green); }
   var t = document.querySelector('.ticket');
   if (!t || !window.matchMedia || !matchMedia('(hover: hover) and (pointer: fine)').matches || matchMedia('(prefers-reduced-motion: reduce)').matches) return;
   var cur = { x: 0, y: 0, l: 0 }, tgt = { x: 0, y: 0, l: 0 }, raf = 0;
-  var ua = navigator.userAgent, flat = /Version\/[\d.]+.*Safari\//.test(ua) && !/Chrome|Chromium|Edg|OPR/.test(ua);   // Safari re-rasterizes text on every 3D turn (shimmer): lift only
   t.style.transition = 'box-shadow .6s ease';
   function tick() {
     var moving = false;
@@ -605,7 +604,7 @@ footer a:hover { color: var(--green); }
   }
   function aim(x, y, l) { tgt.x = x; tgt.y = y; tgt.l = l; if (!raf) raf = requestAnimationFrame(tick); }
   t.addEventListener('pointerenter', function () { t.classList.add('lifted'); });
-  t.addEventListener('pointermove', function (e) { var r = t.getBoundingClientRect(), x = (e.clientX - r.left) / r.width - .5, y = (e.clientY - r.top) / r.height - .5; aim(flat ? 0 : -y * 5, flat ? 0 : x * 6, 1); });
+  t.addEventListener('pointermove', function (e) { var r = t.getBoundingClientRect(), x = (e.clientX - r.left) / r.width - .5, y = (e.clientY - r.top) / r.height - .5; aim(-y * 5, x * 6, 1); });
   t.addEventListener('pointerleave', function () { t.classList.remove('lifted'); aim(0, 0, 0); });
 })();
 </script>

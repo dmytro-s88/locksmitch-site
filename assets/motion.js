@@ -386,10 +386,8 @@ document.addEventListener('pointermove', function (e) {
   }
   function onScroll() { if (ready && !raf) raf = requestAnimationFrame(update); }
   function start() {
-    // the hero rise-in animation keeps its end state and would hide the tilt: drop it once it has played
-    Array.prototype.forEach.call(cards, function (c) {
-      if (c.getAnimations) c.getAnimations().forEach(function (a) { if (a.playState === 'finished') a.cancel(); });
-    });
+    // the hero rise-in keeps its end state and would override the tilt: take it off with a class (site.css .risen), never cancel it (Safari replays it)
+    Array.prototype.forEach.call(cards, function (c) { c.classList.add('risen'); });
     ready = true;
     update();                                     // first tilt eases in with the card's own .6s transition
     setTimeout(function () {

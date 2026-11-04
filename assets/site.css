@@ -525,6 +525,7 @@ a, button, label, .btn, .facts .fact, .svc-pick label, .spots li { -webkit-tap-h
   .hero-grid > div > :nth-child(6) { animation-delay: .45s; }
   .hero-grid > div > :nth-child(7) { animation-delay: .53s; }
   .hero-grid > .estimate { animation: rise-in .6s cubic-bezier(.2,.7,.2,1) .35s both; }
+  .hero-grid > .estimate.risen { animation: none; }   /* once rise-in has played, the scripts take it off this way: cancelling it made Safari replay it on every hover (2026-11-03) */
 
   /* Mobile call bar: a slow, soft pulse ring on Call now */
   @keyframes cta-pulse { 0% { box-shadow: 0 0 0 0 var(--mix-green-55); } 55% { box-shadow: 0 0 0 12px transparent; } 100% { box-shadow: 0 0 0 0 transparent; } }
