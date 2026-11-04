@@ -26,7 +26,7 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="preload" as="style" href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@400;500;600;700;800&display=swap" onload="this.onload=null;this.rel='stylesheet'"><noscript><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@400;500;600;700;800&display=swap"></noscript>
-<link rel="stylesheet" href="/assets/site.css?v=20261103y">
+<link rel="stylesheet" href="/assets/site.css?v=20261103z">
 <script>try{if(navigator.deviceMemory<=4)document.documentElement.classList.add('lowfx');var t=localStorage.getItem('lm_theme');if(t&&!(Date.now()-(+localStorage.getItem('lm_theme_at')||0)<864e5))t=null;if(!t){var d=new Date(),n=d.getHours()*60+d.getMinutes(),m=d.getMonth(),up=[460,445,465,425,395,385,395,415,435,460,425,450][m],dn=[1070,1100,1185,1205,1230,1250,1250,1225,1190,1150,1055,1050][m];t=window.matchMedia&&matchMedia('(prefers-color-scheme: light)').matches&&n>=up&&n<dn?'light':'dark'}if(t==='light'){document.documentElement.setAttribute('data-theme','light');var c=document.querySelector('meta[name=theme-color]');c&&c.setAttribute('content','#F3F5F1')}window.gtag&&gtag('set','user_properties',{site_theme:t})}catch(e){}</script>
 <style>
 /* Booking page: same tokens as the main site (graphite fob, logo green, brass accents).
@@ -205,7 +205,6 @@ footer a:hover { color: var(--green); }
 .ticket { background: linear-gradient(180deg, #212D28 0%, var(--fob) 38%);
   box-shadow: inset 0 1px 0 rgba(255,255,255,.07), 0 2px 4px rgba(0,0,0,.35), 0 14px 28px -12px rgba(0,0,0,.55), 0 40px 80px -36px rgba(0,0,0,.8);
   transition: transform .6s cubic-bezier(.2,.7,.2,1), box-shadow .6s ease; }
-.ticket.tilting { transition: transform .12s linear, box-shadow .3s ease; }
 .ticket.lifted { box-shadow: inset 0 1px 0 rgba(255,255,255,.07), 0 4px 8px rgba(0,0,0,.35), 0 22px 40px -14px rgba(0,0,0,.6), 0 56px 100px -40px rgba(0,0,0,.85); }
 .perf::before, .perf::after { box-shadow: inset 0 3px 5px rgba(0,0,0,.45); }
 :root[data-theme="light"] .ticket { background: linear-gradient(180deg, #FFFFFF 0%, #FFFFFF 55%, #F7F9F6 100%);
@@ -589,16 +588,24 @@ footer a:hover { color: var(--green); }
 </script>
 <script defer src="/assets/motion.js?v=20261103o"></script>
 <script>
-/* Ticket tilt: only with a mouse, never with reduced motion; at most ~4 degrees, eases back when the pointer leaves */
+/* Ticket tilt: only with a mouse, never with reduced motion; at most ~5 degrees, eases back when the pointer leaves.
+   The transform is eased by script every frame (a spring), not by a CSS transition: restarting a transition on every pointer move
+   makes Safari snap back by a frame (2026-11-03, Dima's Mac) */
 (function () {
   var t = document.querySelector('.ticket');
   if (!t || !window.matchMedia || !matchMedia('(hover: hover) and (pointer: fine)').matches || matchMedia('(prefers-reduced-motion: reduce)').matches) return;
-  var raf = 0, ev = null;
-  function apply() { raf = 0; var r = t.getBoundingClientRect(), x = (ev.clientX - r.left) / r.width - .5, y = (ev.clientY - r.top) / r.height - .5;
-    t.style.transform = 'perspective(1100px) rotateX(' + (-y * 5).toFixed(2) + 'deg) rotateY(' + (x * 6).toFixed(2) + 'deg) translateY(-4px)'; }
-  t.addEventListener('pointerenter', function () { t.classList.add('lifted'); setTimeout(function () { t.classList.add('tilting'); }, 150); });
-  t.addEventListener('pointermove', function (e) { ev = e; if (!raf) raf = requestAnimationFrame(apply); });
-  t.addEventListener('pointerleave', function () { if (raf) cancelAnimationFrame(raf); raf = 0; t.classList.remove('tilting', 'lifted'); t.style.transform = ''; });
+  var cur = { x: 0, y: 0, l: 0 }, tgt = { x: 0, y: 0, l: 0 }, raf = 0;
+  t.style.transition = 'box-shadow .6s ease';
+  function tick() {
+    var moving = false;
+    for (var p in cur) { var d = tgt[p] - cur[p]; if (Math.abs(d) > 0.005) { cur[p] += d * 0.16; moving = true; } else cur[p] = tgt[p]; }
+    t.style.transform = (cur.x || cur.y || cur.l) ? 'perspective(1100px) rotateX(' + cur.x.toFixed(2) + 'deg) rotateY(' + cur.y.toFixed(2) + 'deg) translateY(' + (-4 * cur.l).toFixed(2) + 'px)' : '';
+    raf = moving ? requestAnimationFrame(tick) : 0;
+  }
+  function aim(x, y, l) { tgt.x = x; tgt.y = y; tgt.l = l; if (!raf) raf = requestAnimationFrame(tick); }
+  t.addEventListener('pointerenter', function () { t.classList.add('lifted'); });
+  t.addEventListener('pointermove', function (e) { var r = t.getBoundingClientRect(), x = (e.clientX - r.left) / r.width - .5, y = (e.clientY - r.top) / r.height - .5; aim(-y * 5, x * 6, 1); });
+  t.addEventListener('pointerleave', function () { t.classList.remove('lifted'); aim(0, 0, 0); });
 })();
 </script>
 </body>

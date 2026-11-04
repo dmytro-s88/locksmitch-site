@@ -753,11 +753,10 @@ html.theme-anim, html.theme-anim *, html.theme-anim *::before, html.theme-anim *
 :root[data-theme="light"] .estimate .svc-pick input:not(:checked) + label { border-color: rgba(21,32,27,.18); }
 :root[data-theme="light"] .estimate .btn-call { color: var(--on-green); }
 /* Estimate card depth (2026-11-03, same as the "Your visit" ticket on /book/): layered shadow and a lit top edge;
-   on a mouse it lifts and tilts a little toward the pointer, and stays still while a field has focus (site.js) */
+   on a mouse it lifts and tilts a little toward the pointer (site.js eases the transform itself, no CSS transition: Safari twitched), still while a field has focus */
 .estimate { background: linear-gradient(180deg, #212D28 0%, var(--fob) 38%);
   box-shadow: inset 0 1px 0 rgba(255,255,255,.07), 0 2px 4px rgba(0,0,0,.35), 0 14px 28px -12px rgba(0,0,0,.55), 0 40px 80px -36px rgba(0,0,0,.8);
   transition: transform .6s cubic-bezier(.2,.7,.2,1), box-shadow .6s ease; }
-.estimate.tilting { transition: transform .12s linear, box-shadow .3s ease; }
 .estimate.lifted { box-shadow: inset 0 1px 0 rgba(255,255,255,.07), 0 4px 8px rgba(0,0,0,.35), 0 22px 40px -14px rgba(0,0,0,.6), 0 56px 100px -40px rgba(0,0,0,.85); }
 :root[data-theme="light"] .estimate { background: linear-gradient(180deg, #FFFFFF 0%, #FFFFFF 55%, #F7F9F6 100%);
   box-shadow: inset 0 1px 0 #FFFFFF, 0 1px 2px rgba(21,32,27,.08), 0 8px 18px -6px rgba(21,32,27,.12), 0 30px 54px -22px rgba(21,32,27,.30), 0 64px 100px -56px rgba(21,32,27,.35); }

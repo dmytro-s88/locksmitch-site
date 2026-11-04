@@ -308,24 +308,34 @@
   document.addEventListener('keydown', function (e) { if (e.key === 'Escape') close(); });
 })();
 
-// Estimate card: on a mouse it lifts and tilts toward the pointer (up to ~4 degrees), still while a field has focus; never on touch or with reduced motion
+// Estimate card: on a mouse it lifts and tilts toward the pointer (up to ~4 degrees), still while a field has focus; never on touch or with reduced motion.
+// The transform is eased by this script every frame (a spring, like the logo fob), not by a CSS transition: restarting a transform
+// transition on every pointer move makes Safari snap back by a frame (its main thread lags the accelerated animation), a twitch on Dima's Mac (2026-11-03).
 (function () {
   var t = document.querySelector('.estimate');
   if (!t || !window.matchMedia || !matchMedia('(hover: hover) and (pointer: fine)').matches || matchMedia('(prefers-reduced-motion: reduce)').matches) return;
-  var raf = 0, ev = null;
-  function still() { t.classList.remove('tilting'); t.style.transform = ''; }
-  function apply() { raf = 0; if (t.contains(document.activeElement) && document.activeElement.matches('input, select, textarea')) { still(); return; }
-    t.classList.add('tilting');
-    var r = t.getBoundingClientRect(), x = (ev.clientX - r.left) / r.width - .5, y = (ev.clientY - r.top) / r.height - .5;
-    t.style.transform = 'perspective(1200px) rotateX(' + (-y * 4).toFixed(2) + 'deg) rotateY(' + (x * 5).toFixed(2) + 'deg) translateY(-4px)'; }
+  var cur = { x: 0, y: 0, l: 0 }, tgt = { x: 0, y: 0, l: 0 }, raf = 0, over = false;
+  t.style.transition = 'box-shadow .6s ease';
+  function typing() { return t.contains(document.activeElement) && document.activeElement.matches('input, select, textarea'); }
+  function tick() {
+    var moving = false;
+    for (var p in cur) { var d = tgt[p] - cur[p]; if (Math.abs(d) > 0.005) { cur[p] += d * 0.16; moving = true; } else cur[p] = tgt[p]; }
+    t.style.transform = (cur.x || cur.y || cur.l) ? 'perspective(1200px) rotateX(' + cur.x.toFixed(2) + 'deg) rotateY(' + cur.y.toFixed(2) + 'deg) translateY(' + (-4 * cur.l).toFixed(2) + 'px)' : '';
+    raf = moving ? requestAnimationFrame(tick) : 0;
+  }
+  function aim(x, y, l) { tgt.x = x; tgt.y = y; tgt.l = l; if (!raf) raf = requestAnimationFrame(tick); }
   t.addEventListener('pointerenter', function () {
     // the hero rise-in animation keeps its end state and would hide the tilt: drop it once it has played
     if (t.getAnimations) t.getAnimations().forEach(function (a) { if (a.playState === 'finished') a.cancel(); });
-    t.classList.add('lifted');
+    over = true; t.classList.add('lifted');
   });
-  t.addEventListener('pointermove', function (e) { ev = e; if (!raf) raf = requestAnimationFrame(apply); });
-  t.addEventListener('pointerleave', function () { if (raf) cancelAnimationFrame(raf); raf = 0; t.classList.remove('lifted'); still(); });
-  t.addEventListener('focusin', still);
+  t.addEventListener('pointermove', function (e) {
+    if (typing()) { aim(0, 0, 1); return; }
+    var r = t.getBoundingClientRect(), x = (e.clientX - r.left) / r.width - .5, y = (e.clientY - r.top) / r.height - .5;
+    aim(-y * 4, x * 5, 1);
+  });
+  t.addEventListener('pointerleave', function () { over = false; t.classList.remove('lifted'); aim(0, 0, 0); });
+  t.addEventListener('focusin', function () { aim(0, 0, over ? 1 : 0); });
 })();
 
 // Touch screens have no hover, so once per visit play it for them: "$15 off" pops, and the four hero badges light up one by one when they scroll into view
