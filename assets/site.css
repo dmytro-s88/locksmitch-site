@@ -827,3 +827,7 @@ footer .pay-venmo svg { width: 58px; height: 11px; color: var(--ink); }
    and the call bar, it stutters on scroll there. Solid background instead. */
 html.lowfx .top .wrap, html.lowfx .callbar { -webkit-backdrop-filter: none; backdrop-filter: none; background: var(--bg); }
 :root.lowfx[data-theme="light"] .top .wrap, :root.lowfx[data-theme="light"] .callbar { background: var(--surface); }
+/* Experiments (?fx=..., see motion.js): only with the parameter */
+html.fx-noblur .top .wrap, html.fx-noblur .callbar { -webkit-backdrop-filter: none; backdrop-filter: none; background: var(--bg); }
+:root.fx-noblur[data-theme="light"] .top .wrap, :root.fx-noblur[data-theme="light"] .callbar { background: var(--surface); }
+html.fx-noshadow .estimate, html.fx-noshadow .ticket { box-shadow: 0 6px 16px rgba(0,0,0,.25) !important; background: var(--fob) !important; }

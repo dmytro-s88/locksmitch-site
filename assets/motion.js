@@ -1,4 +1,24 @@
 // Shared motion for every page (also /book/): reveal on scroll, floating call button, pointer light on buttons.
+// Experiments (2026-11-03, for the Safari-on-iPhone stutter): ?fx=nogrid,noblur,noshadow,noscale,css,fps adds html.fx-* classes.
+// Nothing changes without the parameter. nogrid = no hero canvas, noblur = solid header and call bar, noshadow = flat card,
+// noscale = tilt without scale(), css = scroll-driven CSS tilt even in Safari, fps = a badge with main-thread frame times.
+(function () {
+  var m = location.search.match(/[?&]fx=([a-z,]+)/); if (!m) return;
+  m[1].split(',').forEach(function (f) { if (f) document.documentElement.classList.add('fx-' + f); });
+  if (m[1].indexOf('fps') < 0) return;
+  var b = document.createElement('div'); b.style.cssText = 'position:fixed;left:10px;top:100px;z-index:60;padding:6px 9px;border-radius:8px;background:#000;color:#9f9;font:600 13px/1.3 monospace;pointer-events:none;white-space:pre';
+  document.body.appendChild(b);
+  var last = 0, n = 0, long = 0, worst = 0, t0 = 0, scrolls = 0;
+  window.addEventListener('scroll', function () { scrolls++; }, { passive: true });
+  (function tick(t) {
+    if (last) { var d = t - last; n++; if (d > 34) long++; if (d > worst) worst = d; }
+    last = t;
+    if (!t0) t0 = t;
+    if (t - t0 >= 500) { b.textContent = 'fps ' + Math.round(n * 1000 / (t - t0)) + '  long ' + long + '  worst ' + Math.round(worst) + 'ms\nscroll ev/s ' + Math.round(scrolls * 1000 / (t - t0)); n = long = worst = scrolls = 0; t0 = t; }
+    requestAnimationFrame(tick);
+  })(0);
+})();
+
 // Motion (2026-10-23): reveal on scroll with a small stagger, floating call button on desktop after the hero.
 (function () {
   var reduce = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
@@ -97,7 +117,7 @@ document.addEventListener('pointermove', function (e) {
 (function () {
   var hero = document.querySelector('.hero');
   var mode = (location.search.match(/[?&]bg=(grid|floor|night)/) || [])[1] || document.documentElement.getAttribute('data-bg') || 'grid';
-  if (!hero || mode === 'night' || hero.querySelector('.hs')) return;
+  if (!hero || mode === 'night' || hero.querySelector('.hs') || document.documentElement.classList.contains('fx-nogrid')) return;
   var reduce = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
   var small = window.matchMedia('(max-width: 760px)').matches;
   var floor = mode === 'floor';
@@ -361,13 +381,14 @@ document.addEventListener('pointermove', function (e) {
   // (Dima's recordings), so the card stepped. There the script sets the tilt and a short transition, run by the GPU, fills the gaps.
   var ua = navigator.userAgent, iosSafari = /iP(hone|ad|od)/.test(ua) || (/Macintosh/.test(ua) && navigator.maxTouchPoints > 1);
   iosSafari = iosSafari && /Version\/[\d.]+.*Safari\//.test(ua) && !/CriOS|FxiOS|EdgiOS|OPiOS|GSA|DuckDuckGo/.test(ua);
+  if (document.documentElement.classList.contains('fx-css')) iosSafari = false;   // experiment: the CSS tilt in Safari too
   if (iosSafari) document.documentElement.classList.add('ios-safari');
   if (!iosSafari && window.CSS && CSS.supports && CSS.supports('animation-timeline: view()')) {
     var mark = function () { Array.prototype.forEach.call(cards, function (c) { c.classList.toggle('typing', typing(c)); }); };
     document.addEventListener('focusin', mark); document.addEventListener('focusout', function () { setTimeout(mark, 0); });
     return;
   }
-  var raf = 0, ready = false;
+  var raf = 0, ready = false, noscale = document.documentElement.classList.contains('fx-noscale');
   function update() {
     raf = 0;
     var vh = document.documentElement.clientHeight || window.innerHeight;
@@ -375,7 +396,7 @@ document.addEventListener('pointermove', function (e) {
       var r = c.getBoundingClientRect();
       if (r.bottom < -200 || r.top > vh + 200 || typing(c)) { c.style.transform = ''; return; }
       var p = Math.max(-1, Math.min(1, ((r.top + r.height / 2) / vh - .5) * 2));
-      c.style.transform = 'perspective(1000px) rotateX(' + (p * 11).toFixed(2) + 'deg) scale(' + (1 - Math.abs(p) * .04).toFixed(3) + ')';
+      c.style.transform = 'perspective(1000px) rotateX(' + (p * 11).toFixed(2) + 'deg)' + (noscale ? '' : ' scale(' + (1 - Math.abs(p) * .04).toFixed(3) + ')');
     });
   }
   function onScroll() { if (ready && !raf) raf = requestAnimationFrame(update); }
