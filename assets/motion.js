@@ -382,7 +382,7 @@ document.addEventListener('pointermove', function (e) {
   function start() {
     // the hero rise-in animation keeps its end state and would hide the tilt: drop it once it has played
     Array.prototype.forEach.call(cards, function (c) {
-      if (c.getAnimations) c.getAnimations().forEach(function (a) { if (a.playState === 'finished') a.cancel(); });
+      if (c.getAnimations) c.getAnimations().forEach(function (a) { if (a.playState === 'finished' || a.animationName === 'card-tilt') a.cancel(); });
     });
     ready = true;
     update();                                     // first tilt eases in with the card's own .6s transition
@@ -390,10 +390,14 @@ document.addEventListener('pointermove', function (e) {
       Array.prototype.forEach.call(cards, function (c) { c.style.transition = iosSafari ? 'transform .16s linear' : 'transform 0s'; c.style.willChange = 'transform'; });
     }, 650);
   }
-  var anims = [];
-  Array.prototype.forEach.call(cards, function (c) { if (c.getAnimations) anims = anims.concat(c.getAnimations()); });
-  if (anims.length && window.Promise) Promise.all(anims.map(function (a) { return a.finished; })).then(start, start);
-  else setTimeout(start, 300);
+  // wait for the hero rise-in only (Safari can still list the scroll-driven card-tilt here, which never finishes), at most 1.5 s
+  var started = false, go = function () { if (!started) { started = true; start(); } }, anims = [];
+  Array.prototype.forEach.call(cards, function (c) {
+    getComputedStyle(c).animationName;          // apply .ios-safari before asking for the running animations
+    if (c.getAnimations) anims = anims.concat(c.getAnimations().filter(function (a) { return a.animationName === 'rise-in'; }));
+  });
+  if (anims.length && window.Promise) Promise.all(anims.map(function (a) { return a.finished; })).then(go, go);
+  setTimeout(go, anims.length ? 1500 : 300);
   window.addEventListener('scroll', onScroll, { passive: true });
   window.addEventListener('resize', onScroll, { passive: true });
   document.addEventListener('focusin', onScroll);
