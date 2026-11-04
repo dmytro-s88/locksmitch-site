@@ -3,4 +3,23 @@ Allow: /
 Disallow: /form-backend/
 Disallow: /sms/
 Disallow: /notrack/
+
+# AI search and answer bots, allowed by name
+User-agent: GPTBot
+User-agent: OAI-SearchBot
+User-agent: ChatGPT-User
+User-agent: PerplexityBot
+User-agent: Perplexity-User
+User-agent: ClaudeBot
+User-agent: Claude-SearchBot
+User-agent: Claude-User
+User-agent: anthropic-ai
+User-agent: Google-Extended
+User-agent: Bingbot
+User-agent: Applebot
+Allow: /
+Disallow: /form-backend/
+Disallow: /sms/
+Disallow: /notrack/
+
 Sitemap: https://locksmitch.com/sitemap.xml
