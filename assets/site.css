@@ -764,7 +764,8 @@ html.theme-anim, html.theme-anim *, html.theme-anim *::before, html.theme-anim *
 :root[data-theme="light"] .estimate.lifted { box-shadow: inset 0 1px 0 #FFFFFF, 0 2px 4px rgba(21,32,27,.08), 0 14px 26px -8px rgba(21,32,27,.14), 0 42px 70px -26px rgba(21,32,27,.34), 0 80px 120px -60px rgba(21,32,27,.38); }
 /* Touch screens: the estimate card and the /book/ ticket tilt with scrolling. Where the browser has scroll-driven animations
    (Safari 26+, Chrome 115+) the tilt runs with the scrolling itself, so it cannot lag behind the page and twitch;
-   elsewhere motion.js sets it from the scroll position. Leaning back below the middle of the screen, upright in the middle,
+   elsewhere motion.js sets it from the scroll position. Safari on iPhone (.ios-safari, set by motion.js) updates a scroll-driven
+   animation only every 3-6 frames, so the card stepped; there motion.js sets the tilt and a short transition fills the gaps. Leaning back below the middle of the screen, upright in the middle,
    leaning forward above it. Not on weak phones (.lowfx), not with reduced motion, paused while a field has focus. */
 @keyframes card-tilt {
   0%, 20% { transform: perspective(1000px) rotateX(11deg) scale(.96); }
@@ -773,9 +774,9 @@ html.theme-anim, html.theme-anim *, html.theme-anim *::before, html.theme-anim *
 }
 @supports (animation-timeline: view()) {
   @media (prefers-reduced-motion: no-preference) and ((hover: none) or (pointer: coarse)) {
-    :root:not(.lowfx) .estimate, :root:not(.lowfx) .ticket { animation: card-tilt linear both; animation-timeline: view(); animation-range: cover; will-change: transform; }
-    :root:not(.lowfx) .hero-grid > .estimate { animation: rise-in .6s cubic-bezier(.2,.7,.2,1) .35s both, card-tilt linear both; animation-timeline: auto, view(); animation-range: normal, cover; }
-    :root:not(.lowfx) .estimate.typing, :root:not(.lowfx) .ticket.typing, :root:not(.lowfx) .hero-grid > .estimate.typing { animation-play-state: paused; }
+    :root:not(.lowfx):not(.ios-safari) .estimate, :root:not(.lowfx):not(.ios-safari) .ticket { animation: card-tilt linear both; animation-timeline: view(); animation-range: cover; will-change: transform; }
+    :root:not(.lowfx):not(.ios-safari) .hero-grid > .estimate { animation: rise-in .6s cubic-bezier(.2,.7,.2,1) .35s both, card-tilt linear both; animation-timeline: auto, view(); animation-range: normal, cover; }
+    :root:not(.lowfx):not(.ios-safari) .estimate.typing, :root:not(.lowfx):not(.ios-safari) .ticket.typing, :root:not(.lowfx):not(.ios-safari) .hero-grid > .estimate.typing { animation-play-state: paused; }
   }
 }
 :root[data-theme="light"] .nav-dd-panel, :root[data-theme="light"] .lang::after, :root[data-theme="light"] .theme-btn::after { box-shadow: 0 18px 44px rgba(21,32,27,.16); }

@@ -357,7 +357,12 @@ document.addEventListener('pointermove', function (e) {
   // weak phones (.lowfx, Android with 4 GB of memory or less) keep the card still, like they keep the header without blur
   if (!cards.length || document.documentElement.classList.contains('lowfx') || !window.matchMedia || matchMedia('(hover: hover) and (pointer: fine)').matches || matchMedia('(prefers-reduced-motion: reduce)').matches) return;
   function typing(c) { var a = document.activeElement; return c.contains(a) && a.matches('input, select, textarea'); }
-  if (window.CSS && CSS.supports && CSS.supports('animation-timeline: view()')) {
+  // Safari on iPhone/iPad (not Chrome or other apps there): it updates scroll-driven animations only every 3-6 frames
+  // (Dima's recordings), so the card stepped. There the script sets the tilt and a short transition, run by the GPU, fills the gaps.
+  var ua = navigator.userAgent, iosSafari = /iP(hone|ad|od)/.test(ua) || (/Macintosh/.test(ua) && navigator.maxTouchPoints > 1);
+  iosSafari = iosSafari && /Version\/[\d.]+.*Safari\//.test(ua) && !/CriOS|FxiOS|EdgiOS|OPiOS|GSA|DuckDuckGo/.test(ua);
+  if (iosSafari) document.documentElement.classList.add('ios-safari');
+  if (!iosSafari && window.CSS && CSS.supports && CSS.supports('animation-timeline: view()')) {
     var mark = function () { Array.prototype.forEach.call(cards, function (c) { c.classList.toggle('typing', typing(c)); }); };
     document.addEventListener('focusin', mark); document.addEventListener('focusout', function () { setTimeout(mark, 0); });
     return;
@@ -382,7 +387,7 @@ document.addEventListener('pointermove', function (e) {
     ready = true;
     update();                                     // first tilt eases in with the card's own .6s transition
     setTimeout(function () {
-      Array.prototype.forEach.call(cards, function (c) { c.style.transition = 'transform 0s'; c.style.willChange = 'transform'; });
+      Array.prototype.forEach.call(cards, function (c) { c.style.transition = iosSafari ? 'transform .16s linear' : 'transform 0s'; c.style.willChange = 'transform'; });
     }, 650);
   }
   var anims = [];
