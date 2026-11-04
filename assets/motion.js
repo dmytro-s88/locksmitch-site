@@ -3,9 +3,10 @@
 // Nothing changes without the parameter. nogrid = no hero canvas, noblur = solid header and call bar, noshadow = flat card,
 // noscale = tilt without scale(), css = scroll-driven CSS tilt even in Safari, fps = a badge with main-thread frame times.
 // poll = in Safari, set the tilt every frame from the card's position instead of on scroll events (Safari batches those).
+// t<ms> (e.g. t33) = in Safari, the transition that fills the gaps between script updates, default 160 ms.
 (function () {
-  var m = location.search.match(/[?&]fx=([a-z,]+)/); if (!m) return;
-  m[1].split(',').forEach(function (f) { if (f) document.documentElement.classList.add('fx-' + f); });
+  var m = location.search.match(/[?&]fx=([a-z0-9,]+)/); if (!m) return;
+  m[1].split(',').forEach(function (f) { if (f) document.documentElement.classList.add('fx-' + f); });   // fx-t33 etc. carry a number
   if (m[1].indexOf('fps') < 0) return;
   var b = document.createElement('div'); b.style.cssText = 'position:fixed;left:10px;top:100px;z-index:60;padding:6px 9px;border-radius:8px;background:#000;color:#9f9;font:600 13px/1.3 monospace;pointer-events:none;white-space:pre';
   document.body.appendChild(b);
@@ -402,6 +403,7 @@ document.addEventListener('pointermove', function (e) {
   }
   function onScroll() { if (ready && !raf) raf = requestAnimationFrame(update); }
   var poll = iosSafari && document.documentElement.classList.contains('fx-poll');
+  var tms = (document.documentElement.className.match(/\bfx-t(\d+)\b/) || [])[1] || 160;
   function start() {
     // the hero rise-in animation keeps its end state and would hide the tilt: drop it once it has played
     Array.prototype.forEach.call(cards, function (c) {
@@ -410,7 +412,7 @@ document.addEventListener('pointermove', function (e) {
     ready = true;
     update();                                     // first tilt eases in with the card's own .6s transition
     setTimeout(function () {
-      Array.prototype.forEach.call(cards, function (c) { c.style.transition = iosSafari && !poll ? 'transform .16s linear' : 'transform 0s'; c.style.willChange = 'transform'; });
+      Array.prototype.forEach.call(cards, function (c) { c.style.transition = iosSafari && !poll ? 'transform ' + tms + 'ms linear' : 'transform 0s'; c.style.willChange = 'transform'; });
       if (poll) (function loop() { update(); requestAnimationFrame(loop); })();
     }, 650);
   }
