@@ -181,6 +181,8 @@ button { font: inherit; color: inherit; }
 .done-actions { display: flex; flex-wrap: wrap; gap: 10px; margin-top: 6px; }
 
 footer { padding-block: 32px calc(36px + env(safe-area-inset-bottom, 0px)); border-top: 1px solid var(--line); color: var(--muted); font-size: 14px; }
+/* phones: room for the fixed Call now / Text bar, so it does not cover the last footer line (2026-11-03) */
+@media (max-width: 760px) { footer { padding-bottom: calc(110px + env(safe-area-inset-bottom, 0px)); } }
 footer .wrap { display: flex; flex-wrap: wrap; gap: 10px 26px; justify-content: space-between; }
 footer a { color: var(--ink); text-decoration: none; font-weight: 600; }
 footer a:hover { color: var(--green); }
