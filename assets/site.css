@@ -763,10 +763,10 @@ html.theme-anim, html.theme-anim *, html.theme-anim *::before, html.theme-anim *
   box-shadow: inset 0 1px 0 #FFFFFF, 0 1px 2px rgba(21,32,27,.08), 0 8px 18px -6px rgba(21,32,27,.12), 0 30px 54px -22px rgba(21,32,27,.30), 0 64px 100px -56px rgba(21,32,27,.35); }
 :root[data-theme="light"] .estimate.lifted { box-shadow: inset 0 1px 0 #FFFFFF, 0 2px 4px rgba(21,32,27,.08), 0 14px 26px -8px rgba(21,32,27,.14), 0 42px 70px -26px rgba(21,32,27,.34), 0 80px 120px -60px rgba(21,32,27,.38); }
 /* Touch screens: the estimate card and the /book/ ticket tilt with scrolling. Where the browser has scroll-driven animations
-   (Safari 26+, Chrome 115+) the tilt runs with the scrolling itself, so it cannot lag behind the page and twitch;
-   elsewhere motion.js sets it from the scroll position. Safari on iPhone (.ios-safari, set by motion.js) updates a scroll-driven
-   animation only every 3-6 frames, so the card stepped; there motion.js sets the tilt and a short transition fills the gaps. Leaning back below the middle of the screen, upright in the middle,
-   leaning forward above it. Not on weak phones (.lowfx), not with reduced motion, paused while a field has focus. */
+   (Chrome 115+, Safari 26+) the tilt runs with the scrolling on the compositor; elsewhere motion.js sets it from the scroll position.
+   Leaning back below the middle of the screen, upright in the middle, leaning forward above it. The card carries no other animation
+   here (no rise-in): with two, Safari on iPhone keeps the tilt on the main thread, and at 120 Hz it steps (2026-11-03, Dima's iPhone).
+   Not on weak phones (.lowfx), not with reduced motion, paused while a field has focus. */
 @keyframes card-tilt {
   0%, 20% { transform: perspective(1000px) rotateX(11deg) scale(.96); }
   50% { transform: perspective(1000px) rotateX(0deg) scale(1); }
@@ -774,11 +774,9 @@ html.theme-anim, html.theme-anim *, html.theme-anim *::before, html.theme-anim *
 }
 @supports (animation-timeline: view()) {
   @media (prefers-reduced-motion: no-preference) and ((hover: none) or (pointer: coarse)) {
-    :root:not(.lowfx):not(.ios-safari) .estimate, :root:not(.lowfx):not(.ios-safari) .ticket { animation: card-tilt linear both; animation-timeline: view(); animation-range: cover; will-change: transform; }
-    :root:not(.lowfx):not(.ios-safari) .hero-grid > .estimate { animation: rise-in .6s cubic-bezier(.2,.7,.2,1) .35s both, card-tilt linear both; animation-timeline: auto, view(); animation-range: normal, cover; }
-    :root:not(.lowfx):not(.ios-safari) .estimate.typing, :root:not(.lowfx):not(.ios-safari) .ticket.typing, :root:not(.lowfx):not(.ios-safari) .hero-grid > .estimate.typing { animation-play-state: paused; }
-    /* experiment ?fx=norise: the estimate card gets only the scroll tilt, no rise-in (two animations on one element may keep Safari off the compositor) */
-    :root.fx-norise:not(.lowfx) .hero-grid > .estimate { animation: card-tilt linear both; animation-timeline: view(); animation-range: cover; }
+    :root:not(.lowfx) .estimate, :root:not(.lowfx) .ticket { animation: card-tilt linear both; animation-timeline: view(); animation-range: cover; will-change: transform; }
+    :root:not(.lowfx) .hero-grid > .estimate { animation: card-tilt linear both; animation-timeline: view(); animation-range: cover; }
+    :root:not(.lowfx) .estimate.typing, :root:not(.lowfx) .ticket.typing, :root:not(.lowfx) .hero-grid > .estimate.typing { animation-play-state: paused; }
   }
 }
 :root[data-theme="light"] .nav-dd-panel, :root[data-theme="light"] .lang::after, :root[data-theme="light"] .theme-btn::after { box-shadow: 0 18px 44px rgba(21,32,27,.16); }
@@ -829,7 +827,3 @@ footer .pay-venmo svg { width: 58px; height: 11px; color: var(--ink); }
    and the call bar, it stutters on scroll there. Solid background instead. */
 html.lowfx .top .wrap, html.lowfx .callbar { -webkit-backdrop-filter: none; backdrop-filter: none; background: var(--bg); }
 :root.lowfx[data-theme="light"] .top .wrap, :root.lowfx[data-theme="light"] .callbar { background: var(--surface); }
-/* Experiments (?fx=..., see motion.js): only with the parameter */
-html.fx-noblur .top .wrap, html.fx-noblur .callbar { -webkit-backdrop-filter: none; backdrop-filter: none; background: var(--bg); }
-:root.fx-noblur[data-theme="light"] .top .wrap, :root.fx-noblur[data-theme="light"] .callbar { background: var(--surface); }
-html.fx-noshadow .estimate, html.fx-noshadow .ticket { box-shadow: 0 6px 16px rgba(0,0,0,.25) !important; background: var(--fob) !important; }

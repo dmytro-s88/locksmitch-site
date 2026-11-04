@@ -1,26 +1,4 @@
 // Shared motion for every page (also /book/): reveal on scroll, floating call button, pointer light on buttons.
-// Experiments (2026-11-03, for the Safari-on-iPhone stutter): ?fx=nogrid,noblur,noshadow,noscale,css,fps adds html.fx-* classes.
-// Nothing changes without the parameter. nogrid = no hero canvas, noblur = solid header and call bar, noshadow = flat card,
-// noscale = tilt without scale(), css = scroll-driven CSS tilt even in Safari, fps = a badge with main-thread frame times.
-// poll = in Safari, set the tilt every frame from the card's position instead of on scroll events (Safari batches those).
-// t<ms> (e.g. t33) = in Safari, the transition that fills the gaps between script updates, default 160 ms.
-(function () {
-  var m = location.search.match(/[?&]fx=([a-z0-9,]+)/); if (!m) return;
-  m[1].split(',').forEach(function (f) { if (f) document.documentElement.classList.add('fx-' + f); });   // fx-t33 etc. carry a number
-  if (m[1].indexOf('fps') < 0) return;
-  var b = document.createElement('div'); b.style.cssText = 'position:fixed;left:10px;top:100px;z-index:60;padding:6px 9px;border-radius:8px;background:#000;color:#9f9;font:600 13px/1.3 monospace;pointer-events:none;white-space:pre';
-  document.body.appendChild(b);
-  var last = 0, n = 0, long = 0, worst = 0, t0 = 0, scrolls = 0;
-  window.addEventListener('scroll', function () { scrolls++; }, { passive: true });
-  (function tick(t) {
-    if (last) { var d = t - last; n++; if (d > 34) long++; if (d > worst) worst = d; }
-    last = t;
-    if (!t0) t0 = t;
-    if (t - t0 >= 500) { b.textContent = 'fps ' + Math.round(n * 1000 / (t - t0)) + '  long ' + long + '  worst ' + Math.round(worst) + 'ms\nscroll ev/s ' + Math.round(scrolls * 1000 / (t - t0)); n = long = worst = scrolls = 0; t0 = t; }
-    requestAnimationFrame(tick);
-  })(0);
-})();
-
 // Motion (2026-10-23): reveal on scroll with a small stagger, floating call button on desktop after the hero.
 (function () {
   var reduce = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
@@ -119,7 +97,7 @@ document.addEventListener('pointermove', function (e) {
 (function () {
   var hero = document.querySelector('.hero');
   var mode = (location.search.match(/[?&]bg=(grid|floor|night)/) || [])[1] || document.documentElement.getAttribute('data-bg') || 'grid';
-  if (!hero || mode === 'night' || hero.querySelector('.hs') || document.documentElement.classList.contains('fx-nogrid')) return;
+  if (!hero || mode === 'night' || hero.querySelector('.hs')) return;
   var reduce = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
   var small = window.matchMedia('(max-width: 760px)').matches;
   var floor = mode === 'floor';
@@ -369,28 +347,23 @@ document.addEventListener('pointermove', function (e) {
 
 // Touch screens have no pointer to follow, so the estimate card and the booking ticket tilt with scrolling (2026-11-03):
 // leaning back below the middle of the screen (up to 11 degrees, a little smaller), upright in the middle, leaning forward above it.
-// Where the browser has scroll-driven animations the tilt itself is CSS (site.css, card-tilt), which runs with the scrolling;
-// this script then only pauses it while a field has focus. Elsewhere it sets the tilt from the scroll position: eases in once
+// Where the browser has scroll-driven animations (Chrome 115+, Safari 26+) the tilt is CSS (site.css, card-tilt): it runs with the
+// scrolling on the compositor, the only way to get 120 Hz on an iPhone (Safari caps scripts at 60 Hz, WebKit bug 173434), and the
+// card must carry no other animation, or Safari keeps it on the main thread and it steps (so no rise-in on the card there).
+// This script then only pauses it while a field has focus. Elsewhere it sets the tilt from the scroll position: eases in once
 // the page has loaded (so the first scroll does not snap it), then follows the finger frame by frame, taking the middle from the
-// steady layout height so Safari folding its toolbars does not jolt it. The shadow does not change on the way (a new big shadow
-// is a full repaint, which Safari showed as a stalled frame). Mouse screens use the pointer tilt (site.js, /book/).
+// steady layout height so Safari folding its toolbars does not jolt it. Mouse screens use the pointer tilt (site.js, /book/).
 (function () {
   var cards = document.querySelectorAll('.estimate, .ticket');
   // weak phones (.lowfx, Android with 4 GB of memory or less) keep the card still, like they keep the header without blur
   if (!cards.length || document.documentElement.classList.contains('lowfx') || !window.matchMedia || matchMedia('(hover: hover) and (pointer: fine)').matches || matchMedia('(prefers-reduced-motion: reduce)').matches) return;
   function typing(c) { var a = document.activeElement; return c.contains(a) && a.matches('input, select, textarea'); }
-  // Safari on iPhone/iPad (not Chrome or other apps there): it updates scroll-driven animations only every 3-6 frames
-  // (Dima's recordings), so the card stepped. There the script sets the tilt and a short transition, run by the GPU, fills the gaps.
-  var ua = navigator.userAgent, iosSafari = /iP(hone|ad|od)/.test(ua) || (/Macintosh/.test(ua) && navigator.maxTouchPoints > 1);
-  iosSafari = iosSafari && /Version\/[\d.]+.*Safari\//.test(ua) && !/CriOS|FxiOS|EdgiOS|OPiOS|GSA|DuckDuckGo/.test(ua);
-  if (document.documentElement.classList.contains('fx-css')) iosSafari = false;   // experiment: the CSS tilt in Safari too
-  if (iosSafari) document.documentElement.classList.add('ios-safari');
-  if (!iosSafari && window.CSS && CSS.supports && CSS.supports('animation-timeline: view()')) {
+  if (window.CSS && CSS.supports && CSS.supports('animation-timeline: view()')) {
     var mark = function () { Array.prototype.forEach.call(cards, function (c) { c.classList.toggle('typing', typing(c)); }); };
     document.addEventListener('focusin', mark); document.addEventListener('focusout', function () { setTimeout(mark, 0); });
     return;
   }
-  var raf = 0, ready = false, noscale = document.documentElement.classList.contains('fx-noscale');
+  var raf = 0, ready = false;
   function update() {
     raf = 0;
     var vh = document.documentElement.clientHeight || window.innerHeight;
@@ -398,28 +371,24 @@ document.addEventListener('pointermove', function (e) {
       var r = c.getBoundingClientRect();
       if (r.bottom < -200 || r.top > vh + 200 || typing(c)) { c.style.transform = ''; return; }
       var p = Math.max(-1, Math.min(1, ((r.top + r.height / 2) / vh - .5) * 2));
-      c.style.transform = 'perspective(1000px) rotateX(' + (p * 11).toFixed(2) + 'deg)' + (noscale ? '' : ' scale(' + (1 - Math.abs(p) * .04).toFixed(3) + ')');
+      c.style.transform = 'perspective(1000px) rotateX(' + (p * 11).toFixed(2) + 'deg) scale(' + (1 - Math.abs(p) * .04).toFixed(3) + ')';
     });
   }
   function onScroll() { if (ready && !raf) raf = requestAnimationFrame(update); }
-  var poll = iosSafari && document.documentElement.classList.contains('fx-poll');
-  var tms = (document.documentElement.className.match(/\bfx-t(\d+)\b/) || [])[1] || 160;
   function start() {
     // the hero rise-in animation keeps its end state and would hide the tilt: drop it once it has played
     Array.prototype.forEach.call(cards, function (c) {
-      if (c.getAnimations) c.getAnimations().forEach(function (a) { if (a.playState === 'finished' || a.animationName === 'card-tilt') a.cancel(); });
+      if (c.getAnimations) c.getAnimations().forEach(function (a) { if (a.playState === 'finished') a.cancel(); });
     });
     ready = true;
     update();                                     // first tilt eases in with the card's own .6s transition
     setTimeout(function () {
-      Array.prototype.forEach.call(cards, function (c) { c.style.transition = iosSafari && !poll ? 'transform ' + tms + 'ms linear' : 'transform 0s'; c.style.willChange = 'transform'; });
-      if (poll) (function loop() { update(); requestAnimationFrame(loop); })();
+      Array.prototype.forEach.call(cards, function (c) { c.style.transition = 'transform 0s'; c.style.willChange = 'transform'; });
     }, 650);
   }
-  // wait for the hero rise-in only (Safari can still list the scroll-driven card-tilt here, which never finishes), at most 1.5 s
+  // wait for the hero rise-in only, at most 1.5 s
   var started = false, go = function () { if (!started) { started = true; start(); } }, anims = [];
   Array.prototype.forEach.call(cards, function (c) {
-    getComputedStyle(c).animationName;          // apply .ios-safari before asking for the running animations
     if (c.getAnimations) anims = anims.concat(c.getAnimations().filter(function (a) { return a.animationName === 'rise-in'; }));
   });
   if (anims.length && window.Promise) Promise.all(anims.map(function (a) { return a.finished; })).then(go, go);
