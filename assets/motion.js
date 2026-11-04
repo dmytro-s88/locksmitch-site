@@ -191,6 +191,9 @@ document.addEventListener('pointermove', function (e) {
     ctx.lineWidth = 1;
   }
   var t0 = 0, lastSpawn = 0, autoNext = 800, frame = 0, visible = true;
+  // The estimate card sits on the grid. While the mouse is over it the grid ignores the pointer, lets its pulses die and stops
+  // redrawing: Safari on Mac draws canvas glows slowly, and the redraw made the card's hover tilt twitch (Dima, 2026-11-03).
+  var calm = false, running = false;
   function render(t) {
     var sc = Math.max(0, Math.min(1, (window.scrollY - (hero.offsetTop || 0) + 80) / Math.max(1, hero.offsetHeight)));
     var breathe = reduce ? 0 : Math.sin(t / 7000) * 0.035 + Math.sin(t / 2900) * 0.012;
@@ -201,10 +204,11 @@ document.addEventListener('pointermove', function (e) {
     ctx.clearRect(0, 0, W, H); ctx.lineWidth = 1; drawGrid(); drawPulses();
   }
   function loop(t) {
-    if (!visible || document.hidden) return;
+    if (!visible || document.hidden || (calm && !pulses.length && pAct < 0.01)) { running = false; return; }
+    running = true;
     if (!small || (frame++ & 1) === 0) {
       pAct += ((px > -999 ? 1 : 0) - pAct) * 0.08;
-      if (t > autoNext) { var ru = (Math.floor(Math.random() * N * 1.2) - Math.floor(N * 0.6)) * S, rv = (Math.floor(Math.random() * N * 1.2) - Math.floor(N * 0.6)) * S; var pr = proj(ru, rv); if (pr && pr[0] > 0 && pr[0] < W && pr[1] > 0 && pr[1] < H) spawn(ru, rv, false); autoNext = t + (small ? 900 : 1300) + Math.random() * 1500; }
+      if (t > autoNext && !calm) { var ru = (Math.floor(Math.random() * N * 1.2) - Math.floor(N * 0.6)) * S, rv = (Math.floor(Math.random() * N * 1.2) - Math.floor(N * 0.6)) * S; var pr = proj(ru, rv); if (pr && pr[0] > 0 && pr[0] < W && pr[1] > 0 && pr[1] < H) spawn(ru, rv, false); autoNext = t + (small ? 900 : 1300) + Math.random() * 1500; }
       render(t);
     }
     requestAnimationFrame(loop);
@@ -212,20 +216,26 @@ document.addEventListener('pointermove', function (e) {
   size(); prep(); window.addEventListener('resize', function () { size(); render(performance.now()); });
   if (reduce) { rx = trx = floor ? 1.18 : -0.2; prep(); render(0); return; }
   hero.addEventListener('pointermove', function (e) {
+    if (calm) return;
     var r = cv.getBoundingClientRect(); px = e.clientX - r.left; py = e.clientY - r.top;
     if (e.pointerType !== 'touch') tryy = ((e.clientX - r.left) / r.width - 0.5) * 0.22;
     var now = performance.now(); if (now - lastSpawn > (e.pointerType === 'touch' ? 140 : 90)) { lastSpawn = now; var n = nearestNode(px, py); if (n) spawn(n[0], n[1], true); }
   }, { passive: true });
   hero.addEventListener('pointerleave', function () { px = py = -9999; tryy = 0; });
+  var card = hero.querySelector('.estimate');
+  if (card && window.matchMedia && matchMedia('(hover: hover) and (pointer: fine)').matches) {
+    card.addEventListener('pointerenter', function () { calm = true; px = py = -9999; tryy = 0; });
+    card.addEventListener('pointerleave', function () { calm = false; if (visible && !running && !document.hidden) requestAnimationFrame(loop); });
+  }
   hero.addEventListener('touchstart', function (e) {
     var r = cv.getBoundingClientRect(), tt = e.touches[0]; px = tt.clientX - r.left; py = tt.clientY - r.top;
     var n = nearestNode(px, py); if (n) { spawn(n[0], n[1], true); spawn(n[0], n[1], true); }
     setTimeout(function () { px = py = -9999; }, 900);
   }, { passive: true });
   function start() {   // after the page has painted, so the grid never delays the first screen
-    new IntersectionObserver(function (en) { visible = en[0].isIntersecting; if (visible) requestAnimationFrame(loop); }).observe(hero);
-    document.addEventListener('visibilitychange', function () { if (!document.hidden && visible) requestAnimationFrame(loop); });
-    requestAnimationFrame(loop);
+    new IntersectionObserver(function (en) { visible = en[0].isIntersecting; if (visible && !running) requestAnimationFrame(loop); }).observe(hero);
+    document.addEventListener('visibilitychange', function () { if (!document.hidden && visible && !running) requestAnimationFrame(loop); });
+    if (!running) requestAnimationFrame(loop);
   }
   if (document.readyState === 'complete') setTimeout(start, 300); else window.addEventListener('load', function () { setTimeout(start, 300); });
 })();
