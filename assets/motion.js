@@ -352,7 +352,8 @@ document.addEventListener('pointermove', function (e) {
 // Still while a field has focus (the keyboard scrolls the page); mouse screens use the pointer tilt (site.js, /book/).
 (function () {
   var cards = document.querySelectorAll('.estimate, .ticket');
-  if (!cards.length || !window.matchMedia || matchMedia('(hover: hover) and (pointer: fine)').matches || matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+  // weak phones (.lowfx, Android with 4 GB of memory or less) keep the card still, like they keep the header without blur
+  if (!cards.length || document.documentElement.classList.contains('lowfx') || !window.matchMedia || matchMedia('(hover: hover) and (pointer: fine)').matches || matchMedia('(prefers-reduced-motion: reduce)').matches) return;
   var raf = 0, ready = false;
   function typing(c) { var a = document.activeElement; return c.contains(a) && a.matches('input, select, textarea'); }
   function update() {
