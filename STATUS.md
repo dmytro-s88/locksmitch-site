@@ -18,7 +18,8 @@
 | Прочее | `lake-lanier/`, `privacy/`, `404.html` |
 | Общие стили и скрипты | `assets/site.css`, `assets/site.js` (подключены на 49 страницах с `?v=20261022b`) |
 | Логотип, og-картинка, иконки | `assets/` (logo.webp для img, PNG для schema/og, og.png 1200x630) |
-| Форма заявки (бэкенд) | `form-backend/` - Apps Script "LocksMitch Site Form", scriptId `1DE2XXZ4KPqsc5j-O1-AjMp7psQRMmbH9owOBRz-Mo9s-aVG5r3abRn-3`; doPost шлёт письмо на info@locksmitch.com, doGet ?feed=instagram отдаёт галерею @locksmitch.ga |
+| Форма заявки | с 2026-11-03 постит прямо в веб-приложение бота (`site_estimate=1`, тот же адрес, что у /book/; site.js). Бот: лид, карточка с черновиком SMS, копия письмом на info@. Скрытое поле-ловушка `extra` (было `company`: автозаполнение iPhone его заполняло, и заявка молча пропадала) |
+| `form-backend/` | Apps Script "LocksMitch Site Form", scriptId `1DE2XXZ4KPqsc5j-O1-AjMp7psQRMmbH9owOBRz-Mo9s-aVG5r3abRn-3`: теперь только Instagram/Facebook (doGet ?feed=instagram, публикации); старый doPost формы (письмо на info@) больше не используется |
 | sitemap, robots, manifest | в корне; sitemap lastmod берётся из git |
 
 Всего 52 html-файла. Генератора страниц нет (шаблон и скрипты сборки потеряны в октябре): правки общих частей (футер, форма, шапка) делаются скриптом сразу по всем `*/index.html`.
@@ -43,6 +44,7 @@
 
 ## Сделано (хронология, последнее сверху)
 
+- 2026-11-03: заявка «Free estimate» уходит прямо в бот (site.js?v=20261103f), ловушка для ботов переименована в `extra` на 63 страницах и на /book/ (автозаполнение iPhone заполняло «Company», заявка пропадала). Работает только после деплоя бота v177.
 - 2026-11-03: после перезапуска Safari наклона не было вообще (воспроизведено в симуляторе): скрипт ждал окончания всех анимаций карточки, а Safari отдавал и бесконечную card-tilt. Теперь ждёт только rise-in и не дольше 1,5 с, card-tilt в Safari гасится; motion.js?v=20261103j.
 - 2026-11-03: смена тени не помогла. По видео Димы Safari на iPhone обновляет CSS-анимацию за прокруткой только раз в 3-6 кадров (ступеньки), Chrome на iPhone в каждом кадре. Только для Safari на iPhone/iPad (по user agent, класс html.ios-safari) наклон снова ставит скрипт, а переход transform .16s linear сглаживает ступеньки на видеочипе. Android и Chrome на iPhone: CSS как было. site.css?v=20261103v, motion.js?v=20261103i.
 - 2026-11-03: Safari на iPhone подтормаживал при наклоне (видео Димы: одиночные застывшие кадры посреди прокрутки, в Chrome на iPhone плавно). Убрана смена тени на ходу на телефонах (глубокая тень в середине экрана = полная перерисовка большой тени), карточке will-change: transform (рисуется один раз, дальше только поворачивается); наклон тот же. site.css?v=20261103u, motion.js?v=20261103h.

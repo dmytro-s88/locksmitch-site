@@ -293,7 +293,7 @@ footer a:hover { color: var(--green); }
             <div class="field"><label for="f-phone">Mobile number</label><input id="f-phone" name="phone" type="tel" inputmode="tel" placeholder="(770) 555-0134" autocomplete="tel" required></div>
             <label class="addon wide" id="addon" for="f-second" hidden><input type="checkbox" id="f-second" name="second"><span><b>Add a second key, 50% off</b><small>Same car, same key type, made in the same visit.</small></span></label>
             <div class="field wide"><label for="f-note">Anything Mitch should know? <span>(optional)</span></label><textarea id="f-note" name="note" maxlength="500" placeholder="Push-to-start or a key you turn, gate code, where to park..."></textarea></div>
-            <div class="hp" aria-hidden="true"><label for="f-company">Company</label><input id="f-company" name="company" tabindex="-1" autocomplete="off"></div>
+            <div class="hp" aria-hidden="true"><label for="f-extra">Leave this empty</label><input id="f-extra" name="extra" tabindex="-1" autocomplete="off"></div>
           </div>
         </section>
       </div>
@@ -489,7 +489,7 @@ footer a:hover { color: var(--green); }
     var data = new URLSearchParams({
       book_request: '1', svc: state.svc, date: state.date, time: state.time,
       vehicle: $('f-vehicle').value.trim(), address: $('f-address').value.trim(), name: $('f-name').value.trim(),
-      phone: digits, note: $('f-note').value.trim(), second: ($('f-second').checked && state.svc === 'akl') ? 'yes' : '', company: $('f-company').value,
+      phone: digits, note: $('f-note').value.trim(), second: ($('f-second').checked && state.svc === 'akl') ? 'yes' : '', extra: $('f-extra').value,
       src_ref: SRC.ref || '', src_land: SRC.land || ''
     });
     sendBtn.disabled = true; sendBtn.textContent = 'Sending…';

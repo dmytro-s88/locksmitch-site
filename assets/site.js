@@ -69,8 +69,9 @@
     document.addEventListener('keydown', function (e) { if (e.key === 'Escape') setDd(false); });
   }
 
-  // Estimate form: posts to the Apps Script endpoint, which emails info@locksmitch.com
-  var ENDPOINT = 'https://script.google.com/macros/s/AKfycbwEnPklqAabpkxC7UoInrIwUW17F5hXMmveX2hEEUIxUGt7hskz_RNbpzz9QHiTZIKz/exec';
+  // Estimate form (2026-11-03): posts straight to the LocksMitch bot (same web app as /book/), which saves the lead, shows the
+  // Telegram card with the SMS draft and emails a copy to info@. Before: Apps Script form endpoint -> email -> Make -> bot.
+  var ENDPOINT = 'https://script.google.com/macros/s/AKfycbynxb1ruxrGOtdWw-uGXRYzHs_Pz7L-ad5lc9KdyqKUzbRcSfJ1-L97VLvmfUbY_cZh/exec';
   var form = document.getElementById('leadForm');
   var err = document.getElementById('formErr');
   var sendBtn = document.getElementById('sendBtn');
@@ -83,12 +84,13 @@
     var phone = form.phone.value.trim();
     if ((phone.match(/\d/g) || []).length < 7) { form.phone.focus(); showErr(T('Check the phone number. It needs at least 7 digits.', 'Revise el número de teléfono. Necesita al menos 7 dígitos.')); return; }
     var data = new URLSearchParams({
+      site_estimate: '1',
       service: (form.querySelector('input[name="svc"]:checked') || {}).value || '',
       second_key: (document.getElementById('s1').checked && document.getElementById('f-second').checked) ? 'yes' : '',
       vehicle: form.vehicle.value.trim(),
       name: form.name.value.trim(),
       phone: phone,
-      company: form.company.value,
+      extra: form.extra.value,   // bot trap; named without meaning so iPhone autofill leaves it alone (it filled "company" from the contact card)
       page: location.href,
       src_ref: SRC.ref || '',
       src_land: SRC.land || ''
