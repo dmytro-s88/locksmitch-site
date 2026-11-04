@@ -76,6 +76,8 @@
   var err = document.getElementById('formErr');
   var sendBtn = document.getElementById('sendBtn');
   function showErr(html) { err.innerHTML = html; err.hidden = false; }
+  // /guides/ and /book/ have no estimate form: skip the handlers, keep the rest of the script running.
+  if (form) {
   form.addEventListener('submit', function (e) {
     e.preventDefault();
     err.hidden = true;
@@ -118,6 +120,7 @@
     document.getElementById('estForm').hidden = false;
     showCard();
   });
+  }
   // After the form swaps for the confirmation (or back), the card gets shorter or taller and the page jumps.
   // Bring the card's top into view under the sticky header and move focus to its heading.
   function showCard() {
@@ -160,7 +163,7 @@
 
   // Second key add-on only applies to All keys lost
   var addon = document.getElementById('addon');
-  function syncAddon() { var c = document.querySelector('input[name="svc"]:checked'); addon.hidden = !(c && c.id === 's1'); }
+  function syncAddon() { if (!addon) return; var c = document.querySelector('input[name="svc"]:checked'); addon.hidden = !(c && c.id === 's1'); }
   Array.prototype.forEach.call(document.querySelectorAll('input[name="svc"]'), function (r) { r.addEventListener('change', syncAddon); });
   syncAddon();
 
