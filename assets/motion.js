@@ -387,7 +387,7 @@ document.addEventListener('pointermove', function (e) {
     ready = true;
     update();                                     // first tilt eases in with the card's own .6s transition
     setTimeout(function () {
-      Array.prototype.forEach.call(cards, function (c) { c.style.transition = iosSafari ? 'transform .25s linear' : 'transform 0s'; c.style.willChange = 'transform'; });
+      Array.prototype.forEach.call(cards, function (c) { c.style.transition = iosSafari ? 'transform .16s linear' : 'transform 0s'; c.style.willChange = 'transform'; });
     }, 650);
   }
   // wait for the hero rise-in only (Safari can still list the scroll-driven card-tilt here, which never finishes), at most 1.5 s
