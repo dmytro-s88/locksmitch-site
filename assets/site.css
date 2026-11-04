@@ -773,7 +773,7 @@ html.theme-anim, html.theme-anim *, html.theme-anim *::before, html.theme-anim *
 }
 @supports (animation-timeline: view()) {
   @media (prefers-reduced-motion: no-preference) and ((hover: none) or (pointer: coarse)) {
-    :root:not(.lowfx) .estimate, :root:not(.lowfx) .ticket { animation: card-tilt linear both; animation-timeline: view(); animation-range: cover; }
+    :root:not(.lowfx) .estimate, :root:not(.lowfx) .ticket { animation: card-tilt linear both; animation-timeline: view(); animation-range: cover; will-change: transform; }
     :root:not(.lowfx) .hero-grid > .estimate { animation: rise-in .6s cubic-bezier(.2,.7,.2,1) .35s both, card-tilt linear both; animation-timeline: auto, view(); animation-range: normal, cover; }
     :root:not(.lowfx) .estimate.typing, :root:not(.lowfx) .ticket.typing, :root:not(.lowfx) .hero-grid > .estimate.typing { animation-play-state: paused; }
   }

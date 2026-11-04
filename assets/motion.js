@@ -346,36 +346,32 @@ document.addEventListener('pointermove', function (e) {
 })();
 
 // Touch screens have no pointer to follow, so the estimate card and the booking ticket tilt with scrolling (2026-11-03):
-// leaning back below the middle of the screen (up to 11 degrees, a little smaller), upright and lifted in the middle, leaning forward above it.
-// Eases into its tilt once the page has loaded (so the first scroll does not snap it), then follows the finger frame by frame.
-// The middle is taken from the steady layout height, so Safari folding its toolbars does not jolt it.
-// Where the browser has scroll-driven animations the tilt itself is CSS (site.css, card-tilt), which runs with the scrolling and cannot lag.
-// Still while a field has focus (the keyboard scrolls the page); mouse screens use the pointer tilt (site.js, /book/).
+// leaning back below the middle of the screen (up to 11 degrees, a little smaller), upright in the middle, leaning forward above it.
+// Where the browser has scroll-driven animations the tilt itself is CSS (site.css, card-tilt), which runs with the scrolling;
+// this script then only pauses it while a field has focus. Elsewhere it sets the tilt from the scroll position: eases in once
+// the page has loaded (so the first scroll does not snap it), then follows the finger frame by frame, taking the middle from the
+// steady layout height so Safari folding its toolbars does not jolt it. The shadow does not change on the way (a new big shadow
+// is a full repaint, which Safari showed as a stalled frame). Mouse screens use the pointer tilt (site.js, /book/).
 (function () {
   var cards = document.querySelectorAll('.estimate, .ticket');
   // weak phones (.lowfx, Android with 4 GB of memory or less) keep the card still, like they keep the header without blur
   if (!cards.length || document.documentElement.classList.contains('lowfx') || !window.matchMedia || matchMedia('(hover: hover) and (pointer: fine)').matches || matchMedia('(prefers-reduced-motion: reduce)').matches) return;
-  var raf = 0, ready = false;
-  // browsers with scroll-driven animations tilt the card in CSS (site.css, card-tilt): here only the deeper shadow and the pause while typing
-  var css = window.CSS && CSS.supports && CSS.supports('animation-timeline: view()');
   function typing(c) { var a = document.activeElement; return c.contains(a) && a.matches('input, select, textarea'); }
+  if (window.CSS && CSS.supports && CSS.supports('animation-timeline: view()')) {
+    var mark = function () { Array.prototype.forEach.call(cards, function (c) { c.classList.toggle('typing', typing(c)); }); };
+    document.addEventListener('focusin', mark); document.addEventListener('focusout', function () { setTimeout(mark, 0); });
+    return;
+  }
+  var raf = 0, ready = false;
   function update() {
     raf = 0;
     var vh = document.documentElement.clientHeight || window.innerHeight;
     Array.prototype.forEach.call(cards, function (c) {
       var r = c.getBoundingClientRect();
-      if (css) c.classList.toggle('typing', typing(c));
-      if (r.bottom < -200 || r.top > vh + 200 || typing(c)) { if (!css) c.style.transform = ''; c.classList.remove('lifted'); return; }
+      if (r.bottom < -200 || r.top > vh + 200 || typing(c)) { c.style.transform = ''; return; }
       var p = Math.max(-1, Math.min(1, ((r.top + r.height / 2) / vh - .5) * 2));
-      if (!css) c.style.transform = 'perspective(1000px) rotateX(' + (p * 11).toFixed(2) + 'deg) scale(' + (1 - Math.abs(p) * .04).toFixed(3) + ')';
-      c.classList.toggle('lifted', Math.abs(p) < .35);
+      c.style.transform = 'perspective(1000px) rotateX(' + (p * 11).toFixed(2) + 'deg) scale(' + (1 - Math.abs(p) * .04).toFixed(3) + ')';
     });
-  }
-  if (css) {
-    ready = true; update();
-    window.addEventListener('scroll', function () { if (!raf) raf = requestAnimationFrame(update); }, { passive: true });
-    document.addEventListener('focusin', update); document.addEventListener('focusout', function () { setTimeout(update, 0); });
-    return;
   }
   function onScroll() { if (ready && !raf) raf = requestAnimationFrame(update); }
   function start() {
@@ -386,7 +382,7 @@ document.addEventListener('pointermove', function (e) {
     ready = true;
     update();                                     // first tilt eases in with the card's own .6s transition
     setTimeout(function () {
-      Array.prototype.forEach.call(cards, function (c) { c.style.transition = 'transform 0s, box-shadow .35s ease'; });
+      Array.prototype.forEach.call(cards, function (c) { c.style.transition = 'transform 0s'; c.style.willChange = 'transform'; });
     }, 650);
   }
   var anims = [];
