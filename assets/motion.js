@@ -2,6 +2,7 @@
 // Experiments (2026-11-03, for the Safari-on-iPhone stutter): ?fx=nogrid,noblur,noshadow,noscale,css,fps adds html.fx-* classes.
 // Nothing changes without the parameter. nogrid = no hero canvas, noblur = solid header and call bar, noshadow = flat card,
 // noscale = tilt without scale(), css = scroll-driven CSS tilt even in Safari, fps = a badge with main-thread frame times.
+// poll = in Safari, set the tilt every frame from the card's position instead of on scroll events (Safari batches those).
 (function () {
   var m = location.search.match(/[?&]fx=([a-z,]+)/); if (!m) return;
   m[1].split(',').forEach(function (f) { if (f) document.documentElement.classList.add('fx-' + f); });
@@ -400,6 +401,7 @@ document.addEventListener('pointermove', function (e) {
     });
   }
   function onScroll() { if (ready && !raf) raf = requestAnimationFrame(update); }
+  var poll = iosSafari && document.documentElement.classList.contains('fx-poll');
   function start() {
     // the hero rise-in animation keeps its end state and would hide the tilt: drop it once it has played
     Array.prototype.forEach.call(cards, function (c) {
@@ -408,7 +410,8 @@ document.addEventListener('pointermove', function (e) {
     ready = true;
     update();                                     // first tilt eases in with the card's own .6s transition
     setTimeout(function () {
-      Array.prototype.forEach.call(cards, function (c) { c.style.transition = iosSafari ? 'transform .16s linear' : 'transform 0s'; c.style.willChange = 'transform'; });
+      Array.prototype.forEach.call(cards, function (c) { c.style.transition = iosSafari && !poll ? 'transform .16s linear' : 'transform 0s'; c.style.willChange = 'transform'; });
+      if (poll) (function loop() { update(); requestAnimationFrame(loop); })();
     }, 650);
   }
   // wait for the hero rise-in only (Safari can still list the scroll-driven card-tilt here, which never finishes), at most 1.5 s
