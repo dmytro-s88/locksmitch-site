@@ -156,15 +156,21 @@ MAKES = {
         ],
     },
     'bmw': {
-        'h3': 'BMW and Mini keys',
+        'h3': 'BMW keys, generation by generation',
         'paras': [
-            "In BMW and Mini cars, the key data lives in a module, not in the key. On older models it's a module called CAS; on many later 3 Series, X-models and Minis it's FEM or BDC. A new key is coded to that module, which is why BMW keys take more work than most cars.",
-            "Many BMWs from these years have Comfort Access, where the car unlocks as you touch the handle. Others use a remote key you press. With a working key, adding a spare is fairly quick. With every key lost, we often need to read the module, which can take a couple of hours on some models.",
-            "Text us the year, model and whether you have Comfort Access, plus whether you still have a working key. We confirm your exact car before anyone drives out.",
+            "On a BMW or Mini the key data lives in a module in the car, not only in the key, so the new key has to be coded to that module. Which module your car has depends on the generation, and we work with all of them.",
+            "EWS (older E-series such as the E46 3 Series, E39 5 Series and first X5, up to about 2006): spare keys and all keys lost. CAS (about 2002 to 2014: E90 3 Series, E60 and F10 5 Series, E70 X5, Mini R56): spare keys and all keys lost, usually by reading the CAS module. FEM and BDC (F-series, about 2012 to 2019: F30 3 Series, F32 4 Series, F15 X5, F48 X1, Mini F56 and Countryman): spare keys and all keys lost, done at the car.",
+            "G-series (newer models such as the G20 3 Series, G30 5 Series, G01 X3 and G05 X5): we add a spare key when you still have one working key. If every key to a G-series is lost, the key has to come from the dealer, and we tell you that on the phone, for free, before anyone drives out.",
+            "Comfort Access smart keys, regular remote keys and the newer BMW key styles are all coded at your car: in your driveway, at work or in a parking lot. You skip the tow to the dealer and the days of waiting for a key to be ordered.",
+            "Text us the year and model (or the VIN), whether the car has Comfort Access, and whether you still have a working key. We confirm your exact car and the price before we come out.",
         ],
         'faq': [
-            ("Why are BMW keys more expensive than Toyota or Honda keys?", "On a BMW the key is coded to a module in the car (CAS, FEM or BDC), and the key blanks cost more. It takes more equipment and more time than a typical Japanese car. You get the exact price by text before we come out."),
+            ("Why are BMW keys more expensive than Toyota or Honda keys?", "On a BMW the key is coded to a module in the car (EWS, CAS, FEM or BDC), and the key blanks cost more. It takes more equipment and more time than a typical Japanese car. You get the exact price by text before we come out."),
             ("Do you make keys for Mini Cooper and Countryman?", "Yes, Mini uses BMW's key systems and the same price range. Send the year and model and we confirm."),
+            ("I lost every key to my BMW. Can you still make one?", "Yes for EWS, CAS, FEM and BDC cars, which covers most BMW and Mini models up to about 2019. We read the module and code a new key at the car. For the newest G-series models a lost-all-keys job goes to the dealer, and we tell you that before anyone drives out."),
+            ("How much is a BMW key replacement?", "Any BMW or Mini key starts at $350, cut and programmed at your car. All keys lost is quoted by model. Every price includes coming to you, and the price you get by text is the price at the car."),
+            ("How long does it take to make a BMW key?", "A spare key with a working key is usually done in under an hour at the car. All keys lost can take a couple of hours on some models because we read the module first."),
+            ("Is it cheaper than the BMW dealer?", "Usually yes, and faster. The dealer often orders the key and asks you to tow the car in if every key is lost. We come to the car and finish the job the same visit on most models."),
         ],
     },
     'mercedes': {

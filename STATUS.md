@@ -44,6 +44,7 @@
 
 ## Сделано (хронология, последнее сверху)
 
+- 2026-11-11: BMW страница по просьбе Димы (позиция ~#67 в Google): блок «BMW keys, generation by generation» (EWS, CAS, FEM/BDC: запасной и all keys lost; G-серия только запасной при рабочем ключе, AKL к дилеру), 6 вопросов FAQ (+4, в JSON-LD), title «BMW Key Replacement in Cumming, GA, 24/7», новое описание; llms.txt: Quick answer и Honest limit про BMW. Источник текста: tools/make_content.py.
 - 2026-11-11: sameAs на 29 страницах (schema LocalBusiness) и Profiles в llms.txt: добавлены BBB, Manta, Nextdoor (https://nextdoor.com/page/locksmitch-cumming-ga/), Foursquare. В repo лежат чужие неотслеженные `assets/email/` (иконки подписи письма, 02.11) и `.DS_Store` — не коммитим, не трогаем.
 - 2026-11-04: Города связаны с гайдами (`tools/city_guides.py`): на всех 24 страницах городов первый вопрос FAQ «Lost all your car keys in <City>?» с ответом под город (минуты в пути, зона: без доплаты / +$50 / по запросу, от $190) и ссылкой на гайд, в FAQPage тот же текст без ссылки; в боковой колонке список из 4 гайдов. Запушено 2026-11-04.
 - 2026-11-04: site.js падал на /guides/ и /book/ (там нет формы оценки): `form.addEventListener` и `syncAddon` на null. Всё после этой строки не выполнялось, в том числе аналитика кликов Call/Text/Book на /book/ (с 2026-11-03, когда форму перевели на бота). Обе точки под `if (form)` / `if (!addon) return`, версия site.js?v=20261104c на 63 страницах. Проверено в чистой вкладке: ошибок нет, lmTrack есть.
