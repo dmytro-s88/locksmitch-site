@@ -152,6 +152,23 @@ function publishKeyOk_(p) {
   return digest === IG_PUBLISH_KEY_SHA256;
 }
 
+// Last posts of @locksmitch.ga (read-only, same key): reel_check.py asks it every evening whether Dima posted the ready reel.
+function igRecent_(p) {
+  if (!publishKeyOk_(p)) return { ok: false, error: 'forbidden' };
+  var token = PropertiesService.getScriptProperties().getProperty('IG_TOKEN');
+  if (!token) return { ok: false, error: 'no_token' };
+  try {
+    var n = Math.min(Math.max(Number(p.limit) || 10, 1), 25);
+    var j = igCall_('get', 'me/media', { fields: 'id,media_type,media_product_type,permalink,timestamp,caption', limit: n }, token);
+    return { ok: true, media: (j.data || []).map(function (m) {
+      return { id: m.id, type: m.media_type, product: m.media_product_type || '', link: m.permalink,
+               time: m.timestamp, caption: String(m.caption || '').split('\n')[0].slice(0, 120) };
+    }) };
+  } catch (err) {
+    return { ok: false, error: String(err.message || err) };
+  }
+}
+
 function igPublish_(p) {
   if (!publishKeyOk_(p)) return { ok: false, error: 'forbidden' };
   var token = PropertiesService.getScriptProperties().getProperty('IG_TOKEN');
