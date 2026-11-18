@@ -55,6 +55,7 @@
 
 ## Сделано (хронология, последнее сверху)
 
+- 2026-11-18: Разметка отзывов (aggregateRating, review) СНЯТА со всех страниц по решению Димы: отзывы взяты из Google, размечать оценки с другой площадки правила Google не разрешают, звёзд это не даёт. Видимый блок «What customers say», строка «5.0 on Google» и ссылка на профиль в sameAs остаются. В `tools/reviews_build.py` флаг `REVIEW_MARKUP = False`.
 - 2026-11-18: ПРАВКИ ПО АУДИТУ САЙТА (аудит: `LocksMitch-bot/docs/site-audit-2026-11-18.md`). Закоммичено по группам, НЕ запушено: ждёт «Push сайт» Димы. Проверка после всех правок: 72 страницы, 222 блока JSON-LD читаются, длинных тире нет, внутренние ссылки и файлы /assets/ на месте, sitemap = 67 индексируемых страниц, вопросы FAQ в тексте и в FAQPage совпадают; все скрипты сборки при повторном запуске дают 0 изменений; телефонная ширина в светлой и тёмной теме просмотрена (главная, город, сервисная, гайд, /book/).
   - `6d7541b` Сервисные страницы: город в title, H1 и первом абзаце, цены из /pricing/ списком, абзац про Cumming и Forsyth County. Title: all-keys-lost «All Car Keys Lost in Cumming, GA, from $190», spare-key «Spare Car Key in Cumming, GA, from $140», car-lockout «Car Lockout in Cumming, GA, from $75, 24/7», key-programming «Key Fob Programming in Cumming, GA, from $99» (было «Near You, from $89»).
   - `a7f8cac` Mercedes: title «Mercedes-Benz Key Replacement, 2014 and Older», три общих ответа FAQ и FAQPage приведены к ограничению (до 2014, 2015+ только дилер).
