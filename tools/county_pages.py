@@ -164,7 +164,11 @@ def build(slug, c):
     def fix_ld(m):
         d = json.loads(m.group(1))
         t = d.get('@type')
-        if t == 'Locksmith':
+        if t == 'Service' and str(d.get('@id', '')).endswith('#service'):
+            # the page's own node; the Locksmith node is the same on every page (tools/locksmith_ld.py)
+            d['@id'] = url + '#service'
+            d['url'] = url
+            d['name'] = plain(c['h1'])
             d['description'] = c['desc']
             d['areaServed'] = [{'@type': 'AdministrativeArea', 'name': c['area']}] + [{'@type': 'City', 'name': CITY_NAMES[x] + ', GA'} for x in c['cities']]
         elif t == 'BreadcrumbList':
