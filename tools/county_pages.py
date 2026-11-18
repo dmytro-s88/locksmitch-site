@@ -221,7 +221,7 @@ def link_home():
 
 def link_makes():
     """Make pages had no links to cities outside the footer."""
-    dirs = sorted(d for d in os.listdir(ROOT) if d.endswith('-key-replacement'))
+    dirs = sorted(d for d in os.listdir(ROOT) if d.endswith('-key-replacement') and d != 'car-key-replacement')   # that one is a service page
     for n, d in enumerate(dirs):
         s = read(d, 'index.html')
         s = re.sub(r'\s*<p class="make-cities".*?</p>', '', s, flags=re.S)

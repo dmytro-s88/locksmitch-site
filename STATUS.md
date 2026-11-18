@@ -1,4 +1,4 @@
-# locksmitch-site - статус (2026-11-11, site.css?v=20261104b, site.js?v=20261104c)
+# locksmitch-site - статус (2026-11-18, site.css?v=20261104b, site.js?v=20261104c)
 
 Записка для новой сессии Claude и для Димы. Что это за проект, где что лежит, что сделано и что осталось. Обновлять, когда что-то меняется.
 
@@ -12,7 +12,7 @@
 |---|---|
 | Главная | `index.html` |
 | 24 городских страницы | `cumming/`, `alpharetta/`, ... (папка = URL) |
-| 4 сервисных | `spare-key/`, `all-keys-lost/`, `car-lockout/`, `key-programming/` |
+| 5 сервисных | `car-key-replacement/` (хаб под запрос «car key replacement», с 2026-11-18), `spare-key/`, `all-keys-lost/`, `car-lockout/`, `key-programming/` |
 | 19 страниц по маркам | `bmw-key-replacement/`, `toyota-key-replacement/`, ... |
 | Онлайн-запись | `book/index.html` (свои CSS/JS, отправляет в веб-приложение бота, не в form-backend) |
 | Прочее | `lake-lanier/`, `privacy/`, `404.html` |
@@ -22,7 +22,7 @@
 | `form-backend/` | Apps Script "LocksMitch Site Form", scriptId `1DE2XXZ4KPqsc5j-O1-AjMp7psQRMmbH9owOBRz-Mo9s-aVG5r3abRn-3`: теперь только Instagram/Facebook (doGet ?feed=instagram, публикации); старый doPost формы (письмо на info@) больше не используется |
 | sitemap, robots, manifest | в корне; sitemap lastmod берётся из git |
 
-Всего 52 html-файла. Генератора страниц нет (шаблон и скрипты сборки потеряны в октябре): правки общих частей (футер, форма, шапка) делаются скриптом сразу по всем `*/index.html`.
+Всего 70 html-файлов (на 2026-11-18). Генератора страниц нет (шаблон и скрипты сборки потеряны в октябре): правки общих частей (футер, форма, шапка) делаются скриптом сразу по всем `*/index.html`.
 
 ## Как работать
 
@@ -44,6 +44,7 @@
 
 ## Сделано (хронология, последнее сверху)
 
+- 2026-11-18: НОВАЯ СТРАНИЦА `/car-key-replacement/` (хаб под запрос «car key replacement Cumming GA»: по срезу позиций 18.11 нас нет на 1-й странице, потому что такой страницы не было). Закоммичено, НЕ запушено: ждёт «Push сайт» Димы. Собрана из шаблона spare-key (та же шапка, форма, футер, версии CSS/JS без изменений, нового CSS нет), текст в вёрстке гайдов (`guide-body`): Quick answer, таблица типов ключей с ценами «от» (только из /pricing/: чип $140, с кнопками и выкидной $150, smart $180, без чипа $75, all keys lost $190), три ситуации со ссылками на /spare-key/, /all-keys-lost/, /key-programming/, шаги у машины, время и гарантия 1 год, локсмит или дилер, 20 страниц марок и честные ограничения (Mercedes 2015+, BMW G-серия только запасной, новейшие модели; формулировки из llms.txt и гайдов), зоны со ссылками на 24 города и округа, 8 вопросов FAQ (в FAQPage) + общие вопросы без повторов. Schema: Service + FAQPage + BreadcrumbList, provider @id #locksmith. Title «Car Key Replacement in Cumming, GA, from $140 | LocksMitch» (58), description 145 знаков. Документы клиента не перечислены, отзывов и рейтингов нет. Связки: ссылка «Car key replacement» первой в футере на 63 английских страницах (/es/ не трогали), строка «Need a new key?» в блоке услуг на главной, боковой список и фраза в тексте на spare-key, all-keys-lost, key-programming, абзац на /cumming/; sitemap.xml (lastmod из git, 62 страницы с датой 18.11 из-за футера), llms.txt (Main pages, Quick answers, Last updated). Инструменты: папка `car-key-replacement` подходит под маску `*-key-replacement` страниц марок, поэтому в `tools/related_guides.py` она записана как сервисная, а в `tools/county_pages.py` (link_makes) исключена; `tools/dealer_build.py` обрабатывает её как страницу с таблицей «дилер или мы», так и нужно. Замечено, не правили: на /volkswagen-audi-key-replacement/ «spare key with chip from $150», а в прайсе «Volkswagen, Audi from $200».
 - 2026-11-11: BMW страница по просьбе Димы (позиция ~#67 в Google): блок «BMW keys, generation by generation» (EWS, CAS, FEM/BDC: запасной и all keys lost; G-серия только запасной при рабочем ключе, AKL к дилеру), 6 вопросов FAQ (+4, в JSON-LD), title «BMW Key Replacement in Cumming, GA, 24/7», новое описание; llms.txt: Quick answer и Honest limit про BMW. Источник текста: tools/make_content.py.
 - 2026-11-11: sameAs на 29 страницах (schema LocalBusiness) и Profiles в llms.txt: добавлены BBB, Manta, Nextdoor (https://nextdoor.com/page/locksmitch-cumming-ga/), Foursquare. В repo лежат чужие неотслеженные `assets/email/` (иконки подписи письма, 02.11) и `.DS_Store` — не коммитим, не трогаем.
 - 2026-11-04: Города связаны с гайдами (`tools/city_guides.py`): на всех 24 страницах городов первый вопрос FAQ «Lost all your car keys in <City>?» с ответом под город (минуты в пути, зона: без доплаты / +$50 / по запросу, от $190) и ссылкой на гайд, в FAQPage тот же текст без ссылки; в боковой колонке список из 4 гайдов. Запушено 2026-11-04.

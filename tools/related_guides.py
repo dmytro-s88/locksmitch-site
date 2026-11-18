@@ -15,6 +15,7 @@ GUIDES = {
     'smart-key-not-detected': '“Key not detected”?',
 }
 SERVICES = {
+    'car-key-replacement': ['lost-all-car-keys', 'dealer-vs-locksmith-car-key', 'bought-car-key-online'],
     'all-keys-lost': ['lost-all-car-keys', 'dealer-vs-locksmith-car-key', 'bought-car-key-online'],
     'spare-key': ['bought-car-key-online', 'dealer-vs-locksmith-car-key', 'key-fob-not-working'],
     'car-lockout': ['keys-locked-in-car', 'smart-key-not-detected', 'key-fob-not-working'],
@@ -31,12 +32,12 @@ def block(slugs):
 def main():
     pages = {os.path.join(ROOT, k, 'index.html'): v for k, v in SERVICES.items()}
     for p in glob.glob(os.path.join(ROOT, '*-key-replacement', 'index.html')):
-        pages[p] = MAKE_GUIDES
+        pages.setdefault(p, MAKE_GUIDES)   # car-key-replacement is a service page, listed above
     n = 0
     for p, slugs in pages.items():
         s = open(p, encoding='utf-8').read()
         s = re.sub(r'<h3 style="margin-top:20px" data-guides="1">Guides</h3>\n\s*<ul[^>]*>.*?</ul>\n\s*', '', s, flags=re.S)
-        m = re.search(r'<aside class="nearby">.*?</aside>', s, re.S)
+        m = re.search(r'<aside class="nearby[^"]*">.*?</aside>', s, re.S)
         if not m:
             raise SystemExit('no aside in ' + p)
         aside = m.group(0)
