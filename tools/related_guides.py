@@ -13,13 +13,14 @@ GUIDES = {
     'key-fob-not-working': 'Key fob not working?',
     'keys-locked-in-car': 'Keys locked in the car?',
     'smart-key-not-detected': '“Key not detected”?',
+    'key-fob-programming-cost': 'Key fob programming cost',
 }
 SERVICES = {
     'car-key-replacement': ['lost-all-car-keys', 'dealer-vs-locksmith-car-key', 'bought-car-key-online'],
     'all-keys-lost': ['lost-all-car-keys', 'dealer-vs-locksmith-car-key', 'bought-car-key-online'],
     'spare-key': ['bought-car-key-online', 'dealer-vs-locksmith-car-key', 'key-fob-not-working'],
     'car-lockout': ['keys-locked-in-car', 'smart-key-not-detected', 'key-fob-not-working'],
-    'key-programming': ['bought-car-key-online', 'smart-key-not-detected', 'key-fob-not-working'],
+    'key-programming': ['key-fob-programming-cost', 'bought-car-key-online', 'smart-key-not-detected', 'key-fob-not-working'],
 }
 MAKE_GUIDES = ['lost-all-car-keys', 'dealer-vs-locksmith-car-key', 'key-fob-not-working']
 
