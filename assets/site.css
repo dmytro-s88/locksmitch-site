@@ -831,3 +831,20 @@ footer .pay-venmo svg { width: 58px; height: 11px; color: var(--ink); }
    and the call bar, it stutters on scroll there. Solid background instead. */
 html.lowfx .top .wrap, html.lowfx .callbar { -webkit-backdrop-filter: none; backdrop-filter: none; background: var(--bg); }
 :root.lowfx[data-theme="light"] .top .wrap, :root.lowfx[data-theme="light"] .callbar { background: var(--surface); }
+
+/* Google reviews block (built by tools/reviews_build.py from tools/reviews.json) */
+.rv-sum { display: flex; flex-wrap: wrap; align-items: baseline; gap: 6px 12px; max-width: none; }
+.rv-sum b { font-size: 26px; font-weight: 800; line-height: 1; color: var(--ink); }
+.rv-stars { color: var(--brass); font-size: 20px; line-height: 1; letter-spacing: 2px; }
+.rv-list { display: grid; grid-template-columns: repeat(2, minmax(0,1fr)); gap: 14px; }
+.rv { margin: 0; display: grid; gap: 14px; align-content: start; padding: 22px 24px; background: var(--surface); border: 1px solid var(--line); border-radius: 14px; }
+.rv blockquote { margin: 0; }
+.rv blockquote p { margin: 0; font-size: 16px; line-height: 1.6; color: var(--ink); overflow-wrap: anywhere; }
+.rv figcaption { display: grid; gap: 2px; font-size: 14px; color: var(--muted); }
+.rv figcaption b { font-size: 16px; color: var(--ink); }
+.rv-cta { display: flex; flex-wrap: wrap; gap: 12px; margin-top: 22px; }
+@media (max-width: 760px) {
+  .rv-list { grid-template-columns: minmax(0,1fr); }
+  .rv { padding: 18px; }
+  .rv-cta .btn { flex: 1 1 100%; justify-content: center; }
+}

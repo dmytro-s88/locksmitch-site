@@ -1,4 +1,4 @@
-# locksmitch-site - статус (2026-11-18, site.css?v=20261104b, site.js?v=20261104c)
+# locksmitch-site - статус (2026-11-18, site.css?v=20261118a, site.js?v=20261104c)
 
 Записка для новой сессии Claude и для Димы. Что это за проект, где что лежит, что сделано и что осталось. Обновлять, когда что-то меняется.
 
@@ -30,6 +30,7 @@
 - Локальный просмотр: `python3 -m http.server 8765` в папке сайта, открыть http://localhost:8765.
 - Публикация: `git push` в main = сайт обновился через 1-2 минуты. Пушить по команде Димы ("Push сайт").
 - Бэкенд формы деплоится из соседнего проекта: `python3 ~/Projects/LocksMitch-bot/gas.py push 1DE2XXZ4KPqsc5j-O1-AjMp7psQRMmbH9owOBRz-Mo9s-aVG5r3abRn-3 ~/Projects/locksmitch-site/form-backend`.
+- Отзывы Google: данные в `tools/reviews.json` (имя как «Имя Ф.», оценка, дата, текст слово в слово, `checked` = день, когда читали профиль). Новый отзыв: дописать в JSON и запустить `python3 -I tools/reviews_build.py`, потом `python3 -I tools/sitemap_lastmod.py`, коммит. Скрипт сам обновляет блок между `<!-- reviews:start -->` и `<!-- reviews:end -->` на главной, /cumming/ и /car-key-replacement/ (список PAGES в скрипте), счётчик «5.0, N reviews on Google», `aggregateRating` и `review` в JSON-LD этих же страниц, ссылку на профиль Google в sameAs и строки Google в llms.txt. Повторный запуск ничего не меняет. Только настоящие отзывы, без пересказа; на /es/ блока нет.
 - DNS и форварды на Porkbun: через MCP Porkbun, не через браузер. MX и SMTP2GO-записи не трогать.
 
 ## Правила по тексту и дизайну (решения Димы)
@@ -44,6 +45,7 @@
 
 ## Сделано (хронология, последнее сверху)
 
+- 2026-11-18: ОТЗЫВЫ GOOGLE НА САЙТЕ. Закоммичено, НЕ запушено: ждёт «Push сайт» Димы. Два настоящих отзыва из профиля Google (Jennifer S. и Ivan M., оба 5★, 18.11, текст дословно) в `tools/reviews.json`; `tools/reviews_build.py` собирает из него блок «What customers say» (5.0, звёзды, «2 reviews on Google», карточки, кнопки «Read on Google» и «Leave a review on Google», обе в новой вкладке с rel=noopener) на главной, /cumming/ и /car-key-replacement/: сразу после «Recent jobs», перед «Why call us instead of the dealer» (на /cumming/ перед «How a visit works»). Без виджетов, внешних скриптов, картинок и логотипа Google. В JSON-LD Locksmith этих трёх страниц (на /car-key-replacement/ это provider внутри Service) добавлены `aggregateRating` (5, reviewCount 2, bestRating 5) и `review` (author Person, reviewRating, reviewBody, datePublished, publisher Google); на остальных страницах их нет, потому что там отзывы не показаны. Ссылка на профиль https://g.page/r/CZ9reQq45jlvEBM первой в sameAs на всех 29 страницах с sameAs и в llms.txt (Business identity: профиль и строка «Google reviews: 5.0 out of 5 from 2 reviews, as of Nov 18, 2026», Profiles). Новый CSS: блок `.rv-*` в конце site.css на токенах темы (тёмная и светлая проверены на телефоне и компьютере), site.css?v=20261118a на 67 страницах (на /es/ поменялась только версия CSS). `tools/es_build.py`: вырезает блок отзывов и строку «Need a new key?» с главной, футер с новой ссылкой учтён. Важно: `es_build.py` не запускается уже давно («MISSING ... How can I pay?», английский текст главной ушёл вперёд от списка переводов), это не от сегодняшних правок; испанские страницы не пересобирались. Звёзды в выдаче Google не обещаем: для отзывов о себе на своём сайте Google их обычно не показывает, разметка нужна для связи сайта с профилем и для ИИ-поиска.
 - 2026-11-18: НОВАЯ СТРАНИЦА `/car-key-replacement/` (хаб под запрос «car key replacement Cumming GA»: по срезу позиций 18.11 нас нет на 1-й странице, потому что такой страницы не было). Закоммичено, НЕ запушено: ждёт «Push сайт» Димы. Собрана из шаблона spare-key (та же шапка, форма, футер, версии CSS/JS без изменений, нового CSS нет), текст в вёрстке гайдов (`guide-body`): Quick answer, таблица типов ключей с ценами «от» (только из /pricing/: чип $140, с кнопками и выкидной $150, smart $180, без чипа $75, all keys lost $190), три ситуации со ссылками на /spare-key/, /all-keys-lost/, /key-programming/, шаги у машины, время и гарантия 1 год, локсмит или дилер, 20 страниц марок и честные ограничения (Mercedes 2015+, BMW G-серия только запасной, новейшие модели; формулировки из llms.txt и гайдов), зоны со ссылками на 24 города и округа, 8 вопросов FAQ (в FAQPage) + общие вопросы без повторов. Schema: Service + FAQPage + BreadcrumbList, provider @id #locksmith. Title «Car Key Replacement in Cumming, GA, from $140 | LocksMitch» (58), description 145 знаков. Документы клиента не перечислены, отзывов и рейтингов нет. Связки: ссылка «Car key replacement» первой в футере на 63 английских страницах (/es/ не трогали), строка «Need a new key?» в блоке услуг на главной, боковой список и фраза в тексте на spare-key, all-keys-lost, key-programming, абзац на /cumming/; sitemap.xml (lastmod из git, 62 страницы с датой 18.11 из-за футера), llms.txt (Main pages, Quick answers, Last updated). Инструменты: папка `car-key-replacement` подходит под маску `*-key-replacement` страниц марок, поэтому в `tools/related_guides.py` она записана как сервисная, а в `tools/county_pages.py` (link_makes) исключена; `tools/dealer_build.py` обрабатывает её как страницу с таблицей «дилер или мы», так и нужно. Замечено, не правили: на /volkswagen-audi-key-replacement/ «spare key with chip from $150», а в прайсе «Volkswagen, Audi from $200».
 - 2026-11-11: BMW страница по просьбе Димы (позиция ~#67 в Google): блок «BMW keys, generation by generation» (EWS, CAS, FEM/BDC: запасной и all keys lost; G-серия только запасной при рабочем ключе, AKL к дилеру), 6 вопросов FAQ (+4, в JSON-LD), title «BMW Key Replacement in Cumming, GA, 24/7», новое описание; llms.txt: Quick answer и Honest limit про BMW. Источник текста: tools/make_content.py.
 - 2026-11-11: sameAs на 29 страницах (schema LocalBusiness) и Profiles в llms.txt: добавлены BBB, Manta, Nextdoor (https://nextdoor.com/page/locksmitch-cumming-ga/), Foursquare. В repo лежат чужие неотслеженные `assets/email/` (иконки подписи письма, 02.11) и `.DS_Store` — не коммитим, не трогаем.
@@ -89,7 +91,7 @@
 
 - `assets/email/` (значки и логотип для подписи в письмах) лежит незакоммиченным нарочно: подпись отложена до ~2026-11-09 (marketing-plan.md), залить вместе с ней. `.DS_Store` не коммитить.
 Для Димы:
-- Google Business Profile ещё не создан (нужна видеоверификация дома). Это главный источник звонков.
+- Google Business Profile создан и подтверждён в кабинете (хронология в `~/Projects/LocksMitch-bot/docs/gbp/README.md`); на 2026-11-18 два отзыва 5★, они показаны на сайте.
 - Подтвердить, что есть именно liability insurance (на сайте написано "Insured").
 - Yelp: новый текст Specialties подан 2026-10-30, на странице есть. Bing Places подтверждён 2026-10-27.
 
@@ -97,7 +99,7 @@
 - Генератор страниц (один шаблон + данные) вместо ручной правки 52 файлов.
 - На городские страницы добавить по 2-3 реальных работы, когда накопятся (уникальные тексты на всех 24 городах и 20 марках уже есть с 2026-10-29).
 - Страница цен ("from" цены, нужны цифры Димы) и страница "About / Meet Mitch".
-- Блок отзывов и aggregateRating, когда появятся реальные отзывы.
+- Отзывы: блок и aggregateRating сделаны 2026-11-18; новые отзывы добавлять через `tools/reviews.json` (см. «Как работать»).
 - 11 реальных фото работ пока не используются, галерея зависит от Instagram.
 - 3D-модель брелока в hero: прототип есть (Three.js, артефакт v3), на сайт не выложен, ждёт одобрения.
 - Перед Google Ads: GA4 key events -> конверсии, страницы марок исключить из рекламы до проверки покрытия.

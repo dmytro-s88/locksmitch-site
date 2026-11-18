@@ -99,7 +99,7 @@ COMMON = [
     ('<span class="ch-val">Message us</span>', '<span class="ch-val">Escríbanos</span>'),
     ('<span class="ch-name">Email</span>', '<span class="ch-name">Correo</span>'),
     ('<span class="ch-name">Save contact</span><span class="ch-val">Add to your phone</span>', '<span class="ch-name">Guardar contacto</span><span class="ch-val">En su teléfono</span>'),
-    ('<nav class="foot-links" aria-label="Services">\n      <a href="/all-keys-lost/">All keys lost</a><a href="/spare-key/">Spare key</a><a href="/car-lockout/">Car lockout</a><a href="/key-programming/">Key programming</a><a href="/pricing/">Prices</a><a href="/guides/">Guides</a><a href="/#area">Service area</a><a href="/privacy/">Privacy</a>\n    </nav>',
+    ('<nav class="foot-links" aria-label="Services">\n      <a href="/car-key-replacement/">Car key replacement</a><a href="/all-keys-lost/">All keys lost</a><a href="/spare-key/">Spare key</a><a href="/car-lockout/">Car lockout</a><a href="/key-programming/">Key programming</a><a href="/pricing/">Prices</a><a href="/guides/">Guides</a><a href="/#area">Service area</a><a href="/privacy/">Privacy</a>\n    </nav>',
      '<nav class="foot-links" aria-label="Servicios">\n      <a href="/es/">Inicio</a><a href="/es/precios/">Precios</a><a href="/es/#area">Zona de servicio</a><a href="{EN}" hreflang="en" lang="en">English</a><a href="/all-keys-lost/" lang="en">All keys lost</a><a href="/spare-key/" lang="en">Spare key</a><a href="/car-lockout/" lang="en">Car lockout</a><a href="/key-programming/" lang="en">Key programming</a><a href="/privacy/">Privacidad</a>\n    </nav>'),
     ('aria-label="City pages"', 'aria-label="Ciudades"'),
     ('<span>© 2026 LocksMitch, a registered DBA of TPVision LLC</span>\n    <span>Mobile auto locksmith serving North Atlanta, GA</span>\n    <span>We accept cash, cards, Apple Pay, Zelle, Venmo and Cash App</span>',
@@ -297,6 +297,9 @@ def build(src, dst, en_url, es_url, pairs, desc):
     # the English page links to its Spanish twin (globe ES + hreflang); the Spanish page gets its own versions below
     s = re.sub(r'\n    <a class="lang"[^\n]*?ES</a>', '', s)
     s = re.sub(r'\n<link rel="alternate" hreflang="[^"]*" href="[^"]*">', '', s)
+    # English-only blocks that have no Spanish twin: Google reviews (tools/reviews_build.py) and the link to /car-key-replacement/
+    s = re.sub(r'  <!-- reviews:start.*?<!-- reviews:end -->\n\n', '', s, flags=re.S)
+    s = re.sub(r'      <p class="also"><b>Need a new key\?</b>.*?</p>\n', '', s)
     for a, b in pairs:
         if a not in s:
             sys.exit('MISSING in %s: %s' % (src, a[:90]))
