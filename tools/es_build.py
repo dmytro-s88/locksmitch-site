@@ -320,6 +320,9 @@ def build(src, dst, en_url, es_url, pairs, desc):
     s = re.sub(r'  <!-- reviews:start.*?<!-- reviews:end -->\n\n', '', s, flags=re.S)
     # the text list of recent jobs (tools/jobs_build.py) is English only; without it the photo section is hidden until the photos load
     s = re.sub(r'[ \t]*<!-- jobs:start.*?<!-- jobs:end -->\n', '', s, flags=re.S).replace('<section id="work">', '<section id="work" hidden>')
+    # first-screen trust line (tools/reviews_build.py owns the rating and the prices): Spanish words, Spanish prices page
+    s = re.sub(r'<p class="trust-line">.*?</p>', lambda m: m.group(0).replace(' on Google</a>', ' en Google</a>').replace('>Lockout from $', '>Apertura desde $')
+               .replace('>Keys from $', '>Llaves desde $').replace('href="/pricing/"', 'href="/es/precios/"'), s, count=1, flags=re.S)
     for a, b in pairs:
         if a not in s:
             sys.exit('MISSING in %s: %s' % (src, a[:90]))
