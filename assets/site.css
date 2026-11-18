@@ -848,3 +848,10 @@ html.lowfx .top .wrap, html.lowfx .callbar { -webkit-backdrop-filter: none; back
   .rv { padding: 18px; }
   .rv-cta .btn { flex: 1 1 100%; justify-content: center; }
 }
+
+/* Recent jobs as a text list under the photos (built by tools/jobs_build.py from tools/jobs.json) */
+.jobs-list { list-style: none; padding: 0; margin: 0; display: grid; grid-template-columns: repeat(2, minmax(0,1fr)); gap: 0 clamp(24px, 4vw, 48px); }
+.gallery:not(:empty) + .jobs-list { margin-top: 22px; }
+.jobs-list li { display: flex; flex-wrap: wrap; align-items: baseline; gap: 0 10px; padding: 10px 0; border-bottom: 1px solid var(--line); font-size: 15px; line-height: 1.45; color: var(--muted); }
+.jobs-list b { color: var(--ink); font-weight: 700; }
+@media (max-width: 760px) { .jobs-list { grid-template-columns: minmax(0,1fr); } }

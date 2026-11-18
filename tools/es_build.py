@@ -300,6 +300,8 @@ def build(src, dst, en_url, es_url, pairs, desc):
     # English-only blocks that have no Spanish twin: Google reviews (tools/reviews_build.py) and the link to /car-key-replacement/
     s = re.sub(r'  <!-- reviews:start.*?<!-- reviews:end -->\n\n', '', s, flags=re.S)
     s = re.sub(r'      <p class="also"><b>Need a new key\?</b>.*?</p>\n', '', s)
+    # the text list of recent jobs (tools/jobs_build.py) is English only; without it the photo section is hidden until the photos load
+    s = re.sub(r'[ \t]*<!-- jobs:start.*?<!-- jobs:end -->\n', '', s, flags=re.S).replace('<section id="work">', '<section id="work" hidden>')
     for a, b in pairs:
         if a not in s:
             sys.exit('MISSING in %s: %s' % (src, a[:90]))
