@@ -48,7 +48,7 @@
 - Везде одинаковые NAP: LocksMitch, (770) 270-3333, locksmitch.com. Часы 24/7, ночью дороже.
 - Отзывы только настоящие. Любые платные рекламные предложения отклонять.
 - Оплата: Cash, карты, Apple Pay, Google Pay, Zelle, Venmo, Cash App (на всех страницах и в schema).
-- «Coming to you is included» всегда с «within 25 miles» (решение Димы 2026-11-18): от 25 до 40 миль ключи +$50, дальше 40 миль цену называет Mitch.
+- «Coming to you is included» пишем БЕЗ «within 25 miles» (Дима, 2026-11-18, вечер): цена называется до выезда и уже включает дорогу, приписка про мили рядом с ценой зоны выглядит как доплата сверху. Правку e6a4ca2 откатили в тот же день. Доплаты по зонам описаны только в /pricing/ и в блоках зон.
 - Второй ключ со скидкой 50%: любой второй ключ для той же машины в тот же визит, и при spare key, и при all keys lost (решение Димы 2026-11-18).
 - NASTF: «registered» (VSP это реестр), не «certified».
 - Оставить как есть (решение Димы 2026-11-18): «No call center, you reach the locksmith» (звонки идут на телефон Димы), «Keys + electrical diagnostics in one visit», на /cumming/ «usually the closest mobile locksmith» и «15 to 25 minutes», страницы Marietta и Kennesaw.
