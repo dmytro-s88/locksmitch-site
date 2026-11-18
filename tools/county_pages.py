@@ -90,7 +90,7 @@ COUNTIES = {
         ],
         'faq': [
             ('How much is a car lockout in North Fulton?', 'In the daytime it’s a flat $100 in Alpharetta, Milton, Johns Creek and Roswell, and $125 in Sandy Springs. Nights from 9 pm to 7 am add $50. You get the price before we drive out.'),
-            ('Is there a trip fee in North Fulton?', 'Not for key jobs in Alpharetta, Milton, Johns Creek or Roswell: they’re at the listed price. Sandy Springs key jobs add $50 for the drive. Every price includes coming to you.'),
+            ('Is there a trip fee in North Fulton?', 'Not for key jobs in Alpharetta, Milton, Johns Creek or Roswell: they’re at the listed price. Sandy Springs key jobs add $50 for the drive. Every price includes coming to you within 25 miles.'),
             ('Can you get into a parking deck at Avalon or Perimeter Center?', 'Yes. We drive in like any visitor. Text us the level, the row and the car, and we come straight to it.'),
             ('Can you make spare keys for several family cars in one visit?', 'Yes. List the cars when you text us and we bring blanks for each one, so nobody has to drive to a dealer and wait.'),
         ],
