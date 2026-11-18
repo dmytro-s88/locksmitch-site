@@ -88,7 +88,7 @@
     var data = new URLSearchParams({
       site_estimate: '1',
       service: (form.querySelector('input[name="svc"]:checked') || {}).value || '',
-      second_key: (document.getElementById('s1').checked && document.getElementById('f-second').checked) ? 'yes' : '',
+      second_key: ((document.getElementById('s1').checked || document.getElementById('s2').checked) && document.getElementById('f-second').checked) ? 'yes' : '',
       vehicle: form.vehicle.value.trim(),
       name: form.name.value.trim(),
       phone: phone,
@@ -161,9 +161,23 @@
     a.addEventListener('click', function () { var r = document.getElementById(a.getAttribute('data-svc')); if (r) { r.checked = true; r.dispatchEvent(new Event('change', { bubbles: true })); } });
   });
 
-  // Second key add-on only applies to All keys lost
+  // Second key, 50% off: any second key for the same car in the same visit, so the add-on shows for All keys lost (s1)
+  // and for Spare key (s2). Ticked by default only for All keys lost; with a spare key the customer ticks it.
+  // Once the customer has touched the box, the choice is kept when the service changes.
   var addon = document.getElementById('addon');
-  function syncAddon() { if (!addon) return; var c = document.querySelector('input[name="svc"]:checked'); addon.hidden = !(c && c.id === 's1'); }
+  var second = document.getElementById('f-second');
+  var addonB = addon && addon.querySelector('b');
+  var addonText = addonB ? addonB.textContent : '';
+  var secondTouched = false;
+  if (second) second.addEventListener('change', function () { secondTouched = true; });
+  if (form) form.addEventListener('reset', function () { secondTouched = false; });
+  function syncAddon() {
+    if (!addon) return;
+    var c = document.querySelector('input[name="svc"]:checked'), id = c && c.id;
+    addon.hidden = !(id === 's1' || id === 's2');
+    if (second && !secondTouched) second.checked = id === 's1';
+    if (addonB) addonB.textContent = id === 's2' ? T('Making two keys? The second is 50% off', '¿Dos llaves nuevas? La segunda con 50% de descuento') : addonText;
+  }
   Array.prototype.forEach.call(document.querySelectorAll('input[name="svc"]'), function (r) { r.addEventListener('change', syncAddon); });
   syncAddon();
 

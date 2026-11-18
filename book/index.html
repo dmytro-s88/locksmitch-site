@@ -290,7 +290,7 @@ footer a:hover { color: var(--green); }
             <div class="field wide"><label for="f-address">Where will the car be?</label><input id="f-address" name="address" placeholder="Street address and city, or a business name" autocomplete="street-address" required><small>Home, work or a parking lot, anywhere in North Atlanta.</small></div>
             <div class="field"><label for="f-name">Your name</label><input id="f-name" name="name" placeholder="First name is fine" autocomplete="given-name" required></div>
             <div class="field"><label for="f-phone">Mobile number</label><input id="f-phone" name="phone" type="tel" inputmode="tel" placeholder="(770) 555-0134" autocomplete="tel" required></div>
-            <label class="addon wide" id="addon" for="f-second" hidden><input type="checkbox" id="f-second" name="second"><span><b>Add a second key, 50% off</b><small>Same car, same key type, made in the same visit.</small></span></label>
+            <label class="addon wide" id="addon" for="f-second" hidden><input type="checkbox" id="f-second" name="second"><span><b id="addonT">Add a second key, 50% off</b><small>Same car, same key type, made in the same visit.</small></span></label>
             <div class="field wide"><label for="f-note">Anything Mitch should know? <span>(optional)</span></label><textarea id="f-note" name="note" maxlength="500" placeholder="Push-to-start or a key you turn, gate code, where to park..."></textarea></div>
             <div class="hp" aria-hidden="true"><label for="f-extra">Leave this empty</label><input id="f-extra" name="extra" tabindex="-1" autocomplete="off"></div>
           </div>
@@ -450,9 +450,18 @@ footer a:hover { color: var(--green); }
     if (window.matchMedia('(max-width: 960px)').matches && !$('f-vehicle').value) $('st3').scrollIntoView({ behavior: 'smooth', block: 'start' });
   }
 
+  // Second key, 50% off: any second key for the same car in the same visit (all keys lost or spare key).
+  // Ticked by default only for all keys lost; with a spare key the customer ticks it.
+  function secondOk(svc) { return svc === 'akl' || svc === 'spare'; }
+  function syncSecond(svc) {
+    $('addon').hidden = !secondOk(svc);
+    $('f-second').checked = svc === 'akl';
+    $('addonT').textContent = svc === 'spare' ? 'Making two keys? The second is 50% off' : 'Add a second key, 50% off';
+  }
+
   function summary() {
     var s = SVC[state.svc];
-    $('tSvc').textContent = s[0] + ($('f-second').checked && state.svc === 'akl' ? ' + 2nd key' : '');
+    $('tSvc').textContent = s[0] + ($('f-second').checked && secondOk(state.svc) ? ' + 2nd key' : '');
     $('tLen').textContent = s[1];
     var deal = state.svc === 'spare' || state.svc === 'akl';   // $15 off: только spare key и all keys lost
     $('saveLine').classList.toggle('na', !deal);
@@ -471,8 +480,7 @@ footer a:hover { color: var(--green); }
     r.addEventListener('change', function () {
       state.svc = r.value; state.time = '';
       $('lockNote').hidden = r.value !== 'lockout';
-      $('addon').hidden = r.value !== 'akl';
-      if (r.value === 'akl') $('f-second').checked = true;
+      syncSecond(r.value);
       hideErr(); summary(); load(r.value);
     });
   });
@@ -488,7 +496,7 @@ footer a:hover { color: var(--green); }
     var data = new URLSearchParams({
       book_request: '1', svc: state.svc, date: state.date, time: state.time,
       vehicle: $('f-vehicle').value.trim(), address: $('f-address').value.trim(), name: $('f-name').value.trim(),
-      phone: digits, note: $('f-note').value.trim(), second: ($('f-second').checked && state.svc === 'akl') ? 'yes' : '', extra: $('f-extra').value,
+      phone: digits, note: $('f-note').value.trim(), second: ($('f-second').checked && secondOk(state.svc)) ? 'yes' : '', extra: $('f-extra').value,
       src_ref: SRC.ref || '', src_land: SRC.land || ''
     });
     sendBtn.disabled = true; sendBtn.textContent = 'Sending…';
@@ -521,7 +529,8 @@ footer a:hover { color: var(--green); }
 
   // ?svc=akl preselects the service (for links from service pages later)
   var pre = (location.search.match(/[?&]svc=(\w+)/) || [])[1];
-  if (pre && SVC[pre]) { var r = $('sv-' + pre); if (r) { r.checked = true; state.svc = pre; $('lockNote').hidden = pre !== 'lockout'; $('addon').hidden = pre !== 'akl'; if (pre === 'akl') $('f-second').checked = true; } }
+  if (pre && SVC[pre]) { var r = $('sv-' + pre); if (r) { r.checked = true; state.svc = pre; $('lockNote').hidden = pre !== 'lockout'; } }
+  syncSecond(state.svc);
   summary();
   load(state.svc);
 })();
