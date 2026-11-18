@@ -89,13 +89,16 @@ def block():
 
 
 def trust_block(prices):
-    rating = ('<a href="%s" target="_blank" rel="noopener"><span class="tl-star" aria-hidden="true">★</span>%.1f on Google</a>' % (PROFILE, AVG))
+    # Rating on its own, larger row (five stars + "5.0 on Google"), prices on the row below: Dima, 2026-11-18 evening.
+    # tools/es_build.py matches ' on Google</a>' and '>Lockout from $' / '>Keys from $': keep those substrings.
+    rating = ('<a class="tl-g" href="%s" target="_blank" rel="noopener"><span class="tl-star" aria-hidden="true">%s</span><b>%.1f</b> on Google</a>'
+              % (PROFILE, '★' * int(round(AVG)), AVG))
     if prices:
-        rest = ''.join('<span aria-hidden="true">·</span><a class="tl-p" href="/pricing/">%s</a>' % p for p in prices)
+        rest = '<span aria-hidden="true">·</span>'.join('<a class="tl-p" href="/pricing/">%s</a>' % p for p in prices)
     else:
-        rest = '<span aria-hidden="true">·</span><a class="tl-p" href="/pricing/">Price by text before we drive out</a>'
+        rest = '<a class="tl-p" href="/pricing/">Price by text before we drive out</a>'
     return ('          ' + T_START + '\n'
-            '          <p class="trust-line">' + rating + rest + '</p>\n'
+            '          <p class="trust-line">' + rating + '<span class="tl-prices">' + rest + '</span></p>\n'
             '          ' + T_END + '\n')
 
 
