@@ -25,7 +25,7 @@ DATA = json.load(open(os.path.join(ROOT, 'tools', 'reviews.json'), encoding='utf
 REVIEWS = DATA['reviews']
 COUNT = len(REVIEWS)
 AVG = sum(r['rating'] for r in REVIEWS) / COUNT
-PROFILE, WRITE = DATA['profile_url'], DATA['review_url']
+PROFILE = DATA['profile_url']   # one button, to the profile; the write-a-review link is not used on the site (Dima, 2026-11-18)
 
 
 def day(iso):
@@ -55,12 +55,11 @@ def block():
             '      </div>\n'
             '      <div class="rv-list">\n%s      </div>\n'
             '      <div class="rv-cta">\n'
-            '        <a class="btn btn-ghost" href="%s" target="_blank" rel="noopener">Read on Google</a>\n'
-            '        <a class="btn btn-ghost" href="%s" target="_blank" rel="noopener">Leave a review on Google</a>\n'
+            '        <a class="btn btn-ghost" href="%s" target="_blank" rel="noopener">See our reviews on Google</a>\n'
             '      </div>\n'
             '    </div>\n'
             '  </section>\n'
-            '  ' + END + '\n\n') % (AVG, stars(AVG, '%.1f' % AVG), COUNT, '' if COUNT == 1 else 's', cards, PROFILE, WRITE)
+            '  ' + END + '\n\n') % (AVG, stars(AVG, '%.1f' % AVG), COUNT, '' if COUNT == 1 else 's', cards, PROFILE)
 
 
 def review_ld():
