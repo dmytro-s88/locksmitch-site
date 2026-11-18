@@ -24,12 +24,22 @@ COMMON = [
      '<p class="direct"><span><strong>Atendemos 24/7.</strong> Sin centro de llamadas. Cada solicitud va directo al cerrajero que hace el trabajo.</span></p>'),
     ('<a class="btn btn-call" href="tel:7702703333"><svg><use href="#i-phone"/></svg>Call (770) 270-3333</a>\n            <a class="btn btn-ghost" href="sms:+17702703333"><svg><use href="#i-sms"/></svg>Text us</a>\n            <a class="btn btn-ghost" href="/book/"><svg><use href="#i-cal"/></svg>Book online</a>',
      '<a class="btn btn-call" href="tel:7702703333"><svg><use href="#i-phone"/></svg>Llame al (770) 270-3333</a>\n            <a class="btn btn-ghost" href="sms:+17702703333"><svg><use href="#i-sms"/></svg>Envíenos un texto</a>\n            <a class="btn btn-ghost" href="/book/"><svg><use href="#i-cal"/></svg>Reservar en línea</a>'),
-    ('<span><svg><use href="#i-van"/></svg>Fully mobile</span>', '<span><svg><use href="#i-van"/></svg>Servicio a domicilio</span>'),
-    ('<span><svg><use href="#i-shield"/></svg>NASTF certified &amp; insured</span>', '<span><svg><use href="#i-shield"/></svg>Certificado NASTF y asegurado</span>'),
-    ('<span><svg><use href="#i-key"/></svg>1-year warranty</span>', '<span><svg><use href="#i-key"/></svg>Garantía de 1 año</span>'),
+    ('<svg><use href="#i-van"/></svg>Fully mobile</button>', '<svg><use href="#i-van"/></svg>Servicio a domicilio</button>'),
+    ('<svg><use href="#i-shield"/></svg>NASTF registered &amp; insured</button>', '<svg><use href="#i-shield"/></svg>Registrado en NASTF y asegurado</button>'),
+    ('<svg><use href="#i-key"/></svg>1-year warranty</button>', '<svg><use href="#i-key"/></svg>Garantía de 1 año</button>'),
+    ('<svg><use href="#i-pay"/></svg>Cash, Cards, Zelle</button>', '<svg><use href="#i-pay"/></svg>Efectivo, tarjetas, Zelle</button>'),
+    ('<div class="fact-tip" id="fx-mobile" hidden>I come to your car: home, work, a parking lot or the roadside. No tow, no shop, and coming to you is included. <a href="#area">See the area&nbsp;→</a></div>',
+     '<div class="fact-tip" id="fx-mobile" hidden>Voy a su carro: casa, trabajo, estacionamiento o la carretera. Sin grúa ni taller, y la visita está incluida. <a href="#area">Ver la zona&nbsp;→</a></div>'),
+    ('<div class="fact-tip" id="fx-nastf" hidden>Registered with NASTF as a Vehicle Security Professional: access to manufacturer key data, the same as dealers. Insured on every job.</div>',
+     '<div class="fact-tip" id="fx-nastf" hidden>Registrado en NASTF como Vehicle Security Professional: acceso a los datos de llaves del fabricante, igual que el dealer. Con seguro en cada trabajo.</div>'),
+    ('<div class="fact-tip" id="fx-warranty" hidden>1 year on keys and remotes I supply. If one stops working, I fix or replace it free. Not covered: physical or water damage, lost keys, batteries.</div>',
+     '<div class="fact-tip" id="fx-warranty" hidden>1 año en las llaves y controles que ponemos. Si uno deja de funcionar, lo arreglamos o reemplazamos gratis. No cubre: golpes, agua, llaves perdidas ni baterías.</div>'),
+    ('<div class="fact-tip" id="fx-pay" hidden>Cash, credit and debit cards, Apple Pay, Google Pay, Zelle, Venmo or Cash App, whichever is easiest for you.</div>',
+     '<div class="fact-tip" id="fx-pay" hidden>Efectivo, tarjetas de crédito y débito, Apple Pay, Google Pay, Zelle, Venmo o Cash App, lo que le sea más fácil.</div>'),
+    ('<span><strong>Upfront price.</strong> Quoted before we drive out, and it doesn’t change at your car. Coming to you is included. <a href="/pricing/">See prices&nbsp;→</a></span>',
+     '<span><strong>Precio por adelantado.</strong> Se lo damos antes de salir y no cambia al llegar a su carro. La visita está incluida. <a href="/es/precios/">Ver precios&nbsp;→</a></span>'),
     ('<details><summary>Is there a warranty?</summary><p>Yes, 1 year on keys and remotes we supply. If one stops working within a year, we fix or replace it free. Not covered: physical or water damage, lost keys and batteries. Programming or cutting a key you bought elsewhere is tested before you pay, but isn’t under warranty, since we can’t vouch for the part. Want the warranty? Get the key from us. No paperwork to keep: the warranty is tied to your phone number and the job date in our records, and we put a LocksMitch tag with our number on your keys.</p></details>',
      '<details><summary>¿Tienen garantía?</summary><p>Sí, 1 año en las llaves y controles que nosotros ponemos. Si uno deja de funcionar dentro de un año, lo arreglamos o lo reemplazamos gratis. No cubre: golpes o daño por agua, llaves perdidas ni baterías. Si programamos o cortamos una llave que usted compró en otro lugar, la probamos antes de que pague, pero no tiene garantía, porque no podemos responder por la pieza. ¿Quiere la garantía? Compre la llave con nosotros. No tiene que guardar ningún papel: la garantía va ligada a su número de teléfono y a la fecha del trabajo en nuestros registros, y le dejamos en las llaves un llavero de LocksMitch con nuestro número.</p></details>'),
-    ('<span><svg><use href="#i-pay"/></svg>Cards, Zelle, Apple Pay</span>', '<span><svg><use href="#i-pay"/></svg>Tarjetas, Zelle, Apple Pay</span>'),
     ('<h2 id="est-h">Free estimate</h2>\n            <p>Tell us the car and what happened. We’ll text you a price.</p>',
      '<h2 id="est-h">Cotización gratis</h2>\n            <p>Díganos qué carro tiene y qué pasó. Le enviamos el precio por texto.</p>'),
     ('<legend>What do you need?</legend>', '<legend>¿Qué necesita?</legend>'),
@@ -41,7 +51,7 @@ COMMON = [
     ('<label for="f-vehicle">Vehicle year, make and model</label>', '<label for="f-vehicle">Año, marca y modelo del carro</label>'),
     ('<label for="f-name">Your name</label><input id="f-name" name="name" placeholder="First name is fine"', '<label for="f-name">Su nombre</label><input id="f-name" name="name" placeholder="Solo el nombre está bien"'),
     ('<label for="f-phone">Phone number</label>', '<label for="f-phone">Número de teléfono</label>'),
-    ('<label for="f-company">Company</label>', '<label for="f-company">Empresa</label>'),
+    ('<label for="f-extra">Leave this empty</label>', '<label for="f-extra">Deje esto vacío</label>'),
     ('type="submit" id="sendBtn">Get my free estimate</button>', 'type="submit" id="sendBtn">Quiero mi cotización gratis</button>'),
     ('<p class="fine">Locked out right now? Call <a href="tel:7702703333">(770) 270-3333</a>, it’s faster.</p>', '<p class="fine">¿Se quedó afuera ahora mismo? Llame al <a href="tel:7702703333">(770) 270-3333</a>, es más rápido.</p>'),
     ('<p class="fine privacy-note">We use your number only to text or call you about this request. <a href="/privacy/">Privacy policy</a></p>',
@@ -93,23 +103,29 @@ COMMON = [
     ('<b>Registered business</b><span>LocksMitch is a DBA of TPVision LLC</span>', '<b>Negocio registrado</b><span>LocksMitch es un DBA de TPVision LLC</span>'),
     ('<h2 class="col-h">Contact us</h2>', '<h2 class="col-h">Contáctenos</h2>'),
     ('<button class="copy" type="button" id="copyBtn">Copy number</button>', '<button class="copy" type="button" id="copyBtn">Copiar número</button>'),
-    ('<p class="hours-line"><svg><use href="#i-check"/></svg>Open 24/7, including nights, weekends and holidays</p>\n        <p class="hours-line pay-line"><svg><use href="#i-pay"/></svg>We accept cash, credit and debit cards, Apple Pay, Zelle, Venmo and Cash App</p>',
-     '<p class="hours-line"><svg><use href="#i-check"/></svg>Abierto 24/7, también de noche, fines de semana y días festivos</p>\n        <p class="hours-line pay-line"><svg><use href="#i-pay"/></svg>Aceptamos efectivo, tarjetas de crédito y débito, Apple Pay, Zelle, Venmo y Cash App</p>'),
+    ('<p class="hours-line"><svg><use href="#i-check"/></svg>Open 24/7, including nights, weekends and holidays</p>\n        <p class="hours-line pay-line"><svg><use href="#i-pay"/></svg>We accept cash, credit and debit cards, Apple Pay, Google Pay, Zelle, Venmo and Cash App</p>',
+     '<p class="hours-line"><svg><use href="#i-check"/></svg>Abierto 24/7, también de noche, fines de semana y días festivos</p>\n        <p class="hours-line pay-line"><svg><use href="#i-pay"/></svg>Aceptamos efectivo, tarjetas de crédito y débito, Apple Pay, Google Pay, Zelle, Venmo y Cash App</p>'),
     ('<span class="ch-name">Text message</span>', '<span class="ch-name">Mensaje de texto</span>'),
     ('<span class="ch-val">Message us</span>', '<span class="ch-val">Escríbanos</span>'),
     ('<span class="ch-name">Email</span>', '<span class="ch-name">Correo</span>'),
     ('<span class="ch-name">Save contact</span><span class="ch-val">Add to your phone</span>', '<span class="ch-name">Guardar contacto</span><span class="ch-val">En su teléfono</span>'),
     ('<nav class="foot-links" aria-label="Services">\n      <a href="/car-key-replacement/">Car key replacement</a><a href="/all-keys-lost/">All keys lost</a><a href="/spare-key/">Spare key</a><a href="/car-lockout/">Car lockout</a><a href="/key-programming/">Key programming</a><a href="/pricing/">Prices</a><a href="/guides/">Guides</a><a href="/#area">Service area</a><a href="/privacy/">Privacy</a>\n    </nav>',
-     '<nav class="foot-links" aria-label="Servicios">\n      <a href="/es/">Inicio</a><a href="/es/precios/">Precios</a><a href="/es/#area">Zona de servicio</a><a href="{EN}" hreflang="en" lang="en">English</a><a href="/all-keys-lost/" lang="en">All keys lost</a><a href="/spare-key/" lang="en">Spare key</a><a href="/car-lockout/" lang="en">Car lockout</a><a href="/key-programming/" lang="en">Key programming</a><a href="/privacy/">Privacidad</a>\n    </nav>'),
+     '<nav class="foot-links" aria-label="Servicios">\n      <a href="/es/">Inicio</a><a href="/es/precios/">Precios</a><a href="/es/#area">Zona de servicio</a><a href="{EN}" hreflang="en" lang="en">English</a><a href="/car-key-replacement/" lang="en">Car key replacement</a><a href="/all-keys-lost/" lang="en">All keys lost</a><a href="/spare-key/" lang="en">Spare key</a><a href="/car-lockout/" lang="en">Car lockout</a><a href="/key-programming/" lang="en">Key programming</a><a href="/privacy/">Privacidad</a>\n    </nav>'),
     ('aria-label="City pages"', 'aria-label="Ciudades"'),
-    ('<span>© 2026 LocksMitch, a registered DBA of TPVision LLC</span>\n    <span>Mobile auto locksmith serving North Atlanta, GA</span>\n    <span>We accept cash, cards, Apple Pay, Zelle, Venmo and Cash App</span>',
-     '<span>© 2026 LocksMitch, un DBA registrado de TPVision LLC</span>\n    <span>Cerrajero de autos a domicilio en North Atlanta, GA</span>\n    <span>Aceptamos efectivo, tarjetas, Apple Pay, Zelle, Venmo y Cash App</span>'),
+    ('<span>© 2026 LocksMitch, a registered DBA of TPVision LLC</span>\n    <span>Mobile auto locksmith serving North Atlanta, GA</span>',
+     '<span>© 2026 LocksMitch, un DBA registrado de TPVision LLC</span>\n    <span>Cerrajero de autos a domicilio en North Atlanta, GA</span>'),
+    ('<span class="pay-lbl">We accept</span>', '<span class="pay-lbl">Aceptamos</span>'),
+    ('#cash"/></svg>Cash</span>', '#cash"/></svg>Efectivo</span>'), ('#card"/></svg>Cards</span>', '#card"/></svg>Tarjetas</span>'),
     ('<a class="btn btn-call" href="tel:7702703333"><svg><use href="#i-phone"/></svg>Call now</a>\n  <a class="btn btn-ghost" href="sms:+17702703333"><svg><use href="#i-sms"/></svg>Text</a>\n  <a class="btn btn-ghost" href="#estimate">Estimate</a>',
      '<a class="btn btn-call" href="tel:7702703333"><svg><use href="#i-phone"/></svg>Llamar</a>\n  <a class="btn btn-ghost" href="sms:+17702703333"><svg><use href="#i-sms"/></svg>Texto</a>\n  <a class="btn btn-ghost" href="#estimate">Cotizar</a>'),
     ('href="assets/', 'href="/assets/'), ('src="assets/', 'src="/assets/'), ('href="favicon.ico', 'href="/favicon.ico'), ('href="site.webmanifest', 'href="/site.webmanifest'),
 ]
 
 HOME = [
+    ('<p class="also"><b>Need a new key?</b> Key types, starting prices and how the visit works: <a href="/car-key-replacement/">Car key replacement&nbsp;→</a></p>',
+     '<p class="also"><b>¿Necesita una llave nueva?</b> Tipos de llave, precios iniciales y cómo es la visita: <a href="/car-key-replacement/" lang="en">Car key replacement</a> (en inglés).</p>'),
+    ('<p class="area-note">Not on the list? Call anyway. If you’re near one of these cities, we can usually reach you. At the lake? See our <a href="/lake-lanier/">Lake Lanier page</a>. By county: <a href="/forsyth-county/">Forsyth</a>, <a href="/gwinnett-county/">Gwinnett</a> and <a href="/north-fulton/">North Fulton</a>.</p>',
+     '<p class="area-note">¿Su ciudad no está en la lista? Llame de todas formas. Si está cerca de una de estas ciudades, casi siempre podemos llegar. ¿Está en el lago? Vea nuestra <a href="/lake-lanier/">página de Lake Lanier</a> (en inglés).</p>'),
     ('<h2>Why call us instead of the dealer</h2>', '<h2>Por qué llamarnos en vez de ir al concesionario</h2>'),
     ('<p class="lede">The same dealer-level programming, done in your driveway instead of their service bay.</p>', '<p class="lede">La misma programación que en el concesionario, hecha frente a su casa y no en su taller.</p>'),
     ('<th scope="col" class="them">Dealership</th>', '<th scope="col" class="them">Concesionario</th>'),
@@ -128,7 +144,7 @@ HOME = [
     ('</svg>No tow fee</span>', '</svg>Sin costo de grúa</span>'),
     ('</svg>Key + programming + tow</span>', '</svg>Llave + programación + grúa</span>'),
     ('</svg>Usually by appointment</span>', '</svg>Normalmente con cita</span>'),
-    ('</svg>NASTF certified</span>', '</svg>Certificado NASTF</span>'),
+    ('</svg>NASTF registered</span>', '</svg>Registrado en NASTF</span>'),
     ('</svg>Service desk</span>', '</svg>Mostrador de servicio</span>'),
     ('</svg>By text</span>', '</svg>Por texto</span>'),
     ('</svg>Original only</span>', '</svg>Solo original</span>'),
@@ -137,7 +153,7 @@ HOME = [
     ('<html lang="en">', '<html lang="es" data-page="Home ES">'),
     ('<title>Mobile Car Locksmith in Cumming, GA, 24/7 | LocksMitch</title>', '<title>Cerrajero de Autos a Domicilio en Cumming, GA | LocksMitch</title>'),
     ('<meta name="description" content="Mobile car locksmith in Cumming, GA: lost keys, spare keys, lockouts and key programming at your car, 24/7 across North Atlanta. Call (770) 270-3333.">',
-     '<meta name="description" content="Llaves de carro perdidas, llaves extra, apertura de carros y programación de llaves. LocksMitch va a donde está su carro en North Atlanta. Llame al (770) 270-3333.">'),
+     '<meta name="description" content="Llaves perdidas, llaves extra, apertura de carros y programación. LocksMitch va a donde está su carro en North Atlanta. Llame al (770) 270-3333.">'),
     ('<meta property="og:title" content="Mobile Car Locksmith in Cumming, GA, 24/7 | LocksMitch">', '<meta property="og:title" content="Cerrajero de Autos a Domicilio en Cumming, GA | LocksMitch">'),
     ('<meta property="og:description" content="Mobile car locksmith in Cumming, GA: lost keys, spare keys, lockouts and key programming at your car, 24/7 across North Atlanta. Call (770) 270-3333.">',
      '<meta property="og:description" content="Llaves de carro perdidas, llaves extra, apertura de carros y programación de llaves. Vamos a donde está usted en North Atlanta. Llame al (770) 270-3333.">'),
@@ -165,8 +181,8 @@ HOME = [
      '<details><summary>¿Esto puede dañar mi carro?</summary><p>Tenemos mucho cuidado. Abrimos las puertas con herramientas especiales, no a la fuerza, y programamos las llaves con el mismo equipo que usa el dealer, normalmente por el puerto de diagnóstico.</p></details>'),
     ('<details><summary>What are your hours?</summary><p>We take calls and go out 24/7, including nights, weekends and holidays.</p></details>',
      '<details><summary>¿Cuál es su horario?</summary><p>Contestamos y salimos 24/7, también de noche, fines de semana y días festivos.</p></details>'),
-    ('<details><summary>How can I pay?</summary><p>Cash, credit and debit cards, Apple Pay, Zelle, Venmo or Cash App, whichever is easiest for you.</p></details>',
-     '<details><summary>¿Cómo puedo pagar?</summary><p>Efectivo, tarjetas de crédito y débito, Apple Pay, Zelle, Venmo o Cash App, lo que le sea más fácil.</p></details>'),
+    ('<details><summary>How can I pay?</summary><p>Cash, credit and debit cards, Apple Pay, Google Pay, Zelle, Venmo or Cash App, whichever is easiest for you.</p></details>',
+     '<details><summary>¿Cómo puedo pagar?</summary><p>Efectivo, tarjetas de crédito y débito, Apple Pay, Google Pay, Zelle, Venmo o Cash App, lo que le sea más fácil.</p></details>'),
     ('<details><summary>Can I text instead of calling?</summary><p>Yes. Text <a href="sms:+17702703333">(770) 270-3333</a> with the year, make and model and what happened. You’ll get a reply from the locksmith, not a call center.</p></details>',
      '<details><summary>¿Puedo escribir en vez de llamar?</summary><p>Sí. Envíe un texto al <a href="sms:+17702703333">(770) 270-3333</a> con el año, la marca, el modelo y qué pasó. Le contesta el cerrajero, no un centro de llamadas. Mitch no habla español, pero puede escribirle en español: él usa un traductor y le contesta con gusto.</p></details>'),
     ('<details><summary>Is there a discount on a second key?</summary><p>Yes. When we make a new key because all keys are lost, a second key for the same car is 50% off. Same car, same key type, made during the same visit. Combines with $15 off for online booking.</p></details>',
@@ -268,16 +284,19 @@ PRICING = [
      '<details><summary>¿De verdad cobran $75 por abrir un carro?</summary><p>Sí, en Cumming y el condado de Forsyth, de día. De noche son $50 más. Ese es el precio completo: la visita y abrir el carro, sin daños.</p></details>'),
     ('<details><summary>What if the key I bought online doesn’t work?</summary><p>Tell us the part number or send a photo before the visit and Mitch checks it. If it still can’t be programmed to your car (wrong type, already used or locked), you pay $75 for the trip and the check, and Mitch can supply a key that works.</p></details>',
      '<details><summary>¿Y si la llave que compré en línea no funciona?</summary><p>Envíenos el número de pieza o una foto antes de la visita y Mitch la revisa. Si aun así no se puede programar a su carro (tipo equivocado, ya usada o bloqueada), usted paga $75 por la visita y la revisión, y Mitch le puede conseguir una llave que funcione.</p></details>'),
-    ('<details><summary>How can I pay?</summary><p>Cash, credit and debit cards, Apple Pay, Zelle, Venmo or Cash App.</p></details>',
-     '<details><summary>¿Cómo puedo pagar?</summary><p>Efectivo, tarjetas de crédito y débito, Apple Pay, Zelle, Venmo o Cash App.</p></details>'),
+    ('<details><summary>How can I pay?</summary><p>Cash, credit and debit cards, Apple Pay, Google Pay, Zelle, Venmo or Cash App.</p></details>',
+     '<details><summary>¿Cómo puedo pagar?</summary><p>Efectivo, tarjetas de crédito y débito, Apple Pay, Google Pay, Zelle, Venmo o Cash App.</p></details>'),
 ]
 
 PAGES = [
     # (English source, Spanish target, English URL, Spanish URL, page pairs, meta description)
     ('index.html', 'es/index.html', 'https://locksmitch.com/', 'https://locksmitch.com/es/', HOME, None),
     ('pricing/index.html', 'es/precios/index.html', 'https://locksmitch.com/pricing/', 'https://locksmitch.com/es/precios/', PRICING,
-     'Cuánto cuesta un cerrajero de autos a domicilio en Cumming, el condado de Forsyth y North Atlanta: apertura desde $75, llave extra con chip desde $140, llave inteligente desde $180, todas las llaves perdidas desde $190. Sin cargo por visita en nuestra zona.'),
+     'Precios de cerrajero de autos en Cumming y North Atlanta: apertura desde $75, llave extra desde $140, llave inteligente desde $180.'),
 ]
+
+
+ES_HOME = 'https://locksmitch.com/es/'
 
 
 def hreflang(en, es):
@@ -297,9 +316,8 @@ def build(src, dst, en_url, es_url, pairs, desc):
     # the English page links to its Spanish twin (globe ES + hreflang); the Spanish page gets its own versions below
     s = re.sub(r'\n    <a class="lang"[^\n]*?ES</a>', '', s)
     s = re.sub(r'\n<link rel="alternate" hreflang="[^"]*" href="[^"]*">', '', s)
-    # English-only blocks that have no Spanish twin: Google reviews (tools/reviews_build.py) and the link to /car-key-replacement/
+    # English-only block that has no Spanish twin: Google reviews (tools/reviews_build.py)
     s = re.sub(r'  <!-- reviews:start.*?<!-- reviews:end -->\n\n', '', s, flags=re.S)
-    s = re.sub(r'      <p class="also"><b>Need a new key\?</b>.*?</p>\n', '', s)
     # the text list of recent jobs (tools/jobs_build.py) is English only; without it the photo section is hidden until the photos load
     s = re.sub(r'[ \t]*<!-- jobs:start.*?<!-- jobs:end -->\n', '', s, flags=re.S).replace('<section id="work">', '<section id="work" hidden>')
     for a, b in pairs:
@@ -318,6 +336,13 @@ def build(src, dst, en_url, es_url, pairs, desc):
     ld = [{"@context": "https://schema.org", "@type": "WebPage", "url": es_url, "inLanguage": "es", "name": title,
            "about": {"@id": "https://locksmitch.com/#locksmith"}, "isPartOf": {"@type": "WebSite", "url": "https://locksmitch.com/"}}, faq_ld(s)]
     tags = ''.join('<script type="application/ld+json">%s</script>\n' % json.dumps(x, ensure_ascii=False) for x in ld)
+    if es_url != ES_HOME:
+        # breadcrumbs for the inner Spanish pages: LocksMitch (Spanish home) > the page's own crumb
+        crumb = re.search(r'<nav class="crumbs"[^>]*>.*?› ([^<›]+)</nav>', s, re.S).group(1).strip()
+        bc = {"@context": "https://schema.org", "@type": "BreadcrumbList", "itemListElement": [
+            {"@type": "ListItem", "position": 1, "name": "LocksMitch", "item": ES_HOME},
+            {"@type": "ListItem", "position": 2, "name": crumb, "item": es_url}]}
+        tags = '<script type="application/ld+json">%s</script>\n' % json.dumps(bc, ensure_ascii=False, separators=(',', ':')) + tags
     s = s.replace('<link rel="preconnect" href="https://fonts.googleapis.com">', tags + '<link rel="preconnect" href="https://fonts.googleapis.com">', 1)
     # anything English left in visible text?
     body = s[s.index('<main'):s.index('</footer>')]
