@@ -1,6 +1,6 @@
 """Google reviews on the site: one data file feeds the visible block, the JSON-LD and llms.txt.
 
-Add a review: copy it word for word into tools/reviews.json (name as first name + last initial, rating, date,
+Add a review: copy it word for word into tools/reviews.json (full name as shown on Google, with normal capitals: decision of Dima 2026-11-18, the reviews are public; rating, date,
 text), set "checked" to the day you read the profile, then run from the site root:
     python3 -I tools/reviews_build.py
 Rerun is safe: nothing changes when the data did not change. Only real reviews, never reworded.
@@ -50,6 +50,7 @@ for _zone, _slugs in {1: 'cumming sugarhill', 2: 'alpharetta milton johnscreek b
 DATA = json.load(open(os.path.join(ROOT, 'tools', 'reviews.json'), encoding='utf-8'))
 REVIEWS = DATA['reviews']
 COUNT = len(REVIEWS)
+SHOW_COUNT_FROM = 10   # below this the number of reviews is not shown ("2 reviews" works against us): Dima, 2026-11-18
 AVG = sum(r['rating'] for r in REVIEWS) / COUNT
 PROFILE = DATA['profile_url']   # one button, to the profile; the write-a-review link is not used on the site (Dima, 2026-11-18)
 
@@ -77,7 +78,7 @@ def block():
             '    <div class="wrap">\n'
             '      <div class="sec-head">\n'
             '        <h2>What customers say</h2>\n'
-            '        <p class="lede rv-sum"><b>%.1f</b>%s<span>%d review%s on Google</span></p>\n'
+            '        <p class="lede rv-sum"><b>%.1f</b>%s<span>%s</span></p>\n'
             '      </div>\n'
             '      <div class="rv-list">\n%s      </div>\n'
             '      <div class="rv-cta">\n'
@@ -85,7 +86,7 @@ def block():
             '      </div>\n'
             '    </div>\n'
             '  </section>\n'
-            '  ' + END + '\n\n') % (AVG, stars(AVG, '%.1f' % AVG), COUNT, '' if COUNT == 1 else 's', cards, PROFILE)
+            '  ' + END + '\n\n') % (AVG, stars(AVG, '%.1f' % AVG), ('%d reviews on Google' % COUNT) if COUNT >= SHOW_COUNT_FROM else 'on Google', cards, PROFILE)
 
 
 def trust_block(prices):
@@ -170,8 +171,8 @@ def fix_llms():
     old = open(path, encoding='utf-8').read()
     d = day(DATA['checked'])
     lines = ['- Google Business Profile: ' + PROFILE,
-             '- Google reviews: %.1f out of 5 from %d review%s, as of %s %d, %d. Read them: %s' % (
-                 AVG, COUNT, '' if COUNT == 1 else 's', d.strftime('%b'), d.day, d.year, PROFILE)]
+             '- Google reviews: %.1f out of 5%s, as of %s %d, %d. Read them: %s' % (
+                 AVG, (' from %d reviews' % COUNT) if COUNT >= SHOW_COUNT_FROM else '', d.strftime('%b'), d.day, d.year, PROFILE)]
     s = re.sub(r'- Google Business Profile: [^\n]*\n|- Google reviews: [^\n]*\n|- Google: [^\n]*\n', '', old)
     head, sep, tail = s.partition('## Profiles\n')
     if not sep or '- Yelp: ' not in head or '- Yelp: ' not in tail:
