@@ -15,7 +15,7 @@ ROWS = [
     ('No tow when all keys are lost', ('yes', 'Yes'), ('no', 'Often needs a tow')),
     ('Usually costs less', ('yes', 'No tow fee'), ('no', 'Key + programming + tow')),
     ('Often same day, 24/7 for urgent calls', ('yes', 'Yes'), ('mid', 'Usually by appointment')),
-    ('Dealer-level programming equipment', ('yes', 'NASTF certified'), ('yes', 'Yes')),
+    ('Dealer-level programming equipment', ('yes', 'NASTF registered'), ('yes', 'Yes')),
     ('Keys + electrical diagnostics in one visit', ('yes', 'Yes'), ('mid', 'Varies')),
     ('Talk directly to the locksmith', ('yes', 'Yes'), ('no', 'Service desk')),
     ('Price before anyone drives out', ('yes', 'By text'), ('mid', 'Varies')),

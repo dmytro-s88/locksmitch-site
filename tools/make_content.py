@@ -86,12 +86,12 @@ MAKES = {
     'hyundai': {
         'h3': 'Hyundai and Genesis keys and the PIN code',
         'paras': [
-            "To program a key, a Hyundai needs a security PIN that belongs to that car. As a NASTF-certified locksmith, we get it through manufacturer data access. Older Elantra, Sonata and Tucson models use a chip key or a flip key with the remote built in. Newer and higher trims, the Santa Fe, Palisade and Genesis models, use a smart key with push-to-start.",
+            "To program a key, a Hyundai needs a security PIN that belongs to that car. As a NASTF-registered locksmith, we get it through manufacturer data access. Older Elantra, Sonata and Tucson models use a chip key or a flip key with the remote built in. Newer and higher trims, the Santa Fe, Palisade and Genesis models, use a smart key with push-to-start.",
             "Hyundai models from 2022 and newer use a newer immobilizer, which adds to the price; the exact amount is on the price list above. Older models are a straightforward visit: we cut the key to your car's code, program it with the PIN and test it before you pay.",
             "Text us the year, model and trim, and whether you have a flip key or a smart key. If your car was broken into or the steering column was damaged, send a photo too, so we know what we're looking at before we drive out.",
         ],
         'faq': [
-            ("Why do you need a PIN code to program a Hyundai key?", "Hyundai and Genesis lock key programming behind a PIN tied to the car. We retrieve it through our manufacturer data access as a NASTF-certified locksmith, so you don't need to get it from the dealer."),
+            ("Why do you need a PIN code to program a Hyundai key?", "Hyundai and Genesis lock key programming behind a PIN tied to the car. We retrieve it through our manufacturer data access as a NASTF-registered locksmith, so you don't need to get it from the dealer."),
             ("Do you make keys for Genesis models?", "Yes, the Genesis G70 and GV70 are on our list. They use smart keys; send the year and model and we confirm the key and the price before anyone drives out."),
         ],
     },
