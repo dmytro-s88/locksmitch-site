@@ -43,8 +43,7 @@ def answer(name, mins, zone):
         3: 'All keys lost starts at $190 for most makes, plus $50 for the drive to %s.' % name,
         4: 'All keys lost starts at $190 for most makes; for %s Mitch quotes the job and the drive by text first.' % name,
     }[zone]
-    # No list of documents to prepare: site rule (STATUS.md). Mitch says what he needs after the first contact.
-    return ("Don't tow it to a dealer. Call or text us with the year, make and model. "
+    return ("Don't tow it to a dealer. Find the VIN, have the registration or title and a photo ID ready, and call or text us. "
             "%s and makes a new key at the car, usually within an hour on site. %s" % (drive, price))
 
 
