@@ -266,7 +266,7 @@ footer a:hover { color: var(--green); }
             <input type="radio" name="svc" id="sv-spare" value="spare" checked>
             <label for="sv-spare"><b><svg><use href="#i-key"/></svg>Spare key</b><small>You have a working key and want another one.</small><span class="len">About 1 hour</span></label>
             <input type="radio" name="svc" id="sv-akl" value="akl">
-            <label for="sv-akl"><b><svg><use href="#i-key"/></svg>All keys lost</b><small>No working key. We cut and program a new one at the car.</small><span class="len">About 2 hours</span></label>
+            <label for="sv-akl"><b><svg><use href="#i-key"/></svg>All keys lost</b><small>No working key. We cut and program a new one at the car.</small><span class="len">About 1 hour</span></label>
             <input type="radio" name="svc" id="sv-lockout" value="lockout">
             <label for="sv-lockout"><b><svg><use href="#i-lock"/></svg>Car lockout</b><small>Keys locked inside. We open it without damage.</small><span class="len">About 1 hour</span></label>
             <input type="radio" name="svc" id="sv-program" value="program">
@@ -350,7 +350,7 @@ footer a:hover { color: var(--green); }
 <script>
 (function () {
   var API = 'https://script.google.com/macros/s/AKfycbynxb1ruxrGOtdWw-uGXRYzHs_Pz7L-ad5lc9KdyqKUzbRcSfJ1-L97VLvmfUbY_cZh/exec';
-  var SVC = { spare: ['Spare key', 'About 1 hour'], akl: ['All keys lost', 'About 2 hours'], lockout: ['Car lockout', 'About 1 hour'], program: ['Key programming', 'About 1 hour'] };
+  var SVC = { spare: ['Spare key', 'About 1 hour'], akl: ['All keys lost', 'About 1 hour'], lockout: ['Car lockout', 'About 1 hour'], program: ['Key programming', 'About 1 hour'] };
   var DOW = ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'], DOWL = ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'];
   var MON = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'];
   var MONL = ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'];
