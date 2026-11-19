@@ -1,6 +1,6 @@
 """Adds a "Guides" list to the side column of the service pages and every make page.
 
-Rerun is safe: an existing list is replaced.
+Rerun is safe: an existing list is replaced, and a page is written only when its list changed.
     python3 -I tools/related_guides.py
 """
 import glob, os, re
@@ -14,13 +14,16 @@ GUIDES = {
     'keys-locked-in-car': 'Keys locked in the car?',
     'smart-key-not-detected': '“Key not detected”?',
     'key-fob-programming-cost': 'Key fob programming cost',
+    'locksmith-make-key-without-original': 'Key without the original?',
+    'where-to-copy-car-key': 'Where to copy a car key',
+    'program-key-fob-yourself': 'Program a key fob yourself?',
 }
 SERVICES = {
-    'car-key-replacement': ['lost-all-car-keys', 'dealer-vs-locksmith-car-key', 'bought-car-key-online'],
-    'all-keys-lost': ['lost-all-car-keys', 'dealer-vs-locksmith-car-key', 'bought-car-key-online'],
-    'spare-key': ['bought-car-key-online', 'dealer-vs-locksmith-car-key', 'key-fob-not-working'],
+    'car-key-replacement': ['lost-all-car-keys', 'where-to-copy-car-key', 'dealer-vs-locksmith-car-key', 'bought-car-key-online'],
+    'all-keys-lost': ['lost-all-car-keys', 'locksmith-make-key-without-original', 'dealer-vs-locksmith-car-key', 'bought-car-key-online'],
+    'spare-key': ['where-to-copy-car-key', 'bought-car-key-online', 'dealer-vs-locksmith-car-key', 'key-fob-not-working'],
     'car-lockout': ['keys-locked-in-car', 'smart-key-not-detected', 'key-fob-not-working'],
-    'key-programming': ['key-fob-programming-cost', 'bought-car-key-online', 'smart-key-not-detected', 'key-fob-not-working'],
+    'key-programming': ['key-fob-programming-cost', 'program-key-fob-yourself', 'bought-car-key-online', 'smart-key-not-detected', 'key-fob-not-working'],
 }
 MAKE_GUIDES = ['lost-all-car-keys', 'dealer-vs-locksmith-car-key', 'key-fob-not-working']
 
@@ -36,7 +39,7 @@ def main():
         pages.setdefault(p, MAKE_GUIDES)   # car-key-replacement is a service page, listed above
     n = 0
     for p, slugs in pages.items():
-        s = open(p, encoding='utf-8').read()
+        s = before = open(p, encoding='utf-8').read()
         s = re.sub(r'<h3 style="margin-top:20px" data-guides="1">Guides</h3>\n\s*<ul[^>]*>.*?</ul>\n\s*', '', s, flags=re.S)
         m = re.search(r'<aside class="nearby[^"]*">.*?</aside>', s, re.S)
         if not m:
@@ -48,9 +51,10 @@ def main():
         else:
             new = aside.replace('</aside>', block(slugs) + '</aside>', 1)
         s = s[:m.start()] + new + s[m.end():]
-        open(p, 'w', encoding='utf-8').write(s)
-        n += 1
-    print('pages updated:', n)
+        if s != before:
+            open(p, 'w', encoding='utf-8').write(s)
+            n += 1
+    print('pages changed:', n, 'of', len(pages))
 
 
 main()
