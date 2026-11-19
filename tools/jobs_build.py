@@ -54,18 +54,26 @@ def slug(city):
     return re.sub(r'[^a-z]', '', city.lower())
 
 
+def name(job):
+    """Vehicle name, linked to the job's own page /jobs/<slug>/ when it has one (tools/job_pages.py)."""
+    if job.get('slug'):
+        return '<a href="/jobs/%s/">%s</a>' % (job['slug'], esc(job['vehicle']))
+    return esc(job['vehicle'])
+
+
 def city_block(city, jobs):
-    items = ''.join('<li><b>%s:</b> %s, %s</li>' % (esc(j['vehicle']), esc(lower(j['service'])), when(j, False)) for j in jobs[:CITY_MAX])
+    items = ''.join('<li><b>%s:</b> %s, %s</li>' % (name(j), esc(lower(j['service'])), when(j, False)) for j in jobs[:CITY_MAX])
     return ('        ' + START + '\n'
             '        <div class="local-jobs"><h3 class="sub">Recent jobs in %s</h3><ul class="price-list">%s</ul></div>\n'
             '        ' + END + '\n') % (esc(city), items)
 
 
 def list_block():
-    items = ''.join('        <li><b>%s</b> <span>%s</span></li>\n' % (esc(j['vehicle']), esc(line(j).split(' - ', 1)[1])) for j in JOBS[:LIST_MAX])
+    items = ''.join('        <li><b>%s</b> <span>%s</span></li>\n' % (name(j), esc(line(j).split(' - ', 1)[1])) for j in JOBS[:LIST_MAX])
+    more = '      <p class="jobs-more"><a href="/jobs/">All recent jobs, with photos&nbsp;→</a></p>\n' if any(j.get('slug') for j in JOBS) else ''
     return ('      ' + START + '\n'
-            '      <ul class="jobs-list">\n%s      </ul>\n'
-            '      ' + END + '\n') % items
+            '      <ul class="jobs-list">\n%s      </ul>\n%s'
+            '      ' + END + '\n') % (items, more)
 
 
 def fix_page(rel, by_city):
@@ -95,7 +103,8 @@ def fix_llms():
     old = open(path, encoding='utf-8').read()
     s = re.sub(r'## Recent jobs\n.*?(?=## )', '', old, flags=re.S)
     section = ('## Recent jobs\nReal jobs completed by LocksMitch, newest first (vehicle, service, city, month):\n' +
-               ''.join('- ' + line(j) + '\n' for j in JOBS[:LLMS_MAX]) + '\n')
+               ''.join('- ' + line(j) + (' (https://locksmitch.com/jobs/%s/)' % j['slug'] if j.get('slug') else '') + '\n' for j in JOBS[:LLMS_MAX]) +
+               ('All recent jobs with photos: https://locksmitch.com/jobs/\n' if any(j.get('slug') for j in JOBS) else '') + '\n')
     anchor = '## Service area\n'
     if anchor not in s:
         raise SystemExit('llms.txt: no "Service area" section')

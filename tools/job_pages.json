@@ -1,0 +1,157 @@
+{
+  "note": "One page per real completed job: /jobs/<slug>/. Public file: no customer names, addresses, phones, prices or lead numbers. Only what really happened on the job. The slug must match the 'slug' of the same job in tools/jobs.json. Photo: assets/jobs/<slug>.webp (no faces, no plates, no house numbers).",
+  "pages": [
+    {
+      "slug": "2010-toyota-corolla-all-keys-lost-cumming",
+      "make": "Toyota",
+      "make_page": "/toyota-key-replacement/",
+      "service_page": "/all-keys-lost/",
+      "city_page": "/cumming/",
+      "title": "2010 Toyota Corolla All Keys Lost in Cumming, GA",
+      "summary": "Every key to a 2010 Toyota Corolla was lost. A new flip key was cut and programmed at the car in Cumming, no tow and no dealer.",
+      "result_short": "New flip key cut and programmed at the car",
+      "problem": "The owner of a 2010 Toyota Corolla in Cumming had lost every key. With no key left there is nothing to copy, so the new key has to be made from the car itself: the blade cut to the locks and the chip added to the car's immobilizer.",
+      "did": [
+        "Came to the car in Cumming, so it did not need a tow.",
+        "Made a new flip key from scratch and cut the blade for this Corolla.",
+        "Programmed the new key to the car and checked that it starts the Corolla."
+      ],
+      "result": "The Corolla has a working flip key again, made without any original key to copy.",
+      "tip": "If you are down to one key on a Toyota, a spare made from it costs less than an all-keys-lost job and takes less time.",
+      "alt": "New flip key for a 2010 Toyota Corolla next to the steering wheel"
+    },
+    {
+      "slug": "2015-nissan-altima-smart-key-lawrenceville",
+      "make": "Nissan",
+      "make_page": "/nissan-key-replacement/",
+      "service_page": "/key-programming/",
+      "city_page": "/lawrenceville/",
+      "title": "2015 Nissan Altima Smart Key Programming in Lawrenceville, GA",
+      "summary": "A 2015 Nissan Altima stopped accepting its smart key even though the fob was alive. A new smart key was programmed at the car in Lawrenceville.",
+      "result_short": "New smart key programmed, car starts",
+      "problem": "The owner's smart key for a 2015 Nissan Altima looked fine: the battery was good and the chip inside read normally. But the car would no longer register it, so the push-to-start did not work with that fob.",
+      "did": [
+        "Came to the car in Lawrenceville and tested the owner's fob first: the chip was alive, the car simply refused it.",
+        "Programmed a new smart key to the Altima on site.",
+        "Checked push-to-start, lock and unlock with the new key."
+      ],
+      "result": "The Altima starts and locks with the new smart key.",
+      "tip": "The dash on this car also showed an \"I-Key System Error\". On this job that message came from a fault code (B2604) that points to the park/neutral position switch, not to the key. A new key does not clear it, so it is worth reading the codes before buying a fob.",
+      "alt": "New smart key for a 2015 Nissan Altima held in front of the steering wheel"
+    },
+    {
+      "slug": "2019-ford-ranger-all-keys-lost-johns-creek",
+      "make": "Ford",
+      "make_page": "/ford-key-replacement/",
+      "service_page": "/all-keys-lost/",
+      "city_page": "/johnscreek/",
+      "title": "2019 Ford Ranger All Keys Lost in Johns Creek, GA",
+      "summary": "No keys at all for a 2019 Ford Ranger. The door lock was decoded, two high-security flip keys were cut in the driveway in Johns Creek and both were programmed to the truck.",
+      "result_short": "Two new high-security keys cut and programmed",
+      "problem": "The owner of a 2019 Ford Ranger in Johns Creek had lost every key. The Ranger uses a laser-cut high-security blade (HU101), which cannot be copied by eye, and there was no key to copy anyway.",
+      "did": [
+        "Decoded the driver door lock with a Lishi pick-decoder to get the key code.",
+        "Cut two new flip keys on the cutting machine in the van, right in the driveway.",
+        "Programmed both keys to the truck and checked the door, the ignition and the remote buttons."
+      ],
+      "result": "The Ranger went from zero keys to two working keys, with no tow and no dealer visit.",
+      "tip": "On high-security Ford keys every cut matters. If a new key turns the ignition but not the door, one cut was read between two depths; re-checking that position fixes it.",
+      "alt": "Two new flip keys for a 2019 Ford Ranger in front of the steering wheel"
+    },
+    {
+      "slug": "2021-lexus-rx-smart-key-programming-cumming",
+      "make": "Lexus",
+      "make_page": "/lexus-key-replacement/",
+      "service_page": "/key-programming/",
+      "city_page": "/cumming/",
+      "title": "2021 Lexus RX Smart Key Programming in Cumming, GA",
+      "summary": "A new smart key for a Lexus RX in Cumming was programmed on site, and the remote buttons were synced so every button works.",
+      "result_short": "Smart key programmed, buttons synced",
+      "problem": "The owner of a 2021 Lexus RX in Cumming had a new smart key that was not programmed to the car, so it could not start the SUV.",
+      "did": [
+        "Came to the car in Cumming and programmed the smart key to the RX.",
+        "The lock and unlock buttons started working after the remote sync step was run a second time.",
+        "Tested push-to-start, the buttons and the doors before leaving."
+      ],
+      "result": "The RX starts on the key, and every button works.",
+      "tip": "If you buy a Lexus key online, check that it is the same part number as your original before paying. A key that only starts the car but has dead buttons usually needs the remote sync step, not a new key.",
+      "alt": "Lexus smart keys held in front of a Lexus RX steering wheel"
+    },
+    {
+      "slug": "2011-toyota-camry-all-keys-lost-cumming",
+      "make": "Toyota",
+      "make_page": "/toyota-key-replacement/",
+      "service_page": "/all-keys-lost/",
+      "city_page": "/cumming/",
+      "title": "2011 Toyota Camry All Keys Lost in Cumming, GA",
+      "summary": "No keys at all for a 2011 Toyota Camry. Two new flip keys were made from scratch at the car in Cumming.",
+      "result_short": "Two new flip keys made from scratch",
+      "problem": "The owner of a 2011 Toyota Camry in Cumming had no key at all, so there was nothing to copy.",
+      "did": [
+        "Came to the car in Cumming, no tow.",
+        "Made two new keys from scratch and cut the blades for this Camry.",
+        "Programmed both keys to the car and tested start, lock and unlock."
+      ],
+      "result": "The Camry has two working keys. Instead of the original remote head key, the owner now has flip keys like on newer Toyotas.",
+      "tip": "Get two keys in the same visit: a second key for the same car made in the same visit is 50% off.",
+      "alt": "Two new flip keys for a 2011 Toyota Camry in front of the steering wheel"
+    },
+    {
+      "slug": "2019-ford-f-150-spare-key-cumming",
+      "make": "Ford",
+      "make_page": "/ford-key-replacement/",
+      "service_page": "/spare-key/",
+      "city_page": "/cumming/",
+      "title": "2019 Ford F-150 Spare Key in Cumming, GA",
+      "summary": "A new flip key for a 2019 Ford F-150, cut and programmed in the owner's driveway in Cumming.",
+      "result_short": "Spare flip key cut and programmed",
+      "problem": "The owner of a 2019 Ford F-150 in Cumming wanted an extra key for the truck.",
+      "did": [
+        "Came to the truck in Cumming.",
+        "Cut a new flip key for the F-150 on site.",
+        "Programmed it to the truck and tested start and the remote."
+      ],
+      "result": "Two working keys again, with no dealer appointment and no waiting.",
+      "tip": "A spare made while you still have one working key is the cheapest key you will ever buy for the truck.",
+      "alt": "New flip key for a 2019 Ford F-150 held in front of the steering wheel"
+    },
+    {
+      "slug": "2012-ford-explorer-all-keys-lost-flowery-branch",
+      "make": "Ford",
+      "make_page": "/ford-key-replacement/",
+      "service_page": "/all-keys-lost/",
+      "city_page": "/flowerybranch/",
+      "title": "2012 Ford Explorer All Keys Lost in Flowery Branch, GA",
+      "summary": "All keys lost on a 2012 Ford Explorer. The lock was decoded and four new remote head keys were cut and programmed in the driveway in Flowery Branch the same day.",
+      "result_short": "Four new remote head keys, same day",
+      "problem": "The owner of a 2012 Ford Explorer in Flowery Branch had lost every key.",
+      "did": [
+        "Decoded the door lock with a Lishi pick-decoder to get the key code.",
+        "Cut new keys on the spot.",
+        "Programmed four remote head keys to the Explorer and tested each one."
+      ],
+      "result": "Four working keys the same day, done in the customer's driveway with no tow to the dealer.",
+      "tip": "Extra keys are cheapest in the same visit: with LocksMitch, a second key for the same car made in the same visit is 50% off.",
+      "alt": "Four new remote head keys for a 2012 Ford Explorer in front of the steering wheel"
+    },
+    {
+      "slug": "2017-honda-odyssey-spare-smart-key-cumming",
+      "make": "Honda",
+      "make_page": "/honda-key-replacement/",
+      "service_page": "/spare-key/",
+      "city_page": "/cumming/",
+      "title": "2017 Honda Odyssey Spare Smart Key in Cumming, GA",
+      "summary": "A spare push-to-start smart key with the power sliding door buttons, programmed on site for a Honda Odyssey in Cumming.",
+      "result_short": "Spare smart key with sliding door buttons",
+      "problem": "The owner of a 2017 Honda Odyssey in Cumming had only one smart key and wanted a spare.",
+      "did": [
+        "Came to the van in Cumming.",
+        "Programmed a new push-to-start smart key with the power sliding door buttons.",
+        "Tested every button and the push-to-start."
+      ],
+      "result": "The Odyssey starts on the new key, and every button works, including both sliding doors.",
+      "tip": "Odyssey keys come with different button layouts. Matching the layout of your original key means every button on the new one works.",
+      "alt": "Honda Odyssey smart keys held in front of the steering wheel"
+    }
+  ]
+}
