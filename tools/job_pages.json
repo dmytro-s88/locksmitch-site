@@ -2,6 +2,26 @@
   "note": "One page per real completed job: /jobs/<slug>/. Public file: no customer names, addresses, phones, prices or lead numbers. Only what really happened on the job. The slug must match the 'slug' of the same job in tools/jobs.json. Photo: assets/jobs/<slug>.webp (no faces, no plates, no house numbers).",
   "pages": [
     {
+      "slug": "2026-hyundai-tucson-spare-smart-key-gainesville",
+      "make": "Hyundai",
+      "make_page": "/hyundai-key-replacement/",
+      "service_page": "/spare-key/",
+      "city_page": "/gainesville/",
+      "title": "2026 Hyundai Tucson Spare Smart Key in Gainesville, GA",
+      "summary": "A genuine Hyundai smart key, matched to the car by its VIN and programmed in the owner's garage in Gainesville. No dealer appointment.",
+      "result_short": "Genuine Hyundai smart key programmed on site",
+      "problem": "The owners had just bought a used 2026 Hyundai Tucson Hybrid. The second key fob that came with it did not match the car, so they had only one working key.",
+      "did": [
+        "Checked the exact key part number for this Tucson by its VIN.",
+        "Got a genuine Hyundai smart key with that part number.",
+        "Came to the car in Gainesville and programmed the new key in the garage.",
+        "Tested the buttons and the push-to-start with the new key."
+      ],
+      "result": "The Tucson now has two working smart keys, and the new one is a genuine Hyundai key.",
+      "tip": "Hyundai and Kia keys have to match the exact part number, not just the look. A fob that looks the same can still be the wrong one, so check it by the VIN before you buy.",
+      "alt": "New Hyundai smart key held in front of the Tucson steering wheel"
+    },
+    {
       "slug": "2010-toyota-corolla-all-keys-lost-cumming",
       "make": "Toyota",
       "make_page": "/toyota-key-replacement/",

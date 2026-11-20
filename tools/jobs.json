@@ -2,7 +2,7 @@
   "note": "Real completed jobs, newest first. Public file: only vehicle, service, city and month. No names, addresses, phones, prices or lead numbers. Optional \"slug\": the job has its own page /jobs/<slug>/ (texts in tools/job_pages.json).",
   "jobs": [
     {"date": "2026-11", "vehicle": "2017 Ram pickup", "service": "Lockout", "city": "Cumming"},
-    {"date": "2026-11", "vehicle": "2026 Hyundai Tucson", "service": "Spare smart key", "city": "Gainesville"},
+    {"date": "2026-11", "vehicle": "2026 Hyundai Tucson", "service": "Spare smart key", "city": "Gainesville", "slug": "2026-hyundai-tucson-spare-smart-key-gainesville"},
     {"date": "2026-11", "vehicle": "2017 Toyota Highlander", "service": "Spare smart key", "city": "Cumming"},
     {"date": "2026-11", "vehicle": "2021 Kia Forte", "service": "Spare smart key", "city": "Cumming"},
     {"date": "2026-11", "vehicle": "2019 Honda Accord", "service": "Spare key", "city": "Cumming"},
