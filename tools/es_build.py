@@ -158,8 +158,8 @@ HOME = [
     ('<meta property="og:description" content="Mobile car locksmith in Cumming, GA: lost keys, spare keys, lockouts and key programming at your car, 24/7 across North Atlanta. Call (770) 270-3333.">',
      '<meta property="og:description" content="Llaves de carro perdidas, llaves extra, apertura de carros y programación de llaves. Vamos a donde está usted en North Atlanta. Llame al (770) 270-3333.">'),
     ('<h1>Lost your car keys?<span class="l2">Mobile car locksmith in Cumming and North Atlanta. We cut and program new keys where you’re parked.</span></h1>', '<h1>¿Perdió las llaves de su carro?<span class="l2">Cerrajero de autos a domicilio en Cumming y North Atlanta. Cortamos y programamos llaves nuevas donde esté su carro.</span></h1>'),
-    ('<p class="lede">LocksMitch is a mobile car locksmith based in Cumming and serving North Atlanta. We bring dealership-level key cutting and programming equipment to your driveway, office lot or the side of the road. No tow, no dealer wait.</p>',
-     '<p class="lede">LocksMitch es un cerrajero de autos a domicilio en North Atlanta. Llevamos equipo de corte y programación de llaves, igual al del dealer, hasta su casa, su trabajo o la orilla de la carretera. Sin grúa y sin esperar en el dealer.</p>'),
+    ('<p class="lede">LocksMitch is a mobile car locksmith based in Cumming and serving North Atlanta. We bring dealership-level key cutting and programming equipment to your driveway, office lot or the side of the road. No tow, no dealer wait. Call or text <a href="tel:7702703333">(770) 270-3333</a>.</p>',
+     '<p class="lede">LocksMitch es un cerrajero de autos a domicilio en North Atlanta. Llevamos equipo de corte y programación de llaves, igual al del dealer, hasta su casa, su trabajo o la orilla de la carretera. Sin grúa y sin esperar en el dealer. Llame o envíe un texto al <a href="tel:7702703333">(770) 270-3333</a>.</p>'),
     ('<p class="book-note"><a class="tag" href="/book/">$15 off</a>&nbsp; <strong>when you book online.</strong> Locked out right now? Call instead, it’s faster.</p>',
      '<p class="book-note"><a class="tag" href="/book/">$15 de descuento</a>&nbsp; <strong>al reservar en línea.</strong> ¿Se quedó afuera de su carro ahora mismo? Mejor llame, es más rápido.</p>'),
     ('<span><strong>Upfront price.</strong> Quoted before we drive out, and it doesn’t change at your car. Coming to you is included. <a href="/pricing/">See prices&nbsp;→</a></span>',
@@ -292,7 +292,7 @@ PAGES = [
     # (English source, Spanish target, English URL, Spanish URL, page pairs, meta description)
     ('index.html', 'es/index.html', 'https://locksmitch.com/', 'https://locksmitch.com/es/', HOME, None),
     ('pricing/index.html', 'es/precios/index.html', 'https://locksmitch.com/pricing/', 'https://locksmitch.com/es/precios/', PRICING,
-     'Precios de cerrajero de autos en Cumming y North Atlanta: apertura desde $75, llave extra desde $140, llave inteligente desde $180.'),
+     'Precios de cerrajero de autos en Cumming y North Atlanta: apertura desde $75, llave extra desde $140, llave inteligente desde $180. Llame al (770) 270-3333.'),
 ]
 
 

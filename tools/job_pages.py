@@ -44,6 +44,14 @@ def ld(obj):
     return '<script type="application/ld+json">' + json.dumps(obj, ensure_ascii=False) + '</script>'
 
 
+PHONE = ' Call (770) 270-3333.'
+
+
+def with_phone(text):
+    """Meta description with the phone at the end when it still fits in a search snippet (160 characters)."""
+    return text + PHONE if len(text + PHONE) <= 160 else text
+
+
 def set_head(s, title, desc, url, image, page_name, og_type, lds):
     s = sub1(r'<html lang="en" data-page="[^"]*">', '<html lang="en" data-page="%s">' % esc(page_name), s)
     s = sub1(r'<title>.*?</title>', '<title>%s</title>' % esc(title), s)
@@ -117,7 +125,7 @@ def main():
                 {'@type': 'ListItem', 'position': 2, 'name': 'Recent jobs', 'item': SITE + '/jobs/'},
                 {'@type': 'ListItem', 'position': 3, 'name': p['title'], 'item': url}]}),
         ]
-        s = set_head(tpl, p['title'] + ' | LocksMitch', p['summary'], url, SITE + img, 'Job: ' + p['title'], 'article', lds)
+        s = set_head(tpl, p['title'] + ' | LocksMitch', with_phone(p['summary']), url, SITE + img, 'Job: ' + p['title'], 'article', lds)
         s = set_hero(s, '<a href="/">LocksMitch</a> › <a href="/jobs/">Recent jobs</a> › %s' % esc(j['vehicle']),
                      p['title'], 'Recent job · %s' % when, p['summary'], 'By Mitch, owner of LocksMitch · Job done %s' % when, svc_slug)
         did = ''.join('<li>%s</li>' % esc(x) for x in p['did'])
@@ -156,7 +164,7 @@ def main():
            ld({'@context': 'https://schema.org', '@type': 'BreadcrumbList', 'itemListElement': [
                {'@type': 'ListItem', 'position': 1, 'name': 'LocksMitch', 'item': SITE + '/'},
                {'@type': 'ListItem', 'position': 2, 'name': 'Recent jobs', 'item': url}]})]
-    s = set_head(tpl, title + ' | LocksMitch', desc, url, None, 'Recent jobs', 'website', lds)
+    s = set_head(tpl, title + ' | LocksMitch', 'Real car key jobs by LocksMitch around Cumming and North Atlanta: the car, the problem and the fix, with a photo.' + PHONE, url, None, 'Recent jobs', 'website', lds)
     s = set_hero(s, '<a href="/">LocksMitch</a> › Recent jobs', 'Recent jobs', 'Real cars, real keys, around North Atlanta.',
                  'Every job here is a real one: the car, what went wrong and what I did, with a photo from the job. No customer names.',
                  'By Mitch, owner of LocksMitch · Updated %s' % month(jobs[pages[0]['slug']]['date']), 'spare-key')
