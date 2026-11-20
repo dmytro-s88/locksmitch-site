@@ -1,6 +1,12 @@
 {
   "note": "Real completed jobs, newest first. Public file: only vehicle, service, city and month. No names, addresses, phones, prices or lead numbers. Optional \"slug\": the job has its own page /jobs/<slug>/ (texts in tools/job_pages.json).",
   "jobs": [
+    {"date": "2026-11", "vehicle": "2017 Ram pickup", "service": "Lockout", "city": "Cumming"},
+    {"date": "2026-11", "vehicle": "2026 Hyundai Tucson", "service": "Spare smart key", "city": "Gainesville"},
+    {"date": "2026-11", "vehicle": "2017 Toyota Highlander", "service": "Spare smart key", "city": "Cumming"},
+    {"date": "2026-11", "vehicle": "2021 Kia Forte", "service": "Spare smart key", "city": "Cumming"},
+    {"date": "2026-11", "vehicle": "2019 Honda Accord", "service": "Spare key", "city": "Cumming"},
+    {"date": "2026-11", "vehicle": "2019 Toyota Highlander", "service": "Spare key", "city": "Cumming"},
     {"date": "2026-11", "vehicle": "2010 Toyota Corolla", "service": "All keys lost", "city": "Cumming", "slug": "2010-toyota-corolla-all-keys-lost-cumming"},
     {"date": "2026-11", "vehicle": "2015 Nissan Altima", "service": "Key programming", "city": "Lawrenceville", "slug": "2015-nissan-altima-smart-key-lawrenceville"},
     {"date": "2026-11", "vehicle": "2019 Ford Ranger", "service": "All keys lost", "city": "Johns Creek", "slug": "2019-ford-ranger-all-keys-lost-johns-creek"},
