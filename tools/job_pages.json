@@ -29,16 +29,17 @@
       "service_page": "/spare-key/",
       "city_page": "/sugarhill/",
       "title": "2008 Infiniti G35 Spare Smart Key in Sugar Hill, GA",
-      "summary": "A new spare smart key for a 2008 Infiniti G35, programmed at the car in Sugar Hill. Push-button start works with it. No dealer trip.",
+      "summary": "A 2008 Infiniti G35 that sat parked for years had lost every key from its memory. We programmed a smart key at the car in Sugar Hill, almost an all keys lost job. No dealer trip.",
       "result_short": "Spare smart key programmed on site",
-      "problem": "The owner of this 2008 Infiniti G35 called for a spare smart key.",
+      "problem": "This 2008 Infiniti G35 had been sitting in a parking spot for years and was covered in a thick layer of dust. After the long sit and a dead battery, the car no longer recognized its original smart key. When we connected the programmer, the system showed 0 keys stored: every key had been wiped.",
       "did": [
         "Came to the car in Sugar Hill.",
-        "Programmed a new smart key to the car.",
-        "Checked that the car starts with the new key by push-button start."
+        "Connected the programmer and read the key memory: 0 keys stored.",
+        "Ran what was almost an all keys lost procedure, since the car did not see the original key.",
+        "Programmed a new smart key and checked that the car starts with it by push-button start."
       ],
-      "result": "The G35 has a spare smart key that starts the car, made at the car with no trip to the dealer.",
-      "tip": "A spare costs far less than losing the last key. When every key is gone, the job turns into all keys lost, which takes more work and costs more.",
+      "result": "The G35 starts again with a working smart key, made at the car with no trip to the dealer.",
+      "tip": "If a car sits for a long time, keep the battery on a maintainer or disconnect it. A fully drained battery can make some cars lose their stored keys, and then even the original key will not start the car.",
       "alt": "New Infiniti smart key held in front of the G35 steering wheel"
     },
     {
