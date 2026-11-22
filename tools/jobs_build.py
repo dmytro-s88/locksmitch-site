@@ -29,7 +29,7 @@ BLOCK_RE = re.compile(r'[ \t]*<!-- jobs:start.*?<!-- jobs:end -->\n', re.S)
 MAKE_PAGES = {'BMW': 'BMW', 'Chevrolet': 'Chevrolet and GMC', 'GMC': 'Chevrolet and GMC', 'Ferrari': 'Ferrari', 'Ford': 'Ford', 'Honda': 'Honda',
               'Hyundai': 'Hyundai', 'Jeep': 'Jeep, Dodge and RAM', 'Dodge': 'Jeep, Dodge and RAM', 'Ram': 'Jeep, Dodge and RAM', 'RAM': 'Jeep, Dodge and RAM', 'Chrysler': 'Jeep, Dodge and RAM',
               'Kia': 'Kia', 'Land': 'Land Rover and Jaguar', 'Jaguar': 'Land Rover and Jaguar', 'Lexus': 'Lexus',
-              'Maserati': 'Maserati', 'Mazda': 'Mazda', 'Mercedes-Benz': 'Mercedes-Benz', 'Mitsubishi': 'Mitsubishi', 'Nissan': 'Nissan',
+              'Maserati': 'Maserati', 'Mazda': 'Mazda', 'Mercedes-Benz': 'Mercedes-Benz', 'Mitsubishi': 'Mitsubishi', 'Nissan': 'Nissan', 'Infiniti': 'Nissan',
               'Porsche': 'Porsche', 'Subaru': 'Subaru', 'Toyota': 'Toyota', 'Volkswagen': 'Volkswagen and Audi', 'Audi': 'Volkswagen and Audi', 'Volvo': 'Volvo'}
 MONTHS = ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December']
 

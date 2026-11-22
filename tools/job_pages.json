@@ -2,6 +2,86 @@
   "note": "One page per real completed job: /jobs/<slug>/. Public file: no customer names, addresses, phones, prices or lead numbers. Only what really happened on the job. The slug must match the 'slug' of the same job in tools/jobs.json. Photo: assets/jobs/<slug>.webp (no faces, no plates, no house numbers).",
   "pages": [
     {
+      "slug": "2025-hyundai-santa-fe-all-keys-lost-cumming",
+      "make": "Hyundai",
+      "make_page": "/hyundai-key-replacement/",
+      "service_page": "/all-keys-lost/",
+      "city_page": "/cumming/",
+      "title": "2025 Hyundai Santa Fe All Keys Lost in Cumming, GA",
+      "summary": "No key left for a 2025 Hyundai Santa Fe Hybrid. A genuine Hyundai smart key, matched by VIN, programmed at the car in Cumming.",
+      "result_short": "Genuine Hyundai smart key, matched by VIN",
+      "problem": "The owners had no key at all for their 2025 Hyundai Santa Fe Hybrid. It was the same family whose Silverado keys were lost in a house fire. A new Santa Fe needs a smart key with the exact part number for its VIN.",
+      "did": [
+        "Checked the exact smart key part number for this Santa Fe by its VIN.",
+        "On the first visit, programmed a temporary key so the car could be driven: buttons and push-button start, without keyless entry.",
+        "Ordered a genuine Hyundai smart key with that part number.",
+        "Came back when it arrived and programmed the genuine key at the car in Cumming.",
+        "Tested lock and unlock, keyless entry and push-button start."
+      ],
+      "result": "The Santa Fe has a genuine Hyundai smart key again, with keyless entry and push-button start. All of it was done at the car, without the dealer.",
+      "tip": "On new Hyundai and Kia models the key has to match the exact part number for your VIN, not just the look. When every key is lost, a temporary key can get the car moving while the genuine one is on order.",
+      "alt": "Genuine Hyundai smart key held in front of the Santa Fe steering wheel, dash showing Ready"
+    },
+    {
+      "slug": "2008-infiniti-g35-spare-smart-key-sugar-hill",
+      "make": "Nissan and Infiniti",
+      "make_page": "/nissan-key-replacement/",
+      "service_page": "/spare-key/",
+      "city_page": "/sugarhill/",
+      "title": "2008 Infiniti G35 Spare Smart Key in Sugar Hill, GA",
+      "summary": "A new spare smart key for a 2008 Infiniti G35, programmed at the car in Sugar Hill. Push-button start works with it. No dealer trip.",
+      "result_short": "Spare smart key programmed on site",
+      "problem": "The owner of this 2008 Infiniti G35 called for a spare smart key.",
+      "did": [
+        "Came to the car in Sugar Hill.",
+        "Programmed a new smart key to the car.",
+        "Checked that the car starts with the new key by push-button start."
+      ],
+      "result": "The G35 has a spare smart key that starts the car, made at the car with no trip to the dealer.",
+      "tip": "A spare costs far less than losing the last key. When every key is gone, the job turns into all keys lost, which takes more work and costs more.",
+      "alt": "New Infiniti smart key held in front of the G35 steering wheel"
+    },
+    {
+      "slug": "2020-kia-forte-all-keys-lost-atlanta",
+      "make": "Kia",
+      "make_page": "/kia-key-replacement/",
+      "service_page": "/all-keys-lost/",
+      "city_page": "/",
+      "title": "2020 Kia Forte All Keys Lost in Downtown Atlanta, GA",
+      "summary": "Late-night call to Downtown Atlanta, no keys for a 2020 Kia Forte. Door opened, new smart key programmed right in the parking lot.",
+      "result_short": "New smart key at night, in the parking lot",
+      "problem": "Late at night the owner of this 2020 Kia Forte had no key at all, and the car was locked in a downtown Atlanta parking lot.",
+      "did": [
+        "Checked the right smart key for this Forte by its VIN.",
+        "Drove to the car in Downtown Atlanta that night.",
+        "Opened the door with an air wedge.",
+        "Quieted the alarm.",
+        "Got the key PIN for the car by its VIN and programmed a new smart key."
+      ],
+      "result": "The Forte started with its new smart key the same night, right in the parking lot.",
+      "tip": "Emergency calls are taken 24/7. A smart key for many Kia models can be programmed at the car, so a locked car with no key does not have to be towed.",
+      "alt": "Key programmer on the steering wheel of the Kia Forte, programming a new smart key at night"
+    },
+    {
+      "slug": "2007-honda-ridgeline-two-keys-cumming",
+      "make": "Honda",
+      "make_page": "/honda-key-replacement/",
+      "service_page": "/spare-key/",
+      "city_page": "/cumming/",
+      "title": "2007 Honda Ridgeline: Two New Keys in Cumming, GA",
+      "summary": "Only the valet key was left for a 2007 Honda Ridgeline. Two new master keys were cut from it and programmed to the truck in Cumming.",
+      "result_short": "Two master keys from the valet key",
+      "problem": "Only the valet key was left for this 2007 Honda Ridgeline. It works, but with one key left, losing it means an all-keys-lost job.",
+      "did": [
+        "Came to the truck in Cumming.",
+        "Cut two new master keys from the valet key on the spot.",
+        "Programmed both new remote keys to the truck."
+      ],
+      "result": "The owner has two full keys again, plus the valet key as a backup. No dealer, no tow.",
+      "tip": "Down to your last key, even a valet key? Make a spare while you still have it. A copy from a working key costs less than a new key after every key is lost.",
+      "alt": "Two new Honda remote keys held in front of the Ridgeline steering wheel"
+    },
+    {
       "slug": "2026-hyundai-tucson-spare-smart-key-gainesville",
       "make": "Hyundai",
       "make_page": "/hyundai-key-replacement/",

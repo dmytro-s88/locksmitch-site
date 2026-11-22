@@ -1,6 +1,10 @@
 {
   "note": "Real completed jobs, newest first. Public file: only vehicle, service, city and month. No names, addresses, phones, prices or lead numbers. Optional \"slug\": the job has its own page /jobs/<slug>/ (texts in tools/job_pages.json).",
   "jobs": [
+    {"date": "2026-11", "vehicle": "2023 Volvo VNL 860 truck", "service": "Key cut", "city": ""},
+    {"date": "2026-11", "vehicle": "2025 Hyundai Santa Fe", "service": "All keys lost", "city": "Cumming", "slug": "2025-hyundai-santa-fe-all-keys-lost-cumming"},
+    {"date": "2026-11", "vehicle": "2008 Infiniti G35", "service": "Spare smart key", "city": "Sugar Hill", "slug": "2008-infiniti-g35-spare-smart-key-sugar-hill"},
+    {"date": "2026-11", "vehicle": "2020 Kia Forte", "service": "All keys lost", "city": "Atlanta", "slug": "2020-kia-forte-all-keys-lost-atlanta"},
     {"date": "2026-11", "vehicle": "2017 Ram pickup", "service": "Lockout", "city": "Cumming"},
     {"date": "2026-11", "vehicle": "2024 Chevrolet Silverado 2500HD", "service": "All keys lost", "city": "Cumming", "slug": "2024-chevrolet-silverado-2500hd-all-keys-lost-cumming"},
     {"date": "2026-11", "vehicle": "2026 Hyundai Tucson", "service": "Spare smart key", "city": "Gainesville", "slug": "2026-hyundai-tucson-spare-smart-key-gainesville"},
@@ -15,7 +19,7 @@
     {"date": "2026-11", "vehicle": "2018 Chrysler Pacifica", "service": "Lockout", "city": "Dunwoody"},
     {"date": "2026-11", "vehicle": "2011 Toyota Camry", "service": "All keys lost", "city": "Cumming", "slug": "2011-toyota-camry-all-keys-lost-cumming"},
     {"date": "2026-11", "vehicle": "2011 Toyota Camry", "service": "Spare flip key", "city": "Cumming"},
-    {"date": "2026-11", "vehicle": "2007 Honda Ridgeline", "service": "Two keys made", "city": "Cumming"},
+    {"date": "2026-11", "vehicle": "2007 Honda Ridgeline", "service": "Two keys made", "city": "Cumming", "slug": "2007-honda-ridgeline-two-keys-cumming"},
     {"date": "2026-11", "vehicle": "2016 Chevrolet Colorado", "service": "Lockout", "city": "Cumming"},
     {"date": "2026-11", "vehicle": "2020 Dodge Challenger", "service": "All keys lost", "city": "Cumming"},
     {"date": "2026-11", "vehicle": "2019 Ford F-150", "service": "Spare key", "city": "Cumming", "slug": "2019-ford-f-150-spare-key-cumming"},
