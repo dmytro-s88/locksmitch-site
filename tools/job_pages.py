@@ -20,6 +20,10 @@ STYLE = ('<style>.job-photo{margin:0 0 26px;border-radius:16px;overflow:hidden;m
          '.job-photo img{display:block;width:100%;height:auto}'
          '.job-facts{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:10px 18px;margin:0 0 26px;padding:16px 18px;border:1px solid var(--line);border-radius:14px}'
          '.job-facts dt{font-size:13px;color:var(--muted);text-transform:uppercase;letter-spacing:.04em}.job-facts dd{margin:2px 0 0;font-weight:700}'
+         '.job-facts .wide{grid-column:1/-1}'
+         '.job-gallery{display:grid;grid-template-columns:repeat(auto-fill,minmax(150px,1fr));gap:14px;margin:0 0 26px}'
+         '.job-gallery figure{margin:0}.job-gallery img{display:block;width:100%;height:auto;border-radius:12px}'
+         '.job-gallery figcaption{margin-top:6px;font-size:14px;line-height:1.4;color:var(--muted)}'
          '.job-cards{list-style:none;padding:0;margin:0;display:grid;grid-template-columns:repeat(auto-fill,minmax(230px,1fr));gap:16px}'
          '.job-cards a{display:block;text-decoration:none;color:inherit;border:1px solid var(--line);border-radius:14px;overflow:hidden;height:100%}'
          '.job-cards img{display:block;width:100%;height:auto;aspect-ratio:4/5;object-fit:cover}.job-cards b{display:block;padding:12px 14px 4px}'
@@ -102,8 +106,9 @@ def main():
     for p in pages:
         if p['slug'] not in jobs:
             raise SystemExit('no job with slug %s in tools/jobs.json' % p['slug'])
-        if not os.path.exists(os.path.join(ROOT, 'assets', 'jobs', p['slug'] + '.webp')):
-            raise SystemExit('no photo assets/jobs/%s.webp' % p['slug'])
+        for f in [p['slug'] + '.webp'] + [x['file'] for x in p.get('photos', [])]:
+            if not os.path.exists(os.path.join(ROOT, 'assets', 'jobs', f)):
+                raise SystemExit('no photo assets/jobs/%s' % f)
     order = [j['slug'] for j in json.load(open(os.path.join(ROOT, 'tools', 'jobs.json'), encoding='utf-8'))['jobs'] if j.get('slug')]
     pages.sort(key=lambda p: order.index(p['slug']))
     changed = []
@@ -114,9 +119,12 @@ def main():
         img = '/assets/jobs/%s.webp' % p['slug']
         when = month(j['date'])
         svc_slug = p['service_page'].strip('/')
+        headline = p['title'] + (': ' + p['title_result'] if p.get('title_result') else '')
+        extra = p.get('photos', [])
+        images = [SITE + img] + [SITE + '/assets/jobs/' + x['file'] for x in extra]
         lds = [
-            ld({'@context': 'https://schema.org', '@type': 'Article', 'headline': p['title'], 'description': p['summary'],
-                'image': SITE + img, 'datePublished': j['date'] + '-01', 'dateModified': j['date'] + '-01',
+            ld({'@context': 'https://schema.org', '@type': 'Article', 'headline': headline, 'description': p['summary'],
+                'image': images if len(images) > 1 else images[0], 'datePublished': j['date'] + '-01', 'dateModified': j['date'] + '-01',
                 'author': {'@type': 'Person', 'name': 'Mitch', 'url': SITE + '/'},
                 'publisher': {'@id': SITE + '/#locksmith'}, 'about': {'@type': 'Service', 'name': j['service'], 'provider': {'@id': SITE + '/#locksmith'},
                 'areaServed': {'@type': 'City', 'name': j['city'] + ', GA'}}, 'mainEntityOfPage': url}),
@@ -127,22 +135,28 @@ def main():
         ]
         s = set_head(tpl, p['title'] + ' | LocksMitch', with_phone(p['summary']), url, SITE + img, 'Job: ' + p['title'], 'article', lds)
         s = set_hero(s, '<a href="/">LocksMitch</a> › <a href="/jobs/">Recent jobs</a> › %s' % esc(j['vehicle']),
-                     p['title'], 'Recent job · %s' % when, p['summary'], 'By Mitch, owner of LocksMitch · Job done %s' % when, svc_slug)
+                     headline, 'Recent job · %s' % when, p['summary'], 'By Mitch, owner of LocksMitch · Job done %s' % when, svc_slug)
         did = ''.join('<li>%s</li>' % esc(x) for x in p['did'])
         city_name = j['city']
+        gallery = ''
+        if extra:
+            gallery = '<h2>More photos from this job</h2>\n<div class="job-gallery">%s</div>\n' % ''.join(
+                '<figure><img src="/assets/jobs/%s" alt="%s" width="960" height="1200" loading="lazy"><figcaption>%s</figcaption></figure>' % (
+                    x['file'], esc(x['alt']), esc(x['alt'])) for x in extra)
         article = (
             '<figure class="job-photo"><img src="%s" alt="%s" width="960" height="1200" loading="eager"></figure>\n'
             '<dl class="job-facts"><div><dt>Vehicle</dt><dd>%s</dd></div><div><dt>Service</dt><dd>%s</dd></div>'
-            '<div><dt>Area</dt><dd>%s, GA</dd></div><div><dt>Date</dt><dd>%s</dd></div></dl>\n'
+            '<div><dt>Area</dt><dd>%s, GA</dd></div><div><dt>Date</dt><dd>%s</dd></div>'
+            '<div class="wide"><dt>Result</dt><dd>%s</dd></div></dl>\n'
             '<h2>The problem</h2>\n<p>%s</p>\n'
             '<h2>What I did</h2>\n<ol>%s</ol>\n'
             '<h2>The result</h2>\n<p>%s</p>\n'
-            '<h2>Good to know</h2>\n<p>%s</p>\n'
+            '<h2>%s</h2>\n<p>%s</p>\n%s'
             '<h2>Need this in %s?</h2>\n<p>Call or text <a href="tel:7702703333">(770) 270-3333</a> with the year, make and model. '
             'You get the price before I drive out. More: <a href="%s">%s keys</a>, <a href="%s">%s</a>, <a href="%s">car locksmith in %s</a>, '
             '<a href="/pricing/">prices</a>.</p>'
-        ) % (img, esc(p['alt']), esc(j['vehicle']), esc(j['service']), esc(city_name), when, esc(p['problem']), did,
-             esc(p['result']), esc(p['tip']), esc(city_name), p['make_page'], esc(p['make']), p['service_page'], esc(j['service'].lower()),
+        ) % (img, esc(p['alt']), esc(j['vehicle']), esc(j['service']), esc(city_name), when, esc(p['result_short']), esc(p['problem']), did,
+             esc(p['result']), esc(p.get('tip_title') or 'Good to know'), esc(p['tip']), gallery, esc(city_name), p['make_page'], esc(p['make']), p['service_page'], esc(j['service'].lower()),
              p['city_page'], esc(city_name))
         others = [o for o in pages if o['slug'] != p['slug']][:6]
         aside = ('<aside class="nearby guide-side"><h3>More recent jobs</h3><ul style="grid-template-columns:1fr">%s<li><a href="/jobs/">All recent jobs</a></li></ul>'

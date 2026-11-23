@@ -1,5 +1,5 @@
 {
-  "note": "One page per real completed job: /jobs/<slug>/. Public file: no customer names, addresses, phones, prices or lead numbers. Only what really happened on the job. The slug must match the 'slug' of the same job in tools/jobs.json. Photo: assets/jobs/<slug>.webp (no faces, no plates, no house numbers).",
+  "note": "One page per real completed job: /jobs/<slug>/. Public file: no customer names, addresses, phones, prices or lead numbers. Only what really happened on the job. The slug must match the 'slug' of the same job in tools/jobs.json. Photo: assets/jobs/<slug>.webp (no faces, no plates, no house numbers). Optional: 'title_result' (short result added to the H1 after a colon), 'tip_title' (heading of the tip block), 'photos' (extra photos from the same job, each a different view: [{file in assets/jobs/, alt}]).",
   "pages": [
     {
       "slug": "2025-hyundai-santa-fe-all-keys-lost-cumming",
@@ -20,7 +20,9 @@
       ],
       "result": "The Santa Fe has a genuine Hyundai smart key again, with keyless entry and push-button start. All of it was done at the car, without the dealer.",
       "tip": "On new Hyundai and Kia models the key has to match the exact part number for your VIN, not just the look. When every key is lost, a temporary key can get the car moving while the genuine one is on order.",
-      "alt": "Genuine Hyundai smart key held in front of the Santa Fe steering wheel, dash showing Ready"
+      "alt": "Genuine Hyundai smart key held in front of the Santa Fe steering wheel, dash showing Ready",
+      "title_result": "Genuine Hyundai Smart Key",
+      "tip_title": "A tip for Hyundai and Kia owners"
     },
     {
       "slug": "2008-infiniti-g35-spare-smart-key-sugar-hill",
@@ -40,7 +42,9 @@
       ],
       "result": "The G35 starts again with a working smart key, made at the car with no trip to the dealer.",
       "tip": "If a car sits for a long time, keep the battery on a maintainer or disconnect it. A fully drained battery can make some cars lose their stored keys, and then even the original key will not start the car.",
-      "alt": "New Infiniti smart key held in front of the G35 steering wheel"
+      "alt": "New Infiniti smart key held in front of the G35 steering wheel",
+      "title_result": "Car Starts Again",
+      "tip_title": "A tip if your car sits for months"
     },
     {
       "slug": "2020-kia-forte-all-keys-lost-atlanta",
@@ -61,7 +65,9 @@
       ],
       "result": "The Forte started with its new smart key the same night, right in the parking lot.",
       "tip": "Emergency calls are taken 24/7. If a key is stolen, the old key can usually be removed from the car's memory when the new one is programmed, so the stolen key no longer starts the car. Ask about it when you call.",
-      "alt": "Key programmer on the steering wheel of the Kia Forte, programming a new smart key at night"
+      "alt": "Key programmer on the steering wheel of the Kia Forte, programming a new smart key at night",
+      "title_result": "New Key the Same Night",
+      "tip_title": "If your key was stolen"
     },
     {
       "slug": "2007-honda-ridgeline-two-keys-cumming",
@@ -80,7 +86,8 @@
       ],
       "result": "The owner has two full keys again, plus the valet key as a backup. No dealer, no tow.",
       "tip": "Down to your last key, even a valet key? Make a spare while you still have it. A copy from a working key costs less than a new key after every key is lost.",
-      "alt": "Two new Honda remote keys held in front of the Ridgeline steering wheel"
+      "alt": "Two new Honda remote keys held in front of the Ridgeline steering wheel",
+      "tip_title": "A tip if you are down to the valet key"
     },
     {
       "slug": "2026-hyundai-tucson-spare-smart-key-gainesville",
@@ -100,7 +107,15 @@
       ],
       "result": "The Tucson now has two working smart keys, and the new one is a genuine Hyundai key.",
       "tip": "Hyundai and Kia keys have to match the exact part number, not just the look. A fob that looks the same can still be the wrong one, so check it by the VIN before you buy.",
-      "alt": "New Hyundai smart key held in front of the Tucson steering wheel"
+      "alt": "New Hyundai smart key held in front of the Tucson steering wheel",
+      "title_result": "Genuine Hyundai Key",
+      "tip_title": "A tip before you buy a Hyundai key online",
+      "photos": [
+        {
+          "file": "2026-hyundai-tucson-spare-smart-key-gainesville-2.webp",
+          "alt": "The new Hyundai smart key held behind the 2026 Tucson in the garage"
+        }
+      ]
     },
     {
       "slug": "2024-chevrolet-silverado-2500hd-all-keys-lost-cumming",
@@ -120,7 +135,19 @@
       ],
       "result": "The Silverado has a working smart key again, made right in the driveway.",
       "tip": "If you lose every key to a newer GM truck, you do not have to tow it to the dealer. The same GM software can be used at your driveway.",
-      "alt": "New Chevrolet smart key held in front of the Silverado steering wheel"
+      "alt": "New Chevrolet smart key held in front of the Silverado steering wheel",
+      "title_result": "New Smart Key in the Driveway",
+      "tip_title": "A tip for GM truck owners",
+      "photos": [
+        {
+          "file": "2024-chevrolet-silverado-2500hd-all-keys-lost-cumming-2.webp",
+          "alt": "Laptop and power station set up in the 2024 Silverado 2500HD to program the new key"
+        },
+        {
+          "file": "2024-chevrolet-silverado-2500hd-all-keys-lost-cumming-3.webp",
+          "alt": "The new smart key held in front of the 2024 Silverado 2500HD in the driveway"
+        }
+      ]
     },
     {
       "slug": "2021-kia-forte-spare-smart-key-cumming",
@@ -140,7 +167,15 @@
       ],
       "result": "The Forte now has a second working smart key.",
       "tip": "Hyundai and Kia keys have to match the exact part number, not just the look. Check it by the VIN before buying a key online.",
-      "alt": "New Kia smart key held in front of a white Kia Forte at night"
+      "alt": "New Kia smart key held in front of a white Kia Forte at night",
+      "title_result": "Second Working Key",
+      "tip_title": "A tip before you buy a Kia key online",
+      "photos": [
+        {
+          "file": "2021-kia-forte-spare-smart-key-cumming-2.webp",
+          "alt": "The new Kia smart key in front of the 2021 Forte steering wheel at night"
+        }
+      ]
     },
     {
       "slug": "2017-toyota-highlander-spare-smart-key-cumming",
@@ -159,7 +194,9 @@
       ],
       "result": "Both Highlanders got a new working smart key in that visit.",
       "tip": "Selling or buying a used car with one key? A spare made while one key still works costs less than replacing a lost only key.",
-      "alt": "Toyota smart key held in front of the Highlander steering wheel"
+      "alt": "Toyota smart key held in front of the Highlander steering wheel",
+      "title_result": "Programmed on the Lot",
+      "tip_title": "A tip when you buy a used car with one key"
     },
     {
       "slug": "2019-honda-accord-spare-smart-key-cumming",
@@ -178,7 +215,9 @@
       ],
       "result": "The Accord has a new working smart key.",
       "tip": "A spare is quickest to make while one key still works: the new key is programmed on the spot, with no tow and no dealer visit.",
-      "alt": "Honda Accord smart key in hand with the programming tablet on the console"
+      "alt": "Honda Accord smart key in hand with the programming tablet on the console",
+      "title_result": "Programmed on the Lot",
+      "tip_title": "A tip: make the spare while one key works"
     },
     {
       "slug": "2010-toyota-corolla-all-keys-lost-cumming",
@@ -197,7 +236,9 @@
       ],
       "result": "The Corolla has a working flip key again, made without any original key to copy.",
       "tip": "If you are down to one key on a Toyota, a spare made from it costs less than an all-keys-lost job and takes less time.",
-      "alt": "New flip key for a 2010 Toyota Corolla next to the steering wheel"
+      "alt": "New flip key for a 2010 Toyota Corolla next to the steering wheel",
+      "title_result": "New Flip Key Made at the Car",
+      "tip_title": "A tip for Toyota owners with one key"
     },
     {
       "slug": "2015-nissan-altima-smart-key-lawrenceville",
@@ -216,7 +257,9 @@
       ],
       "result": "The Altima starts and locks with the new smart key.",
       "tip": "The dash on this car also showed an \"I-Key System Error\". On this job that message came from a fault code (B2604) that points to the park/neutral position switch, not to the key. A new key does not clear it, so it is worth reading the codes before buying a fob.",
-      "alt": "New smart key for a 2015 Nissan Altima held in front of the steering wheel"
+      "alt": "New smart key for a 2015 Nissan Altima held in front of the steering wheel",
+      "title_result": "New Smart Key, Car Starts",
+      "tip_title": "About the \"I-Key System Error\" message"
     },
     {
       "slug": "2019-ford-ranger-all-keys-lost-johns-creek",
@@ -235,7 +278,9 @@
       ],
       "result": "The Ranger went from zero keys to two working keys, with no tow and no dealer visit.",
       "tip": "On high-security Ford keys every cut matters. If a new key turns the ignition but not the door, one cut was read between two depths; re-checking that position fixes it.",
-      "alt": "Two new flip keys for a 2019 Ford Ranger in front of the steering wheel"
+      "alt": "Two new flip keys for a 2019 Ford Ranger in front of the steering wheel",
+      "title_result": "Two New Keys",
+      "tip_title": "A tip on high-security Ford keys"
     },
     {
       "slug": "2021-lexus-rx-smart-key-programming-cumming",
@@ -254,7 +299,19 @@
       ],
       "result": "The RX starts on the key, and every button works.",
       "tip": "If you buy a Lexus key online, check that it is the same part number as your original before paying. A key that only starts the car but has dead buttons usually needs the remote sync step, not a new key.",
-      "alt": "Lexus smart keys held in front of a Lexus RX steering wheel"
+      "alt": "Lexus smart keys held in front of a Lexus RX steering wheel",
+      "title_result": "Every Button Works",
+      "tip_title": "A tip before you buy a Lexus key online",
+      "photos": [
+        {
+          "file": "2021-lexus-rx-smart-key-programming-cumming-2.webp",
+          "alt": "Key programmer connected at the steering wheel of the 2021 Lexus RX"
+        },
+        {
+          "file": "2021-lexus-rx-smart-key-programming-cumming-3.webp",
+          "alt": "Two Lexus smart keys held behind the white Lexus RX in the garage"
+        }
+      ]
     },
     {
       "slug": "2011-toyota-camry-all-keys-lost-cumming",
@@ -273,7 +330,9 @@
       ],
       "result": "The Camry has two working keys. Instead of the original remote head key, the owner now has flip keys like on newer Toyotas.",
       "tip": "Get two keys in the same visit: a second key for the same car made in the same visit is 50% off.",
-      "alt": "Two new flip keys for a 2011 Toyota Camry in front of the steering wheel"
+      "alt": "Two new flip keys for a 2011 Toyota Camry in front of the steering wheel",
+      "title_result": "Two New Flip Keys",
+      "tip_title": "A tip: get two keys in one visit"
     },
     {
       "slug": "2019-ford-f-150-spare-key-cumming",
@@ -292,7 +351,9 @@
       ],
       "result": "Two working keys again, with no dealer appointment and no waiting.",
       "tip": "A spare made while you still have one working key is the cheapest key you will ever buy for the truck.",
-      "alt": "New flip key for a 2019 Ford F-150 held in front of the steering wheel"
+      "alt": "New flip key for a 2019 Ford F-150 held in front of the steering wheel",
+      "title_result": "Cut and Programmed in the Driveway",
+      "tip_title": "A tip for truck owners with one key"
     },
     {
       "slug": "2012-ford-explorer-all-keys-lost-flowery-branch",
@@ -311,7 +372,9 @@
       ],
       "result": "Four working keys the same day, done in the customer's driveway with no tow to the dealer.",
       "tip": "Extra keys are cheapest in the same visit: with LocksMitch, a second key for the same car made in the same visit is 50% off.",
-      "alt": "Four new remote head keys for a 2012 Ford Explorer in front of the steering wheel"
+      "alt": "Four new remote head keys for a 2012 Ford Explorer in front of the steering wheel",
+      "title_result": "Four Keys the Same Day",
+      "tip_title": "A tip: extra keys cost less in the same visit"
     },
     {
       "slug": "2017-honda-odyssey-spare-smart-key-cumming",
@@ -330,7 +393,9 @@
       ],
       "result": "The Odyssey starts on the new key, and every button works, including both sliding doors.",
       "tip": "Odyssey keys come with different button layouts. Matching the layout of your original key means every button on the new one works.",
-      "alt": "Honda Odyssey smart keys held in front of the steering wheel"
+      "alt": "Honda Odyssey smart keys held in front of the steering wheel",
+      "title_result": "Sliding Door Buttons Work",
+      "tip_title": "A tip on Odyssey button layouts"
     }
   ]
 }
