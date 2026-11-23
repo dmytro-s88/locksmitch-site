@@ -21,7 +21,7 @@ STYLE = ('<style>.guide-body .contact-list{list-style:none;padding:0;margin:0 0 
          '.contact-list b{display:block;font-size:13px;color:var(--muted);text-transform:uppercase;letter-spacing:.04em;font-weight:600}'
          '.guide-body .review-list{list-style:none;padding:0;margin:0 0 26px;display:grid;gap:14px}'
          '.guide-body .review-list li{margin:0;padding:16px 18px;border:1px solid var(--line);border-radius:14px}'
-         '.review-list .stars{color:#f5b301;letter-spacing:2px}.review-list .who{margin-top:8px;color:var(--muted);font-size:15px}'
+         '.review-list .stars{color:#f5b301;letter-spacing:2px}.review-list .who{margin-top:8px;color:var(--muted);font-size:15px}.review-list .who .svc{color:var(--ink,inherit);font-weight:600}'
          '.guide-body .price-rows{list-style:none;padding:0;margin:0 0 26px;display:grid;gap:8px}'
          '.guide-body .price-rows li{margin:0;display:flex;justify-content:space-between;gap:16px;padding:10px 14px;border:1px solid var(--line);border-radius:10px}'
          '.price-rows b{white-space:nowrap}</style>')
@@ -365,8 +365,11 @@ def build_reviews_article():
     data = json.load(open(os.path.join(ROOT, 'tools', 'reviews.json'), encoding='utf-8'))
     revs = sorted(data['reviews'], key=lambda r: r['date'], reverse=True)
     months = ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December']
-    items = ''.join('<li><div class="stars" aria-label="%d out of 5 stars">%s</div><p>%s</p><div class="who">%s · Google · %s %d, %s</div></li>' % (
-        r['rating'], '★' * r['rating'], esc(r['text']), esc(r['name']), months[int(r['date'][5:7]) - 1], int(r['date'][8:10]), r['date'][:4]) for r in revs)
+    # "service" is optional: only what the review text itself says (or what Dima confirmed), never a guess
+    items = ''.join('<li><div class="stars" aria-label="%d out of 5 stars">%s</div><p>%s</p><div class="who">%s%s · Google review · %s %d, %s</div></li>' % (
+        r['rating'], '★' * r['rating'], esc(r['text']), esc(r['name']),
+        ' · <span class="svc">%s</span>' % esc(r['service']) if r.get('service') else '',
+        months[int(r['date'][5:7]) - 1], int(r['date'][8:10]), r['date'][:4]) for r in revs)
     return ('<p><strong>5.0 on Google.</strong> Newest first.</p>\n<ul class="review-list">%s</ul>\n'
             '<p><a href="%s" target="_blank" rel="noopener">See all reviews on Google</a></p>\n'
             '<h2>Had a job done?</h2>\n<p>A short review on Google helps other drivers find an honest locksmith. '
