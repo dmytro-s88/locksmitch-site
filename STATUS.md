@@ -143,7 +143,7 @@
 
 - `assets/email/` (значки и логотип для подписи в письмах) лежит незакоммиченным нарочно: подпись отложена до ~2026-11-09 (marketing-plan.md), залить вместе с ней. `.DS_Store` не коммитить.
 Для Димы:
-- Google Business Profile создан и подтверждён в кабинете (хронология в `~/Projects/LocksMitch-bot/docs/gbp/README.md`); на 2026-11-23 в Google пять отзывов 5★ (на сайте шесть: отзыв Ivan Maharjan из списка Google пропал, на сайте пока оставлен). С вечера 20.11 список отзывов в самом Google не показывается (счётчик на месте), см. `LocksMitch-bot/docs/gbp/README.md`.
+- Google Business Profile создан и подтверждён в кабинете (хронология в `~/Projects/LocksMitch-bot/docs/gbp/README.md`); на 2026-11-23 в Google пять отзывов 5★ (на сайте шесть: отзыв Ivan Maharjan из списка Google пропал; Дима 23.11: на сайте оставить). С вечера 20.11 список отзывов в самом Google не показывается (счётчик на месте), см. `LocksMitch-bot/docs/gbp/README.md`.
 - Подтвердить, что есть именно liability insurance (на сайте написано "Insured").
 - Yelp: новый текст Specialties подан 2026-10-30, на странице есть. Bing Places подтверждён 2026-10-27.
 
