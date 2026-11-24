@@ -836,17 +836,31 @@ html.lowfx .top .wrap, html.lowfx .callbar { -webkit-backdrop-filter: none; back
 .rv-sum { display: flex; flex-wrap: wrap; align-items: baseline; gap: 6px 12px; max-width: none; }
 .rv-sum b { font-size: 26px; font-weight: 800; line-height: 1; color: var(--ink); }
 .rv-stars { color: var(--brass); font-size: 20px; line-height: 1; letter-spacing: 2px; }
-.rv-list { display: grid; grid-template-columns: repeat(2, minmax(0,1fr)); gap: 14px; }
-.rv { margin: 0; display: grid; gap: 14px; align-content: start; padding: 22px 24px; background: var(--surface); border: 1px solid var(--line); border-radius: 14px; }
+.rv-list { display: grid; grid-auto-flow: column; grid-auto-columns: calc((100% - 28px) / 3); gap: 14px; overflow-x: auto; overscroll-behavior-x: contain; scroll-snap-type: x mandatory; scrollbar-width: none; }
+.rv-list::-webkit-scrollbar { display: none; }
+.rv-list:focus-visible { outline: 2px solid var(--green); outline-offset: 4px; border-radius: 14px; }
+.rv { margin: 0; display: grid; grid-template-rows: auto 1fr auto; gap: 14px; padding: 22px 24px; background: var(--surface); border: 1px solid var(--line); border-radius: 14px; scroll-snap-align: start; }
 .rv blockquote { margin: 0; }
-.rv blockquote p { margin: 0; font-size: 16px; line-height: 1.6; color: var(--ink); overflow-wrap: anywhere; }
+.rv-body { display: grid; gap: 8px; align-content: start; }
+.rv blockquote p { margin: 0; font-size: 16px; line-height: 1.6; color: var(--ink); overflow-wrap: anywhere; display: -webkit-box; -webkit-box-orient: vertical; -webkit-line-clamp: 7; line-clamp: 7; overflow: hidden; }
+.rv-more { justify-self: start; font-size: 14px; color: var(--muted); text-decoration: underline; text-underline-offset: 3px; }
+.rv-more[hidden] { display: none; }
 .rv figcaption { display: grid; gap: 2px; font-size: 14px; color: var(--muted); }
 .rv figcaption b { font-size: 16px; color: var(--ink); }
-.rv-cta { display: flex; flex-wrap: wrap; gap: 12px; margin-top: 22px; }
+.rv figcaption .rv-svc { color: var(--ink); font-weight: 600; }
+.rv-cta { display: flex; flex-wrap: wrap; align-items: center; gap: 12px; margin-top: 22px; }
+.rv-nav { display: flex; gap: 8px; margin-left: auto; }
+.rv-nav[hidden] { display: none; }
+.rv-nav button { width: 44px; height: 44px; padding: 0 0 3px; border: 1px solid var(--line); border-radius: 50%; background: var(--surface); color: var(--ink); font: inherit; font-size: 24px; line-height: 1; cursor: pointer; }
+.rv-nav button:disabled { opacity: .35; cursor: default; }
+@media (max-width: 1000px) {
+  .rv-list { grid-auto-columns: calc((100% - 14px) / 2); }
+}
 @media (max-width: 760px) {
-  .rv-list { grid-template-columns: minmax(0,1fr); }
+  .rv-list { grid-auto-columns: 86%; margin-inline: calc(-1 * var(--gutter)); padding-inline: var(--gutter); scroll-padding-inline: var(--gutter); }
   .rv { padding: 18px; }
   .rv-cta .btn { flex: 1 1 100%; justify-content: center; }
+  .rv-nav { display: none; }
 }
 
 /* Recent jobs as a text list under the photos (built by tools/jobs_build.py from tools/jobs.json) */

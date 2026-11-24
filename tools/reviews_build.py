@@ -54,6 +54,20 @@ SHOW_COUNT_FROM = 10   # below this the number of reviews is not shown ("2 revie
 AVG = sum(r['rating'] for r in REVIEWS) / COUNT
 PROFILE = DATA['profile_url']   # one button, to the profile; the write-a-review link is not used on the site (Dima, 2026-11-18)
 
+# The cards sit in one row that scrolls sideways (swipe on a phone, arrows on a computer): Dima, 2026-11-23.
+# The arrows are hidden until this script runs and stay hidden when every card already fits.
+NAV_JS = ('<script>(function(){var w=document.currentScript.parentNode,l=w.querySelector(".rv-list"),n=w.querySelector(".rv-nav");if(!l||!n)return;'
+          'var b=n.querySelectorAll("button"),calm=window.matchMedia&&matchMedia("(prefers-reduced-motion: reduce)").matches;'
+          'function st(){n.hidden=l.scrollWidth<=l.clientWidth+4;b[0].disabled=l.scrollLeft<4;b[1].disabled=l.scrollLeft+l.clientWidth>l.scrollWidth-4}'
+          'function go(d){var c=l.querySelector(".rv");l.scrollBy({left:d*(c.offsetWidth+14),behavior:calm?"auto":"smooth"})}'
+          'b[0].onclick=function(){go(-1)};b[1].onclick=function(){go(1)};'
+          'function more(){Array.prototype.forEach.call(l.querySelectorAll(".rv-more"),function(m){var p=m.parentNode.querySelector("p");m.hidden=p.scrollHeight<=p.clientHeight+2})}'
+          'l.addEventListener("scroll",st,{passive:true});window.addEventListener("resize",function(){st();more()});st();more()})();</script>')
+# A long review is cut to LINES lines on the card (CSS line clamp, the text itself stays whole in the HTML) so one long
+# review does not stretch every card; the link to /reviews/ shows only when the text is really cut (the script checks).
+MORE_FROM = 200
+MORE = '<a class="rv-more" href="/reviews/" hidden>Read the full review</a>'
+
 
 def day(iso):
     return datetime.date.fromisoformat(iso)
@@ -65,12 +79,15 @@ def stars(n, label):
 
 
 def block():
+    # "service" is optional (see tools/extra_pages.py): only what the review itself or Dima says, never a guess
     cards = ''.join(
         '        <figure class="rv">\n'
         '          %s\n'
-        '          <blockquote><p>%s</p></blockquote>\n'
-        '          <figcaption><b>%s</b><span>%s review · %s</span></figcaption>\n'
-        '        </figure>\n' % (stars(r['rating'], r['rating']), html.escape(r['text'], quote=False), html.escape(r['name'], quote=False),
+        '          <div class="rv-body"><blockquote><p>%s</p></blockquote>%s</div>\n'
+        '          <figcaption><b>%s</b>%s<span>%s review · %s</span></figcaption>\n'
+        '        </figure>\n' % (stars(r['rating'], r['rating']), html.escape(r['text'], quote=False),
+                                 MORE if len(r['text']) > MORE_FROM else '', html.escape(r['name'], quote=False),
+                                 ('<span class="rv-svc">%s</span>' % html.escape(r['service'], quote=False)) if r.get('service') else '',
                                  html.escape(r['source'], quote=False), day(r['date']).strftime('%B %Y'))
         for r in REVIEWS)
     return ('  ' + START + '\n'
@@ -80,10 +97,12 @@ def block():
             '        <h2>What customers say</h2>\n'
             '        <p class="lede rv-sum"><b>%.1f</b>%s<span>%s</span></p>\n'
             '      </div>\n'
-            '      <div class="rv-list">\n%s      </div>\n'
+            '      <div class="rv-list" tabindex="0" role="region" aria-label="Customer reviews, scroll sideways">\n%s      </div>\n'
             '      <div class="rv-cta">\n'
             '        <a class="btn btn-ghost" href="%s" target="_blank" rel="noopener">See our reviews on Google</a>\n'
+            '        <div class="rv-nav" hidden><button type="button" aria-label="Previous reviews">&#8249;</button><button type="button" aria-label="Next reviews">&#8250;</button></div>\n'
             '      </div>\n'
+            '      ' + NAV_JS + '\n'
             '    </div>\n'
             '  </section>\n'
             '  ' + END + '\n\n') % (AVG, stars(AVG, '%.1f' % AVG), ('%d reviews on Google' % COUNT) if COUNT >= SHOW_COUNT_FROM else 'on Google', cards, PROFILE)

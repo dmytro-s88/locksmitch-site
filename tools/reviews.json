@@ -1,8 +1,23 @@
 {
   "source": "Google",
   "profile_url": "https://g.page/r/CZ9reQq45jlvEBM",
-  "checked": "2026-11-20",
+  "checked": "2026-11-23",
   "reviews": [
+    {
+      "name": "Juliana Momotok",
+      "rating": 5,
+      "date": "2026-11-22",
+      "text": "Great experience! The locksmith was very professional, friendly, and provided excellent service. They arrived on time, worked efficiently, and made sure everything was done correctly. The pricing was fair, and I felt like I received great value for the service. They made the whole process quick and stress-free. Definitely recommend them if you're looking for someone reliable and honest!",
+      "source": "Google"
+    },
+    {
+      "name": "Greg Craft",
+      "rating": 5,
+      "date": "2026-11-21",
+      "service": "Spare smart key",
+      "text": "Mitch was great. Very professional and a pleasure to deal with. Highly recommend his service.",
+      "source": "Google"
+    },
     {
       "name": "Hazzler",
       "rating": 5,
