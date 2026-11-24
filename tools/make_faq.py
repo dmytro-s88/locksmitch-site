@@ -7,6 +7,7 @@ Every make page has four questions that used to carry the same answer on all mak
     new   : "Do you work on the newest <make> models?"
 This script puts the answer from ANSWERS into the page and into the FAQPage JSON-LD. A key left out keeps the
 answer that is already on the page (Mercedes and Land Rover have hand-written ones). The questions stay as they are.
+Two home page questions that repeat the make questions (DROP) are removed from the make pages.
 
 Rules for the texts: only what the page already promises (prices, year limits, "quoted by model") and what was
 really done (tools/jobs.json, tools/job_pages.json). No "cut from the key code": the key is made from the car itself.
@@ -143,6 +144,11 @@ ANSWERS = {
 }
 
 
+# Two questions from the home page FAQ repeat the make questions above and answered a flat "Yes" on every make,
+# also where the make answer says "it depends". They are dropped from the make pages (text and FAQPage).
+DROP = ['Can you make a key if I’ve lost every one?', 'Do you work on push-to-start and smart keys?']
+
+
 def esc(t):
     return t.replace('&', '&amp;').replace('<', '&lt;').replace('>', '&gt;')
 
@@ -183,6 +189,8 @@ def main():
             return m.group(1) + m.group(2) + '</summary><p>' + esc(a) + '</p></details>'
         # only the template questions: the two make_content.py questions carry data-local="1"
         s = re.sub(r'(<details(?: open)?><summary>)(.*?)</summary><p>.*?</p></details>', fix_item, s, flags=re.S)
+        for q in DROP:
+            s = re.sub(r'[ \t]*<details><summary>' + re.escape(esc(q)) + r'</summary>.*?</details>\n', '', s, flags=re.S)
         if done != set(ans):
             raise SystemExit('%s: questions not found: %s' % (slug, sorted(set(ans) - done)))
 
@@ -190,6 +198,7 @@ def main():
             d = json.loads(mm.group(1))
             if d.get('@type') != 'FAQPage':
                 return mm.group(0)
+            d['mainEntity'] = [e for e in d['mainEntity'] if e['name'] not in DROP]
             seen = set()
             for e in d['mainEntity']:
                 if e['name'] in by_q:
