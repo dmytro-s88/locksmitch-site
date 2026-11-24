@@ -1,5 +1,9 @@
 """One page per real job: /jobs/<slug>/ plus the hub /jobs/. Data: tools/job_pages.json (texts) + tools/jobs.json (date, vehicle,
 service, city; the job is matched by "slug"). Photos: assets/jobs/<slug>.webp.
+Optional video of the job ("video" in job_pages.json): our own file assets/jobs/<file>.mp4 (720x1280, H.264, no metadata, NO SOUND TRACK:
+the raw sound has voices, and the music of the Instagram version is licensed for Instagram only) with a
+cover frame assets/jobs/<poster>. It is not loaded until the visitor taps play (preload="none"). Fields: file, poster, seconds,
+published (YYYY-MM-DD, the day the video first went public), text (one sentence: what the video shows), instagram (link, optional).
 
 Run from the site root (rerun is safe):
     python3 -I tools/job_pages.py
@@ -24,6 +28,9 @@ STYLE = ('<style>.job-photo{margin:0 0 26px;border-radius:16px;overflow:hidden;m
          '.job-gallery{display:grid;grid-template-columns:repeat(auto-fill,minmax(150px,1fr));gap:14px;margin:0 0 26px}'
          '.job-gallery figure{margin:0}.job-gallery img{display:block;width:100%;height:auto;border-radius:12px}'
          '.job-gallery figcaption{margin-top:6px;font-size:14px;line-height:1.4;color:var(--muted)}'
+         '.job-video{margin:0 0 26px;max-width:300px}'
+         '.job-video video{display:block;width:100%;height:auto;aspect-ratio:9/16;border-radius:16px;background:#000}'
+         '.job-video figcaption{margin-top:8px;font-size:14px;line-height:1.45;color:var(--muted)}'
          '.job-cards{list-style:none;padding:0;margin:0;display:grid;grid-template-columns:repeat(auto-fill,minmax(230px,1fr));gap:16px}'
          '.job-cards a{display:block;text-decoration:none;color:inherit;border:1px solid var(--line);border-radius:14px;overflow:hidden;height:100%}'
          '.job-cards img{display:block;width:100%;height:auto;aspect-ratio:4/5;object-fit:cover}.job-cards b{display:block;padding:12px 14px 4px}'
@@ -106,9 +113,10 @@ def main():
     for p in pages:
         if p['slug'] not in jobs:
             raise SystemExit('no job with slug %s in tools/jobs.json' % p['slug'])
-        for f in [p['slug'] + '.webp'] + [x['file'] for x in p.get('photos', [])]:
+        v = p.get('video')
+        for f in [p['slug'] + '.webp'] + [x['file'] for x in p.get('photos', [])] + ([v['file'], v['poster']] if v else []):
             if not os.path.exists(os.path.join(ROOT, 'assets', 'jobs', f)):
-                raise SystemExit('no photo assets/jobs/%s' % f)
+                raise SystemExit('no file assets/jobs/%s' % f)
     order = [j['slug'] for j in json.load(open(os.path.join(ROOT, 'tools', 'jobs.json'), encoding='utf-8'))['jobs'] if j.get('slug')]
     pages.sort(key=lambda p: order.index(p['slug']))
     changed = []
@@ -133,6 +141,19 @@ def main():
                 {'@type': 'ListItem', 'position': 2, 'name': 'Recent jobs', 'item': SITE + '/jobs/'},
                 {'@type': 'ListItem', 'position': 3, 'name': p['title'], 'item': url}]}),
         ]
+        video = p.get('video')
+        video_html = ''
+        if video:
+            lds.append(ld({'@context': 'https://schema.org', '@type': 'VideoObject', 'name': '%s: video from the job' % p['title'],
+                           'description': video['text'], 'thumbnailUrl': SITE + '/assets/jobs/' + video['poster'],
+                           'contentUrl': SITE + '/assets/jobs/' + video['file'], 'uploadDate': video['published'],
+                           'duration': 'PT%dS' % video['seconds'], 'publisher': {'@id': SITE + '/#locksmith'}}))
+            more = ' <a href="%s" target="_blank" rel="noopener">Watch it with sound on Instagram</a>.' % video['instagram'] if video.get('instagram') else ''
+            video_html = ('<h2>Video from this job</h2>\n<figure class="job-video"><video controls playsinline preload="none" '
+                          'poster="/assets/jobs/%s" width="720" height="1280" aria-label="%s">'
+                          '<source src="/assets/jobs/%s" type="video/mp4"></video>'
+                          '<figcaption>%d seconds, no sound. %s%s</figcaption></figure>\n') % (
+                video['poster'], esc('Video: ' + p['title']), video['file'], video['seconds'], esc(video['text']), more)
         s = set_head(tpl, p['title'] + ' | LocksMitch', with_phone(p['summary']), url, SITE + img, 'Job: ' + p['title'], 'article', lds)
         s = set_hero(s, '<a href="/">LocksMitch</a> › <a href="/jobs/">Recent jobs</a> › %s' % esc(j['vehicle']),
                      headline, 'Recent job · %s' % when, p['summary'], 'By Mitch, owner of LocksMitch · Job done %s' % when, svc_slug)
@@ -150,13 +171,13 @@ def main():
             '<div class="wide"><dt>Result</dt><dd>%s</dd></div></dl>\n'
             '<h2>The problem</h2>\n<p>%s</p>\n'
             '<h2>What I did</h2>\n<ol>%s</ol>\n'
-            '<h2>The result</h2>\n<p>%s</p>\n'
+            '<h2>The result</h2>\n<p>%s</p>\n%s'
             '<h2>%s</h2>\n<p>%s</p>\n%s'
             '<h2>Need this in %s?</h2>\n<p>Call or text <a href="tel:7702703333">(770) 270-3333</a> with the year, make and model. '
             'You get the price before I drive out. More: <a href="%s">%s keys</a>, <a href="%s">%s</a>, <a href="%s">car locksmith in %s</a>, '
             '<a href="/pricing/">prices</a>.</p>'
         ) % (img, esc(p['alt']), esc(j['vehicle']), esc(j['service']), esc(city_name), when, esc(p['result_short']), esc(p['problem']), did,
-             esc(p['result']), esc(p.get('tip_title') or 'Good to know'), esc(p['tip']), gallery, esc(city_name), p['make_page'], esc(p['make']), p['service_page'], esc(j['service'].lower()),
+             esc(p['result']), video_html, esc(p.get('tip_title') or 'Good to know'), esc(p['tip']), gallery, esc(city_name), p['make_page'], esc(p['make']), p['service_page'], esc(j['service'].lower()),
              p['city_page'], esc(city_name))
         others = [o for o in pages if o['slug'] != p['slug']][:6]
         aside = ('<aside class="nearby guide-side"><h3>More recent jobs</h3><ul style="grid-template-columns:1fr">%s<li><a href="/jobs/">All recent jobs</a></li></ul>'

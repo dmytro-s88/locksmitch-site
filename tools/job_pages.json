@@ -1,5 +1,5 @@
 {
-  "note": "One page per real completed job: /jobs/<slug>/. Public file: no customer names, addresses, phones, prices or lead numbers. Only what really happened on the job. The slug must match the 'slug' of the same job in tools/jobs.json. Photo: assets/jobs/<slug>.webp (no faces, no plates, no house numbers). Optional: 'title_result' (short result added to the H1 after a colon), 'tip_title' (heading of the tip block), 'photos' (extra photos from the same job, each a different view: [{file in assets/jobs/, alt}]).",
+  "note": "One page per real completed job: /jobs/<slug>/. Public file: no customer names, addresses, phones, prices or lead numbers. Only what really happened on the job. The slug must match the 'slug' of the same job in tools/jobs.json. Photo: assets/jobs/<slug>.webp (no faces, no plates, no house numbers). Optional: 'title_result' (short result added to the H1 after a colon), 'tip_title' (heading of the tip block), 'photos' (extra photos from the same job, each a different view: [{file in assets/jobs/, alt}]). Optional 'video': our own short video of the job {file and poster in assets/jobs/, seconds, published (YYYY-MM-DD), text (one sentence: what it shows), instagram (link)}; same rules as photos: no customer faces, plates or house numbers, and no sound track.",
   "pages": [
     {
       "slug": "2025-hyundai-santa-fe-all-keys-lost-cumming",
@@ -22,7 +22,14 @@
       "tip": "On new Hyundai and Kia models the key has to match the exact part number for your VIN, not just the look. When every key is lost, a temporary key can get the car moving while the genuine one is on order.",
       "alt": "Genuine Hyundai smart key held in front of the Santa Fe steering wheel, dash showing Ready",
       "title_result": "Genuine Hyundai Smart Key",
-      "tip_title": "A tip for Hyundai and Kia owners"
+      "tip_title": "A tip for Hyundai and Kia owners",
+      "video": {
+        "file": "2025-hyundai-santa-fe-all-keys-lost-cumming.mp4",
+        "poster": "2025-hyundai-santa-fe-all-keys-lost-cumming-video.webp",
+        "seconds": 15,
+        "published": "2026-11-24",
+        "text": "The genuine Hyundai smart key tested on the car: lock and unlock, keyless entry on the door handle and push-button start."
+      }
     },
     {
       "slug": "2008-infiniti-g35-spare-smart-key-sugar-hill",
@@ -67,7 +74,15 @@
       "tip": "Emergency calls are taken 24/7. If a key is stolen, the old key can usually be removed from the car's memory when the new one is programmed, so the stolen key no longer starts the car. Ask about it when you call.",
       "alt": "Key programmer on the steering wheel of the Kia Forte, programming a new smart key at night",
       "title_result": "New Key the Same Night",
-      "tip_title": "If your key was stolen"
+      "tip_title": "If your key was stolen",
+      "video": {
+        "file": "2020-kia-forte-all-keys-lost-atlanta.mp4",
+        "poster": "2020-kia-forte-all-keys-lost-atlanta-video.webp",
+        "seconds": 18,
+        "published": "2026-11-21",
+        "text": "The night drive to Downtown Atlanta, the door opened with an air wedge, the alarm quieted and the new smart key programmed.",
+        "instagram": "https://www.instagram.com/reel/DgBb8U3hKsV/"
+      }
     },
     {
       "slug": "2007-honda-ridgeline-two-keys-cumming",
@@ -147,7 +162,15 @@
           "file": "2024-chevrolet-silverado-2500hd-all-keys-lost-cumming-3.webp",
           "alt": "The new smart key held in front of the 2024 Silverado 2500HD in the driveway"
         }
-      ]
+      ],
+      "video": {
+        "file": "2024-chevrolet-silverado-2500hd-all-keys-lost-cumming.mp4",
+        "poster": "2024-chevrolet-silverado-2500hd-all-keys-lost-cumming-video.webp",
+        "seconds": 24,
+        "published": "2026-11-22",
+        "text": "The door lock picked and decoded, the new key blade tested in the door, and the smart key programmed with GM dealer software.",
+        "instagram": "https://www.instagram.com/reel/DgEHu_bh8Iu/"
+      }
     },
     {
       "slug": "2021-kia-forte-spare-smart-key-cumming",
@@ -175,7 +198,15 @@
           "file": "2021-kia-forte-spare-smart-key-cumming-2.webp",
           "alt": "The new Kia smart key in front of the 2021 Forte steering wheel at night"
         }
-      ]
+      ],
+      "video": {
+        "file": "2021-kia-forte-spare-smart-key-cumming.mp4",
+        "poster": "2021-kia-forte-spare-smart-key-cumming-video.webp",
+        "seconds": 16,
+        "published": "2026-11-19",
+        "text": "An evening visit: the emergency blade cut, the smart key programmed, the door and push-to-start checked.",
+        "instagram": "https://www.instagram.com/reel/Df8mhcFhuHH/"
+      }
     },
     {
       "slug": "2017-toyota-highlander-spare-smart-key-cumming",
@@ -280,7 +311,15 @@
       "tip": "On high-security Ford keys every cut matters. If a new key turns the ignition but not the door, one cut was read between two depths; re-checking that position fixes it.",
       "alt": "Two new flip keys for a 2019 Ford Ranger in front of the steering wheel",
       "title_result": "Two New Keys",
-      "tip_title": "A tip on high-security Ford keys"
+      "tip_title": "A tip on high-security Ford keys",
+      "video": {
+        "file": "2019-ford-ranger-all-keys-lost-johns-creek.mp4",
+        "poster": "2019-ford-ranger-all-keys-lost-johns-creek-video.webp",
+        "seconds": 21,
+        "published": "2026-11-16",
+        "text": "The driver door lock decoded with a Lishi tool, a new key cut on the machine in the driveway, tested in the door and programmed to the truck.",
+        "instagram": "https://www.instagram.com/reel/Df0kW-LxFxw/"
+      }
     },
     {
       "slug": "2021-lexus-rx-smart-key-programming-cumming",
@@ -374,7 +413,14 @@
       "tip": "Extra keys are cheapest in the same visit: with LocksMitch, a second key for the same car made in the same visit is 50% off.",
       "alt": "Four new remote head keys for a 2012 Ford Explorer in front of the steering wheel",
       "title_result": "Four Keys the Same Day",
-      "tip_title": "A tip: extra keys cost less in the same visit"
+      "tip_title": "A tip: extra keys cost less in the same visit",
+      "video": {
+        "file": "2012-ford-explorer-all-keys-lost-flowery-branch.mp4",
+        "poster": "2012-ford-explorer-all-keys-lost-flowery-branch-video.webp",
+        "seconds": 15,
+        "published": "2026-11-10",
+        "text": "The door lock decoded, new keys cut on the machine and four remote head keys programmed to the Explorer."
+      }
     },
     {
       "slug": "2017-honda-odyssey-spare-smart-key-cumming",
