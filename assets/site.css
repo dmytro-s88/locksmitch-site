@@ -292,6 +292,8 @@ table.vs { width: 100%; table-layout: fixed; border-collapse: collapse; font-siz
 
 /* Area */
 .local-more { margin-top: 22px; }
+.local-notes .price-list { max-width: 70ch; gap: 10px; line-height: 1.6; }
+.local-notes .price-list b { color: var(--ink); }
 .local-more h3 { margin-bottom: 8px; }
 .local-more p { color: var(--muted); max-width: 70ch; margin: 0 0 12px; line-height: 1.6; }
 .guide-faq { margin-bottom: 18px; }
