@@ -1,5 +1,5 @@
 {
-  "note": "One page per real completed job: /jobs/<slug>/. Public file: no customer names, addresses, phones, prices or lead numbers. Only what really happened on the job. The slug must match the 'slug' of the same job in tools/jobs.json. Photo: assets/jobs/<slug>.webp (no faces, no plates, no house numbers). Optional: 'title_result' (short result added to the H1 after a colon), 'tip_title' (heading of the tip block), 'photos' (extra photos from the same job, each a different view: [{file in assets/jobs/, alt}]). Optional 'video': our own short video of the job {file and poster in assets/jobs/, seconds, published (YYYY-MM-DD), text (one sentence: what it shows), instagram (link)}; same rules as photos: no customer faces, plates or house numbers, and no sound track.",
+  "note": "One page per real completed job: /jobs/<slug>/. Public file: no customer names, addresses, phones, prices or lead numbers. Only what really happened on the job. The slug must match the 'slug' of the same job in tools/jobs.json. Photo: assets/jobs/<slug>.webp (no faces, no plates, no house numbers). Optional: 'title_result' (short result added to the H1 after a colon), 'tip_title' (heading of the tip block), 'photos' (extra photos from the same job, each a different view: [{file in assets/jobs/, alt}]). Optional 'video': our own short video of the job {file and poster in assets/jobs/, seconds, published (YYYY-MM-DD), text (one sentence: what it shows), instagram (link)}; same rules as photos: no customer faces, plates or house numbers, and no sound track unless every part with speech is muted (then 'sound': true).",
   "pages": [
     {
       "slug": "2025-hyundai-santa-fe-all-keys-lost-cumming",
@@ -81,7 +81,8 @@
         "seconds": 18,
         "published": "2026-11-21",
         "text": "The night drive to Downtown Atlanta, the door opened with an air wedge, the alarm quieted and the new smart key programmed.",
-        "instagram": "https://www.instagram.com/reel/DgBb8U3hKsV/"
+        "instagram": "https://www.instagram.com/reel/DgBb8U3hKsV/",
+        "sound": true
       }
     },
     {

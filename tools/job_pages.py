@@ -1,7 +1,8 @@
 """One page per real job: /jobs/<slug>/ plus the hub /jobs/. Data: tools/job_pages.json (texts) + tools/jobs.json (date, vehicle,
 service, city; the job is matched by "slug"). Photos: assets/jobs/<slug>.webp.
-Optional video of the job ("video" in job_pages.json): our own file assets/jobs/<file>.mp4 (720x1280, H.264, no metadata, NO SOUND TRACK:
-the raw sound has voices, and the music of the Instagram version is licensed for Instagram only) with a
+Optional video of the job ("video" in job_pages.json): our own file assets/jobs/<file>.mp4 (720x1280, H.264, no metadata). Sound: by default NO SOUND TRACK (the raw
+sound has voices, and the music of the Instagram version is licensed for Instagram only). A file may keep its own raw sound only
+after every part with speech is muted and checked; then set "sound": true in its data with a
 cover frame assets/jobs/<poster>. It is not loaded until the visitor taps play (preload="none"). Fields: file, poster, seconds,
 published (YYYY-MM-DD, the day the video first went public), text (one sentence: what the video shows), instagram (link, optional).
 
@@ -148,12 +149,14 @@ def main():
                            'description': video['text'], 'thumbnailUrl': SITE + '/assets/jobs/' + video['poster'],
                            'contentUrl': SITE + '/assets/jobs/' + video['file'], 'uploadDate': video['published'],
                            'duration': 'PT%dS' % video['seconds'], 'publisher': {'@id': SITE + '/#locksmith'}}))
-            more = ' <a href="%s" target="_blank" rel="noopener">Watch it with sound on Instagram</a>.' % video['instagram'] if video.get('instagram') else ''
+            more = ' <a href="%s" target="_blank" rel="noopener">%s</a>.' % (
+                video['instagram'], 'Watch on Instagram' if video.get('sound') else 'Watch it with sound on Instagram') if video.get('instagram') else ''
             video_html = ('<h2>Video from this job</h2>\n<figure class="job-video"><video controls playsinline preload="none" '
                           'poster="/assets/jobs/%s" width="720" height="1280" aria-label="%s">'
                           '<source src="/assets/jobs/%s" type="video/mp4"></video>'
-                          '<figcaption>%d seconds, no sound. %s%s</figcaption></figure>\n') % (
-                video['poster'], esc('Video: ' + p['title']), video['file'], video['seconds'], esc(video['text']), more)
+                          '<figcaption>%d seconds%s. %s%s</figcaption></figure>\n') % (
+                video['poster'], esc('Video: ' + p['title']), video['file'], video['seconds'], '' if video.get('sound') else ', no sound',
+                esc(video['text']), more)
         s = set_head(tpl, p['title'] + ' | LocksMitch', with_phone(p['summary']), url, SITE + img, 'Job: ' + p['title'], 'article', lds)
         s = set_hero(s, '<a href="/">LocksMitch</a> › <a href="/jobs/">Recent jobs</a> › %s' % esc(j['vehicle']),
                      headline, 'Recent job · %s' % when, p['summary'], 'By Mitch, owner of LocksMitch · Job done %s' % when, svc_slug)
