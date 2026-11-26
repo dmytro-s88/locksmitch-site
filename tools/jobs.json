@@ -3,7 +3,7 @@
   "jobs": [
     {"date": "2026-11", "vehicle": "2025 Toyota Sienna", "service": "Spare OEM smart key", "city": "Suwanee", "slug": "2025-toyota-sienna-spare-oem-smart-key-suwanee"},
     {"date": "2026-11", "vehicle": "2010 Ford F-150", "service": "All keys lost", "city": "Cumming"},
-    {"date": "2026-11", "vehicle": "2003 Honda Accord", "service": "All keys lost", "city": "Marietta"},
+    {"date": "2026-11", "vehicle": "2003 Honda Accord", "service": "All keys lost", "city": "Marietta", "slug": "2003-honda-accord-all-keys-lost-marietta"},
     {"date": "2026-11", "vehicle": "2025 Hyundai Santa Fe", "service": "All keys lost", "city": "Cumming", "slug": "2025-hyundai-santa-fe-all-keys-lost-cumming"},
     {"date": "2026-11", "vehicle": "2008 Infiniti G35", "service": "Spare smart key", "city": "Sugar Hill", "slug": "2008-infiniti-g35-spare-smart-key-sugar-hill"},
     {"date": "2026-11", "vehicle": "2020 Kia Forte", "service": "All keys lost", "city": "Atlanta", "slug": "2020-kia-forte-all-keys-lost-atlanta"},

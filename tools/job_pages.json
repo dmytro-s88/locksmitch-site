@@ -496,6 +496,29 @@
           "alt": "New Sienna smart key held in front of the steering wheel"
         }
       ]
+    },
+    {
+      "slug": "2003-honda-accord-all-keys-lost-marietta",
+      "make": "Honda",
+      "make_page": "/honda-key-replacement/",
+      "service_page": "/all-keys-lost/",
+      "city_page": "/marietta/",
+      "title": "2003 Honda Accord All Keys Lost in Marietta, GA",
+      "summary": "No key left for a 2003 Honda Accord. New remote head keys made and programmed at the car in Marietta, with lock, unlock, trunk and panic buttons.",
+      "result_short": "New remote head keys, no tow",
+      "problem": "The owner of a 2003 Honda Accord had lost the only key. The car could not be started, and the owner wanted a key with lock and unlock buttons, not a plain key.",
+      "did": [
+        "Came to the car in Marietta.",
+        "Cut new remote head keys (key and remote in one) for the Accord.",
+        "Programmed the chip in each key so the engine starts.",
+        "Paired the remote buttons to the car: lock, unlock, trunk and panic.",
+        "Tested the doors, the trunk button and the engine start with each key."
+      ],
+      "result": "The Accord starts and locks with new keys again. All of it was done at the car, without a tow and without the dealer.",
+      "tip": "On an older Honda you do not need the dealer when every key is lost: a new key can be cut, the chip programmed and the remote paired right where the car is parked.",
+      "alt": "Two new Honda remote head keys held in front of the 2003 Accord steering wheel",
+      "title_result": "New Remote Head Keys",
+      "tip_title": "A tip for older Honda owners"
     }
   ]
 }
