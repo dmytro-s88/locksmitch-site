@@ -1,6 +1,8 @@
 {
   "note": "Real completed jobs, newest first. Public file: only vehicle, service, city and month. No names, addresses, phones, prices or lead numbers. Optional \"slug\": the job has its own page /jobs/<slug>/ (texts in tools/job_pages.json).",
   "jobs": [
+    {"date": "2026-11", "vehicle": "2021 Volkswagen Tiguan", "service": "All keys lost", "city": "Atlanta"},
+    {"date": "2026-11", "vehicle": "2003 Honda Accord", "service": "All keys lost", "city": "Marietta"},
     {"date": "2026-11", "vehicle": "2025 Hyundai Santa Fe", "service": "All keys lost", "city": "Cumming", "slug": "2025-hyundai-santa-fe-all-keys-lost-cumming"},
     {"date": "2026-11", "vehicle": "2008 Infiniti G35", "service": "Spare smart key", "city": "Sugar Hill", "slug": "2008-infiniti-g35-spare-smart-key-sugar-hill"},
     {"date": "2026-11", "vehicle": "2020 Kia Forte", "service": "All keys lost", "city": "Atlanta", "slug": "2020-kia-forte-all-keys-lost-atlanta"},
@@ -24,6 +26,7 @@
     {"date": "2026-11", "vehicle": "2019 Ford F-150", "service": "Spare key", "city": "Cumming", "slug": "2019-ford-f-150-spare-key-cumming"},
     {"date": "2026-11", "vehicle": "2012 Ford Explorer", "service": "All keys lost", "city": "Flowery Branch", "slug": "2012-ford-explorer-all-keys-lost-flowery-branch"},
     {"date": "2026-11", "vehicle": "2017 Honda Odyssey", "service": "Spare key", "city": "Cumming", "slug": "2017-honda-odyssey-spare-smart-key-cumming"},
-    {"date": "2026-11", "vehicle": "2008 Dodge Ram 1500", "service": "Key programming", "city": "Cumming"}
+    {"date": "2026-11", "vehicle": "2008 Dodge Ram 1500", "service": "Key programming", "city": "Cumming"},
+    {"date": "2026-10", "vehicle": "2025 Toyota Sienna", "service": "Spare OEM smart key", "city": "Suwanee"}
   ]
 }
