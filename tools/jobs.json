@@ -1,6 +1,7 @@
 {
   "note": "Real completed jobs, newest first. Public file: only vehicle, service, city and month. No names, addresses, phones, prices or lead numbers. Optional \"slug\": the job has its own page /jobs/<slug>/ (texts in tools/job_pages.json).",
   "jobs": [
+    {"date": "2026-11", "vehicle": "2010 Ford F-150", "service": "All keys lost", "city": "Cumming"},
     {"date": "2026-11", "vehicle": "2021 Volkswagen Tiguan", "service": "All keys lost", "city": "Atlanta"},
     {"date": "2026-11", "vehicle": "2003 Honda Accord", "service": "All keys lost", "city": "Marietta"},
     {"date": "2026-11", "vehicle": "2025 Hyundai Santa Fe", "service": "All keys lost", "city": "Cumming", "slug": "2025-hyundai-santa-fe-all-keys-lost-cumming"},
