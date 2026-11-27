@@ -151,11 +151,11 @@ HOME = [
     ('</svg>Varies</span>', '</svg>Depende</span>'),
     ('</svg>Yes</span>', '</svg>Sí</span>'),
     ('<html lang="en">', '<html lang="es" data-page="Home ES">'),
-    ('<title>Mobile Car Locksmith in Cumming, GA, 24/7 | LocksMitch</title>', '<title>Cerrajero de Autos a Domicilio en Cumming, GA | LocksMitch</title>'),
-    ('<meta name="description" content="Mobile car locksmith in Cumming, GA: lost keys, spare keys, lockouts and key programming at your car, 24/7 across North Atlanta. Call (770) 270-3333.">',
+    ('<title>Mobile Car Locksmith in Cumming, GA, 24/7 Lockouts | LocksMitch</title>', '<title>Cerrajero de Autos a Domicilio en Cumming, GA | LocksMitch</title>'),
+    ('<meta name="description" content="Mobile car locksmith in Cumming, GA: lost keys, spare keys, lockouts and key programming at your car. Lockouts and lost keys 24/7. Call (770) 270-3333.">',
      '<meta name="description" content="Llaves perdidas, llaves extra, apertura de carros y programación. LocksMitch va a donde está su carro en North Atlanta. Llame al (770) 270-3333.">'),
-    ('<meta property="og:title" content="Mobile Car Locksmith in Cumming, GA, 24/7 | LocksMitch">', '<meta property="og:title" content="Cerrajero de Autos a Domicilio en Cumming, GA | LocksMitch">'),
-    ('<meta property="og:description" content="Mobile car locksmith in Cumming, GA: lost keys, spare keys, lockouts and key programming at your car, 24/7 across North Atlanta. Call (770) 270-3333.">',
+    ('<meta property="og:title" content="Mobile Car Locksmith in Cumming, GA, 24/7 Lockouts | LocksMitch">', '<meta property="og:title" content="Cerrajero de Autos a Domicilio en Cumming, GA | LocksMitch">'),
+    ('<meta property="og:description" content="Mobile car locksmith in Cumming, GA: lost keys, spare keys, lockouts and key programming at your car. Lockouts and lost keys 24/7. Call (770) 270-3333.">',
      '<meta property="og:description" content="Llaves de carro perdidas, llaves extra, apertura de carros y programación de llaves. Vamos a donde está usted en North Atlanta. Llame al (770) 270-3333.">'),
     ('<h1>Lost your car keys?<span class="l2">Mobile car locksmith in Cumming and North Atlanta. We cut and program new keys where you’re parked.</span></h1>', '<h1>¿Perdió las llaves de su carro?<span class="l2">Cerrajero de autos a domicilio en Cumming y North Atlanta. Cortamos y programamos llaves nuevas donde esté su carro.</span></h1>'),
     ('<p class="lede">LocksMitch is a mobile car locksmith based in Cumming and serving North Atlanta. We bring dealership-level key cutting and programming equipment to your driveway, office lot or the side of the road. No tow, no dealer wait. Call or text <a href="tel:7702703333">(770) 270-3333</a>.</p>',
@@ -250,6 +250,7 @@ PRICING = [
     ('alt="Smart key fob"', 'alt="Llave inteligente"'),
     ('<h4>Land Rover, Jaguar</h4><p>2011 and newer. All keys lost quoted by model</p>', '<h4>Land Rover, Jaguar</h4><p>De 2011 en adelante. Si perdió todas las llaves, el precio depende del modelo</p>'),
     ('<h4>Mercedes-Benz, Porsche, Volvo</h4><p>Complex key systems, quoted by model</p>', '<h4>Mercedes-Benz, Porsche, Volvo</h4><p>Sistemas de llave complejos, precio según el modelo</p>'),
+    ('<h4>Ferrari, Maserati</h4><p>Checked by year and model first. Many keys are ordered for the car; the newest models may be dealer only</p></div><div class="pc-price"><span>price</span>by text</div>', '<h4>Ferrari, Maserati</h4><p>Primero se revisa el año y el modelo. Muchas llaves se piden para el carro; los modelos más nuevos pueden ser solo del concesionario</p></div><div class="pc-price"><span>precio</span>por mensaje</div>'),
     ('<h3 class="sub">Distance and time</h3>', '<h3 class="sub">Distancia y horario</h3>'),
     ('<li><b>Cumming, Forsyth County and Sugar Hill</b> (up to 12 miles by road): prices as listed, no trip fee</li>',
      '<li><b>Cumming, el condado de Forsyth y Sugar Hill</b> (hasta 12 millas por carretera): precios de la lista, sin cargo por visita</li>'),
@@ -346,7 +347,7 @@ def build(src, dst, en_url, es_url, pairs, desc):
             {"@type": "ListItem", "position": 1, "name": "LocksMitch", "item": ES_HOME},
             {"@type": "ListItem", "position": 2, "name": crumb, "item": es_url}]}
         tags = '<script type="application/ld+json">%s</script>\n' % json.dumps(bc, ensure_ascii=False, separators=(',', ':')) + tags
-    s = s.replace('<link rel="preconnect" href="https://fonts.googleapis.com">', tags + '<link rel="preconnect" href="https://fonts.googleapis.com">', 1)
+    s = s.replace('<link rel="preload" href="/assets/fonts/open-sans-latin.woff2"', tags + '<link rel="preload" href="/assets/fonts/open-sans-latin.woff2"', 1)
     # anything English left in visible text?
     body = s[s.index('<main'):s.index('</footer>')]
     t = re.sub(r'<script.*?</script>|<svg.*?</svg>|<a [^>]*lang="en"[^>]*>.*?</a>', '', body, flags=re.S)

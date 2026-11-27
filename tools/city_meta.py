@@ -36,12 +36,36 @@ DESCRIPTIONS = {
 }
 
 
+# Outside the usual 40-mile area: Mitch comes when the schedule allows, so no 24/7 in the title (audit 2026-11-27).
+NO_247 = {'marietta', 'kennesaw'}
+
+
+def title_for(city, html):
+    name = re.search(r'<title>(?:Mobile Auto Locksmith|Car Locksmith) in ([^,|<]+), GA', html).group(1)
+    if city in NO_247:
+        return 'Car Locksmith in %s, GA | LocksMitch' % name
+    # Spare keys and programming are Mon-Sat; only lockouts and lost keys are 24/7 (audit 2026-11-27).
+    return 'Car Locksmith in %s, GA, 24/7 Lockouts | LocksMitch' % name
+
+
+def fix_desc(desc):
+    # Descriptions about lockouts and lost keys keep "24/7"; one that offers a spare key must not
+    # promise 24/7, spare keys are Mon-Sat (audit 2026-11-27).
+    if 'spare' in desc.lower():
+        return desc.replace(' 24/7.', '')
+    return desc
+
+
 def main():
     for city, desc in DESCRIPTIONS.items():
+        desc = fix_desc(desc)
         assert len(desc) <= 160 and '—' not in desc and '–' not in desc, (city, len(desc))
         path = os.path.join(ROOT, city, 'index.html')
         html = open(path, encoding='utf-8').read()
-        html = re.sub(r'Mobile Auto Locksmith in ([^|"<]+), GA \| LocksMitch', r'Car Locksmith in \1, GA, 24/7 | LocksMitch', html)
+        title = title_for(city, html)
+        html = re.sub(r'<title>[^<]*</title>', '<title>%s</title>' % title, html, count=1)
+        html, n = re.subn(r'(<meta (?:property="og:title"|name="twitter:title") content=")[^"]*', lambda m: m.group(1) + title, html)
+        assert n >= 1, (city, 'og:title')
         html, n = re.subn(r'(<meta (?:name="description"|property="og:description") content=")[^"]*', lambda m: m.group(1) + desc, html)
         assert n == 2, (city, n)
         open(path, 'w', encoding='utf-8').write(html)
