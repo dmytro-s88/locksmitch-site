@@ -5,6 +5,7 @@ sound has voices, and the music of the Instagram version is licensed for Instagr
 after every part with speech is muted and checked; then set "sound": true in its data with a
 cover frame assets/jobs/<poster>. It is not loaded until the visitor taps play (preload="none"). Fields: file, poster, seconds,
 published (YYYY-MM-DD, the day the video first went public), text (one sentence: what the video shows), instagram (link, optional).
+Optional "guide": {url, text}, a guide linked in the closing "Need this in <City>?" paragraph.
 
 Run from the site root (rerun is safe):
     python3 -I tools/job_pages.py
@@ -177,11 +178,12 @@ def main():
             '<h2>The result</h2>\n<p>%s</p>\n%s'
             '<h2>%s</h2>\n<p>%s</p>\n%s'
             '<h2>Need this in %s?</h2>\n<p>Call or text <a href="tel:7702703333">(770) 270-3333</a> with the year, make and model. '
-            'You get the price before I drive out. More: <a href="%s">%s keys</a>, <a href="%s">%s</a>, <a href="%s">car locksmith in %s</a>, '
+            'You get the price before I drive out. More: <a href="%s">%s keys</a>, <a href="%s">%s</a>, <a href="%s">car locksmith in %s</a>, %s'
             '<a href="/pricing/">prices</a>.</p>'
         ) % (img, esc(p['alt']), esc(j['vehicle']), esc(j['service']), esc(city_name), when, esc(p['result_short']), esc(p['problem']), did,
              esc(p['result']), video_html, esc(p.get('tip_title') or 'Good to know'), esc(p['tip']), gallery, esc(city_name), p['make_page'], esc(p['make']), p['service_page'], esc(j['service'].lower()),
-             p['city_page'], esc(city_name))
+             p['city_page'], esc(city_name),
+             '<a href="%s">%s</a>, ' % (p['guide']['url'], esc(p['guide']['text'])) if p.get('guide') else '')
         others = [o for o in pages if o['slug'] != p['slug']][:6]
         aside = ('<aside class="nearby guide-side"><h3>More recent jobs</h3><ul style="grid-template-columns:1fr">%s<li><a href="/jobs/">All recent jobs</a></li></ul>'
                  '<h3 style="margin-top:20px">Services</h3><ul style="grid-template-columns:1fr"><li><a href="/all-keys-lost/">All keys lost</a></li>'

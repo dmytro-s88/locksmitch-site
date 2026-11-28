@@ -17,15 +17,20 @@ GUIDES = {
     'locksmith-make-key-without-original': 'Key without the original?',
     'where-to-copy-car-key': 'Where to copy a car key',
     'program-key-fob-yourself': 'Program a key fob yourself?',
+    'how-long-to-make-car-key': 'How long does a car key take?',
+    'only-one-car-key': 'Only one car key?',
+    'car-key-broke': 'Car key broke?',
+    'bmw-key-systems': 'Which BMW key system?',
 }
 SERVICES = {
-    'car-key-replacement': ['lost-all-car-keys', 'where-to-copy-car-key', 'dealer-vs-locksmith-car-key', 'bought-car-key-online'],
-    'all-keys-lost': ['lost-all-car-keys', 'locksmith-make-key-without-original', 'dealer-vs-locksmith-car-key', 'bought-car-key-online'],
-    'spare-key': ['where-to-copy-car-key', 'bought-car-key-online', 'dealer-vs-locksmith-car-key', 'key-fob-not-working'],
+    'car-key-replacement': ['lost-all-car-keys', 'where-to-copy-car-key', 'only-one-car-key', 'how-long-to-make-car-key', 'dealer-vs-locksmith-car-key', 'bought-car-key-online'],
+    'all-keys-lost': ['lost-all-car-keys', 'locksmith-make-key-without-original', 'how-long-to-make-car-key', 'car-key-broke', 'dealer-vs-locksmith-car-key', 'bought-car-key-online'],
+    'spare-key': ['only-one-car-key', 'where-to-copy-car-key', 'bought-car-key-online', 'dealer-vs-locksmith-car-key', 'key-fob-not-working'],
     'car-lockout': ['keys-locked-in-car', 'smart-key-not-detected', 'key-fob-not-working'],
     'key-programming': ['key-fob-programming-cost', 'program-key-fob-yourself', 'bought-car-key-online', 'smart-key-not-detected', 'key-fob-not-working'],
 }
 MAKE_GUIDES = ['lost-all-car-keys', 'dealer-vs-locksmith-car-key', 'key-fob-not-working']
+MAKE_OVERRIDES = {'bmw-key-replacement': ['bmw-key-systems', 'lost-all-car-keys', 'dealer-vs-locksmith-car-key', 'key-fob-not-working']}
 
 
 def block(slugs):
@@ -36,7 +41,7 @@ def block(slugs):
 def main():
     pages = {os.path.join(ROOT, k, 'index.html'): v for k, v in SERVICES.items()}
     for p in glob.glob(os.path.join(ROOT, '*-key-replacement', 'index.html')):
-        pages.setdefault(p, MAKE_GUIDES)   # car-key-replacement is a service page, listed above
+        pages.setdefault(p, MAKE_OVERRIDES.get(os.path.basename(os.path.dirname(p)), MAKE_GUIDES))   # car-key-replacement is a service page, listed above
     n = 0
     for p, slugs in pages.items():
         s = before = open(p, encoding='utf-8').read()

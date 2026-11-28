@@ -101,7 +101,7 @@ ANSWERS = {
     'bmw': {
         'smart': "Yes. Comfort Access smart keys and regular remote keys are coded to the module in your car (CAS, FEM or BDC), at the car. On the newest G-series we add a spare while one key still works. Send the year and model, or the VIN, and we confirm what your car needs.",
         'orig': "On most BMW and Mini models up to about 2019 you can choose: an original key, or a quality aftermarket key that costs less. On some of the newest G-series models only an original BMW key can be added. We tell you which applies and the price before we come out.",
-        'new': "Partly. On G-series models such as the G20 3 Series, G30 5 Series, G01 X3 and G05 X5 we add a spare key when you still have one that works. If every key to a G-series is lost, the key has to come from the dealer, and we tell you that on the phone, for free.",
+        'new': "Partly. On G-series models such as the G20 3 Series, G30 5 Series, G01 X3 and G05 X5 we add a spare key when you still have one that works. If every key is lost, BDC2 models (about 2015 to 2021) are checked case by case by VIN, and 2020 and newer BDC3 models go to the dealer. We tell you which on the phone, for free.",
     },
     'mercedes': {
         'orig': "For the years we cover, up to 2014, we tell you which keys are available for your car, original or aftermarket, and the price of each before we come out. For 2015 and newer the key comes from the dealer.",

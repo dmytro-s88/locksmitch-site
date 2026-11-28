@@ -1,6 +1,7 @@
 {
   "note": "Real completed jobs, newest first. Public file: only vehicle, service, city and month. No names, addresses, phones, prices or lead numbers. Optional \"slug\": the job has its own page /jobs/<slug>/ (texts in tools/job_pages.json).",
   "jobs": [
+    {"date": "2026-11", "vehicle": "2012 BMW 128i Convertible", "service": "Second smart key", "city": "Cumming", "slug": "2012-bmw-128i-convertible-second-key-cumming"},
     {"date": "2026-11", "vehicle": "2025 Toyota Sienna", "service": "Spare OEM smart key", "city": "Suwanee", "slug": "2025-toyota-sienna-spare-oem-smart-key-suwanee"},
     {"date": "2026-11", "vehicle": "2010 Ford F-150", "service": "All keys lost", "city": "Cumming"},
     {"date": "2026-11", "vehicle": "2003 Honda Accord", "service": "All keys lost", "city": "Marietta", "slug": "2003-honda-accord-all-keys-lost-marietta"},

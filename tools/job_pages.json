@@ -1,6 +1,40 @@
 {
-  "note": "One page per real completed job: /jobs/<slug>/. Public file: no customer names, addresses, phones, prices or lead numbers. Only what really happened on the job. The slug must match the 'slug' of the same job in tools/jobs.json. Photo: assets/jobs/<slug>.webp (no faces, no plates, no house numbers). Optional: 'title_result' (short result added to the H1 after a colon), 'tip_title' (heading of the tip block), 'photos' (extra photos from the same job, each a different view: [{file in assets/jobs/, alt}]). Optional 'video': our own short video of the job {file and poster in assets/jobs/, seconds, published (YYYY-MM-DD), text (one sentence: what it shows), instagram (link)}; same rules as photos: no customer faces, plates or house numbers, and no sound track unless every part with speech is muted (then 'sound': true).",
+  "note": "One page per real completed job: /jobs/<slug>/. Public file: no customer names, addresses, phones, prices or lead numbers. Only what really happened on the job. The slug must match the 'slug' of the same job in tools/jobs.json. Photo: assets/jobs/<slug>.webp (no faces, no plates, no house numbers). Optional: 'title_result' (short result added to the H1 after a colon), 'tip_title' (heading of the tip block), 'photos' (extra photos from the same job, each a different view: [{file in assets/jobs/, alt}]). Optional 'video': our own short video of the job {file and poster in assets/jobs/, seconds, published (YYYY-MM-DD), text (one sentence: what it shows), instagram (link)}; same rules as photos: no customer faces, plates or house numbers, and no sound track unless every part with speech is muted (then 'sound': true). Optional 'guide': {url, text}, a guide linked in the closing paragraph.",
   "pages": [
+    {
+      "slug": "2012-bmw-128i-convertible-second-key-cumming",
+      "make": "BMW",
+      "make_page": "/bmw-key-replacement/",
+      "service_page": "/spare-key/",
+      "city_page": "/cumming/",
+      "title": "2012 BMW 128i Convertible Second Smart Key in Cumming, GA",
+      "summary": "A 2012 BMW 128i Convertible with one key. A second Comfort Access smart key made through the CAS module and tested on the car.",
+      "result_short": "Second key made through the CAS module",
+      "problem": "This 2012 BMW 128i Convertible is my own car, bought at auction. It came with a single key: a Comfort Access smart key with three buttons and push-button start. One key is one loss away from an all-keys-lost job, so I made a second one. On this BMW the key data lives in the CAS module under the steering column, so the new key has to be coded to that module.",
+      "did": [
+        "Disconnected the battery in the trunk before touching the module.",
+        "Pulled the CAS module from under the steering column and opened it.",
+        "Read the key data from the module and made a new Comfort Access smart key from it.",
+        "Put the module back, reconnected the battery and started the engine with the new key."
+      ],
+      "result": "The car now has two working smart keys: three buttons, keyless entry and push-button start. All of it was done at the car, without the dealer.",
+      "tip": "Most BMWs from about 2005 to 2014 (E-series such as the 1 Series, 3 Series, 5 Series and X5) keep the key data in the CAS module. A second key is easiest while one still works, and because the data lives in the car, a new key can be made even when every key is lost.",
+      "alt": "New BMW Comfort Access smart key with a LocksMitch tag held in front of the 128i steering wheel",
+      "title_result": "Key Made Through the CAS Module",
+      "tip_title": "A tip for E-series BMW owners",
+      "guide": {
+        "url": "/guides/bmw-key-systems/",
+        "text": "which BMW key system your car has"
+      },
+      "video": {
+        "file": "2012-bmw-128i-convertible-second-key-cumming.mp4",
+        "poster": "2012-bmw-128i-convertible-second-key-cumming-video.webp",
+        "seconds": 27,
+        "published": "2026-11-27",
+        "text": "The whole job: battery disconnected in the trunk, CAS module out from under the steering column, data read, new key made, module back in and the engine started with the new key.",
+        "sound": true
+      }
+    },
     {
       "slug": "2025-hyundai-santa-fe-all-keys-lost-cumming",
       "make": "Hyundai",

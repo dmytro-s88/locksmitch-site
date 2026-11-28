@@ -2,7 +2,7 @@
 
 > LocksMitch is a mobile auto locksmith in North Atlanta, Georgia, based in Cumming (Forsyth County). The owner, Mitch, comes to the car and cuts and programs keys on the spot: all keys lost, spare keys, smart keys and fobs, key programming and car lockouts. Answered 24/7. Phone and text: (770) 270-3333. Website: https://locksmitch.com
 
-Last updated: 2026-11-18
+Last updated: 2026-11-27
 
 ## Business identity
 - Name: LocksMitch
@@ -28,15 +28,19 @@ Last updated: 2026-11-18
 - Can a locksmith make a car key without the original? Yes, for most cars. The lock is read at the car, a new key is cut and programmed to the immobilizer on the spot, usually in about an hour, from $190 for most makes with LocksMitch, no tow. Proof of ownership is checked (photo ID plus registration, title or insurance card). Dealer only: Mercedes-Benz 2015 and newer, BMW G-series with every key lost, some brand-new models. Guide: https://locksmitch.com/guides/locksmith-make-key-without-original/
 - Where can I get a car key copied? A plain metal key: a hardware store, a key kiosk or a mobile locksmith. A chip key, remote key or smart key also has to be programmed to the car: a participating Ace Hardware store or a KeyMe kiosk for supported cars, a mobile locksmith or the dealer. AutoZone's site says it no longer cuts or programs keys (checked Nov 18, 2026). LocksMitch copies keys at the car in Cumming and North Atlanta: chip key from $140, key with remote from $150, push-to-start smart key from $180. Guide: https://locksmitch.com/guides/where-to-copy-car-key/
 - Can I program a key fob myself? On some cars. Many Ford models with two working keys, many Chrysler, Dodge and Jeep models with two valid Sentry Keys and many Chevrolet models with one or two recognized keys have an owner procedure in the owner's manual. Toyota, Honda and Nissan keys and most push-to-start smart keys need a programmer: from $99 with LocksMitch for a key the customer already has, $129 for a smart key. Guide: https://locksmitch.com/guides/program-key-fob-yourself/
+- How long does it take to make a car key? About an hour at the car for most keys, spare or all keys lost, including most push-to-start smart keys; a lockout takes a few minutes; some European cars such as BMW take two to three hours because a module is read on a bench. The arrival time is texted with the price. Lockouts and all keys lost 24/7, other jobs Monday to Saturday, nights (9 pm to 7 am) add $50. Guide: https://locksmitch.com/guides/how-long-to-make-car-key/
+- I have only one car key. Is a spare worth it? Yes. A copy of a working key costs less than a new key after the last one is lost: with LocksMitch a chip key from $140, a key with remote from $150, a push-to-start smart key from $180 (2020 and newer from $200), against all keys lost from $190 for most makes. Second key in the same visit 50% off. Guide: https://locksmitch.com/guides/only-one-car-key/
+- My car key broke. What now? Keep the pieces and don't glue them. A piece stuck in the ignition or a door is removed from $75; a new key is cut from the pieces or the lock and programmed at the car (chip key from $140, flip or remote key from $150, from $190 when no working key is left). Guide: https://locksmitch.com/guides/car-key-broke/
+- Which BMW key system does my car have? EWS (about 1995 to 2006), CAS (about 2002 to 2016, CAS4 to 2018), FEM and BDC (F-series, about 2012 to 2020), BDC2 (G30, G32, G11 to early 2019, G01, G02, F90, about 2015 to 2021), BDC3 (G20, G05, G07 and others, about 2019 to 2024) and BCP (U-chassis and newest). LocksMitch makes keys for EWS, CAS, FEM and BDC including all keys lost; BDC2 spare from a working key, all keys lost case by case after a VIN check (not hybrids or EVs); BDC3 and BCP copy only from a working key onto an original BMW key, all keys lost is dealer only. Guide: https://locksmitch.com/guides/bmw-key-systems/
 - Will the price change at the car? No. The price is quoted before driving out and is the same at the car. Coming to you is included.
 - Do you work at night and on Sunday? Lockouts and all keys lost: 24/7, including nights, Sundays and holidays. Spare keys, programming and other jobs: Monday to Saturday. Nights (9 pm to 7 am) add $50.
-- BMW key lost or need a spare in North Atlanta? LocksMitch makes BMW and Mini keys at the car from $350: EWS, CAS, FEM and BDC models including all keys lost; newest G-series spare key with a working key. Page: https://locksmitch.com/bmw-key-replacement/
+- BMW key lost or need a spare in North Atlanta? LocksMitch makes BMW and Mini keys at the car from $350: EWS, CAS, FEM and BDC models including all keys lost; G-series spare key with a working key, BDC2 all keys lost case by case. Page: https://locksmitch.com/bmw-key-replacement/
 - Is there a warranty? 1 year on keys and remotes LocksMitch supplies.
 - Which languages? English and Spanish (https://locksmitch.com/es/).
 
 ## Honest limits
 - Mercedes-Benz 2015 and newer: LocksMitch does not make those keys; the dealer does. Customers are told on the phone, for free, before anyone drives out.
-- BMW G-series (newest models such as G20 3 Series, G05 X5): spare key only while one working key exists; if every key is lost, the dealer makes it. Older BMW and Mini (EWS, CAS, FEM, BDC) are done at the car, all keys lost included.
+- BMW G-series: spare key while one working key exists. With every key lost: BDC2 models (about 2015 to 2021, such as G30 5 Series, G01 X3) case by case after a VIN check, not hybrids or EVs; BDC3 and BCP models (about 2019 and newer, such as G20 3 Series, G05 X5) only the dealer. Older BMW and Mini (EWS, CAS, FEM, BDC) are done at the car, all keys lost included.
 - Some brand-new models are not supported by aftermarket programming tools yet; checked by year, make and model before dispatch.
 - Cars only. No residential or commercial locks, no safes.
 - Mobile only. No shop or storefront.
@@ -90,6 +94,7 @@ Full list: https://locksmitch.com/pricing/
 
 ## Recent jobs
 Real jobs completed by LocksMitch, newest first (vehicle, service, city, month):
+- 2012 BMW 128i Convertible - second smart key - Cumming - Nov 2026 (https://locksmitch.com/jobs/2012-bmw-128i-convertible-second-key-cumming/)
 - 2025 Toyota Sienna - spare OEM smart key - Suwanee - Nov 2026 (https://locksmitch.com/jobs/2025-toyota-sienna-spare-oem-smart-key-suwanee/)
 - 2010 Ford F-150 - all keys lost - Cumming - Nov 2026
 - 2003 Honda Accord - all keys lost - Marietta - Nov 2026 (https://locksmitch.com/jobs/2003-honda-accord-all-keys-lost-marietta/)
@@ -99,7 +104,6 @@ Real jobs completed by LocksMitch, newest first (vehicle, service, city, month):
 - 2017 Ram pickup - lockout - Cumming - Nov 2026
 - 2024 Chevrolet Silverado 2500HD - all keys lost - Cumming - Nov 2026 (https://locksmitch.com/jobs/2024-chevrolet-silverado-2500hd-all-keys-lost-cumming/)
 - 2026 Hyundai Tucson - spare smart key - Gainesville - Nov 2026 (https://locksmitch.com/jobs/2026-hyundai-tucson-spare-smart-key-gainesville/)
-- 2017 Toyota Highlander - spare smart key - Cumming - Nov 2026 (https://locksmitch.com/jobs/2017-toyota-highlander-spare-smart-key-cumming/)
 All recent jobs with photos: https://locksmitch.com/jobs/
 
 ## Service area
@@ -158,6 +162,10 @@ Beyond 40 miles (Marietta, Kennesaw and further): quoted by Mitch.
 - [Can a Locksmith Make a Car Key Without the Original? (2026)](https://locksmitch.com/guides/locksmith-make-key-without-original/)
 - [Where to Copy a Car Key: Stores, Kiosk or Locksmith (2026)](https://locksmitch.com/guides/where-to-copy-car-key/)
 - [Can I Program a Key Fob Myself? Honest Answer (2026)](https://locksmitch.com/guides/program-key-fob-yourself/)
+- [How Long Does It Take to Make a Car Key? (2026)](https://locksmitch.com/guides/how-long-to-make-car-key/)
+- [Only One Car Key? Why a Spare Now Costs Less (2026)](https://locksmitch.com/guides/only-one-car-key/)
+- [Car Key Broke? What to Do Next (2026)](https://locksmitch.com/guides/car-key-broke/)
+- [Which BMW Key System Do I Have? EWS, CAS, FEM, BDC (2026)](https://locksmitch.com/guides/bmw-key-systems/)
 
 ## Profiles
 - Google: https://g.page/r/CZ9reQq45jlvEBM
